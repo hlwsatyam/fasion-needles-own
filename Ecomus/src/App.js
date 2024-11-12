@@ -29,7 +29,7 @@ import Categoryforbrand from "./pages/Category-for-brand";
 
 function App() {
   return (
-    <div className="App">
+    <div className="max-w-7xl mx-auto">
       <Routes >
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Home />} />

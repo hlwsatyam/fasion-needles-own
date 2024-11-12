@@ -4,48 +4,88 @@ import 'swiper/css';
  
 import { Navigation, Pagination } from 'swiper/modules';
 
-const testimonials = [
+const testimonials =
+[
   {
-    name: 'Jane D',
-    role: 'CEO',
-    avatar: 'https://pagedone.io/asset/uploads/1696229969.png',
-    text: 'Pagedone is simply the best tool of investment in the market right now.',
+    id: 1,
+    name: 'Arjun M',
+    role: 'Frequent Shopper',
+    avatar: 'https://cdn.pixabay.com/photo/2023/09/21/09/36/new-simple-style-boy-photo-8266357_1280.jpg',
+    text: 'Fashion Needles has completely transformed my shopping experience. From the easy-to-navigate website to the seamless checkout process, every step feels tailored to my needs ',
+    rating: 5,
+  },
+ 
+  {
+    id: 3,
+    name: 'Ravi K',
+    role: 'Occasional Buyer',
+    avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2nsLes8gok3zS5lcOdlo0t7xcQCLVwOfn-A&s',
+    text: 'As someone who doesn’t usually shop online, I was initially hesitant. However, Fashion Needles made my experience so easy and enjoyable.  ',
     rating: 5,
   },
   {
-    name: 'John S',
-    role: 'CTO',
-    avatar: 'https://via.placeholder.com/50',
-    text: 'A game changer in our industry. Highly recommend to everyone.',
+    id: 4,
+    name: 'Aditi R',
+    role: 'Style Consultant',
+    avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ55P7e6ps8N3x-6z5ViUSgDZT2GjCO9yw7sA&s',
+    text: 'I’ve been recommending Fashion Needles to my clients for a while now, and they never fail to impress. Their selection of clothing is curated  ',
     rating: 4,
   },
   {
-    name: 'Alice W',
-    role: 'Designer',
-    avatar: 'https://via.placeholder.com/50',
-    text: 'I’ve been using this for a year now, and it has transformed my workflow.',
+    id: 5,
+    name: 'Karan V',
+    role: 'Online Shopper',
+    avatar: 'https://www.shutterstock.com/image-photo/create-portrait-indian-man-aged-260nw-2517961915.jpg',
+    text: 'Fashion Needles is my go-to for everything from daily wear to special event outfits. The website is easy to use, and I can always find what I’m looking for without hassle.  ',
+    rating: 5,
+  },
+  {
+    id: 6,
+    name: 'Meena T',
+    role: 'Casual Shopper',
+    avatar: 'https://pikshunt.com/wp-content/uploads/2024/06/Cute-Simple-Girl-Pic-7.jpg.webp',
+    text: 'I love shopping at Fashion Needles because they offer a great mix of trendy and timeless pieces. I never have to compromise on quality, and I’m always impressed by how the clothes fit.  ',
     rating: 4,
   },
   {
-    name: 'Mark T',
-    role: 'Product Manager',
-    avatar: 'https://via.placeholder.com/50',
-    text: 'Excellent service, would recommend to anyone looking for quality.',
+    id: 7,
+    name: 'Siddharth N',
+    role: 'First-Time Buyer',
+    avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEOY_Dx3HiD279gBDKbLKp9lCbu2-P7fWM9_h5YmIJONEGoiEFeKKcYpaFyntxuiJqnqo&usqp=CAU',
+    text: 'This was my first time shopping on Fashion Needles, and it was an exceptional experience. The website is intuitive, making it easy to browse through various categories.   ',
     rating: 5,
   },
   {
-    name: 'Emily B',
-    role: 'Marketing Director',
-    avatar: 'https://via.placeholder.com/50',
-    text: 'The support team is outstanding, and the product is top-notch.',
+    id: 8,
+    name: 'Ananya P',
+    role: 'Fashion Blogger',
+    avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSE1i0XM_hPnRCmLdZUAFdpMxUl2PTP72FapIOwtA8a67b_1xVskMyhp5DtqqVoClCKz9M&usqp=CAU',
+    text: 'As a fashion blogger, I’m always on the lookout for the latest trends and styles. Fashion Needles has become my go-to platform for shopping, thanks to its wide selection of fashionable yet affordable clothing.  ',
+    rating: 4,
+  },
+  {
+    id: 9,
+    name: 'Rahul J',
+    role: 'Tech-Savvy Shopper',
+    avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFQRwrX8bhG6rVLSNFVGC-iPZlOJS5qc3E3XSw2OQoHhjtEDoCzuKzOWfYQQu3iKyc7r4&usqp=CAU',
+    text: 'I’m very particular about the shopping platforms I use, and Fashion Needles has really impressed me. From the smooth checkout process to the timely delivery, they’ve taken care of every detail. ',
     rating: 5,
   },
+  {
+    id: 10,
+    name: 'Sneha L',
+    role: 'Loyal Customer',
+    avatar: 'https://photosly.net/wp-content/uploads/2024/02/hot-girl-pic5.jpg',
+    text: 'I’ve been shopping with Fashion Needles for over a year now, and every purchase has been a positive experience. Their clothes are not only stylish but also of great quality.  ',
+    rating: 4,
+  }
 ];
+
 
 export default function Testimonials() {
   return (
     <section className="py-24">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto   px-4 sm:px-6 lg:px-8">
         <div className="mb-14 flex flex-col justify-center items-center sm:flex-row sm:items-center sm:justify-between max-sm:gap-8">
           <h2 className="text-4xl text-center font-bold text-gray-900 lg:text-left">Testimonials</h2>
 
@@ -103,7 +143,7 @@ export default function Testimonials() {
           }}
           pagination={{ clickable: true }}
           spaceBetween={30}
-          slidesPerView={1}
+          slidesPerView={2}
         >
           {testimonials.map((testimonial, index) => (
             <SwiperSlide key={index}>
@@ -130,7 +170,7 @@ export default function Testimonials() {
                 </p>
                 <div className="flex items-center gap-5">
                   <img
-                    className="rounded-full object-cover"
+                    className="rounded-full w-[50px] h-[50px] object-cover"
                     src={testimonial.avatar}
                     alt="avatar"
                   />

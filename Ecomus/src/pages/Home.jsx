@@ -10,11 +10,12 @@ import { useGetBannerQuery, useGetBestSellerQuery, useGetFeatureItemQuery, useGe
 import Crouselitem from '../components/Crouselitem';
 import { useGetBrandQuery } from '../store/api/brandapi';
 import Testomonials from '../components/Testomonials';
+import ShopCard from '../components/ShopCard';
 
 const Home = () => {
 
   const nvg = useNavigate();
-  const tokenvalue = gettoken();
+ 
   const [categories, setcategories] = useState([]);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const options = {
@@ -125,7 +126,7 @@ const Home = () => {
    <Header />
 
     {/* home main banner section start */}
-   <section className="sale-banenr banner-style2 design2 marginfromtop" >
+   <section className="sale-banenr mt-2  banner-style2 design2 marginfromtop" >
   <OwlCarousel className="owl-theme" style={{width:'100%',height:'100%'}} {...options}>
   {Banner.data.map((item, index) => (
      item.banner_type == "Banner" ? <div key={index} className='mobileorlaptop'
@@ -135,7 +136,7 @@ const Home = () => {
         onClick={()=>{window.location.href = item.banner_link}}
           src={`http://localhost:8000/uploads/images/${item.banner}`}
           alt={`banner-${index}`}
-          className="img-fluid mainbanner bg-img"
+          className="img-fluid rounded-2xl mainbanner bg-img"
           style={{ width: '100%', height: '100%', objectFit: '100% 100%' }}
         />
       </div> : ''
@@ -230,11 +231,14 @@ const Home = () => {
   </section>
   {/* best seller end  */}
 
-
+<ShopCard/>
 
   <div className="title8">
     <h4 style={{fontSize:'16px'}}>Feature Product</h4>
   </div>
+
+
+
   {/* best feature start  */}
   <section className="section-big-mb-space ratio_square product">
     <div className="container-fluid">

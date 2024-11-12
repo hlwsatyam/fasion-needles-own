@@ -35,8 +35,7 @@ import Viewcontact from "./pages/Website_info/Editbanner/Viewcontact";
 function App() {
  
   return (
-    <div className="app">
-      
+    <div className="max-w-7xl">
       <Router>
       <Sidebar>
         <Routes>

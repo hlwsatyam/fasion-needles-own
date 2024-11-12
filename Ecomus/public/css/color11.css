@@ -8021,7 +8021,8 @@
             .category-header7 {
               /* background-color: #059fe2; */
               /* background-color: rgba(246, 246, 246, 1); */
-              background-color: #059fe2;
+              /* background-color: #059fe2; */
+              color:'black' !important;
               position: relative;
             }
             
@@ -8572,7 +8573,7 @@
             }
             
             .header-search {
-              width: 638px;
+              width: 400px;
               border-radius: 25px;
               overflow-x: hidden;
             }
@@ -40695,8 +40696,8 @@
             
               .custom-container {
                 max-width: 1940px;
-                padding-right: 15px !important;
-                padding-left: 15px !important; 
+                padding:12px 0;
+                
                 margin-right: auto;
                 margin-left: auto;
               }

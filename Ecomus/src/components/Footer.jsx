@@ -1,158 +1,78 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
+import React from 'react';
 
 const Footer = () => {
   return (
-<footer>
-  <div className="footer1">
-    <div className="container">
-      <div className="row">
-        <div className="col-12">
-          <div className="footer-main">
-            <div className="footer-box">
-              <div className="footer-title mobile-title">
-                <h5>about</h5>
-              </div>
-              <div className="footer-contant">
-                <div className="footer-logo">
-                  <NavLink href="/Home">
-                    <img src={`${process.env.PUBLIC_URL}/images/Ecomus.svg`} className="maxwidthlogo" alt="logo" />
-                  </NavLink>
-                </div>
-                {/* <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC.</p> */}
-                <ul className="paymant">
-                  <li>
-                    <a href="javascript:void(0)"><img src={`${process.env.PUBLIC_URL}/images/layout-1/pay/1.png`} className="img-fluid" alt="pay" /></a>
-                  </li>
-                  <li>
-                    <a href="javascript:void(0)"><img src={`${process.env.PUBLIC_URL}/images/layout-1/pay/2.png`} className="img-fluid" alt="pay" /></a>
-                  </li>
-                  <li>
-                    <a href="javascript:void(0)"><img src={`${process.env.PUBLIC_URL}/images/layout-1/pay/3.png`} className="img-fluid" alt="pay" /></a>
-                  </li>
-                  <li>
-                    <a href="javascript:void(0)"><img src={`${process.env.PUBLIC_URL}/images/layout-1/pay/4.png`} className="img-fluid" alt="pay" /></a>
-                  </li>
-                  <li>
-                    <a href="javascript:void(0)"><img src={`${process.env.PUBLIC_URL}/images/layout-1/pay/5.png`} className="img-fluid" alt="pay" /></a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div className="footer-box">
-              <div className="footer-title">
-                <h5 className=''  >INFORMATION</h5>
-              </div>
-              <div className="footer-contant">
-                <ul>
-                  <li><NavLink to="/about">About Us</NavLink></li>
-                  <li><NavLink to="/contact">Contact Us</NavLink></li>
-                  <li><NavLink to="/privacypolicy">Privacy Policy</NavLink></li>
-                  <li><NavLink to="/termsconditions">Terms & Conditions</NavLink></li>
-                  {/* <li>Follow &amp; exchanges</li> */}
-                  {/* <li><a href="javascript:void(0)">terms &amp; conditions</a></li>
-                        <li><a href="javascript:void(0)">returns &amp; exchanges</a></li>
-                     <li><a href="javascript:void(0)">shipping &amp; delivery</a></li> */}
-                </ul>
-              </div>
-            </div>
-            <div className="footer-box">
-              <div className="footer-title">
-                <h5>contact us</h5>
-              </div>
-              <div className="footer-contant">
-                <ul className="contact-list">
-                  <li>
-                    <i className="fa fa-map-marker" />J - 34/A, 3rd Floor,
-                    Lajpat Nagar - II, <br />
-                    New Delhi -<span>110024</span>
-                  </li>
-                  {/*<li><i class="fa fa-phone"></i>call us: <span>123-456-7898</span></li>*/}
-                  <li>
-                    <i className="fa fa-envelope-o" />email us:
-                    support@oneup.com
-                  </li>
-                  {/*<li><i class="fa fa-fax"></i>fax <span>123456</span></li>*/}
-                  {/* <li>
-                    <div style={{display: 'flex', gap: 6, position: 'relative', alignItems: 'center'}}>
-                      <span> Follow us: </span>
-                      <div style={{display: 'flex', gap: 5}}>
-                        <a href="https://www.facebook.com/oneuptrade/" style={{position: 'relative', background: '#4150b5', borderRadius: '50%', color: '"white"', padding: '7px 10px', display: 'flex', justifyContent: 'center', alignItems: 'center'}}><i style={{position: 'relative', color: 'white'}} className="fa-brands fa-facebook-f" /></a>
-                        <a href="https://www.linkedin.com/company/oneuptrade/" style={{position: 'relative', background: '#4150b5', borderRadius: '50%', color: '"white"', padding: '7px 6px', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-                          <i style={{position: 'relative', color: 'white'}} className="fa-brands fa-linkedin" /></a>
-                        <a href="javascript:void(0)" style={{position: 'relative', background: '#4150b5', borderRadius: '50%', color: '"white"', padding: '7px 7px', display: 'flex', justifyContent: 'center', alignItems: 'center'}}><i style={{position: 'relative', color: 'white'}} className="fa-brands fa-youtube" />
-                        </a><a href="https://www.instagram.com/oneuptrade/" style={{position: 'relative', background: '#4150b5', borderRadius: '50%', color: '"white"', padding: '7px 7px', display: 'flex', justifyContent: 'center', alignItems: 'center'}}><i style={{position: 'relative', color: 'white'}} className="fa-brands fa-instagram" /></a>
-                      </div>
-                    </div>
-                  </li> */}
-
-<li>
-                    <div style={{ gap: 6, position: 'relative', alignItems: 'center'}}>
-                      <span style={{color:'#000000',fontSize:'18px'}}> Follow us: </span>
-                      <br />
-                      <br />
-                      <div style={{display: 'flex', gap: 10}}>
-                        <a href="https://www.facebook.com/oneuptrade/" style={{position: 'relative', background: 'white',border:'2px #059fe2 solid ',   borderRadius: '50%', color: '"white"', padding: '7px 10px', display: 'flex', justifyContent: 'center', alignItems: 'center'}}><i style={{position: 'relative', color: '#059fe2'}} className="fa-brands fa-facebook-f" /></a>
-                        <a href="https://www.linkedin.com/company/oneuptrade/" style={{position: 'relative', background: 'white',border:'2px #059fe2 solid ',   borderRadius: '50%', color: '"white"', padding: '7px 8px', display: 'flex', justifyContent: 'center', alignItems: 'center'}}><i style={{position: 'relative', color: '#059fe2'}} className="fa-brands fa-linkedin" /></a>
-                        <a href="javascript:void(0)" style={{position: 'relative', background: 'white',border:'2px #059fe2 solid ',borderRadius: '50%', color: '"#059fe2"', padding: '7px 7px', display: 'flex', justifyContent: 'center', alignItems: 'center'}}><i style={{position: 'relative', color: '#059fe2'}} className="fa-brands fa-youtube" />
-                        </a><a href="https://www.instagram.com/oneuptrade/" style={{position: 'relative',background: 'white',border:'2px #059fe2 solid ', borderRadius: '50%', color: '"white"', padding: '7px 8px', display: 'flex', justifyContent: 'center', alignItems: 'center'}}><i style={{position: 'relative', color: '#059fe2'}} className="fa-brands fa-instagram" /></a>
-                        {/* <a href="javascript:void(0)"  style="
-                            position: relative;
-                            background: #4150b5;
-                            border-radius: 50%;
-                            color:'white';
-                            padding: 7px 7px;
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                          "
-                        ><i
-                          style="
-                            position: relative;
-                            color: white;
-                          "
-                          class="fa fa-rss"
-                        ></i
-                      ></a> */}
-                      </div>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div className="footer-box">
-              <div className="footer-title">
-                <h5>Newsletter</h5>
-              </div>
-              <div className="footer-contant">
-                <div className="newsletter-second bottomspace">
-                  <div className="form-group">
-                    <div className="input-group">
-                      <input type="text" className="form-control" placeholder="enter full name" />
-                      <span className="input-group-text"><i className="fa-solid fa-user" /></span>
-                    </div>
-                  </div>
-                  <div className="form-group">
-                    <div className="input-group">
-                      <input type="text" className="form-control" placeholder="enter email address" />
-                      <span className="input-group-text"><i className="fa-solid fa-envelope" /></span>
-                    </div>
-                  </div>
-                  <div className="form-group mb-0">
-                    <a href="javascript:void(0)" className="btn btn-solid btn-sm">Submit Now</a>
-                  </div>
-                </div>
-              </div>
+    <footer className="bg-gradient-to-r from-gray-100 via-[#bce1ff] to-gray-100">
+      <div className="max-w-screen-xl px-4 py-16 mx-auto sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
+          <div>
+            <img src="/images/FN-Main.png" className="mr-5 h-32  mix-blend-multiply" alt="logo" />
+            <p className="max-w-xs mt-4 text-sm text-gray-600">
+            First Floor, Lal Mandir Market, C-67, Main Rd, Shital Vihar, Khora Colony, Sector 57, Noida, Uttar Pradesh 201301
+            </p>
+            <div className="flex mt-8 space-x-6 text-gray-600">
+              {[
+                { label: 'Facebook', iconPath: 'M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z' },
+                { label: 'Instagram', iconPath: 'M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z' },
+                { label: 'Twitter', iconPath: 'M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84' },
+                { label: 'GitHub', iconPath: 'M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z' },
+                { label: 'Dribbble', iconPath: 'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c5.51 0 10-4.48 10-10S17.51 2 12 2zm6.605 4.61a8.502 8.502 0 011.93 5.314c-.281-.054-3.101-.629-5.943-.271-.065-.141-.12-.293-.184-.445a25.416 25.416 0 00-.564-1.236c3.145-1.28 4.577-3.124 4.761-3.362zM12 3.475c2.17 0 4.154.813 5.662 2.148-.152.216-1.443 1.941-4.48 3.08-1.399-2.57-2.95-4.675-3.189-5A8.687 8.687 0 0112 3.475zm-3.633.803a53.896 53.896 0 013.167 4.935c-3.992 1.063-7.517 1.04-7.896 1.04a8.581 8.581 0 014.73-5.975zm-5.46 8.23v-.223c.356.008 4.287.034 8.412-1.116.146.305.281.61.42.918.136.305.27.61.399.92-1.53.47-3.93 1.31-6.094 3.285a8.52 8.52 0 01-3.137-4.085zm5.488 6.91a8.506 8.506 0 01-2.73-1.52c1.984-1.952 4.207-2.775 5.726-3.22.799 2.212 1.306 4.199 1.464 4.935a8.588 8.588 0 01-4.46-.196zm6.196-.927a30.267 30.267 0 00-1.38-4.672c2.62-.321 5.35.242 5.628.305a8.575 8.575 0 01-4.248 4.367z' }
+              ].map(({ label, iconPath }, index) => (
+                <a href="#" key={index} aria-label={label}>
+                  <svg
+                    className="w-5 h-5 hover:text-gray-800 transition duration-300"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d={iconPath} />
+                  </svg>
+                </a>
+              ))}
             </div>
           </div>
+          <div className="grid grid-cols-4 gap-8 sm:col-span-2 lg:col-span-2">
+            {[
+              {
+                heading: 'Services',
+                items: ['UI/UX Design', 'Web Development', 'Mobile App', 'Animation']
+              },
+              {
+                heading: 'Company',
+                items: ['About Us', 'Team', 'Careers', 'Contact']
+              },
+              {
+                heading: 'Useful Links',
+                items: ['Blog', 'Support', 'Terms & Conditions', 'Privacy Policy']
+              },
+              {
+                heading: 'Resources',
+                items: ['Documentation', 'Tutorials', 'Guides', 'Webinars']
+              }
+            ].map(({ heading, items }, index) => (
+              <div key={index}>
+                <p className="font-medium text-gray-900">{heading}</p>
+                <ul className="mt-6 flex-col flex space-y-4 text-sm">
+                  {items.map((item, i) => (
+                    <li key={i}>
+                      <a href="#" className="text-gray-600 hover:text-gray-900 transition">
+                        {item}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="pt-8 mt-8 border-t border-gray-300">
+          <p className="text-xs text-center text-gray-500">
+            &copy; 2024 fashionneedles.com. All rights reserved.
+          </p>
         </div>
       </div>
-    </div>
-  </div>
-</footer>
+    </footer>
+  );
+};
 
-
-  )
-}
-
-export default Footer
+export default Footer;

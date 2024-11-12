@@ -19,13 +19,10 @@ const Addproductform = () => {
   const imageInputRef3 = useRef(null);
   const imageInputRef4 = useRef(null);
   const nvg = useNavigate();
-
   let getlevelonecategory = useGetLevelOneCategoryQuery();
-
   const config = {
     height: "300px",
   };
-
   // create product api start here
   const [postproduct] = usePostProductMutation();
   const ProductForm = async (value) => {
