@@ -3,20 +3,16 @@ import React from "react";
 function ShopCard() {
   return (
     <div>
-      <div>
-        <img src="/images/cards/abc.png" className="w-full h-[300px]" alt="" />
+      <div className="flex items-center flex-wrap justify-between gap-x-4">
+        <SmallCard />
+        <SmallCard />
+        <SmallCard />
+        <SmallCard />
+        <SmallCard />
+        <SmallCard />
+        <SmallCard />
+        <SmallCard />
       </div>
-
-    <div className="flex items-center flex-wrap justify-between gap-x-4">
-    <SmallCard />
-      <SmallCard />
-      <SmallCard />
-      <SmallCard />
-    <SmallCard />
-      <SmallCard />
-      <SmallCard />
-      <SmallCard />
-    </div>
     </div>
   );
 }

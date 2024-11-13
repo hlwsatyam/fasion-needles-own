@@ -126,7 +126,7 @@ const Home = () => {
    <Header />
 
     {/* home main banner section start */}
-   <section className="sale-banenr mt-2  banner-style2 design2 marginfromtop" >
+   <section className="  sale-banenr mt-2  banner-style2 design2 marginfromtop" >
   <OwlCarousel className="owl-theme" style={{width:'100%',height:'100%'}} {...options}>
   {Banner.data.map((item, index) => (
      item.banner_type == "Banner" ? <div key={index} className='mobileorlaptop'
