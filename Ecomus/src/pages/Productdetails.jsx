@@ -82,9 +82,6 @@ function Productdetails() {
   const [removetowishlistapi] = usePostDeleteWishlistMutation();
   const devto = () => {
     if (delto == "") {
-      // console.log("dddd",delresponse)
-      // setdelresponse["status"] = true;
-      // setdelresponse["msg"] = "Deliver to field is required";
       setdelresponse({ status: true, msg: "Deliver to field is required" });
     } else {
       // setdelresponse["status"] = true;
@@ -167,41 +164,27 @@ function Productdetails() {
           ? Data23[showoption]._id
           : null,
       };
-      const response = await addincart(cart_value);
-      console.log("response of add to cart", response);
-      if (response.data.status == "successfully") {
-        nvg("/cart");
-        // window.location.reload();
-      }
-    } catch (error) {}
+       // Check if there is an existing cart in localStorage
+       const existingCart = JSON.parse(localStorage.getItem("cart")) || [];
+
+       // Add the new item to the cart array
+       const updatedCart = [...existingCart, cart_value];
+   
+       // Save the updated cart back to localStorage
+       localStorage.setItem("cart", JSON.stringify(updatedCart));
+      // const response = await addincart(cart_value);
+
+      // if (response.data.status == "successfully") {
+      //   nvg("/cart");
+      //   // window.location.reload();
+      // }
+    } catch (error) {
+      console.log(error.message);
+    }
   };
-  //  add to cart item end here
 
   let ispresent = false;
   useEffect(() => {
-    const addProductToRecentlyViewed = (mydata, id) => {
-      if (recentlydata == null) {
-        recentlystore([id]);
-      } else {
-        if (recentlydata.some((obj) => obj === id)) {
-          console.log(`Object with id ${mydata} is in the array!`);
-          ispresent = true;
-        } else {
-        }
-        if (ispresent == false) {
-          console.log(`Object with id ${mydata} is not in the array.`, mydata);
-          // if (recentlyViewed.length < 13) {
-          //   console.log("first 13 leng")
-          //   // If the array size is less than the maximum, simply add the new object
-          //   setRecentlyViewed([...recentlyViewed, mydata]);
-          // } else {
-          // If the array size is equal to the maximum, replace the oldest element
-
-          recentlystore([...recentlydata, id]);
-          // }
-        }
-      }
-    };
     setloading(true);
     if (isLoading == false) {
       const newdata1 = [data.data, ...data.productvariant];
@@ -210,7 +193,7 @@ function Productdetails() {
         ...item,
         weightandtype: `${item.weight} ${item.weight_type}`, // Replace 'defaultValue' with your desired value
       }));
-      console.log("this is latest data", newdata);
+
       setData(newdata);
       setloading(false);
     }
@@ -520,19 +503,33 @@ function Productdetails() {
                           padding: "20px 17px",
                         }}
                       >
-                        <div className="pro-group">
-                          <h2>{Data23?.[showoption]?.product_name}</h2>
+                        <div className=" flex items-center justify-between">
+                          <div>
+                            <h2>{Data23?.[showoption]?.product_name}</h2>
 
-                          <div className="mt-3">
-                            <div className="flex border w-fit px-2 py-1 cursor-pointer items-center gap-x-2">
-                              <span className="flex gap-x-1 items-center ">
-                                <span>4</span>
-                                <FaStar className="mb-1 text-blue-400" />
-                              </span>
-                              <span className="border-l-2 border-gray-300 pl-2">
-                                580 Ratings
-                              </span>
+                            <div className=" flex items-center mt-2 justify-between">
+                              <div className="flex border w-fit px-2 py-1 cursor-pointer items-center gap-x-2">
+                                <span className="flex gap-x-1 items-center ">
+                                  <span>4</span>
+                                  <FaStar className="mb-1 text-blue-400" />
+                                </span>
+                                <span className="border-l-2 border-gray-300 pl-2">
+                                  580 Ratings
+                                </span>
+                              </div>
                             </div>
+                          </div>
+                          <div className="">
+                            <a
+                              href="javascript:void(0)"
+                              style={{ color: "#fff" }}
+                            >
+                              <img
+                                className="sm:h-20 sm:w-26 h-12 w-18"
+                                src={`${process.env.REACT_APP_API_IMAGE_URL}${data?.brandLogo}`}
+                                alt=""
+                              />
+                            </a>
                           </div>
                         </div>
                         <div
@@ -605,71 +602,6 @@ function Productdetails() {
                           <div className="w-full text-sm font-bold text-blue-400 ">
                             inclusive of all taxes
                           </div>
-                          {Data23.map((item, index) => (
-                            <div
-                              className="productdetailcontainer flex gap-x-3 customwidth"
-                              style={{
-                                display:
-                                  index == 0 &&
-                                  item.brand != "" &&
-                                  item.brand != undefined &&
-                                  item.brand != undefined
-                                    ? "block"
-                                    : "none",
-                              }}
-                            >
-                              <h6
-                                className="product-title mt-2"
-                                style={{
-                                  display:
-                                    index == 0 &&
-                                    item.brand != "" &&
-                                    item.brand != undefined &&
-                                    item.brand != undefined
-                                      ? "block"
-                                      : "none",
-                                }}
-                              >
-                                Brand
-                              </h6>
-
-                              <div className="size-box">
-                                <ul>
-                                  {Data23.map((item, index) => (
-                                    <li
-                                      style={{
-                                        height: "auto",
-                                        width: "fit-content",
-                                        padding: "3px 4px",
-                                        background: "#059fe2",
-                                        display:
-                                          index == 0 &&
-                                          item.brand != "" &&
-                                          item.brand != undefined
-                                            ? "inline-block"
-                                            : "none",
-                                      }}
-                                    >
-                                      <a
-                                        href="javascript:void(0)"
-                                        style={{ color: "#fff" }}
-                                      >
-                                        {item.brand}
-                                      </a>
-                                    </li>
-                                  ))}
-                                  <li style={{ background: "#059fe2" }}>
-                                    <a
-                                      style={{ color: "white" }}
-                                      href="javascript:void(0)"
-                                    >
-                                      l
-                                    </a>
-                                  </li>
-                                </ul>
-                              </div>
-                            </div>
-                          ))}
 
                           {Data23.map((item, index) => (
                             <div
@@ -882,7 +814,7 @@ function Productdetails() {
                             <div className="product-buttons ">
                               <a
                                 onClick={() => {
-                                  checktoken ? addtocartfun() : nvg("/login");
+                                  addtocartfun();
                                 }}
                                 href="javascript:void(0) "
                                 style={{

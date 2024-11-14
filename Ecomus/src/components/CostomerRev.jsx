@@ -8,6 +8,8 @@ import {
   Input,
   Avatar,
 } from "@material-tailwind/react";
+import { usePostCommentMutation } from "../store/api/commentapi";
+import { toast } from "react-toastify";
 
 function CardReview({ name, feedback, date, title }) {
   return (
@@ -67,6 +69,41 @@ const CONTENTS = [
 ];
 
 function AddReviewForm({ onClose }) {
+  const [commentApi] = usePostCommentMutation();
+  const [data, setData] = useState({
+    subject: "",
+    description: "",
+    rating: 0,
+    productId: window.location.href.split("/").pop(),
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleRatingChange = (value) => {
+    setData((prevData) => ({
+      ...prevData,
+      rating: value,
+    }));
+  };
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await commentApi(data);
+      toast("Review added successfully");
+      onClose();
+    } catch (error) {
+      toast(error?.message || "Something went wrong");
+      onClose();
+    }
+  };
+
   return (
     <div className="p-6 border rounded-lg w-full bg-white shadow-lg">
       <Typography variant="h5" className="mb-4 text-center text-blue-gray-700">
@@ -74,19 +111,29 @@ function AddReviewForm({ onClose }) {
       </Typography>
 
       <Input
+        name="subject"
+        value={data.subject}
+        onChange={handleChange}
         placeholder="Subject"
-        className="mb-2 rounded !border-yellow-300 outline-0 py-2 !text-sm"
+        className="mb-2 rounded border-yellow-300 outline-none py-2 text-sm"
       />
       <Input
-        placeholder="Desription"
-        className="mb-2 rounded !border-yellow-300 outline-0 py-2 !text-sm"
+        name="description"
+        value={data.description}
+        onChange={handleChange}
+        placeholder="Description"
+        className="mb-2 rounded border-yellow-300 outline-none py-2 text-sm"
       />
 
       <div className="flex gap-x-6 justify-between items-center">
-        <Rating value={0} className="flex text-amber-500" />
+        <Rating
+          value={data.rating}
+          onChange={handleRatingChange}
+          className="flex text-amber-500"
+        />
         <Button
           color="blue"
-          onClick={onClose}
+          onClick={onSubmit}
           className="py-2 px-4 flex-1 bg-black shadow-md hover:shadow-lg transition-shadow"
         >
           Submit

@@ -99,10 +99,10 @@ const Addcategoryform = () => {
                     />
                   </div>
                   <div className="offset-lg-4 col-lg-8">
-                    {apiresponse.name ? (
+                    {apiresponse?.name ? (
                       <p style={{ color: "red" }}>
                         {" "}
-                        {apiresponse.name.message}{" "}
+                        {apiresponse?.name.message}{" "}
                       </p>
                     ) : (
                       ""
@@ -130,7 +130,7 @@ const Addcategoryform = () => {
                     />
                   </div>
                   <div className="offset-lg-4 col-lg-8">
-                    {apiresponse.url ? (
+                    {apiresponse?.url ? (
                       <p style={{ color: "red" }}>
                         {" "}
                         {apiresponse.url.message}{" "}

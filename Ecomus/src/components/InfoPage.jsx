@@ -36,22 +36,24 @@ const InfoList = () => {
   ];
 
   return (
-    <div className=" bg-transparent  shadow-lg p-6 rounded-lg w-full   mx-auto space-y-6">
-     
-      <div className="mt-6 flex justify-between items-center space-y-6">
+    <div className="bg-transparent overflow-y-scroll no-scrollbar shadow-lg p-6 rounded-lg w-full mx-auto space-y-6">
+      <div className="mt-6 flex justify-between items-stretch gap-x-4">
         {additionalContent.map((content, index) => (
-          <div key={index} className="flex items-start space-x-4 p-4 w-1/5   rounded-lg border border-gray-200 hover:shadow-md transition-shadow">
+          <div
+            key={index}
+            className="p-2 flex-1 leading-[180px] rounded-lg border border-gray-200 hover:shadow-md transition-shadow flex flex-col"
+          >
             <div className="text-2xl">{content.icon}</div>
-            <div>
-              <h3 className="text-xl font-semibold text-gray-800 mb-2">{content.title}</h3>
+            <div className="flex-grow">
+              <h3 className="text-xl font-semibold text-gray-800 mb-2 w-full">{content.title}</h3>
               <p className="text-gray-600">{content.description}</p>
             </div>
           </div>
         ))}
       </div>
-      
     </div>
   );
+  
 };
 
 export default InfoList;

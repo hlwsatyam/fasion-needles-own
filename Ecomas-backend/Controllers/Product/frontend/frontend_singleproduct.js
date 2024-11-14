@@ -3,14 +3,20 @@ const category = require("../../../Models/category");
 const variant = require("../../../Models/product_variant");
 const wishlist = require("../../../Models/wishlist");
 const mongoose = require("mongoose");
+const brand = require("../../../Models/brand");
 
 const frontend_singleproduct = async (req, res) => {
+  let brandLogo
   try {
     const data = await product.findById(req.params.id);
+    
     if (!data) {
       return res.status(404).send({ error: "Product not found" });
     }
-
+    const dd = await brand.findOne({brand_name: data.brand});
+     if(dd){
+      brandLogo = dd.brand_image
+     }
     const user_id = req.user.id || 0;
 
     let wishlist_status = false;
@@ -50,12 +56,13 @@ const frontend_singleproduct = async (req, res) => {
     const uniqueAttributes = Array.from(
       new Map(combinedDynamicAttributes.map((attr) => [JSON.stringify(attr), attr])).values()
     );
-
+ 
     res.send({
       status: "successfully",
       data: { ...data._doc, wishlist_status },
       parentcategory,
       childcategory,
+      brandLogo,
       productvariant: variantsWithWishlistStatus,
       uniqueAttributes,
       slug: data.product_url.replace(/-/g, " "),

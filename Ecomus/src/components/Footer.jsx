@@ -34,20 +34,20 @@ const Footer = () => {
           <div className="grid grid-cols-4 gap-8 sm:col-span-2 lg:col-span-2">
             {[
               {
-                heading: 'Services',
-                items: ['UI/UX Design', 'Web Development', 'Mobile App', 'Animation']
+                heading: 'Category',
+                items: ['Product', 'Men', 'Women', 'Kids']
               },
               {
-                heading: 'Company',
-                items: ['About Us', 'Team', 'Careers', 'Contact']
+                heading: 'Discover',
+                items: ['Contact Us', 'Blogs', 'Maps']
               },
               {
-                heading: 'Useful Links',
-                items: ['Blog', 'Support', 'Terms & Conditions', 'Privacy Policy']
+                heading: 'Product',
+                items: ['Track Order', 'Careers', 'Whatsapp']
               },
               {
-                heading: 'Resources',
-                items: ['Documentation', 'Tutorials', 'Guides', 'Webinars']
+                heading: 'Policies',
+                items: ['FAQ', 'T&C', 'Cancellation Policy', 'Privacy Policy']
               }
             ].map(({ heading, items }, index) => (
               <div key={index}>

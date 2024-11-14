@@ -99,7 +99,14 @@ h6 {
   padding-left: 1rem;
   border-bottom: 1px solid #e1e1e1;
 }
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
 
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;     /* Firefox */
+}
 
 .top-header .primary-menu .navbar-nav a.nav-link:hover,
 .top-header .primary-menu .navbar-nav a.nav-link:focus,

@@ -26,10 +26,12 @@ import Termsconditions from "./pages/Termsconditions";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import Pay from "./pages/Pay";
 import Categoryforbrand from "./pages/Category-for-brand";
-
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 function App() {
   return (
     <div className="max-w-7xl mx-auto">
+      <ToastContainer />
       <Routes >
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Home />} />

@@ -8573,7 +8573,7 @@
             }
             
             .header-search {
-              width: 400px;
+              width: 310px;
               border-radius: 25px;
               overflow-x: hidden;
             }
@@ -23503,7 +23503,7 @@
               }
               .newwith {
                 position: absolute;
-                width: max-content !important;
+                width: 800px !important;
               }
             
               .pixelstrap li {
