@@ -1,7 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 export const commentApi = createApi({
   reducerPath: 'wishlistApi',
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:8000/api/user/comment", prepareHeaders: (headers, { getState }) => {
+ 
+  baseQuery: fetchBaseQuery({ baseUrl:  `${process.env.REACT_APP_API_URL}/user/comment`, prepareHeaders: (headers, { getState }) => {
     const token = localStorage.getItem('Oneuptoken'); // Retrieve the token from local storage
     if (token) {
       headers.set('Authorization', `Bearer ${token}`);

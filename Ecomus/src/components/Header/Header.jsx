@@ -69,8 +69,8 @@ const Header = () => {
 
   useEffect(() => {
     if (isLoading == false && wislistloading == false) {
-      dispatch(addItem(cartcount.totalItems));
-      dispatch(addwishlist(wishlistcount.totalItems));
+      dispatch(addItem(cartcount?.totalItems||0));
+      dispatch(addwishlist(wishlistcount?.totalItems || 0));
     }
   }, [isLoading, cartcount, wislistloading, wishlistcount]);
 
@@ -225,7 +225,7 @@ const Header = () => {
                                 style={{ width: "47%" }}
                               >
                                 <img
-                                  src={`http://localhost:8000/uploads/images/${item.product_image1}`}
+                                  src={`${process.env.REACT_APP_API_IMAGE_URL}${item.product_image1}`}
                                   style={{ width: "100%", height: "100%" }}
                                   className="img-fluid  "
                                   alt="product"

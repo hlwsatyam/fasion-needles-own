@@ -88,7 +88,8 @@ function Productdetails() {
   const fetchComment = async (e) => {
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/user/comment/getcomment",
+        ` ${process.env.REACT_APP_API_URL}/user/comment/getcomment`,
+      
         {
           product_id: id,
         }

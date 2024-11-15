@@ -70,7 +70,7 @@ const Nav = ({ togglesidebar, closesidebar }) => {
                         <i className="fa fa-angle-left" /> back
                       </li>
 
-                      {categoryData.data.map((item, index) => (
+                      {categoryData?.data.map((item, index) => (
                         <MobileSubcategory
                           value={item}
                           key={index}
@@ -110,7 +110,7 @@ const Nav = ({ togglesidebar, closesidebar }) => {
                             />
                           </div>
                         </li>
-                        {categoryData.data.map((item, index) => (
+                        {categoryData?.data.map((item, index) => (
                           <Subcategory
                             key={index}
                             value={item}

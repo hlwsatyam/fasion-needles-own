@@ -164,7 +164,7 @@ const Home = () => {
           style={{ width: "100%", height: "100%" }}
           {...options}
         >
-          {Banner.data.map((item, index) =>
+          {Banner?.data.map((item, index) =>
             item.banner_type == "Banner" ? (
               <div
                 key={index}
@@ -175,7 +175,7 @@ const Home = () => {
                   onClick={() => {
                     window.location.href = item.banner_link;
                   }}
-                  src={`http://localhost:8000/uploads/images/${item.banner}`}
+                  src={`${process.env.REACT_APP_API_IMAGE_URL}${item.banner}`}
                   alt={`banner-${index}`}
                   className="img-fluid rounded-2xl mainbanner bg-img"
                   style={{
@@ -268,7 +268,7 @@ const Home = () => {
                   style={{ width: "100%", height: "100%" }}
                   {...options2}
                 >
-                  {newarrivals.data.map((item) => (
+                  {newarrivals?.data.map((item) => (
                     <Crouselitem item={item} />
                   ))}
                 </OwlCarousel>
@@ -292,7 +292,7 @@ const Home = () => {
                   style={{ width: "100%", height: "100%" }}
                   {...options2}
                 >
-                  {bestseller.data.map((item) => (
+                  {bestseller?.data.map((item) => (
                     <Crouselitem item={item} />
                   ))}
                 </OwlCarousel>
@@ -350,7 +350,7 @@ const Home = () => {
                   style={{ width: "100%", height: "100%" }}
                   {...options2}
                 >
-                  {featureitem.data.map((item) => (
+                  {featureitem?.data.map((item) => (
                     <Crouselitem item={item} />
                   ))}
                 </OwlCarousel>
@@ -370,14 +370,14 @@ const Home = () => {
           style={{ width: "100%", height: "100%" }}
           {...options}
         >
-          {Banner.data.map((item, index) =>
+          {Banner?.data.map((item, index) =>
             item.banner_type == "Slider" ? (
               <div key={index} style={{ height: isMobile ? "300px" : "400px" }}>
                 <img
                   onClick={() => {
                     window.location.href = item.banner_link;
                   }}
-                  src={`http://localhost:8000/uploads/images/${item.banner}`}
+                  src={`${process.env.REACT_APP_API_IMAGE_URL}${item.banner}`}
                   alt={`banner-${index}`}
                   className="img-fluid mainbanner bg-img"
                   style={{
@@ -411,7 +411,7 @@ const Home = () => {
                   style={{ width: "100%", height: "100%" }}
                   {...optionsforbrand}
                 >
-                  {brnaditem.data.map((item, index) => (
+                  {brnaditem?.data.map((item, index) => (
                     <div>
                       <div
                         className="brand-box"
@@ -420,7 +420,7 @@ const Home = () => {
                         }}
                       >
                         <img
-                          src={`http://localhost:8000/uploads/images/${item.brand_image}`}
+                          src={`${process.env.REACT_APP_API_IMAGE_URL}${item.brand_image}`}
                           alt=""
                           className="img-fluid object-contain h-[150px]"
                         />

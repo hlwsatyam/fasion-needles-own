@@ -15,7 +15,8 @@ const Crouselitem = ({ item }) => {
           <div className="product-front">
             <a href="javascript:void(0)">
               <img
-                src={`http://localhost:8000/uploads/images/${item.product_image1}`}
+         
+                src={`${process.env.REACT_APP_API_IMAGE_URL}${item.product_image1}`}
                 alt=""
                 className="h-[300px] object-cover "
               />
