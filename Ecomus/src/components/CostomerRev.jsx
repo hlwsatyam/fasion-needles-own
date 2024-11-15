@@ -11,7 +11,7 @@ import {
 import { usePostCommentMutation } from "../store/api/commentapi";
 import { toast } from "react-toastify";
 
-function CardReview({ name, feedback, date, title }) {
+function CardReview({ name, feedback, date, title, rating }) {
   return (
     <Card
       shadow={false}
@@ -23,7 +23,7 @@ function CardReview({ name, feedback, date, title }) {
             {name.slice(0, 2).toUpperCase()}
           </span>
 
-          <div>
+          <div >
             <Typography variant="h6" color="blue-gray" className="font-bold">
               {name}
             </Typography>
@@ -32,7 +32,7 @@ function CardReview({ name, feedback, date, title }) {
             </Typography>
           </div>
         </div>
-        <Rating value={4} className="flex text-amber-500 mb-3" />
+        <Rating value={rating} className="flex text-amber-500 mb-3" />
         <Typography variant="h6" color="blue-gray" className="font-bold mb-3">
           {title}
         </Typography>
@@ -143,9 +143,8 @@ function AddReviewForm({ onClose }) {
   );
 }
 
-export function OverviewSection3() {
+export function OverviewSection3({ getComment }) {
   const [showForm, setShowForm] = useState(false);
-
   return (
     <section className="container  bg-gradient-to-b from-gray-50 to-white">
       <div className="mx-auto  flex flex-col lg:flex-row gap-10">
@@ -212,20 +211,21 @@ export function OverviewSection3() {
         </div>
 
         {/* Right Section */}
-        <div>
+        <div className="w-full">
           <Typography
             variant="h6"
             className="mb-4 uppercase text-blue-gray-700"
           >
             Recent reviews
           </Typography>
-          {CONTENTS.map(({ name, feedback, title, date }, index) => (
+          {getComment?.data.map((item, index) => (
             <CardReview
               key={index}
-              title={title}
-              name={name}
-              feedback={feedback}
-              date={date}
+              title={item?.commentSubject}
+              name={item?.user_id?.first_name + " " + item?.user_id?.last_name}
+              feedback={item?.commentDescription}
+              date={item?.createdAt}
+              rating={item?.star}
             />
           ))}
           <div className="flex justify-center items-center my-4 gap-x-3">

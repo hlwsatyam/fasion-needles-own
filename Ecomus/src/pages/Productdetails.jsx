@@ -21,6 +21,7 @@ import RelativeProduct from "../components/RelativeProduct";
 import OverviewSection3 from "../components/CostomerRev";
 import SharePage from "../components/ShareComp";
 import InfoList from "../components/InfoPage";
+import { useGetCommentMutation } from "../store/api/commentapi";
 
 const options5 = {
   items: 1,
@@ -78,8 +79,34 @@ function Productdetails() {
   const [delresponse, setdelresponse] = useState({ status: false, msg: "" });
   const { data, isLoading, refetch } = useGetSingleProductQuery(id);
   const [addincart] = usePostCartItemMutation();
+  const [getCommentApi] = useGetCommentMutation();
   const [addtowishlistapi] = usePostWishlistItemMutation();
   const [removetowishlistapi] = usePostDeleteWishlistMutation();
+
+  const [getComment, setGetComment] = useState(null);
+  const fetchComment = async (e) => {
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/api/user/comment/getcomment",
+        {
+          product_id: id,
+        }
+      );
+      if(response.status===200){
+        console.log(response.data);
+        setGetComment(response.data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    if (id) {
+      fetchComment();
+    }
+  }, []);
+
   const devto = () => {
     if (delto == "") {
       setdelresponse({ status: true, msg: "Deliver to field is required" });
@@ -164,14 +191,14 @@ function Productdetails() {
           ? Data23[showoption]._id
           : null,
       };
-       // Check if there is an existing cart in localStorage
-       const existingCart = JSON.parse(localStorage.getItem("cart")) || [];
+      // Check if there is an existing cart in localStorage
+      const existingCart = JSON.parse(localStorage.getItem("cart")) || [];
 
-       // Add the new item to the cart array
-       const updatedCart = [...existingCart, cart_value];
-   
-       // Save the updated cart back to localStorage
-       localStorage.setItem("cart", JSON.stringify(updatedCart));
+      // Add the new item to the cart array
+      const updatedCart = [...existingCart, cart_value];
+
+      // Save the updated cart back to localStorage
+      localStorage.setItem("cart", JSON.stringify(updatedCart));
       // const response = await addincart(cart_value);
 
       // if (response.data.status == "successfully") {
@@ -510,11 +537,11 @@ function Productdetails() {
                             <div className=" flex items-center mt-2 justify-between">
                               <div className="flex border w-fit px-2 py-1 cursor-pointer items-center gap-x-2">
                                 <span className="flex gap-x-1 items-center ">
-                                  <span>4</span>
+                                  <span>5</span>
                                   <FaStar className="mb-1 text-blue-400" />
                                 </span>
                                 <span className="border-l-2 border-gray-300 pl-2">
-                                  580 Ratings
+                                  {getComment?.length || 0} Ratings
                                 </span>
                               </div>
                             </div>
@@ -977,7 +1004,7 @@ function Productdetails() {
       <p className="mt-4 container text-xl">Related Product</p>
 
       <RelativeProduct />
-      <OverviewSection3 />
+      <OverviewSection3 getComment={getComment} />
       <Footer />
     </>
   );

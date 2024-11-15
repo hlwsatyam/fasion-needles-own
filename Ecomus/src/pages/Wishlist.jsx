@@ -19,8 +19,6 @@ const Wishlist = () => {
   };
   // redirect to pdp page 
 
-
-
   // Remove item from wishlist start here 
   const removewishlist = async (data) => {
     const wishlist_value = {
@@ -37,8 +35,6 @@ const Wishlist = () => {
     }
   };
   // Remove item from wishlist end here 
-
-
 
   return isLoading == true ? (
     <></>
