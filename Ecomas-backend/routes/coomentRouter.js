@@ -21,9 +21,9 @@ router.post('/', authenticateToken, async (req, res) => {
             commentDescription: description
           }
         );
-        res.send({ message: 'Comment updated successfully', data: updateResult });
+      return  res.send({ message: 'Comment updated successfully', data: updateResult });
       } catch (err) {
-        res.status(500).send({ message: 'Error updating comment', error: err });
+     return   res.status(500).send({ message: 'Error updating comment', error: err });
       }
     } else {
       // User has not commented on this product, create a new comment

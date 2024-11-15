@@ -580,7 +580,7 @@ const Checkout = () => {
                                   </span>
                                 </li>
                               </ul>
-                            </div>
+                            </div>``
                             <div className="payment-box">
                               <div className="text-right">
                                 <button

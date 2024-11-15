@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addItem } from "../../store/state/cart";
 import { useGetWishlistCountQuery } from "../../store/api/wishlistapi";
 import { addwishlist } from "../../store/state/wishlist";
-import axios from "axios";
+
 import { useGetProductBySearchQuery } from "../../store/api/productapi";
 
 const Header = () => {
@@ -82,6 +82,20 @@ const Header = () => {
   useEffect(() => {
     refetch();
   }, [gobalvariable.cart]);
+
+  const [noOfItems, setItems] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const cartdata = localStorage.getItem("cart")
+        ? JSON.parse(localStorage.getItem("cart"))
+        : [];
+  
+      setItems(cartdata?.length);
+    }, 2000);
+  
+    return () => clearInterval(interval); // Clean up the interval on component unmount
+  }, []);
 
   return (
     <header className=" " style={{ position: " " }}>
@@ -367,7 +381,7 @@ const Header = () => {
                           alt={404}
                         />
                         <div className="item-count-contain inverce">
-                          {gobalvariable.cart}
+                          {noOfItems}
                         </div>
                       </NavLink>
                     </li>

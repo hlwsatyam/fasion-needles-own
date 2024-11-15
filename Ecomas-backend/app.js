@@ -46,18 +46,20 @@ app.use(express.json());
 app.use("/api", inforouter);
 app.use("/api/user", userrouter);
 app.use("/api/user/comment", commentrouter);
-app.use("/api/product",productrouter);
+app.use("/api/product", productrouter);
 app.use("/api/category", categoryrouter);
 app.use("/api/attribute", attributerouter);
 app.use("/api/banner", bannerrouter);
 app.use("/api/cart", cartrouter);
 app.use("/api/wishlist", wishlistrouter);
 app.use("/api/variant", variantrouter);
-app.use("/api/list",carousellistrouter);
-app.use("/api/brand",brandrouter);
-app.use("/api/address",addressrouter);
-app.use("/api/order",orderrouter);
-
+app.use("/api/list", carousellistrouter);
+app.use("/api/brand", brandrouter);
+app.use("/api/address", addressrouter);
+app.use("/api/order", orderrouter);
+app.get("/", (req, res) => {
+  res.send("hello world")
+})
 app.listen(port, () => {
   console.log(`server is runing at ${port}`);
 });

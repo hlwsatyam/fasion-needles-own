@@ -9,7 +9,7 @@ const Pay = () => {
 
   const location = useLocation();
   const userinfo = location.state.checkoutdata;
-
+ console.log(userinfo);
   const { data: cartdata, isLoading: cartloading } = useGetCartProductQuery();
   const Codpay = async () => {
     const orderInfo = {

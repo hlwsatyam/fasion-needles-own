@@ -22,6 +22,7 @@ import OverviewSection3 from "../components/CostomerRev";
 import SharePage from "../components/ShareComp";
 import InfoList from "../components/InfoPage";
 import { useGetCommentMutation } from "../store/api/commentapi";
+import { toast } from "react-toastify";
 
 const options5 = {
   items: 1,
@@ -92,7 +93,7 @@ function Productdetails() {
           product_id: id,
         }
       );
-      if(response.status===200){
+      if (response.status === 200) {
         console.log(response.data);
         setGetComment(response.data);
       }
@@ -181,30 +182,36 @@ function Productdetails() {
   const addtocartfun = async () => {
     try {
       const cart_value = {
-        product_name: Data23[showoption].product_name,
-        product_id: Data23[showoption].product_id
-          ? null
-          : Data23[showoption]._id,
-        product_qty: qty,
-        item_or_variant: Data23[showoption].product_id ? "variant" : "item",
-        product_variant_id: Data23[showoption].product_id
-          ? Data23[showoption]._id
-          : null,
+        name: Data23[showoption].product_name,
+        id: Data23[showoption].product_id ? null : Data23[showoption]._id,
+        quantity: qty,
+        price: Data23[showoption].selling_price,
+        image: Data23[showoption].product_image1,
+        size: Data23[showoption].size,
+        brand: Data23[showoption].brand,
+        rating: 5,
       };
+
       // Check if there is an existing cart in localStorage
       const existingCart = JSON.parse(localStorage.getItem("cart")) || [];
 
-      // Add the new item to the cart array
-      const updatedCart = [...existingCart, cart_value];
+      // Check if the item already exists in the cart by comparing the `id`
+      const itemIndex = existingCart.findIndex(
+        (item) => item.id === cart_value.id
+      );
+
+      if (itemIndex !== -1) {
+        // Item already exists, update the quantity
+        existingCart[itemIndex].quantityy += qty;
+        toast(`Item quantity updated successfully`);
+      } else {
+        // Item doesn't exist, add it to the cart
+        existingCart.push(cart_value);
+        toast(`Item added to cart successfully`);
+      }
 
       // Save the updated cart back to localStorage
-      localStorage.setItem("cart", JSON.stringify(updatedCart));
-      // const response = await addincart(cart_value);
-
-      // if (response.data.status == "successfully") {
-      //   nvg("/cart");
-      //   // window.location.reload();
-      // }
+      localStorage.setItem("cart", JSON.stringify(existingCart));
     } catch (error) {
       console.log(error.message);
     }

@@ -28,6 +28,8 @@ import Pay from "./pages/Pay";
 import Categoryforbrand from "./pages/Category-for-brand";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Cart2 from "./pages/Cart2";
+import OrderSummary from "./pages/Checkout2";
 function App() {
   return (
     <div className="max-w-7xl mx-auto">
@@ -38,9 +40,9 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />
-        <Route path="/cart" element={<Cart />} />
+        <Route path="/cart" element={<Cart2 />} />
         <Route path="/wishlist" element={<Wishlist/>} />
-        <Route path="/checkout/" element={<Checkout/>} />
+        <Route path="/checkout/" element={<OrderSummary/>} />
         <Route path="/myaccount" element={<Myaccount/>} />
         <Route path="/testproduct" element={<Testproduct/>} />
         <Route path="/productdetails/:id" element={<Productdetails/>} />

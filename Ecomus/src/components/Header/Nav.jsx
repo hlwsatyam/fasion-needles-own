@@ -3,6 +3,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import Subcategory from "./Subcategory";
 import MobileSubcategory from "./MobileSubcategory ";
 import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 
 const Nav = ({ togglesidebar, closesidebar }) => {
   const nvg = useNavigate();
@@ -16,6 +17,26 @@ const Nav = ({ togglesidebar, closesidebar }) => {
 
   // fetch all category api start here
   const { data: categoryData, isLoading } = useGetAllCategoriesQuery();
+
+
+
+
+  const [noOfItems, setItems] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const cartdata = localStorage.getItem("cart")
+        ? JSON.parse(localStorage.getItem("cart"))
+        : [];
+  
+      setItems(cartdata?.length);
+    }, 2000);
+  
+    return () => clearInterval(interval); // Clean up the interval on component unmount
+  }, []);
+
+
+
   // fetch all category api start here
   return isLoading == true ? (
     <></>
@@ -232,7 +253,7 @@ const Nav = ({ togglesidebar, closesidebar }) => {
 
                       <div className="item-count-contain inverce">
                         {" "}
-                        {globalvariable.cart}{" "}
+                      {  noOfItems}
                       </div>
                     </li>
                   </ul>
