@@ -102,7 +102,7 @@ const Header = () => {
       {/* top header start here  */}
       <div className="header7">
         <div className="custom-container">
-          <div className="row">
+          <div className=" ">
             <div className="col-12">
               <div className="header-contain ">
                 <div className="logo-block logowidth">

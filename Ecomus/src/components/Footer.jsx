@@ -47,7 +47,7 @@ const Footer = () => {
               },
               {
                 heading: 'Policies',
-                items: ['FAQ', 'T&C', 'Cancellation Policy', 'Privacy Policy']
+                items: ['FAQ', 'T&C', 'v', 'Privacy Policy']
               }
             ].map(({ heading, items }, index) => (
               <div key={index}>

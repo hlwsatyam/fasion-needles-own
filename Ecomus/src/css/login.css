@@ -280,9 +280,9 @@
     }
     
     .custom-container {
-        max-width: 1940px;
+        /* max-width: 1940px;
         padding-right: 10px !important;
-        padding-left: 10px !important; 
+        padding-left: 10px !important;  */
         margin-right: auto;
         margin-left: auto;
       }
