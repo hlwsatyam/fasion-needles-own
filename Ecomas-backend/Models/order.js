@@ -13,6 +13,10 @@ const orderSchema = mongoose.Schema(
     },
     shipping_last_name: {
       type: String,
+      
+    },
+    items:{
+      type: Array,
       required: true,
     },
     shipping_country: {
@@ -37,7 +41,7 @@ const orderSchema = mongoose.Schema(
     },
     shipping_address2: {
       type: String,
-      required: true,
+  
     },
     shipping_email: {
       type: String,

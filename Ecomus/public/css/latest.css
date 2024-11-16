@@ -184,7 +184,7 @@ body{
     }
     .largefont{
         font-size: 16px;
-        color: rgb(255, 0, 0);
+        color: rgb(47, 34, 34);
         text-transform: capitalize;
         position: relative;
     top: -6px;
@@ -292,7 +292,7 @@ body{
     }
     .largefont{
         font-size: 12px;
-        color: rgb(255, 11, 11);
+        color: rgb(0, 0, 0);
         text-transform: capitalize;
         position: relative;
         top: -6px;
@@ -321,7 +321,7 @@ body{
     width: 260px !important;
    }
    .marginfromtop {
-    margin-top: 4rem;
+    margin-top: -1rem;
 }
 }
 @media screen and (max-width: 1100px) {

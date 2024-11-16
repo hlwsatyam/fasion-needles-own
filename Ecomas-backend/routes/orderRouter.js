@@ -11,7 +11,7 @@ const updateorderstatus = require('../Controllers/order/update_order_status')
 const orderlistbyuser = require('../Controllers/order/orderlist_by_user')
 const router = express.Router()
 
-router.post('/',authenticateToken,createorder)
+router.post('/',createorder)
 router.get('/',orderlist)
 router.get('/orderbyuser',authenticateToken,orderlistbyuser)
 router.get('/:id',singleorder)

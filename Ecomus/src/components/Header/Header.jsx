@@ -69,7 +69,7 @@ const Header = () => {
 
   useEffect(() => {
     if (isLoading == false && wislistloading == false) {
-      dispatch(addItem(cartcount?.totalItems||0));
+      dispatch(addItem(cartcount?.totalItems || 0));
       dispatch(addwishlist(wishlistcount?.totalItems || 0));
     }
   }, [isLoading, cartcount, wislistloading, wishlistcount]);
@@ -90,10 +90,10 @@ const Header = () => {
       const cartdata = localStorage.getItem("cart")
         ? JSON.parse(localStorage.getItem("cart"))
         : [];
-  
+
       setItems(cartdata?.length);
     }, 2000);
-  
+
     return () => clearInterval(interval); // Clean up the interval on component unmount
   }, []);
 
@@ -102,7 +102,7 @@ const Header = () => {
       {/* top header start here  */}
       <div className="header7">
         <div className="custom-container">
-          <div className=" ">
+          <div className=" px-6">
             <div className="col-12">
               <div className="header-contain ">
                 <div className="logo-block logowidth">
@@ -117,7 +117,7 @@ const Header = () => {
                     <NavLink to="/home">
                       <img
                         src={`/images/FN-Main.png`}
-                        className="w-[60px] h-[60px]"
+                        className="w-[65px] h-[40px]"
                         alt="logo"
                       />
                     </NavLink>

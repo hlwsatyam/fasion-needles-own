@@ -13,6 +13,8 @@ const carousellistrouter = require("./routes/carousellistRouter.js")
 const brandrouter = require("./routes/brandRouter.js")
 const addressrouter = require("./routes/addressRouter.js")
 const orderrouter = require("./routes/orderRouter.js")
+const TrackOrderRouter = require("./routes/TrackOrderRouter.js")
+const verificationrouter = require("./routes/verificationRouter.js")
 const commentrouter = require("./routes/coomentRouter.js")
 const express = require("express");
 const bodyParser = require('body-parser');
@@ -44,6 +46,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.json());
 app.use("/api", inforouter);
+app.use("/api/track", TrackOrderRouter);
 app.use("/api/user", userrouter);
 app.use("/api/user/comment", commentrouter);
 app.use("/api/product", productrouter);
@@ -57,6 +60,7 @@ app.use("/api/list", carousellistrouter);
 app.use("/api/brand", brandrouter);
 app.use("/api/address", addressrouter);
 app.use("/api/order", orderrouter);
+app.use("/api/verification", verificationrouter);
 app.get("/", (req, res) => {
   res.send("hello world")
 })

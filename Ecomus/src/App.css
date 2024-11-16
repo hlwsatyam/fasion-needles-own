@@ -453,7 +453,7 @@ display: block;
         left: 4px;
     }
     .mobileorlaptop{
-      height: 300px;
+      height: 200px;
     }
     }
     @media screen and (max-width: 600px) {
@@ -1015,6 +1015,7 @@ display: block;
   @media screen and (max-width: 725px) {
     .bottomdgn{
       position: fixed;
+      left: 0;
         width: 100vw;
         z-index: 100;
         bottom: 0px;

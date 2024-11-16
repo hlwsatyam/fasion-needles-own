@@ -1,66 +1,108 @@
-import React, { useEffect, useState } from "react";
-// import React from 'react'
-
-import OwlCarousel from "react-owl-carousel";
-import "owl.carousel/dist/assets/owl.carousel.css";
-import "owl.carousel/dist/assets/owl.theme.default.css";
+import React from "react";
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer";
 
-export const PrivacyPolicy = () => {
-
+const PrivacyPolicy = () => {
   return (
     <div>
       <Header />
+      <div className="  mx-auto px-2 bg-white shadow-md rounded-lg">
+        <h1 className="text-4xl font-bold mb-4">Privacy Policy</h1>
+        <p className="text-gray-700 mb-4">
+          Welcome to Fashion Needles! Your privacy is of utmost importance to
+          us. This Privacy Policy outlines how we collect, use, and safeguard
+          your personal information when you visit our website,
+          www.fashionneedles.in, or make a purchase.
+        </p>
 
+        <h2 className="text-2xl font-semibold mt-6 mb-2">
+          1. Information We Collect
+        </h2>
+        <p className="text-gray-700 mb-4">
+          We collect personal information you provide directly to us when you
+          create an account, make a purchase, or contact customer support. This
+          may include:
+        </p>
+        <ul className="list-disc list-inside text-gray-700 mb-4">
+          <li>Name</li>
+          <li>Email address</li>
+          <li>Phone number</li>
+          <li>Shipping and billing addresses</li>
+          <li>Payment information (securely processed)</li>
+        </ul>
+        <p className="text-gray-700 mb-4">
+          Additionally, we may collect information about your usage of the site
+          through cookies and similar technologies.
+        </p>
 
+        <h2 className="text-2xl font-semibold mt-6 mb-2">
+          2. How We Use Your Information
+        </h2>
+        <p className="text-gray-700 mb-4">We use your information to:</p>
+        <ul className="list-disc list-inside text-gray-700 mb-4">
+          <li>Process and fulfill your orders</li>
+          <li>Communicate with you regarding your orders or inquiries</li>
+          <li>Enhance your shopping experience by personalizing content</li>
+          <li>Send promotional emails (you can opt out at any time)</li>
+        </ul>
 
-      <div>
-          {/* breadcrumb start */}
-  <div className="breadcrumb-main marginfromtop" style={{backgroundColor:"#f9f9f9"}}>
-    <div className="container m-0">
-      <div className="row">
-        <div className="col">
-          <div className="breadcrumb-contain">
-            <div>
-              <ul>
-                <li><a href="/">home</a></li>
-                <li><i className="fa fa-angle-double-right" /></li>
-                <li><a href="javascript:void(0)">Privacy Policy</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
+        <h2 className="text-2xl font-semibold mt-6 mb-2">
+          3. Sharing Your Information
+        </h2>
+        <p className="text-gray-700 mb-4">
+          We do not sell or share your personal information with third parties
+          for their marketing purposes. We may share your data with trusted
+          service providers who assist in operating our website, conducting
+          business, and servicing you, so long as they agree to keep this
+          information confidential.
+        </p>
+
+        <h2 className="text-2xl font-semibold mt-6 mb-2">4. Data Security</h2>
+        <p className="text-gray-700 mb-4">
+          We implement industry-standard security measures to protect your
+          personal information. While we strive to use commercially acceptable
+          means to protect your data, no method of transmission over the
+          internet or electronic storage is 100% secure.
+        </p>
+
+        <h2 className="text-2xl font-semibold mt-6 mb-2">5. Your Rights</h2>
+        <p className="text-gray-700 mb-4">You have the right to:</p>
+        <ul className="list-disc list-inside text-gray-700 mb-4">
+          <li>Access and request a copy of your personal information</li>
+          <li>Correct any inaccuracies in your data</li>
+          <li>Request deletion of your data (subject to legal obligations)</li>
+        </ul>
+
+        <h2 className="text-2xl font-semibold mt-6 mb-2">
+          6. Changes to This Policy
+        </h2>
+        <p className="text-gray-700 mb-4">
+          We may update this Privacy Policy from time to time to reflect changes
+          to our practices or for other operational, legal, or regulatory
+          reasons. We encourage you to review this policy periodically.
+        </p>
+
+        <h2 className="text-2xl font-semibold mt-6 mb-2">7. Contact Us</h2>
+        <p className="text-gray-700 mb-4">
+          If you have questions about this Privacy Policy, please contact us:
+        </p>
+        <ul className="text-gray-700 mb-4">
+          <li>Email: support@fashionneedles.in</li>
+          <li>Phone: 085954 90062</li>
+          <li>
+            Address: First Floor, Lal Mandir Market, C-67, Main Rd, Shital
+            Vihar, Khora Colony, Sector 57, Noida, Uttar Pradesh 201301
+          </li>
+        </ul>
+
+        <p className="text-gray-700 mt-8">
+          Thank you for trusting Fashion Needles with your information. Your
+          privacy is essential to us.
+        </p>
       </div>
-    </div>
-  </div>
-  {/* breadcrumb End */}
-        <section className="section-big-pt-space pb-2" style={{backgroundColor:"#f9f9f9"}}>
-          <div className="col-lg-12 col-sm-12 col-xs-12 mt-lg-3 mt-xs-4 mb-5">
-            <div className="container-fuild emp-profile">
-              <div className="row profile2">
-               
-
-                <section className="tab-product-main-tab">
-                  <div className="row mt-2">
-                       <h3 className="privacy">PRIVACY POLICY</h3>
-                       <p className="policy">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum facilis perspiciatis minus exercitationem ducimus suscipit obcaecati saepe nobis, consequatur ut rerum corrupti molestiae, voluptate ab aspernatur dolore eaque. Labore assumenda, hic mollitia praesentium sed harum consequatur minima impedit facilis dicta magnam optio quaerat, vitae perspiciatis incidunt maiores architecto. Earum quae asperiores recusandae sequi impedit maiores! Dolore, cupiditate doloremque! Consequuntur est saepe temporibus vero illum dignissimos quibusdam hic enim. Quidem earum rerum atque numquam dolorum nulla? A doloremque saepe voluptatum accusamus, ipsa corrupti similique blanditiis quibusdam sed voluptatem consequuntur modi distinctio iusto quam culpa. Corporis modi blanditiis ratione est tempore quasi veniam obcaecati sed incidunt. Ipsam, quidem! In nesciunt expedita maiores ipsa a dolores illum? Consequuntur alias excepturi animi commodi neque. Sed at enim quia quos porro, ut iure, aliquid illum, voluptatem quam recusandae. Eaque perferendis laborum sed fugit magni eos consequatur! Ipsum saepe magni iusto atque nihil enim facere delectus quis tempora suscipit amet id impedit, perspiciatis nostrum quaerat, sapiente provident fugiat harum explicabo facilis, eveniet architecto aliquid? Voluptate impedit eos, dolor officiis voluptates quasi nesciunt labore dolorem, suscipit officia molestiae quisquam, doloribus eaque repellendus? Perferendis iste corporis suscipit voluptatem modi est, a esse id? Quaerat, recusandae? Voluptatum fugiat cum aut, quod enim eveniet dolores? Excepturi explicabo, id perferendis animi delectus aut obcaecati ad provident tenetur, laboriosam quo? Ipsam consectetur dignissimos dolores porro veniam minus a labore possimus suscipit nemo, sint officiis recusandae praesentium odit officia quas quidem quisquam optio dolorem autem maiores? Autem obcaecati minima repudiandae, natus iusto sapiente.</p>
-
-                  </div>
-                </section>
-              </div>
-            </div>
-          </div>
-        </section>
-        <Footer />
-        {/* </div> */}
-
-        {/* <Footer /> */}
-
-        {/* footer start */}
-     
-      </div>
+      <Footer />
     </div>
   );
 };
+
 export default PrivacyPolicy;

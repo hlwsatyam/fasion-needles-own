@@ -1,37 +1,60 @@
-import React, {useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../components/Header/Header";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useGetCartProductQuery } from "../store/api/cartapi";
+import axios from "axios";
+import { tokenstore } from "../Localstorage/Store";
 
 const Pay = () => {
   const [paymethod, setpaymethod] = useState("Online");
+  const [items, setItems] = useState([]);
   const nvg = useNavigate();
 
   const location = useLocation();
   const userinfo = location.state.checkoutdata;
- console.log(userinfo);
+ 
+  useEffect(() => {
+    setItems(userinfo.items);
+  }, []);
   const { data: cartdata, isLoading: cartloading } = useGetCartProductQuery();
+
   const Codpay = async () => {
-    const orderInfo = {
-      shipping_first_name: userinfo.first_name,
-      shipping_last_name: userinfo.last_name,
-      shipping_address1: userinfo.address1,
-      shipping_address2: userinfo.address2,
-      shipping_country: userinfo.country,
-      shipping_state: userinfo.state,
-      shipping_city: userinfo.city,
-      shipping_pincode: userinfo.pincode,
-      shipping_email: userinfo.email,
-      shipping_mobile: userinfo.phone_number,
-      payment_method: "COD",
-      total_amount: userinfo.total,
-      shipping_charges:cartdata.shipping_charges,
-    };
-    nvg("/thankyoupage", {
-      state: {
-        orderinfo: orderInfo,
-      },
-    });
+    try {
+      const res = await axios.post(`${process.env.REACT_APP_API_URL}/order`, {
+        shipping_first_name: userinfo.first_name,
+        shipping_last_name: userinfo.last_name,
+
+        items: userinfo.items,
+        shipping_address1: userinfo.address1,
+        shipping_address2: userinfo.address2,
+        shipping_country: userinfo.country,
+        shipping_state: userinfo.state,
+        shipping_city: userinfo.city,
+        shipping_pincode: userinfo.pincode,
+        shipping_mobile: userinfo.phone_number,
+        shipping_email: userinfo.email,
+        total_amount: userinfo.total,
+        payment_method: "COD",
+        payment_status: "pending",
+        payment_key: "COD",
+        shipping_charges: 0,
+      });
+      if (res.status === 200) {
+        if (res.data.token) {
+          tokenstore(res.data.token);
+        }
+      window.location.href = "/thankyoupage";
+      localStorage.removeItem("cart");
+      window.location.reload();
+      }
+      console.log(res.data)
+    } catch (error) {}
+
+    // nvg("/thankyoupage", {
+    //   state: {
+    //     orderinfo: orderInfo,
+    //   },
+    // });
   };
 
   const Onlinepay = async () => {
@@ -63,7 +86,7 @@ const Pay = () => {
           payment_status: "received",
           payment_method: "Online",
           total_amount: userinfo.total,
-          shipping_charges:cartdata.shipping_charges,
+          shipping_charges: cartdata.shipping_charges,
         };
 
         try {
@@ -90,7 +113,10 @@ const Pay = () => {
       <Header />
 
       {/* section start */}
-      <section className="section-big-py-space b-g-light" style={{marginTop:'65px'}}>
+      <section
+        className="section-big-py-space b-g-light"
+        style={{ marginTop: "65px" }}
+      >
         <div className="custom-container">
           <div className="checkout-page contact-page">
             <div className="checkout-form">
@@ -118,7 +144,7 @@ const Pay = () => {
                           cursor: "pointer",
                         }}
                       >
-                         Pay Online
+                        Pay Online
                       </div>
                       <div
                         className="tabdes"
@@ -175,13 +201,14 @@ const Pay = () => {
                           <p style={{ marginTop: "8px", fontSize: "11px" }}>
                             By placing this order, you agree to
                             <span
+                              className="underline text-green-600"
                               style={{ cursor: "pointer" }}
                               onClick={() => {
-                                nvg("/termsconditions");
+                                nvg("/privacy-policy");
                               }}
                             >
                               {" "}
-                              Ecomus T&C
+                              Privacy Policy
                             </span>
                           </p>
                         </div>
@@ -203,45 +230,29 @@ const Pay = () => {
                         </div>
                       </div>
                       <ul className="qty">
-                        {cartdata.data[0]?.product_name
-                          ? cartdata.data.map((item, index) =>
-                              item.product_id == null ? (
-                                <li style={{ fontSize: "12px" }}>
-                                  {item.product_variant_id.product_name} ×{" "}
-                                  {item.product_qty}{" "}
-                                  <span style={{ fontSize: "12px" }}>
-                                    ₹
-                                    {item.product_variant_id.selling_price *
-                                      item.product_qty}
-                                  </span>
-                                </li>
-                              ) : (
-                                <li style={{ fontSize: "12px" }}>
-                                  {item.product_id.product_name} ×{" "}
-                                  {item.product_qty}{" "}
-                                  <span style={{ fontSize: "12px" }}>
-                                    ₹
-                                    {item.product_id.selling_price *
-                                      item.product_qty}
-                                  </span>
-                                </li>
-                              )
-                            )
-                          : ""}
+                        {items?.map((item, index) => (
+                          <li style={{ fontSize: "12px" }}>
+                            {item.name?.substring(0, 15)}... × {item.quantity}{" "}
+                            <span style={{ fontSize: "12px" }}>
+                              ₹{item.price * item.quantity}
+                            </span>
+                          </li>
+                        ))}
                       </ul>
                       <ul className="sub-total">
                         <li style={{ fontSize: "12px" }}>
                           Subtotal{" "}
                           <span style={{ fontSize: "12px" }} className="count">
-                            ₹{cartdata.total_Amount_with_discount_subtotal}
+                            ₹{userinfo.total}
                           </span>
                         </li>
                         <li style={{ fontSize: "12px" }}>
                           Shipping{" "}
                           <span style={{ fontSize: "12px" }} className="count">
-                            {/* ₹{0.0} */}
-                    ₹{cartdata.shipping_charges == 0 ? `0.00` : cartdata.shipping_charges}
-
+                            {/* ₹{0.0} */}₹
+                            {cartdata.shipping_charges == 0
+                              ? `0.00`
+                              : cartdata.shipping_charges}
                           </span>
                         </li>
                       </ul>
@@ -249,7 +260,7 @@ const Pay = () => {
                         <li>
                           Total{" "}
                           <span style={{ fontSize: "12px" }} className="count">
-                            ₹{cartdata.total_Amount_with_discount}
+                            ₹{userinfo.total}
                           </span>
                         </li>
                       </ul>

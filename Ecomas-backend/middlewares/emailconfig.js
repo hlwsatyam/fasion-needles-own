@@ -5,22 +5,22 @@ const transporter = nodemailer.createTransport({
   port:587,
   secure:false,
   auth: {
-    user: 'azy6049@gmail.com',
-    pass: 'kqxe ljqr qcru unnw'
+    user: 'satyampandit021@gmail.com',
+    pass: 'mnlm kfcp wzwb dthw'
   },
 });
 
 async function sendEmail(to, subject, text, html) {
   try {
     const mailOptions = {
-      from: 'azy6049@gmail.com',
+      from: 'satyampandit021@gmail.com',
       to: to,
       subject: subject,
       text: text,
       html: html
     };
     const info = await transporter.sendMail(mailOptions);
-    console.log('Email sent: ', to);
+    
     return { success: true, messageId: info.messageId };
   } catch (error) {
     console.error('Error sending email: ', error);
