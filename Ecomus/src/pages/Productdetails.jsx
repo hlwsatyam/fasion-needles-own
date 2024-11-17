@@ -336,7 +336,7 @@ function Productdetails() {
                         onClick={() => redirectfun("/wishlist")}
                       >
                         <img
-                          src="./images/mega-store/brand/heart.png"
+                          src="/images/mega-store/brand/heart.png"
                           className="newwidthpro hellopooja"
                           alt="heart"
                         />
@@ -362,7 +362,7 @@ function Productdetails() {
                         }}
                       >
                         <img
-                          src="./images/mega-store/brand/shopping-cart.png"
+                          src="/images/mega-store/brand/shopping-cart.png"
                           className="newwidthpro  hellopooja"
                           alt="cart"
                         />
@@ -398,7 +398,7 @@ function Productdetails() {
       >
         <div className="collection-wrapper">
           <div className="custom-container">
-            <div className="row">
+            <div className="">
               <div className="col-lg-12 col-sm-12 col-xs-12">
                 <div className="container-fluid">
                   {/* <div className="row">
@@ -536,6 +536,7 @@ function Productdetails() {
                           boxShadow: "0px 14px 40px 0px rgba(0, 0, 0, 0.12)",
                           borderRadius: "10px",
                           padding: "20px 17px",
+                          
                         }}
                       >
                         <div className=" flex items-center justify-between">
@@ -980,6 +981,7 @@ function Productdetails() {
                           boxShadow: "0px 14px 40px 0px rgba(0, 0, 0, 0.12)",
                           borderRadius: "10px",
                           padding: "20px 17px",
+                          overflow: "hidden",
                         }}
                       >
                         <div

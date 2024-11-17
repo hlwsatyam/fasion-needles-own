@@ -29,8 +29,9 @@ const createorder = async (req, res) => {
 
 
 
-        let token = null
+        let token = ""
         if (!user_id) {
+
             const existUser = await Usertable.findOne({ mobile: shipping_mobile })
             if (!existUser) {
                 const genRatePss = () => Math.random().toString(36).slice(-8)
@@ -109,7 +110,7 @@ const createorder = async (req, res) => {
 <div class="col-xs-12">
     <div class="container-fluid">
         <table width="99%" border="0" align="center" cellpadding="0" cellspacing="0" style="font-family: Arial, Helvetica, sans-serif; font-size: 12px; border: 1px solid #eee;">
-            <tbody>
+            <tbody> 
                 <tr>
                     <td style="border-bottom: 1px solid #eee; height: 24px; font-size: 14px;" align="center"><strong>TAX INVOICE</strong></td>
                 </tr>
@@ -233,7 +234,7 @@ const createorder = async (req, res) => {
 
 
         sendEmail(shipping_email, "Order Confirmation", "Order Details With Invoice", emailHtml)
-        return res.status(200).send({ token,status: "successfully", order: savedOrder });
+        return res.status(200).send({ token, status: "successfully", order: savedOrder });
     } catch (err) {
         console.log(`Here is error: ${err}`);
         res.send({ status: "failed", errors: err });

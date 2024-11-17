@@ -8,14 +8,13 @@ const Crouselitem = ({ item }) => {
       <div
         className="product-box product-box2"
         onClick={() => {
-          nvg(`/productdetails/${item._id}`);
+          window.location.href=(`/productdetails/${item._id}`);
         }}
       >
         <div className="product-imgbox">
           <div className="product-front">
             <a href="javascript:void(0)">
               <img
-         
                 src={`${process.env.REACT_APP_API_IMAGE_URL}${item.product_image1}`}
                 alt=""
                 className="h-[300px] object-cover "

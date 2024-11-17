@@ -68,12 +68,7 @@ const Home = () => {
       920: {
         items: 4,
       },
-      700: {
-        items: 3,
-      },
-      600: {
-        items: 3,
-      },
+      
       504: {
         items: 2,
       },
@@ -81,7 +76,7 @@ const Home = () => {
         items: 2,
       },
       310: {
-        items: 1,
+        items: 2,
       },
     },
   };
@@ -103,17 +98,12 @@ const Home = () => {
       700: {
         items: 4,
       },
-      600: {
-        items: 4,
-      },
-      504: {
-        items: 3,
-      },
+     
       300: {
         items: 2,
       },
       310: {
-        items: 1,
+        items: 2,
       },
     },
   };

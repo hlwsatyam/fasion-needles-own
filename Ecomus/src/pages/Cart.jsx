@@ -19,11 +19,9 @@ const Cart = () => {
   const [totalvoucher, settotalvoucher] = useState(0);
   const [voucherlist, setvoucherlist] = useState([]);
   const [vouchererror, setvouchererror] = useState("");
-
   const { isLoading, refetch } = useGetCartProductQuery();
   const [updatecart] = usePostUpdateCartMutation();
   const [deletecartitem] = useDeleteCartMutation();
-
   const [cartdata, setData] = useState(null);
 
   useEffect(() => {
@@ -49,7 +47,8 @@ const Cart = () => {
     if (qty > 1) {
       const data = {
         newQuantity: qty - 1,
-        cartItemId: id,      };
+        cartItemId: id,
+      };
       setloading(false);
       const response = await updatecart(data);
       if (response.data.status == "successfully") {
@@ -429,7 +428,6 @@ const Cart = () => {
                             </h6>
                           </td>
                           <td>
-                      
                             <div
                               className="qty-box"
                               style={{ padding: "10px 0px" }}

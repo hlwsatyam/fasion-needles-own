@@ -201,6 +201,7 @@ const FAQSection = () => {
     setOpenQuestions(newOpenQuestions);
   };
 
+  
   return (
     <div>
       <Header />

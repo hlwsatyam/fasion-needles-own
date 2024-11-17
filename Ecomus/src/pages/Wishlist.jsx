@@ -12,7 +12,6 @@ const Wishlist = () => {
   const dispatch = useDispatch();
   const globalvariable = useSelector((state) => state);
 
-
   // redirect to pdp page 
   const transfer = (productid) => {
     nvg(`/productdetails/${productid}`);

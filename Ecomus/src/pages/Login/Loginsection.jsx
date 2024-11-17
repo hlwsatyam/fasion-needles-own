@@ -46,13 +46,13 @@ const Loginsection = () => {
             className="form-login"
             onSubmit={handleSubmit}
           >
-            <label htmlFor="text">Email Id</label>
+            <label htmlFor="text">Email Or Phone</label>
 
             <Field
-              type="email"
+              
               name="email"
               className="login-input mb-0"
-              placeholder="Enter your Email"
+              placeholder="Email Or Phone"
               value={values.email}
             />
             <span
@@ -96,7 +96,12 @@ const Loginsection = () => {
                 <p>Remeber me</p>
               </div>
               <div>
-                <p>Forgot password?</p>
+                <p
+                  onClick={() => (window.location.href = "/forget-pass")}
+                  className="text-blue-600 hover:underline cursor-pointer"
+                >
+                  Forgot password?
+                </p>
               </div>
             </div>
 

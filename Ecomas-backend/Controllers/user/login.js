@@ -7,8 +7,9 @@ const login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    const user = await usertable.findOne({ email });
-
+    const user = await usertable.findOne({ 
+      $or: [{ email }, { mobile: email }] 
+    });
     if (!user) {
       return res.status(401).send({ message: "Invalid credentials" });
     } else {

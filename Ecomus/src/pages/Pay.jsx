@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useGetCartProductQuery } from "../store/api/cartapi";
 import axios from "axios";
 import { tokenstore } from "../Localstorage/Store";
+import { toast } from "react-toastify";
 
 const Pay = () => {
   const [paymethod, setpaymethod] = useState("Online");
@@ -12,42 +13,105 @@ const Pay = () => {
 
   const location = useLocation();
   const userinfo = location.state.checkoutdata;
- 
+
   useEffect(() => {
     setItems(userinfo.items);
   }, []);
   const { data: cartdata, isLoading: cartloading } = useGetCartProductQuery();
 
   const Codpay = async () => {
-    try {
-      const res = await axios.post(`${process.env.REACT_APP_API_URL}/order`, {
-        shipping_first_name: userinfo.first_name,
-        shipping_last_name: userinfo.last_name,
+    // Retrieve the token from localStorage
+    const token = localStorage.getItem("Oneuptoken");
 
-        items: userinfo.items,
-        shipping_address1: userinfo.address1,
-        shipping_address2: userinfo.address2,
-        shipping_country: userinfo.country,
-        shipping_state: userinfo.state,
-        shipping_city: userinfo.city,
-        shipping_pincode: userinfo.pincode,
-        shipping_mobile: userinfo.phone_number,
-        shipping_email: userinfo.email,
-        total_amount: userinfo.total,
-        payment_method: "COD",
-        payment_status: "pending",
-        payment_key: "COD",
-        shipping_charges: 0,
-      });
+    // Configure headers
+    const headers = {};
+    if (token) {
+      headers["Authorization"] = `Bearer ${token}`;
+    }
+    try {
+      const res = await axios.post(
+        `${process.env.REACT_APP_API_URL}/order`,
+        {
+          shipping_first_name: userinfo.first_name,
+          shipping_last_name: userinfo.last_name,
+
+          items: userinfo.items,
+          shipping_address1: userinfo.address1,
+          shipping_address2: userinfo.address2,
+          shipping_country: userinfo.country,
+          shipping_state: userinfo.state,
+          shipping_city: userinfo.city,
+          shipping_pincode: userinfo.pincode,
+          shipping_mobile: userinfo.phone_number,
+          shipping_email: userinfo.email,
+          total_amount: userinfo.total,
+          payment_method: "COD",
+          payment_status: "pending",
+          payment_key: "COD",
+          shipping_charges: 0,
+        },
+        { headers }
+      );
       if (res.status === 200) {
         if (res.data.token) {
           tokenstore(res.data.token);
         }
-      window.location.href = "/thankyoupage";
-      localStorage.removeItem("cart");
-      window.location.reload();
+        window.location.href = "/thankyoupage";
+        localStorage.removeItem("cart");
+      } else {
+        toast(res?.data?.message || "Error");
       }
-      console.log(res.data)
+    } catch (error) {}
+
+    // nvg("/thankyoupage", {
+    //   state: {
+    //     orderinfo: orderInfo,
+    //   },
+    // });
+  };
+  const Onlinepay = async () => {
+    // Retrieve the token from localStorage
+    const token = localStorage.getItem("Oneuptoken");
+
+    // Configure headers
+    const headers = {};
+    if (token) {
+      headers["Authorization"] = `Bearer ${token}`;
+    }
+    try {
+      const res = await axios.post(
+        `${process.env.REACT_APP_API_URL}/OnlineOrder`,
+        {
+          shipping_first_name: userinfo.first_name,
+          shipping_last_name: userinfo.last_name,
+
+          items: userinfo.items,
+          shipping_address1: userinfo.address1,
+          shipping_address2: userinfo.address2,
+          shipping_country: userinfo.country,
+          shipping_state: userinfo.state,
+          shipping_city: userinfo.city,
+          shipping_pincode: userinfo.pincode,
+          shipping_mobile: userinfo.phone_number,
+          shipping_email: userinfo.email,
+          total_amount: userinfo.total,
+          payment_method: "Online",
+          payment_status: "pending",
+          payment_key: "Online",
+          shipping_charges: 0,
+        },
+        { headers }
+      );
+      if (res.status === 200) {
+        if (res.data.token) {
+          tokenstore(res.data.token);
+          
+        }
+        window.location.href = "/thankyoupage";
+        localStorage.removeItem("cart");
+      } else {
+        toast(res?.data?.message || "Error");
+      }
     } catch (error) {}
 
     // nvg("/thankyoupage", {
@@ -57,56 +121,7 @@ const Pay = () => {
     // });
   };
 
-  const Onlinepay = async () => {
-    const shipping_address = {
-      shipping_first_name: userinfo.first_name,
-      shipping_last_name: userinfo.last_name,
-      shipping_address1: userinfo.address1,
-      shipping_address2: userinfo.address2,
-      shipping_country: userinfo.country,
-      shipping_state: userinfo.state,
-      shipping_city: userinfo.city,
-      shipping_pincode: userinfo.pincode,
-      shipping_email: userinfo.email,
-      shipping_mobile: userinfo.phone_number,
-    };
-    var options = {
-      key: "rzp_test_aiOVlfNqfFBdQC",
-      key_secret: "mKKqmTlBRBIL0ulpzc6sCdjs",
-      amount: parseFloat(userinfo.total * 100),
-      currency: "INR",
-      order_receipt: "order_rcptid_" + userinfo.first_name,
-      name: "ONEUP BRANDS",
-      description: "for testing purpose",
-      handler: function (response) {
-        const paymentId = response.razorpay_payment_id;
-        const orderInfo = {
-          ...shipping_address,
-          payment_key: paymentId,
-          payment_status: "received",
-          payment_method: "Online",
-          total_amount: userinfo.total,
-          shipping_charges: cartdata.shipping_charges,
-        };
-
-        try {
-          nvg("/thankyoupage", {
-            state: {
-              orderinfo: orderInfo,
-            },
-          });
-        } catch (error) {
-          nvg("/");
-        }
-      },
-
-      theme: {
-        color: "#059fe2",
-      },
-    };
-    var pay = new window.Razorpay(options);
-    pay.open();
-  };
+  
 
   return cartloading == false ? (
     <>

@@ -101,9 +101,9 @@ const handleSubmit = (e) => {
     return toast("Please enter a valid email address");
   }
 
-  if (!isMobVerified) {
-    return toast("Please verify your mobile number");
-  }
+  // if (!isMobVerified) {
+  //   return toast("Please verify your mobile number");
+  // }
 
   if (!Array.isArray(items) || items?.length === 0) {
     return toast("Your cart is empty");
@@ -164,7 +164,7 @@ const handleSubmit = (e) => {
   };
   const calculateTotal = () => {
     const subtotal = products.reduce((acc, product) => acc + product.price, 0);
-    const shippingCost = 8.0;
+    const shippingCost = 0;
     return subtotal + shippingCost;
   };
 
@@ -194,7 +194,7 @@ const handleSubmit = (e) => {
                   <span className="float-right text-gray-400">
                     {product.brand} X {product.quantity}
                   </span>
-                  <p className="text-lg font-bold">{product.price}</p>
+                  <p className="text-lg font-bold">₹{product.price}</p>
                 </div>
               </div>
             ))}
@@ -404,7 +404,7 @@ const handleSubmit = (e) => {
           <div className="mt-6 flex items-center justify-between">
             <p className="text-sm font-medium text-gray-900">Total</p>
             <p className="text-2xl font-semibold text-gray-900">
-              ${calculateTotal()}
+            ₹{total}
             </p>
           </div>
           <div className="flex mt-3 border-t-2 gap-x-2 mb-4 pt-4 justify-end items-center">

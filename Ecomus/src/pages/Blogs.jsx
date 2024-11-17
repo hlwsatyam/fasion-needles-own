@@ -43,8 +43,7 @@ const blogsData = [
   {
     id: 3,
     title: "5 Must-Have Accessories for This Season",
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTIPYgd6u9Bln7hSxqdreFeub2dFRUsNUoj6w&s", // Replace with a relevant image URL
+    image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTIPYgd6u9Bln7hSxqdreFeub2dFRUsNUoj6w&s", // Replace with a relevant image URL
     content: `
       Accessories can make or break an outfit. This season, focus on chunky gold jewelry, silk scarves, and structured handbags.
       Our experts guide you through selecting the perfect pieces to elevate your everyday looks and evening attire.

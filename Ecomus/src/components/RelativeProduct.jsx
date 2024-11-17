@@ -16,12 +16,7 @@ function RelativeProduct() {
             items: 5,
             // stagePadding: 50,
           },
-          920: {
-            items: 4,
-          },
-          700: {
-            items: 3,
-          },
+         
           600: {
             items: 3,
           },
@@ -32,7 +27,7 @@ function RelativeProduct() {
             items: 2,
           },
           310: {
-            items: 1,
+            items: 2,
           },
         },
       };
