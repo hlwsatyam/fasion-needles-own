@@ -68,7 +68,7 @@ const Home = () => {
       920: {
         items: 4,
       },
-      
+
       504: {
         items: 2,
       },
@@ -98,7 +98,7 @@ const Home = () => {
       700: {
         items: 4,
       },
-     
+
       300: {
         items: 2,
       },
@@ -362,7 +362,7 @@ const Home = () => {
         >
           {Banner?.data.map((item, index) =>
             item.banner_type == "Slider" ? (
-              <div key={index} style={{ height: isMobile ? "300px" : "400px" }}>
+              <div key={index} style={{ height: isMobile ? "200px" : "400px" }}>
                 <img
                   onClick={() => {
                     window.location.href = item.banner_link;
@@ -402,19 +402,17 @@ const Home = () => {
                   {...optionsforbrand}
                 >
                   {brnaditem?.data.map((item, index) => (
-                    <div>
-                      <div
-                        className="brand-box"
-                        onClick={() => {
-                          nvg(`/categoryforbrand/${item.brand_name}`);
-                        }}
-                      >
-                        <img
-                          src={`${process.env.REACT_APP_API_IMAGE_URL}${item.brand_image}`}
-                          alt=""
-                          className="img-fluid object-contain h-[150px]"
-                        />
-                      </div>
+                    <div
+                      className="brand-box cursor-pointer h-[150px] !w-[150px]  rounded-full "
+                      onClick={() => {
+                        nvg(`/categoryforbrand/${item.brand_name}`);
+                      }}
+                    >
+                      <img
+                        src={`${process.env.REACT_APP_API_IMAGE_URL}${item.brand_image}`}
+                        alt=""
+                        className=" w-full h-full object-contain "
+                      />
                     </div>
                   ))}
                 </OwlCarousel>

@@ -1,42 +1,28 @@
 const website_info = require("../../Models/website_info");
+const testomonials = require("../../Models/testomonials");
 const editwebinfo = async (req, res) => {
+
   try {
     const {
-      website_name,
-      mobile_no,
-      address,
-      email,
-      facebook,
-      instagram,
-      youtube,
-      twitter,
-      pinterest,
-      gstno,
+      name, subject, description, noOfStar
     } = req.body;
-    let updatedate = {
-      website_name,
-      mobile_no,
-      address,
-      email,
-      facebook,
-      instagram,
-      youtube,
-      twitter,
-      pinterest,
-      gstno,
-    };
 
+    let img;
     for (let i = 1; i <= 1; i++) {
       const imageFieldName = `logo`;
       if (req.files[imageFieldName]) {
-        updatedate[imageFieldName] = req.files[imageFieldName][0].filename;
+        img = req.files[imageFieldName][0].filename;
       }
     }
-    const data = await website_info.findByIdAndUpdate(
-      `6563815007f92d08b1f7df3c`,
-      updatedate,
-      { new: true }
-    );
+
+    const data = new testomonials({
+      name: name,
+      subject: subject,
+      description: description,
+      noOfStar: noOfStar,
+      logo: img
+    })
+    await data.save();
 
     if (!data) {
       return res
@@ -44,7 +30,7 @@ const editwebinfo = async (req, res) => {
         .json({ status: "failed", message: "no Record found" });
     }
 
-    res.send({ status: "successfully update", data: data });
+    res.status(200).send({ status: "successfully added", data: data });
   } catch (err) {
     console.log(`  here is errror ${err}`);
     res.send({ status: "faild", errors: err });

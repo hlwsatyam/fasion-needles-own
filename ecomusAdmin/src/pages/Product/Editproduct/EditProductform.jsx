@@ -500,7 +500,7 @@ const EditProductform = ({ id }) => {
                         <img
                           src={
                             values.product_image1 == data.data.product_image1
-                              ? `http://localhost:8000/uploads/images/${data.data.product_image1}`
+                              ? `${process.env.REACT_APP_API_IMAGE_URL}${data.data.product_image1}`
                               : URL.createObjectURL(values.product_image1)
                           }
                           alt="zxcvbnm"
@@ -553,7 +553,7 @@ const EditProductform = ({ id }) => {
                         <img
                           src={
                             values.product_image2 == data.data.product_image2
-                              ? `http://localhost:8000/uploads/images/${data.data.product_image2}`
+                              ? `${process.env.REACT_APP_API_IMAGE_URL}${data.data.product_image2}`
                               : URL.createObjectURL(values.product_image2)
                           }
                           alt="zxcvbnm"
@@ -606,7 +606,7 @@ const EditProductform = ({ id }) => {
                         <img
                           src={
                             values.product_image3 == data.data.product_image3
-                              ? `http://localhost:8000/uploads/images/${data.data.product_image3}`
+                              ? `${process.env.REACT_APP_API_IMAGE_URL}${data.data.product_image3}`
                               : URL.createObjectURL(values.product_image3)
                           }
                           alt="zxcvbnm"
@@ -659,7 +659,7 @@ const EditProductform = ({ id }) => {
                         <img
                           src={
                             values.product_image4 == data.data.product_image4
-                              ? `http://localhost:8000/uploads/images/${data.data.product_image4}`
+                              ? `${process.env.REACT_APP_API_IMAGE_URL}${data.data.product_image4}`
                               : URL.createObjectURL(values.product_image4)
                           }
                           alt="zxcvbnm"
@@ -1014,51 +1014,7 @@ const EditProductform = ({ id }) => {
         )}
       </Formik>
 
-      <div className="row">
-        <div className="col-12 py-2">
-          <h2 style={{fontWeight:'bold'}}>Create Variant</h2>
-        </div>
-        <div className="col-3">
-          <NavLink to={`/addvariant/${id}`}>
-            <div class="card">
-              <div class="header">
-                <div class="image d-flex justify-content-center align-items-center">
-                  <IoAddCircle size={70} color="white" />
-                </div>
-                {/* <div class="date">
-				<span>6 min ago</span>
-			</div> */}
-              </div>
-              {/* <div class="info">
-			<a rel="noopener noreferrer" href="#" class="block">
-				<span class="title">Facere ipsa nulla corrupti praesentium </span>
-			</a>
-			<p class="description">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellat, excepturi. Lorem ipsum dolor sit ...</p>
-		</div> */}
-            </div>
-          </NavLink>
-        </div>
-        {variantdata.data.map((item, index) => (
-          <div className="col-3">
-            <NavLink to={`/editvariant/${item._id}`}>
-            <div class="card2">
-            <img
-                          src={`http://localhost:8000/uploads/images/${item.product_image1}`}
-                          alt="zxcvbnm"
-                          width="100%"
-                          height="100%"
-                          style={{ cursor: "pointer" }}
-                        />
-              <div class="card__content">
-                <p class="card__title" style={{textTransform:'capitalize',fontSize:'21px'}}>{item.product_name}</p>
-                <p class="card__description" style={{color:'black'}}>₹{item.selling_price} <span style={{textDecoration:'line-through',fontSize:'11px'}}>₹{item.mrp_price}</span></p>
-                <p class="card__description" style={{fontSize:'13px'}}>{item.sort_description}</p>
-              </div>
-            </div>
-            </NavLink>
-          </div>
-        ))}
-      </div>
+
     </div>
   );
 };

@@ -6,13 +6,17 @@ import JoditEditor from "jodit-react";
 import { Field, Form, Formik } from "formik";
 import img3 from "../../../assets/selectbanner.webp";
 import { Productvalidation } from "../Validation/Productvalidation";
-import { useGetLevelOneCategoryQuery, usePostFetchSubCategoryMutation} from "../../../store/api/categoryapi";
+import {
+  useGetLevelOneCategoryQuery,
+  usePostFetchSubCategoryMutation,
+} from "../../../store/api/categoryapi";
 import { usePostProductMutation } from "../../../store/api/productapi";
 import { useGetAttributeByCategoryIdQuery } from "../../../store/api/attributeapi";
 const Addproductform = () => {
   const [subcategories, setsubcategories] = useState([]);
   const [categoryid, setcategoryid] = useState([]);
   const [subcategoryid, setsubcategoryid] = useState([]);
+  const [allBrandid, setAllBrandid] = useState([]);
   const [apiresponse, setapiresponse] = useState({});
   const imageInputRef1 = useRef(null);
   const imageInputRef2 = useRef(null);
@@ -23,6 +27,7 @@ const Addproductform = () => {
   const config = {
     height: "300px",
   };
+  console.log(apiresponse);
   // create product api start here
   const [postproduct] = usePostProductMutation();
   const ProductForm = async (value) => {
@@ -40,44 +45,23 @@ const Addproductform = () => {
   };
   // create product api end here
 
+  // fetch sub category api start here
+  const [getsubcatgory] = usePostFetchSubCategoryMutation();
+  const FetchsubCategorys = async (value) => {
+    try {
+      const formdata = new FormData();
+      formdata.append("categorys", value);
+      const response = await getsubcatgory(formdata);
+      setsubcategories(response.data.data[0].categories);
+    } catch (error) {}
+  };
+  // fetch sub category api end here
 
-    // remove attribute from array of array state here 
-const deleteItem = (name, value, totaldata) => {
-  console.log("first bbb", name, value, totaldata);
-
-  const updatedData = totaldata
-  .map((innerArray) => {
-    if (value !== undefined) {
-      return innerArray.filter((item) => !(item[name] === value));
-    } else {
-      return innerArray.filter((item) => !(name in item));
-    }
-  }).filter((innerArray) => innerArray.length > 0);
-
-  console.log("update data", updatedData);
-  return updatedData;
-};
-
-
-
-    // fetch sub category api start here
-    const [getsubcatgory] = usePostFetchSubCategoryMutation();
-    const FetchsubCategorys = async (value) => {
-      try {
-        const formdata = new FormData();
-          formdata.append("categorys", value);
-        const response = await getsubcatgory(formdata);
-        setsubcategories(response.data.data[0].categories)
-      } catch (error) {}
-    };
-    // fetch sub category api end here
-    
-
-
-    // fetch Attribute api start here
-  const { data:attributedata, isLoading } = useGetAttributeByCategoryIdQuery(!subcategoryid[0] ? !categoryid[0] ? 0 : categoryid[0] : subcategoryid[0]);
+  // fetch Attribute api start here
+  const { data: attributedata, isLoading } = useGetAttributeByCategoryIdQuery(
+    !subcategoryid[0] ? (!categoryid[0] ? 0 : categoryid[0]) : subcategoryid[0]
+  );
   // fetch Attribute api end here
-
 
   return (
     <div className="container-fuild pb-4 pt-3 px-2 bg-white">
@@ -112,7 +96,6 @@ const deleteItem = (name, value, totaldata) => {
         }}
         validationSchema={Productvalidation}
         onSubmit={(values) => {
-          console.log(values, "ddkdkd");
           const formdata = new FormData();
           formdata.append("product_name", values.product_name);
           formdata.append("product_url", values.product_url);
@@ -145,7 +128,6 @@ const deleteItem = (name, value, totaldata) => {
       >
         {({ values, errors, handleSubmit, touched, setFieldValue }) => (
           <Form autoComplete="off" onSubmit={handleSubmit}>
-            {console.log("dkddkkkdkdkkddddd",values)}
             <div
               className="row bg-white pb-4 round"
               style={{
@@ -328,13 +310,21 @@ const deleteItem = (name, value, totaldata) => {
                           setFieldValue(
                             "parent_category",
                             selectedList.map((item) => item._id)
-                          );FetchsubCategorys(selectedList.map((item) => item._id));setcategoryid(selectedList.map((item) => item._id));
+                          );
+                          FetchsubCategorys(
+                            selectedList.map((item) => item._id)
+                          );
+                          setcategoryid(selectedList.map((item) => item._id));
                         }}
                         onRemove={(selectedList) => {
                           setFieldValue(
                             "parent_category",
                             selectedList.map((item) => item.id)
-                          );FetchsubCategorys(selectedList.map((item) => item._id));setcategoryid(selectedList.map((item) => item._id));
+                          );
+                          FetchsubCategorys(
+                            selectedList.map((item) => item._id)
+                          );
+                          setcategoryid(selectedList.map((item) => item._id));
                         }}
                         displayValue="name"
                         maxSelectedValues={1}
@@ -366,13 +356,19 @@ const deleteItem = (name, value, totaldata) => {
                           setFieldValue(
                             "child_category",
                             selectedList.map((item) => item._id)
-                          );setsubcategoryid(selectedList.map((item) => item._id));
+                          );
+                          setsubcategoryid(
+                            selectedList.map((item) => item._id)
+                          );
                         }}
                         onRemove={(selectedList) => {
                           setFieldValue(
                             "child_category",
                             selectedList.map((item) => item.id)
-                          );setsubcategoryid(selectedList.map((item) => item._id));
+                          );
+                          setsubcategoryid(
+                            selectedList.map((item) => item._id)
+                          );
                         }}
                         displayValue="name"
                       />
@@ -387,10 +383,6 @@ const deleteItem = (name, value, totaldata) => {
                   </div>
                 </div>
               </div>
-
-
-
-             
 
               <div className="col-3 pt-3">
                 <div className="row">
@@ -609,11 +601,15 @@ const deleteItem = (name, value, totaldata) => {
                 <div className="row">
                   <div className="col-12">
                     <label htmlFor="" className="form-label">
-                    Trending Product <span style={{ color: "red" }}>*</span>
+                      Trending Product <span style={{ color: "red" }}>*</span>
                     </label>
                   </div>
                   <div className="col-12">
-                    <Field as="select" name="trendingproduct" className="form-select">
+                    <Field
+                      as="select"
+                      name="trendingproduct"
+                      className="form-select"
+                    >
                       <option value="" disabled>
                         Select Status
                       </option>
@@ -632,11 +628,16 @@ const deleteItem = (name, value, totaldata) => {
                 <div className="row">
                   <div className="col-12">
                     <label htmlFor="" className="form-label">
-                    New Arrived Product <span style={{ color: "red" }}>*</span>
+                      New Arrived Product{" "}
+                      <span style={{ color: "red" }}>*</span>
                     </label>
                   </div>
                   <div className="col-12">
-                    <Field as="select" name="newarrivedproduct" className="form-select">
+                    <Field
+                      as="select"
+                      name="newarrivedproduct"
+                      className="form-select"
+                    >
                       <option value="" disabled>
                         Select Status
                       </option>
@@ -655,11 +656,15 @@ const deleteItem = (name, value, totaldata) => {
                 <div className="row">
                   <div className="col-12">
                     <label htmlFor="" className="form-label">
-                    Featured Product <span style={{ color: "red" }}>*</span>
+                      Featured Product <span style={{ color: "red" }}>*</span>
                     </label>
                   </div>
                   <div className="col-12">
-                    <Field as="select" name="featuredproduct" className="form-select">
+                    <Field
+                      as="select"
+                      name="featuredproduct"
+                      className="form-select"
+                    >
                       <option value="" disabled>
                         Select Status
                       </option>
@@ -674,7 +679,7 @@ const deleteItem = (name, value, totaldata) => {
                   </div>
                 </div>
               </div>
-              <div style={{width:"19.866667%"}} className="col-2 px-2 pt-3">
+              <div style={{ width: "19.866667%" }} className="col-2 px-2 pt-3">
                 <div className="row">
                   <div className="col-lg-12">
                     <label htmlFor="" className="form-label">
@@ -697,7 +702,7 @@ const deleteItem = (name, value, totaldata) => {
                   </div>
                 </div>
               </div>
-              <div style={{width:"19.866667%"}} className="col-2 px-2 pt-3">
+              <div style={{ width: "19.866667%" }} className="col-2 px-2 pt-3">
                 <div className="row">
                   <div className="col-lg-12">
                     <label htmlFor="" className="form-label">
@@ -720,11 +725,11 @@ const deleteItem = (name, value, totaldata) => {
                   </div>
                 </div>
               </div>
-              <div style={{width:"19.866667%"}} className="col-2 px-2 pt-3">
+              <div style={{ width: "19.866667%" }} className="col-2 px-2 pt-3">
                 <div className="row">
                   <div className="col-lg-12">
                     <label htmlFor="" className="form-label">
-                    Stock <span style={{ color: "red" }}>*</span>{" "}
+                      Stock <span style={{ color: "red" }}>*</span>{" "}
                     </label>
                   </div>
                   <div className="col-lg-12">
@@ -743,60 +748,12 @@ const deleteItem = (name, value, totaldata) => {
                   </div>
                 </div>
               </div>
-              <div style={{width:"19.866667%"}} className="col-2 px-2 pt-3">
-                <div className="row">
-                  <div className="col-lg-12">
-                    <label htmlFor="" className="form-label">
-                    Weight <span style={{ color: "red" }}>*</span>{" "}
-                    </label>
-                  </div>
-                  <div className="col-lg-12">
-                    <Field
-                      name="weight"
-                      type="number"
-                      className="form-control"
-                      placeholder="Weight"
-                      value={values.weight}
-                    />
-                  </div>
-                  <div className="col-12">
-                    {errors.weight && touched.weight ? (
-                      <p style={{ color: "red" }}>{errors.weight}</p>
-                    ) : null}
-                  </div>
-                </div>
-              </div>
-              <div style={{width:"19.866667%"}} className="col-2 px-2 pt-3">
-                <div className="row">
-                  <div className="col-lg-12">
-                    <label htmlFor="" className="form-label">
-                    Weight Type <span style={{ color: "red" }}>*</span>{" "}
-                    </label>
-                  </div>
-                  <div className="col-lg-12">
-                    <Field
-                      name="weight_type"
-                      type="text"
-                      className="form-control"
-                      placeholder="Weight Type"
-                      value={values.weight_type}
-                    />
-                  </div>
-                  <div className="col-12">
-                    {errors.weight_type && touched.weight_type ? (
-                      <p style={{ color: "red" }}>{errors.weight_type}</p>
-                    ) : null}
-                  </div>
-                </div>
-              </div>
-         
 
-
-              <div style={{width:"19.866667%"}} className="col-2 px-2 pt-3">
+              <div style={{ width: "19.866667%" }} className="col-2 px-2 pt-3">
                 <div className="row">
                   <div className="col-lg-12">
                     <label htmlFor="" className="form-label">
-                    Brand <span style={{ color: "red" }}>*</span>{" "}
+                      Brand <span style={{ color: "red" }}>*</span>{" "}
                     </label>
                   </div>
                   <div className="col-lg-12">
@@ -807,7 +764,16 @@ const deleteItem = (name, value, totaldata) => {
                       placeholder="Brand"
                       value={values.brand}
                     />
+
+                    {allBrandid.map((item) => {
+                      return (
+                        <span className="  text-white px-2 py-1 rounded-md mt-2 w-full">
+                          fgfg
+                        </span>
+                      );
+                    })}
                   </div>
+
                   <div className="col-12">
                     {errors.brand && touched.brand ? (
                       <p style={{ color: "red" }}>{errors.brand}</p>
@@ -815,11 +781,11 @@ const deleteItem = (name, value, totaldata) => {
                   </div>
                 </div>
               </div>
-              <div style={{width:"19.866667%"}} className="col-2 px-2 pt-3">
+              <div style={{ width: "19.866667%" }} className="col-2 px-2 pt-3">
                 <div className="row">
                   <div className="col-lg-12">
                     <label htmlFor="" className="form-label">
-                    Color <span style={{ color: "red" }}>*</span>{" "}
+                      Color <span style={{ color: "red" }}>*</span>{" "}
                     </label>
                   </div>
                   <div className="col-lg-12">
@@ -838,11 +804,11 @@ const deleteItem = (name, value, totaldata) => {
                   </div>
                 </div>
               </div>
-              <div style={{width:"19.866667%"}} className="col-2 px-2 pt-3">
+              <div style={{ width: "19.866667%" }} className="col-2 px-2 pt-3">
                 <div className="row">
                   <div className="col-lg-12">
                     <label htmlFor="" className="form-label">
-                    Size <span style={{ color: "red" }}>*</span>{" "}
+                      Size <span style={{ color: "red" }}>*</span>{" "}
                     </label>
                   </div>
                   <div className="col-lg-12">
@@ -861,22 +827,23 @@ const deleteItem = (name, value, totaldata) => {
                   </div>
                 </div>
               </div>
-                
+
               <div className="col-12 px-2 pt-3">
                 <div className="row">
                   <div className="col-lg-12">
                     <label htmlFor="" className="form-label ">
-                      Sort Description{" "}
-                      <span style={{ color: "red" }}>*</span>{" "}
+                      Sort Description <span style={{ color: "red" }}>*</span>{" "}
                     </label>
                   </div>
                   <div className="col-lg-12">
                     <textarea
-                    name="sort_description"
-                    className="form-control"
-                  style={{width:"100%",height:"100px"}}
-                  value={values.sort_description}
-                      onChange={(event)=>{setFieldValue("sort_description",event.target.value)}}
+                      name="sort_description"
+                      className="form-control"
+                      style={{ width: "100%", height: "100px" }}
+                      value={values.sort_description}
+                      onChange={(event) => {
+                        setFieldValue("sort_description", event.target.value);
+                      }}
                     />
                   </div>
                   <div className="col-lg-12">

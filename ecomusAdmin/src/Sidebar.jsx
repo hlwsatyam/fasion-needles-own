@@ -253,7 +253,7 @@ const Sidebarmenu = ({ children }) => {
                   Brand 
                 </MenuItem>
               </NavLink>
-              {/* <NavLink
+              <NavLink
                className={
                 result === "/webinfo"
                   ? "nav active"
@@ -266,12 +266,12 @@ const Sidebarmenu = ({ children }) => {
                   icon={<img style={{width:"36px"}} src={img13} alt="menu" />}
                 >
                   {" "}
-                  Webinfo 
+                  Testomonials 
                 </MenuItem>
-              </NavLink> */}
+              </NavLink>
 
 
-              <SubMenu
+              {/* <SubMenu
                 title="Submenu 1"
                 key="submenu1"
                 open={openSubMenu === "submenu1"}
@@ -312,7 +312,7 @@ const Sidebarmenu = ({ children }) => {
                     Contact Us
                   </MenuItem>
                 </NavLink>
-              </SubMenu>
+              </SubMenu> */}
 
               <NavLink to="/" onClick={logoutevt} className="nav">
                 <MenuItem

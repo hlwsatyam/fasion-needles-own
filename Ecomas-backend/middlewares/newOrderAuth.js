@@ -8,7 +8,7 @@ const newOrderAuth = (req, res, next) => {
         if (!authorizationHeader || !authorizationHeader.startsWith("Bearer ")) {
             req.user = "";
      
-            next();
+            return  next();
         }
  
         const token = authorizationHeader.slice(7).replace(/"/g, ''); // Remove 'Bearer ' from the beginning
@@ -23,14 +23,14 @@ const newOrderAuth = (req, res, next) => {
             req.user = decoded;
 
             // Continue to the next middleware or route handler
-            next();
+            return next();
         });
     } catch (error) {
         console.log(error)
         req.user = "";
 
         // Continue to the next middleware or route handler
-        next();
+        return    next();
     }
 };
 

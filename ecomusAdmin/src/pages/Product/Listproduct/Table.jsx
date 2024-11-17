@@ -5,10 +5,7 @@ import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import Loadercomp from "../../../components/Loadercomp";
 import { AiOutlineDelete } from "react-icons/ai";
 import { BsQuestionLg } from "react-icons/bs";
-import {
-  useDeleteproductMutation,
-  useGetAllCategoriesQuery,
-} from "../../../store/api/categoryapi";
+ 
 import { useDeleteProductMutation, useGetAllProductQuery } from "../../../store/api/productapi";
 
 const Table = () => {
@@ -33,7 +30,7 @@ const Table = () => {
       flex: 1,
       renderCell: ({ row: { product_image1 } }) => {
         return (
-         <img src={`http://localhost:8000/uploads/images/${product_image1}`} width="56%" height="60%" alt="product" />
+         <img src={`${process.env.REACT_APP_API_IMAGE_URL}${product_image1}`} width="56%" height="60%" alt="product" />
         );
       },
     },

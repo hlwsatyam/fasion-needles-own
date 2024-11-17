@@ -5,15 +5,20 @@ import Multiselect from "multiselect-react-dropdown";
 import JoditEditor from "jodit-react";
 import { Field, Form, Formik } from "formik";
 import img3 from "../../../assets/selectbanner.webp";
-import { Bannervalidationedit, Categoryvalidationedit } from "../Validation/Bannervalidationedit";
-import { useGetSingleBannerQuery, usePatchBannerMutation } from "../../../store/api/bannerapi";
+import {
+  Bannervalidationedit,
+  Categoryvalidationedit,
+} from "../Validation/Bannervalidationedit";
+import {
+  useGetSingleBannerQuery,
+  usePatchBannerMutation,
+} from "../../../store/api/bannerapi";
 const Editbannerform = ({ id }) => {
   const { data, isLoading } = useGetSingleBannerQuery(id);
 
   const [apiresponse, setapiresponse] = useState({});
   const imageInputRef = useRef(null);
   const nvg = useNavigate();
-
 
   const config = {
     height: "300px",
@@ -103,7 +108,7 @@ const Editbannerform = ({ id }) => {
                 <div className="row">
                   <div className="col-lg-4">
                     <label htmlFor="" className="form-label">
-                    Banner Alt <span style={{ color: "red" }}>*</span>
+                      Banner Alt <span style={{ color: "red" }}>*</span>
                     </label>
                   </div>
                   <div className="col-lg-8">
@@ -116,7 +121,6 @@ const Editbannerform = ({ id }) => {
                     />
                   </div>
                   <div className="offset-lg-4 col-lg-8">
-
                     {errors.banner_alt && touched.banner_alt ? (
                       <p style={{ color: "red" }}>{errors.banner_alt}</p>
                     ) : null}
@@ -128,11 +132,15 @@ const Editbannerform = ({ id }) => {
                 <div className="row">
                   <div className="col-lg-4">
                     <label htmlFor="" className="form-label">
-                    Banner Type <span style={{ color: "red" }}>*</span>
+                      Banner Type <span style={{ color: "red" }}>*</span>
                     </label>
                   </div>
                   <div className="col-lg-8">
-                    <Field as="select" name="banner_type" className="form-select">
+                    <Field
+                      as="select"
+                      name="banner_type"
+                      className="form-select"
+                    >
                       <option value="" disabled>
                         Select Status
                       </option>
@@ -188,7 +196,6 @@ const Editbannerform = ({ id }) => {
                     />
                   </div>
                   <div className="offset-lg-4 col-lg-8">
-
                     {errors.banner_link && touched.banner_link ? (
                       <p style={{ color: "red" }}>{errors.banner_link}</p>
                     ) : null}
@@ -228,7 +235,7 @@ const Editbannerform = ({ id }) => {
                         <img
                           src={
                             values.banner == data.data.banner
-                              ? `http://localhost:8000/uploads/images/${data.data.banner}`
+                              ? `${process.env.REACT_APP_API_IMAGE_URL}${data.data.banner}`
                               : URL.createObjectURL(values.banner)
                           }
                           alt="zxcvbnm"
@@ -254,15 +261,16 @@ const Editbannerform = ({ id }) => {
                 <div className="row">
                   <div className="col-lg-12">
                     <label htmlFor="" className="form-label ">
-                      Banner Description{" "}
-                      <span style={{ color: "red" }}>*</span>{" "}
+                      Banner Description <span style={{ color: "red" }}>*</span>{" "}
                     </label>
                   </div>
                   <div className="col-lg-12">
                     <JoditEditor
                       config={config}
                       value={values.description}
-                      onChange={(content) => setFieldValue("description", content)}
+                      onChange={(content) =>
+                        setFieldValue("description", content)
+                      }
                     />
                   </div>
                   <div className="col-lg-12">

@@ -200,7 +200,7 @@ readOnly
                         <img
                           src={
                             values.banner == data.data.banner
-                              ? `http://localhost:8000/uploads/images/${data.data.banner}`
+                              ? `${process.env.REACT_APP_API_IMAGE_URL}${data.data.banner}`
                               : URL.createObjectURL(values.banner)
                           }
                           alt="zxcvbnm"

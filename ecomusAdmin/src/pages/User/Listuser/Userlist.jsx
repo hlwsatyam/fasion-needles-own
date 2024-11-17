@@ -43,10 +43,10 @@ const Userlist = () => {
             ) : (
               <div></div>
             )}
-            <div className="col-lg-3 d-flex justify-content-between">
+            <div className=" flex justify-between">
               <p className="m-0 customfont">User List</p>
-              <div className="addnew d-lg-none d-block mb-2">
-                <button className="btn text-white customcolor2">
+              <div className="addnew  ">
+                <button className="btn text-black customcolor2">
                   <NavLink
                     to="/addremittance"
                     style={{ textDecoration: "none", color: "white" }}

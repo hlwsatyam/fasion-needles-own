@@ -101,9 +101,9 @@ const handleSubmit = (e) => {
     return toast("Please enter a valid email address");
   }
 
-  // if (!isMobVerified) {
-  //   return toast("Please verify your mobile number");
-  // }
+  if (!isMobVerified) {
+    return toast("Please verify your mobile number");
+  }
 
   if (!Array.isArray(items) || items?.length === 0) {
     return toast("Your cart is empty");

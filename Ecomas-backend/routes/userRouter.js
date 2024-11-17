@@ -3,6 +3,7 @@ const router = express.Router()
 const multer = require('multer')
 const register = require('../Controllers/user/register.js');
 const login = require('../Controllers/user/login.js');
+const loginForAdmin = require('../Controllers/user/loginForAdmin.js');
 const userlist = require('../Controllers/user/userlist.js');
 const usersingle = require('../Controllers/user/usersingle.js');
 const updateuser = require('../Controllers/user/updateuser.js');
@@ -18,6 +19,7 @@ router.get('/:id',usersingle)
 router.delete('/:id',deleteuser)
 router.post('/register',register)
 router.post('/login', upload.none() ,login)
+router.post('/loginForAdmin', upload.none() ,loginForAdmin)
 router.patch('/',authenticateToken,frontendupdateuser)
 router.patch('/:id',authenticateToken,updateuser)
 
