@@ -77,6 +77,8 @@ function App() {
         <Route path="/blogs" element={<Blogs />} />
         <Route path="/maps" element={<Map />} />
         <Route path="/forget-pass" element={<ForgetPass />} />
+        <Route path="/payment-failed" element={<h1>heyyy</h1>} />
+        <Route path="/customer-order/:txnId" element={<h1>heyyygggggg</h1>}  />
 
       </Routes>
     </div>

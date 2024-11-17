@@ -80,7 +80,7 @@ const Pay = () => {
     }
     try {
       const res = await axios.post(
-        `${process.env.REACT_APP_API_URL}/OnlineOrder`,
+        `${process.env.REACT_APP_API_URL}/order/Online`,
         {
           shipping_first_name: userinfo.first_name,
           shipping_last_name: userinfo.last_name,
@@ -105,10 +105,11 @@ const Pay = () => {
       if (res.status === 200) {
         if (res.data.token) {
           tokenstore(res.data.token);
-          
         }
-        window.location.href = "/thankyoupage";
-        localStorage.removeItem("cart");
+
+        if (res.data.url) {
+          window.location.href = res.data.url;
+        }
       } else {
         toast(res?.data?.message || "Error");
       }
@@ -120,8 +121,6 @@ const Pay = () => {
     //   },
     // });
   };
-
-  
 
   return cartloading == false ? (
     <>

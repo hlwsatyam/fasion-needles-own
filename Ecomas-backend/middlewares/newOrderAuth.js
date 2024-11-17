@@ -10,7 +10,7 @@ const newOrderAuth = (req, res, next) => {
      
             next();
         }
-return console.log("authorizationHeader")
+ 
         const token = authorizationHeader.slice(7).replace(/"/g, ''); // Remove 'Bearer ' from the beginning
         // Verify the token
         jwt.verify(token, "12345678910", (err, decoded) => {
