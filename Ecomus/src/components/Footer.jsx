@@ -1,5 +1,10 @@
 import React from "react";
-import { FaFacebookF, FaInstagram, FaTwitter, FaGithub, FaDribbble, FaYoutube } from 'react-icons/fa';
+import {
+  FaFacebookF,
+  FaInstagram,
+  FaTwitter,
+  FaYoutube,
+} from "react-icons/fa";
 const Footer = () => {
   const socialLinks = [
     {
@@ -26,7 +31,6 @@ const Footer = () => {
       url: "https://www.youtube.com/@fashion_needles",
       colorClass: "text-red-500", // GitHub color
     },
-   
   ];
   return (
     <footer className="bg-gradient-to-r from-gray-100 via-[#bce1ff] to-gray-100">
@@ -52,16 +56,9 @@ const Footer = () => {
                   rel="noopener noreferrer"
                   className="text-gray-600 hover:text-gray-800 transition duration-300"
                 >
-                    <span className={`text-2xl ${colorClass}`}>{icon}</span>
+                  <span className={`text-2xl ${colorClass}`}>{icon}</span>
                 </a>
               ))}
-
-
-
-
- 
-
-
             </div>
           </div>
           <div className="grid sm:grid-cols-4  grid-cols-2 gap-8 sm:col-span-2 lg:col-span-2">
@@ -72,11 +69,11 @@ const Footer = () => {
               },
               {
                 heading: "Discover",
-                items: ["Contact Us", "Blogs",  ],
+                items: ["Contact Us", "Blogs"],
               },
               {
                 heading: "Product",
-                items: ["Track Order", "wishlist" , "Whatsapp"],
+                items: ["Track Order", "wishlist", "Whatsapp"],
               },
               {
                 heading: "Policies",

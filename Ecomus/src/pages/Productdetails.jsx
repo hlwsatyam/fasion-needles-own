@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import Header from "../components/Header/Header";
-import OwlCarousel from "react-owl-carousel";
+ 
 import ReactImageMagnify from "react-image-magnify";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
@@ -518,8 +518,12 @@ function Productdetails() {
                                     height: 1100,
                                   },
                                   enlargedImagePosition: "over",
+                               
                                   lensStyle: {
                                     backgroundColor: "rgba(0,0,0,.6)",
+                                  
+                                    
+
                                   },
                                 }}
                               />

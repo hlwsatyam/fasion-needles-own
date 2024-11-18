@@ -42,7 +42,8 @@ const Subcategory = ({ value, issubcategory }) => {
             />{" "} */}
             &nbsp; <span className="largefont"> {value.name}</span>
           </button>
-          <ul className="mega-menu z-20 full-mega-menu  resultappear newwith">
+         
+             <ul className="mega-menu z-20 full-mega-menu  resultappear newwith">
             <div>
               <div className="container">
                 <div className="row">
@@ -84,6 +85,8 @@ const Subcategory = ({ value, issubcategory }) => {
               </div>
             </div>
           </ul>
+         
+         
         </>
       )}
     </li>

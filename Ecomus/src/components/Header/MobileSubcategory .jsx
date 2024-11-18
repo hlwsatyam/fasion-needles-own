@@ -6,18 +6,17 @@ const MobileSubcategory = ({ value, issubcategory }) => {
   const [showfullmenu, setshowfullmenu] = useState(false);
   const nvg = useNavigate();
 
-  const transfer = (id,title) => {
+  const transfer = (id, title) => {
     nvg(`/category/${id}/${title}/none`);
   };
   return (
-    
     <li className={issubcategory == 0 ? "" : "mega"}>
       {issubcategory == 0 ? (
         <button
           className="btn dark-menu-item desgin1"
           style={{ padding: "6px 18px 0px 18px" }}
           onClick={() => {
-            transfer(value._id,value.name);
+            transfer(value._id, value.name);
           }}
         >
           {" "}
@@ -57,7 +56,7 @@ const MobileSubcategory = ({ value, issubcategory }) => {
                         <div className="menu-title">
                           <h5
                             onClick={() => {
-                              transfer(value._id,value.name);
+                              transfer(value._id, value.name);
                             }}
                           >
                             {item.name}

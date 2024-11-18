@@ -5,13 +5,13 @@ var categorySchema = new mongoose.Schema({
     name:{
         type:String,
         required:[true, "name is required"],
-        unique:[true,"name must be unique"],
+  
         // index:true,
     },
     url:{
         type:String,
         required:[true, "name is url"],
-        unique:true,
+        
         lowercase:true,
     },
     desc:{

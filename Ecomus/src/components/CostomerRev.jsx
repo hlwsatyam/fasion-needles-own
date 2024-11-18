@@ -185,7 +185,7 @@ export function OverviewSection3({ getComment }) {
               2 stars
               <Rating
                 style={{ display: "flex", marginLeft: "10px" }}
-                value={4}
+                value={2}
                 className="text-amber-500"
               />
             </Typography>
@@ -193,7 +193,7 @@ export function OverviewSection3({ getComment }) {
               1 stars
               <Rating
                 style={{ display: "flex", marginLeft: "10px" }}
-                value={2}
+                value={1}
                 className="text-amber-500"
               />
             </Typography>

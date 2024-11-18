@@ -4,13 +4,13 @@ import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import MobileSubcategory from "../components/Header/MobileSubcategory ";
 import ReactPaginate from "react-paginate";
-import Loader from "../components/Loader";
+
 import { useGetItemByBrandQuery } from "../store/api/brandapi";
 const Categoryforbrand = () => {
   const { name } = useParams();
   const nvg = useNavigate();
   const [brand, setbrand] = useState(true);
-  const [categoriesbtn, setcategoriesbtn] = useState(true)
+  const [categoriesbtn, setcategoriesbtn] = useState(true);
   const [filter, setfilter] = useState(false);
   const [currentwdith, setcurrentwdith] = useState(window.innerWidth);
   const [showsidebar, setshowsidebar] = useState(false);
@@ -21,7 +21,7 @@ const Categoryforbrand = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [pageSize, setpageSize] = useState(12);
 
-  const transfer = (productid,pname) => {
+  const transfer = (productid, pname) => {
     nvg("/productdetails", {
       state: {
         id: productid,
@@ -31,30 +31,30 @@ const Categoryforbrand = () => {
     window.location.reload();
   };
 
-
-
-  const {data:itembybrand,isLoading:brandloading} = useGetItemByBrandQuery(name)
-  console.log("kd brand of brnad",itembybrand)
+  const { data: itembybrand, isLoading: brandloading } =
+    useGetItemByBrandQuery(name);
+  console.log("kd brand of brnad", itembybrand);
   const [categories, setCategories] = useState([]);
   const [totalrecords, settotalrecords] = useState(0);
 
   const filterdata = async (pagenumber) => {
-    console.log("page numer is here",pagenumber);
-      setloading(true);
-      let urlapi = `${process.env.REACT_APP_API_URL}homepageapi/shop_by_brand/${name}/?offset=${pagenumber}`;
-      const response = await axios.get(urlapi);
+    console.log("page numer is here", pagenumber);
+    setloading(true);
+    let urlapi = `${process.env.REACT_APP_API_URL}homepageapi/shop_by_brand/${name}/?offset=${pagenumber}`;
+    const response = await axios.get(urlapi);
 
-settotalrecords(response.data.count);
-setData(response.data.results.results);
-setData4(response.data.results.categories)
-setloading(false)
-  }
-
+    settotalrecords(response.data.count);
+    setData(response.data.results.results);
+    setData4(response.data.results.categories);
+    setloading(false);
+  };
 
   const pageCount = Math.ceil(totalrecords / 12);
 
-  return (
-    brandloading == true ? <></> : <>
+  return brandloading == true ? (
+    <></>
+  ) : (
+    <>
       <Header />
 
       <div className="category-header7" style={{ zIndex: 9991 }}>
@@ -191,7 +191,7 @@ setloading(false)
                     }}
                   >
                     <span className="filter-back">
-                      <i className="fa fa-angle-left" aria-hidden="true" /> back 
+                      <i className="fa fa-angle-left" aria-hidden="true" /> back
                     </span>
                   </div>
                   {/* <div className="collection-collapse-block open">
@@ -202,73 +202,70 @@ setloading(false)
                             <h6 style={{color:`#black`,position:'relative',left:'10px',display:categorytwo == null ? 'none' : 'block',padding: `0 0 10px 8px`}}>{`${categorytwo}`}</h6>
                             </div> */}
 
-                        <div className="collection-collapse-block open">
-                          <h3
-                            className={"collapse-block-title dynamic-after2"}
-                            // className={
-                            //   item.name.length > 6
-                            //     ? "collapse-block-title dynamic-after2"
-                            //     : "collapse-block-title dynamic-after"
-                            // }
-                            onClick={() => {
-                              categoriesbtn == false
-                                ? setcategoriesbtn(true)
-                                : setcategoriesbtn(false);
-                            }}
-                         
-                          >
-                           CATEGORIES
-                            {
-                              // item.name.length > 7 ?
-                              <style>
-                                {`.dynamic-after::after {
+                  <div className="collection-collapse-block open">
+                    <h3
+                      className={"collapse-block-title dynamic-after2"}
+                      // className={
+                      //   item.name.length > 6
+                      //     ? "collapse-block-title dynamic-after2"
+                      //     : "collapse-block-title dynamic-after"
+                      // }
+                      onClick={() => {
+                        categoriesbtn == false
+                          ? setcategoriesbtn(true)
+                          : setcategoriesbtn(false);
+                      }}
+                    >
+                      CATEGORIES
+                      {
+                        // item.name.length > 7 ?
+                        <style>
+                          {`.dynamic-after::after {
             left:51px;
           }  .dynamic-after2::after {
             left:110px;
           }`}
-                              </style>
-                              //  : <style>
-                              //   {`
-                              //   .dynamic-after::after {
-                              //     left:50px;
-                              //   }
-                              // `}
-                              // </style>
-                            }
-                          </h3>
-                          <div
-                            className="collection-collapse-block-content"
-                            style={{
-                              display:
-                              categoriesbtn == true ? "block" : "none",
-                            }}
-                          >
-                            <div className="collection-brand-filter">
-                            {data4.map((item2, index2)=>(
+                        </style>
+                        //  : <style>
+                        //   {`
+                        //   .dynamic-after::after {
+                        //     left:50px;
+                        //   }
+                        // `}
+                        // </style>
+                      }
+                    </h3>
+                    <div
+                      className="collection-collapse-block-content"
+                      style={{
+                        display: categoriesbtn == true ? "block" : "none",
+                      }}
+                    >
+                      <div className="collection-brand-filter">
+                        {data4.map((item2, index2) => (
+                          <div className="custom-control custom-checkbox  form-check collection-filter-checkbox">
+                            <input
+                              type="checkbox"
+                              className="custom-control-input form-check-input"
+                              id="item2"
+                              onClick={() => {
+                                nvg(
+                                  `/category/${item2[0]}/${item2[1]}/&attr_name_Brand=Brand&attr_value_Brand=${name}`
+                                );
+                              }}
+                            />
 
-                                <div className="custom-control custom-checkbox  form-check collection-filter-checkbox">                                  
-                          
-                                    <input
-                                      type="checkbox"
-                                      className="custom-control-input form-check-input"
-                                      id="item2"
-                                      onClick={()=>{nvg(`/category/${item2[0]}/${item2[1]}/&attr_name_Brand=Brand&attr_value_Brand=${name}`)}}
-                                    />
-                                 
-                                  <label
-                                    className="custom-control-label form-check-label"
-                                    htmlFor="item2"
-                                  >
-                                    {item2[1]}
-                                  </label>
-                                </div>
-                            ))}
-                           
-                            </div>
+                            <label
+                              className="custom-control-label form-check-label"
+                              htmlFor="item2"
+                            >
+                              {item2[1]}
+                            </label>
                           </div>
-                        </div>
-                    
-            
+                        ))}
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
 
@@ -313,8 +310,7 @@ setloading(false)
                       className="collection-collapse-block-content"
                       style={{ display: brand == true ? "block" : "none" }}
                     >
-                      <div className="collection-brand-filter">
-                      </div>
+                      <div className="collection-brand-filter"></div>
                     </div>
                   </div>
                 </div>
@@ -353,9 +349,14 @@ setloading(false)
                                     }}
                                   >
                                     Showing Products{" "}
-                                    {(currentPage == 0 ? currentPage : currentPage - 1) * pageSize }-
+                                    {(currentPage == 0
+                                      ? currentPage
+                                      : currentPage - 1) * pageSize}
+                                    -
                                     {Math.min(
-                                      (currentPage == 0 ? currentPage + 1 : currentPage ) * 12,
+                                      (currentPage == 0
+                                        ? currentPage + 1
+                                        : currentPage) * 12,
                                       totalrecords
                                     )}{" "}
                                     of {totalrecords} Result
@@ -367,8 +368,7 @@ setloading(false)
                                     width: "100%",
                                     paddingBottom: "0px",
                                   }}
-                                >
-                                </div>
+                                ></div>
                               </div>
                             </div>
                           </div>
@@ -376,7 +376,10 @@ setloading(false)
                         <div className="product-wrapper-grid product">
                           <div className="row removepadding additionalgap">
                             {" "}
-                            { itembybrand.data[0] ? (
+                            {
+                              console.log(itembybrand)
+                            }
+                            {itembybrand.data[0] ? (
                               itembybrand.data.map((item, index) => (
                                 <div className="col-xl-3 col-md-4 col-sm-6 col-12">
                                   <div
@@ -390,12 +393,12 @@ setloading(false)
                                           className="btn fixedhight"
                                           style={{ width: "100%" }}
                                           onClick={() => {
-                                            transfer(item.id,item.title);
+                                            transfer(item.id, item.title);
                                           }}
                                         >
                                           {" "}
                                           <img
-                                            src={`${process.env.REACT_APP_API_URL}media/${item?.image}`}
+                                            src={`${process.env.REACT_APP_API_URL}${item?.image}`}
                                             className="img-fluid  "
                                             alt="product"
                                           />{" "}
@@ -416,7 +419,7 @@ setloading(false)
                                               type="button"
                                               className="btn"
                                               onClick={() => {
-                                                transfer(item.id,item.title);
+                                                transfer(item.id, item.title);
                                               }}
                                             >
                                               <h6
@@ -449,17 +452,53 @@ setloading(false)
                                                 justifyContent: "center",
                                                 color: "#000",
                                                 fontSize: "12px",
-                                                fontWeight:'500'
+                                                fontWeight: "500",
                                               }}
                                             >
                                               {" "}
-                                              ₹{item?.stockrecords__price}{" "} {item.stock_record?.discount == 0 ? '' : <span style={{fontSize: '10px',color: '#c1c1c1',lineHeight: '20px',textDecoration: 'line-through',paddingLeft:'3px',fontWeight:'400'}}>₹{item.stock_record?.mrp}</span>}{item.stock_record?.discount == 0 ? '' : <span style={{fontSize: '10px',color: '#230bb3',lineHeight: '20px',paddingLeft:'3px',fontWeight:'400'}}>{item.stock_record?.discount_type == "amount" ? `(₹${item.stock_record?.discount} off)` : `(${item.stock_record?.discount} %off)`}</span>}
+                                              ₹{item?.stockrecords__price}{" "}
+                                              {item.stock_record?.discount ==
+                                              0 ? (
+                                                ""
+                                              ) : (
+                                                <span
+                                                  style={{
+                                                    fontSize: "10px",
+                                                    color: "#c1c1c1",
+                                                    lineHeight: "20px",
+                                                    textDecoration:
+                                                      "line-through",
+                                                    paddingLeft: "3px",
+                                                    fontWeight: "400",
+                                                  }}
+                                                >
+                                                  ₹{item.stock_record?.mrp}
+                                                </span>
+                                              )}
+                                              {item.stock_record?.discount ==
+                                              0 ? (
+                                                ""
+                                              ) : (
+                                                <span
+                                                  style={{
+                                                    fontSize: "10px",
+                                                    color: "#230bb3",
+                                                    lineHeight: "20px",
+                                                    paddingLeft: "3px",
+                                                    fontWeight: "400",
+                                                  }}
+                                                >
+                                                  {item.stock_record
+                                                    ?.discount_type == "amount"
+                                                    ? `(₹${item.stock_record?.discount} off)`
+                                                    : `(${item.stock_record?.discount} %off)`}
+                                                </span>
+                                              )}
                                             </div>
                                             {/* <div className="price text-align-center" style={{display:'flex',justifyContent:'center'}}>  ₹{item.price} </div> */}
                                           </div>
                                         </div>
                                       </div>
-                                      
                                     </div>
                                   </div>
                                 </div>
@@ -479,65 +518,67 @@ setloading(false)
                           </div>
                         </div>
                         {/* {loading == true ? "" : data[0] ? ( */}
-                      {
-                        data[0] ? 
-                       <div className="product-pagination">
-                          <div className="theme-paggination-block">
-                            <div className="row mobilemargin">
-                              <div className="col-xl-12 col-md-12 col-sm-12">
-                                <ReactPaginate
-                                  pageCount={pageCount}
-                                  pageRangeDisplayed={5}
-                                  marginPagesDisplayed={2}
-                                  onPageChange={(e) => {
-                                    setCurrentPage(e.selected + 1);
-                                    filterdata(e.selected * 12);
-                                  }}
-                                  containerClassName="pagination"
-                                  breakClassName="page-item"
-                                  activeClassName="active"
-                                  pageClassName="page-item"
-                                  previousLabel={
-                                    <li className="page-item">
-                                      <a
-                                        className="page-link"
-                                        href="javascript:void(0)"
-                                        aria-label="Previous"
-                                      >
-                                        <span aria-hidden="true">
-                                          <i
-                                            className="fa fa-chevron-left"
-                                            aria-hidden="true"
-                                          />
-                                        </span>{" "}
-                                        <span className="sr-only">
-                                          Previous
-                                        </span>
-                                      </a>
-                                    </li>
-                                  }
-                                  nextLabel={
-                                    <li className="page-item">
-                                      <a
-                                        className="page-link"
-                                        href="javascript:void(0)"
-                                        aria-label="Next"
-                                      >
-                                        <span aria-hidden="true">
-                                          <i
-                                            className="fa fa-chevron-right"
-                                            aria-hidden="true"
-                                          />
-                                        </span>{" "}
-                                        <span className="sr-only">Next</span>
-                                      </a>
-                                    </li>
-                                  }
-                                />
+                        {data[0] ? (
+                          <div className="product-pagination">
+                            <div className="theme-paggination-block">
+                              <div className="row mobilemargin">
+                                <div className="col-xl-12 col-md-12 col-sm-12">
+                                  <ReactPaginate
+                                    pageCount={pageCount}
+                                    pageRangeDisplayed={5}
+                                    marginPagesDisplayed={2}
+                                    onPageChange={(e) => {
+                                      setCurrentPage(e.selected + 1);
+                                      filterdata(e.selected * 12);
+                                    }}
+                                    containerClassName="pagination"
+                                    breakClassName="page-item"
+                                    activeClassName="active"
+                                    pageClassName="page-item"
+                                    previousLabel={
+                                      <li className="page-item">
+                                        <a
+                                          className="page-link"
+                                          href="javascript:void(0)"
+                                          aria-label="Previous"
+                                        >
+                                          <span aria-hidden="true">
+                                            <i
+                                              className="fa fa-chevron-left"
+                                              aria-hidden="true"
+                                            />
+                                          </span>{" "}
+                                          <span className="sr-only">
+                                            Previous
+                                          </span>
+                                        </a>
+                                      </li>
+                                    }
+                                    nextLabel={
+                                      <li className="page-item">
+                                        <a
+                                          className="page-link"
+                                          href="javascript:void(0)"
+                                          aria-label="Next"
+                                        >
+                                          <span aria-hidden="true">
+                                            <i
+                                              className="fa fa-chevron-right"
+                                              aria-hidden="true"
+                                            />
+                                          </span>{" "}
+                                          <span className="sr-only">Next</span>
+                                        </a>
+                                      </li>
+                                    }
+                                  />
+                                </div>
                               </div>
                             </div>
                           </div>
-                        </div> : ''}
+                        ) : (
+                          ""
+                        )}
                       </div>
                     </div>
                   </div>
