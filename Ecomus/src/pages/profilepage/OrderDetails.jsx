@@ -9,7 +9,7 @@ const OrderDetails = () => {
   return (
     <div className="bg-gradient-to-r from-blue-50 to-blue-100 min-h-screen">
       <Header />
-      <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden mt-8">
+      <div className="  mx-auto bg-white rounded-lg shadow-lg overflow-hidden my-8">
         {/* Order Info */}
         <div className="p-6 bg-blue-600 text-white">
           <h1 className="text-3xl font-bold">Order Details</h1>

@@ -200,16 +200,16 @@ const OrderHistoryDetails = () => {
               <p> 85-B, UAE Road, DubaiSaudi Arabia, 201001
                 3839483843</p>
             
-            {/* <span style={{fontWeight: 600, fontSize: 12}}>Apply Credits</span>
+            <span style={{fontWeight: 600, fontSize: 12}}>Apply Credits</span>
             <div style={{display: 'flex', gap: 4}}>
               <span style={{fontWeight: 700, color: '#230BB3'}}><input type="text" className="form-control applypay" placeholder="Enter your credit" /></span>
               <button className="btn" style={{fontWeight: 500, backgroundColor: '#230BB3', color: 'white', fontSize: 12, height: 'fit-content', padding: '7px 8px'}}>Apply</button>
-            </div> */}
+            </div>
           </div>
-          {/* <div className="firstrow px-3 pb-2 d-flex justify-content-between">
+          <div className="firstrow px-3 pb-2 d-flex justify-content-between">
             <span style={{fontWeight: 600, fontSize: "17px"}} />
             <span style={{fontWeight: 500, fontSize: 11}}>Available Credit - ₹5000</span>
-          </div> */}
+          </div>
         </div>
                         </div>
                     </div>

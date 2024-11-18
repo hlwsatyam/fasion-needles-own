@@ -265,7 +265,7 @@ useEffect(()=>{
       </div>
 
       <section
-        className="section-big-pt-space ratio_asos b-g-light marginfromtop"
+        className="section-big-pt-space overflow-hidden ratio_asos b-g-light marginfromtop"
         style={{ padding: "0px" }}
       >
         <div className="collection-wrapper" style={{ background: "#f9f9f9" }}>

@@ -93,16 +93,20 @@ export default function Testimonials() {
   const [allText, setAllText] = useState([]);
   useEffect(() => {
     fetchData();
-  });
+  },[]);
   const fetchData = async () => {
+    console.log(process.env.REACT_APP_API_URL)
     try {
       const res = await axios.get(
-        `${process.env.REACT_APP_API_URL}testomonials-info`
+        `${process.env.REACT_APP_API_URL}/testomonials-info`
       );
       if (res.status === 200) {
+        console.log( res.data)
         setAllText(res.data);
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log(error)
+    }
   };
 
   return (
@@ -200,8 +204,11 @@ export default function Testimonials() {
                     </svg>
                   ))}
                 </div>
-                <p className="text-lg text-gray-500 leading-8 h-24 transition-all duration-500 mb-9 group-hover:text-gray-800">
-                  {testimonial.name}
+                <p className="text-sm text-gray-500 leading-8   transition-all duration-500 mb-2 group-hover:text-gray-800">
+                  {testimonial.subject}
+                </p>
+                <p className="text-base text-gray-500 leading-8 overflow-hidden h-16  transition-all duration-500 mb-2 group-hover:text-gray-800">
+                  {testimonial.description}
                 </p>
                 <div className="flex items-center gap-5">
                   <img
@@ -211,10 +218,10 @@ export default function Testimonials() {
                   />
                   <div className="grid gap-1">
                     <h5 className="text-gray-900 font-medium transition-all duration-500 group-hover:text-indigo-600">
-                      {testimonial.subject}
+                      {testimonial.name}
                     </h5>
                     <span className="text-sm leading-6 text-gray-500">
-                      User
+                      Customer
                     </span>
                   </div>
                 </div>

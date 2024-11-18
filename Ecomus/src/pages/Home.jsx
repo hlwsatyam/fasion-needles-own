@@ -167,7 +167,7 @@ const Home = () => {
                   }}
                   src={`${process.env.REACT_APP_API_IMAGE_URL}${item.banner}`}
                   alt={`banner-${index}`}
-                  className="img-fluid rounded-2xl mainbanner bg-img"
+                  className="img-fluid   mainbanner bg-img"
                   style={{
                     width: "100%",
                     height: "100%",

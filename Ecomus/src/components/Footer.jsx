@@ -72,11 +72,11 @@ const Footer = () => {
               },
               {
                 heading: "Discover",
-                items: ["Contact Us", "Blogs", "Maps"],
+                items: ["Contact Us", "Blogs",  ],
               },
               {
                 heading: "Product",
-                items: ["Track Order", "Careers", "Whatsapp"],
+                items: ["Track Order", "wishlist" , "Whatsapp"],
               },
               {
                 heading: "Policies",

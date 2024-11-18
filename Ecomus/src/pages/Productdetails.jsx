@@ -902,7 +902,7 @@ function Productdetails() {
                               <h6 className="product-title flex items-center endlinetext">
                                 Deliver To{" "}
                                 <img
-                                  src={`${process.env.PUBLIC_URL}/images/icon/place.png`}
+                                  src={`/images/icon/place.png`}
                                   alt="404"
                                 />{" "}
                               </h6>
