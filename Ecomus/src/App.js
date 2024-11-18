@@ -39,6 +39,7 @@ import CancellationPolicy from "./pages/CancellationPol";
 import Blogs from "./pages/Blogs";
 import { useEffect } from "react";
 import ForgetPass from "./pages/ForgetPass";
+import OrderDetails from "./pages/profilepage/OrderDetails";
 function App() {
   return (
     <div className="  mx-auto">
@@ -78,7 +79,7 @@ function App() {
         <Route path="/maps" element={<Map />} />
         <Route path="/forget-pass" element={<ForgetPass />} />
         <Route path="/payment-failed" element={<h1>heyyy</h1>} />
-        <Route path="/customer-order/:txnId" element={<h1>heyyygggggg</h1>}  />
+        <Route path="/customer-order/:txnId" element={<OrderDetails />} />
 
       </Routes>
     </div>
