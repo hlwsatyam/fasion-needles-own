@@ -104,8 +104,8 @@ const Footer = () => {
           </div>
         </div>
         <div className="pt-8 mt-8 border-t border-gray-300">
-          <p className="text-xs text-center text-gray-500">
-            &copy; 2024 fashionneedles.com. All rights reserved.
+          <p className="text-xs flex justify-center items-center flex-wrap gap-4 text-center text-gray-500">
+            &copy; 2024 fashionneedles.com. All rights reserved. <img src="/images/visa.svg" alt="fashion needles.com cloths " />
           </p>
         </div>
       </div>

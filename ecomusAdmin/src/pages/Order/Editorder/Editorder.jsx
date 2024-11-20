@@ -535,7 +535,7 @@ const Editorder = () => {
                         </td>
                       </tr>
                     )}
-                    {orderdetail?.data?.payment_method!="COD" && (
+                    {orderdetail?.data?.payment_method != "COD" && (
                       <tr>
                         <td>
                           <table
@@ -559,8 +559,7 @@ const Editorder = () => {
                                   }}
                                 >
                                   <strong>Payment Status :</strong>{" "}
-                                  {orderdetail?.data?.payment_status
-                                  }
+                                  {orderdetail?.data?.payment_status}
                                 </td>
                               </tr>
 

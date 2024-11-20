@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import Header from "../components/Header/Header";
- 
+
 import ReactImageMagnify from "react-image-magnify";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
@@ -89,7 +89,7 @@ function Productdetails() {
     try {
       const response = await axios.post(
         ` ${process.env.REACT_APP_API_URL}/user/comment/getcomment`,
-      
+
         {
           product_id: id,
         }
@@ -222,7 +222,7 @@ function Productdetails() {
   useEffect(() => {
     setloading(true);
     if (isLoading == false) {
-      const newdata1 = [data.data, ...data.productvariant];
+      const newdata1 = [data?.data, ...data.productvariant];
 
       const newdata = newdata1.map((item) => ({
         ...item,
@@ -518,12 +518,9 @@ function Productdetails() {
                                     height: 1100,
                                   },
                                   enlargedImagePosition: "over",
-                               
+
                                   lensStyle: {
                                     backgroundColor: "rgba(0,0,0,.6)",
-                                  
-                                    
-
                                   },
                                 }}
                               />
@@ -540,7 +537,6 @@ function Productdetails() {
                           boxShadow: "0px 14px 40px 0px rgba(0, 0, 0, 0.12)",
                           borderRadius: "10px",
                           padding: "20px 17px",
-                          
                         }}
                       >
                         <div className=" flex items-center justify-between">
@@ -719,31 +715,35 @@ function Productdetails() {
                               </h6>
                               <div className="size-box">
                                 <ul>
-                                  {Data23.map((item, index) => (
-                                    <li
-                                      style={{
-                                        background:
-                                          showoption == index
-                                            ? "#059fe2"
-                                            : "#fff",
-                                      }}
-                                    >
-                                      <a
-                                        href="javascript:void(0)"
+                                  {
+                                  Data23[0]?.size?.split(",")?.map((str, index) => (
+                                      <li
                                         style={{
-                                          color:
+                                          background:
                                             showoption == index
-                                              ? "white"
-                                              : "#333",
-                                        }}
-                                        onClick={() => {
-                                          setshowoption(index);
+                                              ? "#059fe2"
+                                              : "#fff",
                                         }}
                                       >
-                                        {item.size}
-                                      </a>
-                                    </li>
-                                  ))}
+                                        {" "}
+                                        <a
+                                          href="javascript:void(0)"
+                                          style={{
+                                            color:
+                                              showoption == index
+                                                ? "white"
+                                                : "#333",
+                                          }}
+                                          onClick={() => {
+                                           
+                                          }}
+                                        >
+                                          {" "}
+                                          {str}
+                                        </a>{" "}
+                                      </li>
+                                    ))
+                                  }
                                   {/* <li style={{ background: "#059fe2" }}><a style={{ color: "white" }} href="javascript:void(0)">l</a></li> */}
                                 </ul>
                               </div>
@@ -905,10 +905,7 @@ function Productdetails() {
                             <div className="pro-group mt-4 ">
                               <h6 className="product-title flex items-center endlinetext">
                                 Deliver To{" "}
-                                <img
-                                  src={`/images/icon/place.png`}
-                                  alt="404"
-                                />{" "}
+                                <img src={`/images/icon/place.png`} alt="404" />{" "}
                               </h6>
                               <div className="delivery-detail">
                                 <div className="delivery-detail-contian">

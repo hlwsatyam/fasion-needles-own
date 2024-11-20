@@ -48,26 +48,18 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
-
         <Route path="/about" element={<About />} />
         <Route path="/cart" element={<Cart2 />} />
         <Route path="/wishlist" element={<Wishlist />} />
         <Route path="/checkout/" element={<OrderSummary />} />
-
-
         <Route path="/productdetails/:id" element={<Productdetails />} />
-
         <Route path="/category/:id/:name/:url" element={<Category />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/addresslist" element={<Addresslist />} />
-
-
-
         <Route path="/pay" element={<Pay />} />
         <Route path="/categoryforbrand/:name" element={<Categoryforbrand />} />
         <Route path="/thankyoupage" element={<Thankyoupage />} />
         <Route path="/privacypolicy" element={<PrivacyPolicy />} />
-
         <Route path="/contact-us" element={<ContactUs />} />
         <Route path="/track-order" element={<TrackDelevery />} />
         <Route path="/careers" element={<CareerPage />} />
@@ -81,13 +73,10 @@ function App() {
         <Route path="/payment-failed" element={<PaymentFailed />} />
         <Route path="/customer-order/:txnId" element={<OrderDetails />} />
         <Route path="*" element={<Error404 />} />
-
       </Routes>
     </div>
   )
-
 }
-
 const Map = () => {
   useEffect(() => {
     window.location.href = "https://www.google.com/maps?ll=28.609226,77.351335&z=11&t=m&hl=en&gl=US&mapclient=embed&cid=2841190900802331527";
@@ -95,10 +84,4 @@ const Map = () => {
 
   return null; // Return null or a simple JSX element if needed
 };
-
-
-
-
-
-
 export default App;

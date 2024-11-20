@@ -1,3 +1,4 @@
+const category = require("../../Models/category");
 const testo = require("../../Models/testomonials");
 const getTesto = async (req, res) => {
     try {
@@ -13,6 +14,19 @@ const getTesto = async (req, res) => {
 
 
 }
+const getCateg = async (req, res) => {
+    try {
+        const contactlisting = await category.find({
+            parentcategory: { $size: 0 } // MongoDB query to find documents where parentcategory is an empty array
+        });
+console.log(contactlisting)
+        res.status(200).send(contactlisting);
+    } catch (err) {
+        console.error(`Error: ${err}`);
+        res.status(500).send({ status: "failed", errors: err.message }); // Added a proper HTTP status code and error message
+    }
+};
+
 const deleteTesto = async (req, res) => {
    
     const { id } = req.params
@@ -24,4 +38,4 @@ const deleteTesto = async (req, res) => {
     }
 }
 
-module.exports = { getTesto, deleteTesto }
+module.exports = { getTesto,getCateg, deleteTesto }

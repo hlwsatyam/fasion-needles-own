@@ -1,6 +1,6 @@
 const order = require("../../Models/order");
 const cart = require("../../Models/cart");
-const sendEmail = require("../../middlewares/emailconfig");
+const {sendEmail} = require("../../middlewares/emailconfig");
 const website_info = require("../../Models/website_info");
 const Usertable = require("../../Models/usertable");
 const jwt = require("jsonwebtoken");
@@ -64,7 +64,7 @@ const createorder = async (req, res) => {
 
         const countorder = await order.countDocuments();
 
-        const orderid = `FNXXXXX00${countorder}`;
+        const orderid = `FN12345600${countorder}`;
         let savedOrder;
         const ordernow = new order({
             orderid,

@@ -16,6 +16,7 @@ import Crouselitem from "../components/Crouselitem";
 import { useGetBrandQuery } from "../store/api/brandapi";
 import Testomonials from "../components/Testomonials";
 import ShopCard from "../components/ShopCard";
+import Categ from "../components/Categ";
 
 const Home = () => {
   const nvg = useNavigate();
@@ -267,6 +268,8 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      <Categ />
 
       <div className="title8">
         <h4 style={{ fontSize: "16px" }}>Best Sellers</h4>

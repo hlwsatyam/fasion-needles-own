@@ -30,6 +30,9 @@ const Subcategory = ({ value, issubcategory }) => {
         <>
           {" "}
           <button
+           onClick={() =>
+            (window.location.href = `/category/${value._id}/${value.name}/none`)
+          }
             type="button"
             className="btn dark-menu-item desgin1 ulappear"
             style={{ padding: "6px 18px 0px 18px" }}
