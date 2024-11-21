@@ -29,7 +29,7 @@ const Login = () => {
     formdata.append("password", password);
 
     try {
-      let url =`${process.env.REACT_APP_API_URL}user/loginForAdmin`;
+      let url =`${process.env.REACT_APP_API_URL}/user/loginForAdmin`;
       const response = await axios.post(url, formdata);
       console.log("login response", response);
       if (response.data.status == "successfull") {

@@ -11,7 +11,7 @@ const Webinfo = () => {
   const fetchData = async () => {
     try {
       const res = await axios.get(
-        `${process.env.REACT_APP_API_URL}testomonials-info`
+        `${process.env.REACT_APP_API_URL}/testomonials-info`
       );
       if (res.status === 200) {
         setAllText(res.data);
@@ -21,7 +21,7 @@ const Webinfo = () => {
   const deleteHandle = async (id) => {
     try {
       const res = await axios.get(
-        `${process.env.REACT_APP_API_URL}testomonials-info/deleteHandle/${id}`
+        `${process.env.REACT_APP_API_URL}/testomonials-info/deleteHandle/${id}`
       );
       if (res.status === 200) {
          window.location.reload();

@@ -6,6 +6,7 @@ import MobileSubcategory from "../../components/Header/MobileSubcategory ";
 import ReactPaginate from "react-paginate";
 import Loader from "../../components/Loader";
 import { useGetAttributeByCategoryQuery } from "../../store/api/categoryapi";
+import Footer from "../../components/Footer";
 const Category = () => {
   const { id, name, url } = useParams();
   const nvg = useNavigate();
@@ -21,7 +22,6 @@ const Category = () => {
   const [sortby, setsortby] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
   const [pageSize, setpageSize] = useState(12);
-
 
   const transfer = (productid) => {
     nvg(`/productdetails/${productid}`);
@@ -172,18 +172,17 @@ const Category = () => {
 
   const [categories, setCategories] = useState([]);
 
-useEffect(()=>{
-  let regex = /max_price=(\d+)/;
-  let hasMaxPrice = regex.test(url);
-  if (hasMaxPrice) {
-    // Extract max_price value using match
-    let match = url.match(regex);
-    if (match) {
-      setpricevalue(match[1])
+  useEffect(() => {
+    let regex = /max_price=(\d+)/;
+    let hasMaxPrice = regex.test(url);
+    if (hasMaxPrice) {
+      // Extract max_price value using match
+      let match = url.match(regex);
+      if (match) {
+        setpricevalue(match[1]);
+      }
     }
-  }
-},[url])
-
+  }, [url]);
 
   return isLoading == true || attributeloading == true ? (
     <></>
@@ -191,7 +190,10 @@ useEffect(()=>{
     <>
       <Header />
 
-      <div className="category-header7" style={{ zIndex: 9991,marginTop:"16px" }}>
+      <div
+        className="category-header7"
+        style={{ zIndex: 9991, marginTop: "16px" }}
+      >
         <div className="container-fluid">
           <div className="row">
             <div className="col-12">
@@ -301,24 +303,42 @@ useEffect(()=>{
                   <div className="collection-collapse-block open">
                     <h4>CATEGORIES</h4>
                     <h6
-                  
                       style={{
-                        color: data4.parentcategoryname?.name ? `black` : `#878787`,
+                        color: data4.parentcategoryname?.name
+                          ? `black`
+                          : `#878787`,
                         padding: `10px 0px 10px 8px`,
                       }}
-                    >{data4.parentcategoryname?.name ? data4.parentcategoryname?.name : data4.categorydata?.name}</h6>
+                    >
+                      {data4.parentcategoryname?.name
+                        ? data4.parentcategoryname?.name
+                        : data4.categorydata?.name}
+                    </h6>
                     <h6
                       style={{
                         color: `#black`,
                         position: "relative",
                         left: "10px",
-                        display: data4.parentcategoryname?.name ? "block" : "none",
+                        display: data4.parentcategoryname?.name
+                          ? "block"
+                          : "none",
                         padding: `0 0 10px 5px`,
                       }}
-                    >{data4.parentcategoryname?.name ? data4.categorydata?.name : ''}</h6>
+                    >
+                      {data4.parentcategoryname?.name
+                        ? data4.categorydata?.name
+                        : ""}
+                    </h6>
                   </div>
                   {/* brand  filter start here  */}
-                  <div className="collection-collapse-block open" style={{display:data4.availableFilters.brand?.[0] ? 'block' : 'none'}}>
+                  <div
+                    className="collection-collapse-block open"
+                    style={{
+                      display: data4.availableFilters.brand?.[0]
+                        ? "block"
+                        : "none",
+                    }}
+                  >
                     <h3
                       className={
                         brand == true
@@ -375,7 +395,14 @@ useEffect(()=>{
                   {/* brand  filter end here  */}
 
                   {/* color  filter start here  */}
-                  <div className="collection-collapse-block open" style={{display:data4.availableFilters.color?.[0] ? 'block' : 'none'}}>
+                  <div
+                    className="collection-collapse-block open"
+                    style={{
+                      display: data4.availableFilters.color?.[0]
+                        ? "block"
+                        : "none",
+                    }}
+                  >
                     <h3
                       className={
                         color == true
@@ -432,7 +459,14 @@ useEffect(()=>{
                   {/* color  filter end here  */}
 
                   {/* size filter start here  */}
-                  <div className="collection-collapse-block open" style={{display:data4.availableFilters.size?.[0] ? 'block' : 'none'}}>
+                  <div
+                    className="collection-collapse-block open"
+                    style={{
+                      display: data4.availableFilters.size?.[0]
+                        ? "block"
+                        : "none",
+                    }}
+                  >
                     <h3
                       className={
                         size == true
@@ -489,7 +523,14 @@ useEffect(()=>{
                   {/* size filter end here  */}
 
                   {/* size filter start here  */}
-                  <div className="collection-collapse-block open" style={{display:data4.availableFilters.weight?.[0] ? 'block' : 'none'}}>
+                  <div
+                    className="collection-collapse-block open"
+                    style={{
+                      display: data4.availableFilters.weight?.[0]
+                        ? "block"
+                        : "none",
+                    }}
+                  >
                     <h3
                       className={
                         weight == true
@@ -589,7 +630,6 @@ useEffect(()=>{
                           max={14000}
                           name="my_range"
                           value={pricevalue}
-                          
                           onChange={(e) => {
                             setpricevalue(e.target.value);
                             updateDataValueforsort("max_price", e.target.value);
@@ -853,12 +893,19 @@ useEffect(()=>{
                                       data?.totalItems
                                     )}{" "}
                                     of {data?.totalItems} Result */}
-
-    Showing Products{" "}
-    {Math.min((data?.pageNumber - 1) * data?.itemsPerPage + 1, data?.totalItems)}-
-    {Math.min(data?.pageNumber * data?.itemsPerPage, data?.totalItems)}{" "}
-    of {data?.totalItems} Results
-
+                                    Showing Products{" "}
+                                    {Math.min(
+                                      (data?.pageNumber - 1) *
+                                        data?.itemsPerPage +
+                                        1,
+                                      data?.totalItems
+                                    )}
+                                    -
+                                    {Math.min(
+                                      data?.pageNumber * data?.itemsPerPage,
+                                      data?.totalItems
+                                    )}{" "}
+                                    of {data?.totalItems} Results
                                   </h5>
                                 </div>
                                 <div
@@ -1312,7 +1359,7 @@ useEffect(()=>{
         </div>
       </section>
       {/* section End */}
-
+      <Footer />
       {/* <Footer /> */}
     </>
   );

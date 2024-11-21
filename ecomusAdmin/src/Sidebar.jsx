@@ -9,7 +9,7 @@ import {
 import { GiHamburgerMenu } from "react-icons/gi";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 // import img from "./assets/loginlogo.png";
-import img from "./assets/Ecomus.svg";
+import img from "./assets/fashion needles.webp";
 import img1 from "./assets/dashboard.png";
 import img4 from "./assets/team.png";
 import img5 from "./assets/options.png";
@@ -22,16 +22,15 @@ import img40 from "./assets/trolley.png";
 import img43 from "./assets/completed-task.png";
 import { gettoken, removeToken, sohstore } from "./Localstorage/Store";
 import { useState } from "react";
-import axios from "axios";
 import Header from "./components/Header";
-
 const Sidebarmenu = ({ children }) => {
-  const gettokinval = gettoken();
+
   const nvg = useNavigate();
   const logoutevt = async () => {
     removeToken();
     nvg("/");
   };
+  
   const [openSubMenu, setOpenSubMenu] = useState(null);
 
   const handleSubMenuClick = (key) => {
@@ -86,7 +85,7 @@ const Sidebarmenu = ({ children }) => {
               >
                 {" "}
                 {hideimg == true ? (
-                  <img src={img} alt="qwerty" style={{ width: "80%" }} />
+                  <img src={img} alt="qwerty"  className="w-[80px] h-[50px]" />
                 ) : (
                   ""
                 )}
@@ -143,26 +142,7 @@ const Sidebarmenu = ({ children }) => {
                 </MenuItem>
               </NavLink>
 
-{/*
-              <NavLink
-                to="/attributelist/0"
-                className={
-                  location.pathname === "/addattribute" ||
-                  result === "/attributelist" ||
-                  result === "/editattribute"
-                    ? "nav active"
-                    : "nav"
-                }
-              >
-                <MenuItem
-                  className="nothover"
-                  icon={<img style={{width:"36px"}} src={img5} alt="qwdfgerct" />}
-                >
-                  {" "}
-                  Attributes 
-                </MenuItem>
-              </NavLink>
-*/}
+
               <NavLink
                 to="/categorylist/0"
                 className={

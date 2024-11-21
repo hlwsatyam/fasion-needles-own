@@ -17,7 +17,7 @@ const Dashboard = () => {
         <div className="container-fuild py-4" style={{paddingLeft:"0px",paddingRight:"0px"}}>
           <div className="row">
             <div className="col-lg-4 mb-2 col-md-6 col-12 dbox">
-              <div className="row bg-white py-3 d-flex align-items-center rounded py-2">
+              <div className="row bg-white  d-flex align-items-center rounded py-2">
                 <div className="col-3">
                   <img src={img1} alt="" />
                 </div>

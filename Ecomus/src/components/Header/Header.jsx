@@ -124,8 +124,7 @@ const Header = () => {
                   </div>
                 </div>
 
-                {
-                pagename == "/pay" ? (
+                {pagename == "/pay" ? (
                   ""
                 ) : (
                   <Nav
@@ -134,7 +133,10 @@ const Header = () => {
                   />
                 )}
 
-                <div style={{ position: "relative" }}>
+                <div
+                  className="hidden md:block"
+                  style={{ position: "relative" }}
+                >
                   <div
                     ref={searchRef}
                     className="header-search ajax-search the-basics dflex"
@@ -198,11 +200,13 @@ const Header = () => {
                     </div>
                   </div>
                   <ul
-                    className="serachlisting"
+                    className="serachlisting     shadow-2xl"
                     style={{
                       display: "flex",
                       position: "absolute",
-                      width: "100%",
+                      width: "40vw",
+                      left: "-50%",
+
                       flexDirection: "column",
                       zIndex: 4,
                       background: "#fff",
@@ -210,62 +214,47 @@ const Header = () => {
                   >
                     {isError == false ? (
                       searchapidata?.results?.[0]?.product_name ? (
-                        searchapidata?.results.map((item, index) => (
-                          <li>
-                            <div
-                              className="p-1 d-flex"
-                              style={{ gap: "10px", cursor: "pointer" }}
-                              onClick={() => {
-                                transfer(item._id, item.title);
-                              }}
-                            >
+                        searchapidata?.results
+                          .map((item, index) => (
+                            <li>
                               <div
-                                className="imagecontain"
-                                style={{ width: "47%" }}
+                                className="p-1 flex  items-center"
+                                style={{ gap: "10px", cursor: "pointer" }}
+                                onClick={() => {
+                                  transfer(item._id, item.title);
+                                }}
                               >
                                 <img
                                   src={`${process.env.REACT_APP_API_IMAGE_URL}${item.product_image1}`}
-                                  style={{ width: "100%", height: "100%" }}
-                                  className="img-fluid  "
+                                  className="   h-[100px] w-[100px] "
                                   alt="product"
                                 />
+
+                                <div className="cartinfo">
+                                  <h6
+                                    style={{
+                                      fontSize: "12px",
+                                      color: "#059fe2",
+                                      fontWeight: "600",
+                                      padding: "3px 0px",
+                                    }}
+                                  >
+                                    {item.product_name}
+                                  </h6>
+                                  <h6
+                                    style={{
+                                      fontSize: "12px",
+                                      color: "#059fe2",
+                                      padding: "3px 0px",
+                                    }}
+                                  >
+                                    ₹{item.selling_price}
+                                  </h6>
+                                </div>
                               </div>
-                              <div className="cartinfo">
-                                <h6
-                                  style={{
-                                    fontSize: "12px",
-                                    color: "#059fe2",
-                                    fontWeight: "600",
-                                    padding: "3px 0px",
-                                  }}
-                                >
-                                  {item.product_name}
-                                </h6>
-                                <h6
-                                  style={{
-                                    fontSize: "12px",
-                                    color: "#059fe2",
-                                    padding: "3px 0px",
-                                  }}
-                                >
-                                  ₹{item.selling_price}
-                                </h6>
-                                <p
-                                  style={{
-                                    fontSize: "11px",
-                                    color: "#059fe2",
-                                    display: "-webkit-box",
-                                    WebkitLineClamp: "2",
-                                    WebkitBoxOrient: "vertical",
-                                    overflow: "hidden",
-                                  }}
-                                >
-                                  {item.sort_description}
-                                </p>
-                              </div>
-                            </div>
-                          </li>
-                        ))
+                            </li>
+                          ))
+                          .slice(0, 5)
                       ) : serchvalue == "" ? (
                         ""
                       ) : (
@@ -472,27 +461,125 @@ const Header = () => {
             className="modal-content"
             style={{ flexDirection: "row-reverse" }}
           >
-            <div className="modal-header mod-line">
-              <button
-                type="button"
-                className="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
+            <div className="modal-body ">
+              <div className="flex">
+                <input
+                  type="text"
+                  name=""
+                  placeholder="Search For Product"
+                  style={{ width: "100%", border: "none", outline: "none" }}
+                  id=""
+                  value={serchvalue}
+                  onChange={(e) => {
+                    searchresult(e.target.value);
+                    setserchvalue(e.target.value);
+                    setshowrecords(true);
+                  }}
+                />{" "}
+                <button
+                  type="button"
+                  className="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+            
+
+
+              {
+                <ul
+                className="     shadow-2xl"
+               
+              >
+                {isError == false ? (
+                  searchapidata?.results?.[0]?.product_name ? (
+                    searchapidata?.results
+                      .map((item, index) => (
+                        <li>
+                          <div
+                            className="p-1 flex  items-center"
+                            style={{ gap: "10px", cursor: "pointer" }}
+                            onClick={() => {
+                              transfer(item._id, item.title);
+                            }}
+                          >
+                            
+                              <img
+                                src={`${process.env.REACT_APP_API_IMAGE_URL}${item.product_image1}`}
+                                className="   h-[100px] w-[100px] "
+                                alt="product"
+                              />
+                           
+                            <div className="cartinfo">
+                              <h6
+                                style={{
+                                  fontSize: "12px",
+                                  color: "#059fe2",
+                                  fontWeight: "600",
+                                  padding: "3px 0px",
+                                }}
+                              >
+                                {item.product_name}
+                              </h6>
+                              <h6
+                                style={{
+                                  fontSize: "12px",
+                                  color: "#059fe2",
+                                  padding: "3px 0px",
+                                }}
+                              >
+                                ₹{item.selling_price}
+                              </h6>
+                            
+                            </div>
+                          </div>
+                        </li>
+                      ))
+                      .slice(0, 5)
+                  ) : serchvalue == "" ? (
+                    ""
+                  ) : (
+                    <li style={{ width: "100%" }}>
+                      <div
+                        className="p-1 d-flex"
+                        style={{
+                          gap: "10px",
+                          padding: "4px 0px",
+                          cursor: "pointer",
+                          width: "100%",
+                          display: "flex",
+                          justifyContent: "center",
+                        }}
+                      >
+                        <h6
+                          style={{
+                            fontSize: "14px",
+                            color: "#333",
+                            fontWeight: "600",
+                            padding: "3px 0px",
+                          }}
+                        >
+                          No Record Fount
+                        </h6>
+                      </div>
+                    </li>
+                  )
+                ) : (
+                  ""
+                )}
+              </ul>
+              }
+
+
+
+
             </div>
-            <div className="modal-body">
-              <input
-                type="text"
-                name=""
-                placeholder="Search For Product"
-                style={{ width: "100%", border: "none", outline: "none" }}
-                id=""
-              />
-            </div>
+
+
+          
           </div>
         </div>
       </div>
-      {/* Search bar for mobile end here  */}
     </header>
   );
 };
