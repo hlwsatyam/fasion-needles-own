@@ -6,12 +6,13 @@ const webinfo = require('../Controllers/info/webinfo.js');
 const getwebinfo = require('../Controllers/info/getwebinfo.js');
 const editwebinfo = require('../Controllers/info/editwebinfo.js');
 const contactlist = require('../Controllers/info/contactlist.js');
-const {getTesto, deleteTesto, getCateg} = require('../Controllers/info/gtTestomonialsInfo.js');
+const {getTesto,delAvailable, deleteTesto, getCateg} = require('../Controllers/info/gtTestomonialsInfo.js');
 
 router.get('/contactus', contactlist)
 router.get('/categoryInfo-info', getCateg)
 router.get('/testomonials-info', getTesto);
 router.get('/testomonials-info/deleteHandle/:id', deleteTesto);
+router.get('/delAvailable-info/:id', delAvailable);
 router.post('/contactus', upload.none(), contactus);
 router.post('/websiteinfo', upload.fields([
   { name: 'logo', maxCount: 1 },

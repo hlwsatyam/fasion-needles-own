@@ -17,7 +17,7 @@ const Crouselitem = ({ item }) => {
               <img
                 src={`${process.env.REACT_APP_API_IMAGE_URL}${item.product_image1}`}
                 alt=""
-                className="h-[250px] object-fill "
+                className="h-[300px]   object-fill "
               />
             </a>
           </div>

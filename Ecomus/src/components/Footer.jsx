@@ -33,16 +33,16 @@ const Footer = () => {
     },
   ];
   return (
-    <footer className="bg-gradient-to-r from-gray-100 via-[#bce1ff] to-gray-100">
+    <footer className="bg-gradient-to-r !text-white bg-black/80">
       <div className="max-w-screen-xl px-4 sm:llmb-0 mb-[68px]  sm:py-8 mx-auto sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
           <div>
-            <img
+            {/* <img
               src="/images/FN-Main.png"
-              className="mr-5 h-32  mix-blend-multiply"
+              className="mr-5 h-32  mix-blend-screen"
               alt="logo"
-            />
-            <p className="max-w-xs mt-4 text-sm text-gray-600">
+            /> */}
+            <p className="max-w-xs !text-white mt-4 text-sm ">
               First Floor, Lal Mandir Market, C-67, Main Rd, Shital Vihar, Khora
               Colony, Sector 57, Noida, Uttar Pradesh 201301
             </p>
@@ -54,7 +54,7 @@ const Footer = () => {
                   aria-label={label}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-600 hover:text-gray-800 transition duration-300"
+                  className="!text-white hover:text-gray-800 transition duration-300"
                 >
                   <span className={`text-2xl ${colorClass}`}>{icon}</span>
                 </a>
@@ -86,13 +86,13 @@ const Footer = () => {
               },
             ].map(({ heading, items }, index) => (
               <div key={index}>
-                <p className="font-medium text-gray-900">{heading}</p>
+                <p className="font-medium !text-white">{heading}</p>
                 <ul className="mt-6 flex-col flex space-y-4 text-sm">
                   {items.map((item, i) => (
                     <li key={i}>
                       <a
                         href={`/${item.replace(" ", "-").toLowerCase()}`}
-                        className="text-gray-600 hover:text-gray-900 transition"
+                        className="!text-white hover:text-gray-900 transition"
                       >
                         {item}
                       </a>
@@ -104,7 +104,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="pt-8 mt-8 border-t border-gray-300">
-          <p className="text-xs flex justify-center items-center flex-wrap gap-4 text-center text-gray-500">
+          <p className="text-xs flex justify-center items-center flex-wrap gap-4 text-center !text-white">
             &copy; 2024 fashionneedles.com. All rights reserved. <img src="/images/visa.svg" alt="fashion needles.com cloths " />
           </p>
         </div>

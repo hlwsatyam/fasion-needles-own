@@ -40,6 +40,8 @@ import ForgetPass from "./pages/ForgetPass";
 import OrderDetails from "./pages/profilepage/OrderDetails";
 import Error404 from "./pages/Error404";
 import PaymentFailed from "./pages/PaymentFailed";
+import OrderHistorytwo from "./pages/OrderHistorytwo";
+import OrderHistoryDetails from "./pages/OrderHistoryDetails";
 function App() {
   return (
     <div className=" max-w-7xl mx-auto  ">
@@ -58,6 +60,8 @@ function App() {
         <Route path="/addresslist" element={<Addresslist />} />
         <Route path="/pay" element={<Pay />} />
         <Route path="/categoryforbrand/:name" element={<Categoryforbrand />} />
+        <Route path="/order-history-detail" element={<OrderHistoryDetails/>} />
+        <Route path="/order-history" element={<OrderHistorytwo/>} />
         <Route path="/thankyoupage" element={<Thankyoupage />} />
         <Route path="/privacypolicy" element={<PrivacyPolicy />} />
         <Route path="/contact-us" element={<ContactUs />} />

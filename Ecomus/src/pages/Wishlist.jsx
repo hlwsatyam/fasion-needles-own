@@ -4,8 +4,21 @@ import { MdOutlineDeleteOutline } from "react-icons/md";
 import {  useGetWishlistProductQuery,usePostDeleteWishlistMutation} from "../store/api/wishlistapi";
 import { useDispatch, useSelector } from "react-redux";
 import { addwishlist } from "../store/state/wishlist";
+import { gettoken } from "../Localstorage/Store";
+import { useEffect } from "react";
 
 const Wishlist = () => {
+
+
+  useEffect(() => {
+    if (gettoken() == null) {
+      window.location.href = "/login";
+    }
+  },[]);
+
+
+
+
   const nvg = useNavigate();
   const {data: wishlistdata,isLoading,refetch} = useGetWishlistProductQuery();
   const [removetowishlistapi] = usePostDeleteWishlistMutation();
@@ -44,7 +57,7 @@ const Wishlist = () => {
       {/* breadcrumb start */}
       <div className="breadcrumb-main marginfromtop" style={{backgroundColor:"#f9f9f9"}}>
         <div className="container m-0">
-          <div className="row">
+          <div className="">
             <div className="col">
               <div className="breadcrumb-contain">
                 <div>
@@ -72,14 +85,14 @@ const Wishlist = () => {
       >
         <div className="collection-wrapper">
           <div className="custom-container">
-            <div className="row">
+            <div className="">
               <div className="collection-content col">
                 <div className="page-main-content">
-                  <div className="row">
+                  <div className="">
                     <div className="col-sm-12">
                       <div className="collection-product-wrapper">
                         <div className="product-top-filter">
-                          <div className="row">
+                          <div className="">
                             <div className="col-12">
                               <div className="product-filter-content"></div>
                             </div>
@@ -87,7 +100,7 @@ const Wishlist = () => {
                         </div>
                         <div className="product-wrapper-grid product">
                           <div
-                            className="row removepadding"
+                            className=" removepadding"
                             style={{ gap: "7px" }}
                           >
                             {wishlistdata?.data?.[0] ? (
@@ -124,7 +137,7 @@ const Wishlist = () => {
                                                   : item.product_id._id
                                               );
                                             }}
-                                            className="img-fluid  "
+                                            className="img-fluid   object-cover h-[250px]"
                                             alt="product"
                                           />{" "}
                                           <span

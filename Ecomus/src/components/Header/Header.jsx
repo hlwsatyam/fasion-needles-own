@@ -124,8 +124,7 @@ const Header = () => {
                   </div>
                 </div>
 
-                {pagename == "/cart" ||
-                pagename == "/checkout" ||
+                {
                 pagename == "/pay" ? (
                   ""
                 ) : (

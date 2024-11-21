@@ -110,20 +110,7 @@ function Productdetails() {
   }, []);
 
   const devto = () => {
-    if (delto == "") {
-      setdelresponse({ status: true, msg: "Deliver to field is required" });
-    } else {
-      // setdelresponse["status"] = true;
-      // setdelresponse["msg"] = "Something went wrong please try Again";
-      setdelresponse({
-        status: true,
-        msg: "Something went wrong please try Again",
-      });
-    }
-    setdelto("");
-    setTimeout(() => {
-      setdelresponse({ status: false, msg: "" });
-    }, 4000);
+    fetchData();
   };
   const redirectfun = (linkpage) => {
     nvg(linkpage);
@@ -233,6 +220,21 @@ function Productdetails() {
       setloading(false);
     }
   }, [data, isLoading]);
+
+  const fetchData = async () => {
+    try {
+      const res = await axios.get(
+        `${process.env.REACT_APP_API_URL}/delAvailable-info/${delto}`
+      );
+      if (res.status === 200) {
+        toast(res?.data?.message);
+      } else {
+        toast(res?.data?.message);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const transfer = () => {
     nvg("/category", {
@@ -715,8 +717,9 @@ function Productdetails() {
                               </h6>
                               <div className="size-box">
                                 <ul>
-                                  {
-                                  Data23[0]?.size?.split(",")?.map((str, index) => (
+                                  {Data23[0]?.size
+                                    ?.split(",")
+                                    ?.map((str, index) => (
                                       <li
                                         style={{
                                           background:
@@ -734,16 +737,13 @@ function Productdetails() {
                                                 ? "white"
                                                 : "#333",
                                           }}
-                                          onClick={() => {
-                                           
-                                          }}
+                                          onClick={() => {}}
                                         >
                                           {" "}
                                           {str}
                                         </a>{" "}
                                       </li>
-                                    ))
-                                  }
+                                    ))}
                                   {/* <li style={{ background: "#059fe2" }}><a style={{ color: "white" }} href="javascript:void(0)">l</a></li> */}
                                 </ul>
                               </div>

@@ -20,7 +20,6 @@ const Nav = ({ togglesidebar, closesidebar }) => {
 
 
 
-
   const [noOfItems, setItems] = useState(0);
 
   useEffect(() => {

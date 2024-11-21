@@ -23,19 +23,19 @@ export default function Testimonials() {
   };
 
   return (
-    <section className="py-4">
+    <section className="sm:py-4 pt-0 pb-4">
       <div className="mx-auto px-2 sm:px-6 lg:px-8">
         <h2 className="text-xl mb-2 text-center font-bold text-gray-900 lg:text-left">
           Shop By Category
         </h2>
-        <div className="flex flex-wrap mt-4 justify-center items-center gap-8">
+        <div className="flex flex-wrap mt-4 justify-center items-center gap-x-[7px] sm:gap-8">
           {allText.map((item) => {
             return (
               <div
                 onClick={() =>
                   (window.location.href = `/category/${item._id}/${item.name}/none`)
                 }
-                className="rounded-full sha h-24 shadow   w-24 bg-white s"
+                className="rounded-full sha h-20 shadow sm:w-32 sm:h-32  w-20 bg-white s"
               >
                 <img
                   src={`${process.env.REACT_APP_API_IMAGE_URL}${item.banner}`}

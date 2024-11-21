@@ -89,12 +89,13 @@ const ShoppingCart = () => {
   return (
     <div>
       <Header />
+      
       <div className="container mx-auto p-4 bg-gray-100 ">
         <div className="flex flex-col md:flex-row gap-8">
           <div className="md:w-2/3 bg-white rounded-lg shadow-md p-6">
             <h2 className="text-2xl font-bold mb-4">Shopping Cart</h2>
             {items.map((item) => (
-              <div key={item.id} className="flex items-center border-b py-4">
+              <div key={item.id} className="flex flex-wrap items-center border-b py-4">
                 <img
                   src={`${process.env.REACT_APP_API_IMAGE_URL}${item?.image}`}
                   alt={item.name}

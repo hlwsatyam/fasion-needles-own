@@ -1049,7 +1049,7 @@ useEffect(()=>{
                                           {" "}
                                           <img
                                             src={`${process.env.REACT_APP_API_IMAGE_URL}${item?.product_image1}`}
-                                            className="img-fluid  "
+                                            className="img-fluid object-cover h-[250px]"
                                             alt="product"
                                           />{" "}
                                         </button>

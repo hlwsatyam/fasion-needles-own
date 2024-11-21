@@ -13,6 +13,23 @@
 
 
  
+.breadcrumb {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.breadcrumb li {
+  margin-right: 5px;
+}
+.breadcrumb li i {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+.table tbody tr:hover {
+  background-color: #f9f9f9;
+  cursor: pointer;
+}
 
 
 

@@ -3,7 +3,7 @@ import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 import Header from "../../components/Header/Header";
 import { useLocation, useNavigate } from "react-router-dom";
-import { removeToken } from "../../Localstorage/Store";
+import { removeToken, gettoken } from "../../Localstorage/Store";
 import AddressformComp from "./AddressformComp";
 import EditressformComp from "./EditressformComp";
 import {
@@ -16,6 +16,11 @@ import {
 } from "../../store/api/addressapi";
 import { useGetOrderByUserQuery } from "../../store/api/orderapi";
 export const Profile = () => {
+  useEffect(() => {
+    if (gettoken() == null) {
+      window.location.href = "/login";
+    }
+  },[]);
   const {
     data: userinfo,
     isLoading: userloading,
@@ -119,7 +124,7 @@ export const Profile = () => {
 
   const { data: orderlist, isLoading: orderlistloading } =
     useGetOrderByUserQuery();
-  console.log("order lst", orderlist);
+ 
   const {
     data: addressdata,
     isLoading: addressloading,
@@ -844,7 +849,7 @@ export const Profile = () => {
                               {orderlist?.orderlist?.map((item, index) => (
                                 <tr
                                   onClick={() =>
-                                    nvg(`/customer-order/${item.orderid}`,{
+                                    nvg(`/customer-order/${item.orderid}`, {
                                       state: { item },
                                     })
                                   }
