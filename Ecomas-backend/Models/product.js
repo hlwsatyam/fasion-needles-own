@@ -53,6 +53,14 @@ const productSchema = mongoose.Schema(
       type: Array,
       default: [],
     },
+    mutipleSize: {
+      type: Array,
+      default: [],
+    },
+    mutipleColor: {
+      type: Array,
+      default: [],
+    },
     sort_description: {
       type: String,
       required: true,

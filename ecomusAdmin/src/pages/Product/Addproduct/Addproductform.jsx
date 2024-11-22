@@ -6,6 +6,9 @@ import JoditEditor from "jodit-react";
 import { Field, Form, Formik } from "formik";
 import img3 from "../../../assets/selectbanner.webp";
 import { Productvalidation } from "../Validation/Productvalidation";
+import TagsInput from "react-tagsinput";
+import "react-tagsinput/react-tagsinput.css"; // Import TagsInput CSS
+
 import {
   useGetLevelOneCategoryQuery,
   usePostFetchSubCategoryMutation,
@@ -83,6 +86,8 @@ const Addproductform = () => {
           color: "",
           size: "",
           parent_category: [],
+          mutipleSize: [],
+          mutipleColor: [],
           child_category: [],
           status: "",
           trendingproduct: "",
@@ -102,6 +107,9 @@ const Addproductform = () => {
           formdata.append("meta_title", values.meta_title);
           formdata.append("meta_keywords", values.meta_keywords);
           formdata.append("meta_description", values.meta_description);
+          formdata.append("mutipleSize", values.mutipleSize);
+          formdata.append("mutipleColor", values.mutipleColor);
+
           formdata.append("editor", values.editor);
           formdata.append("parent_category", values.parent_category);
           formdata.append("child_category", values.child_category);
@@ -808,6 +816,43 @@ const Addproductform = () => {
                 <div className="row">
                   <div className="col-lg-12">
                     <label htmlFor="" className="form-label">
+                      Multiple Size <span style={{ color: "red" }}>*</span>{" "}
+                    </label>
+                  </div>
+                  <div className="col-lg-12">
+                    <Field
+                      name="mutipleSize"
+                      type="text"
+                      className="form-control"
+                      placeholder="Color"
+                      component={TagsField}
+                    />
+                  </div>
+                </div>
+              </div>
+              <div style={{ width: "19.866667%" }} className="col-2 px-2 pt-3">
+                <div className="row">
+                  <div className="col-lg-12">
+                    <label htmlFor="" className="form-label">
+                      Multiple Color <span style={{ color: "red" }}>*</span>{" "}
+                    </label>
+                  </div>
+                  <div className="col-lg-12">
+                    <Field
+                      name="mutipleColor"
+                      type="text"
+                      className="form-control"
+                      placeholder="Color"
+                      component={mutipleColorField}
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div style={{ width: "19.866667%" }} className="col-2 px-2 pt-3">
+                <div className="row">
+                  <div className="col-lg-12">
+                    <label htmlFor="" className="form-label">
                       Size <span style={{ color: "red" }}>*</span>{" "}
                     </label>
                   </div>
@@ -898,3 +943,18 @@ const Addproductform = () => {
 };
 
 export default Addproductform;
+
+const TagsField = ({ field, form }) => {
+  const handleChange = (tags) => {
+    form.setFieldValue(field.name, tags); // Update Formik value
+  };
+
+  return <TagsInput value={field.value || []} onChange={handleChange} />;
+};
+const mutipleColorField = ({ field, form }) => {
+  const handleChange = (tags) => {
+    form.setFieldValue(field.name, tags); // Update Formik value
+  };
+
+  return <TagsInput value={field.value || []} onChange={handleChange} />;
+};
