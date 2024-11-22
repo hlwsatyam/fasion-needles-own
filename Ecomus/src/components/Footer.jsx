@@ -34,33 +34,9 @@ const Footer = () => {
   ];
   return (
     <footer className="bg-gradient-to-r !text-white bg-black/80">
-      <div className="max-w-screen-xl px-4 sm:llmb-0 mb-[68px]  sm:py-8 mx-auto sm:px-6 lg:px-8">
+      <div className="max-w-screen-xl px-4 sm:mb-0 mb-[68px]  sm:py-8 mx-auto sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
-          <div>
-            {/* <img
-              src="/images/FN-Main.png"
-              className="mr-5 h-32  mix-blend-screen"
-              alt="logo"
-            /> */}
-            <p className="max-w-xs !text-white mt-4 text-sm ">
-              First Floor, Lal Mandir Market, C-67, Main Rd, Shital Vihar, Khora
-              Colony, Sector 57, Noida, Uttar Pradesh 201301
-            </p>
-            <div className="flex mt-8 space-x-6 text-gray-600">
-              {socialLinks.map(({ label, icon, url, colorClass }, index) => (
-                <a
-                  href={url}
-                  key={index}
-                  aria-label={label}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="!text-white hover:text-gray-800 transition duration-300"
-                >
-                  <span className={`text-2xl ${colorClass}`}>{icon}</span>
-                </a>
-              ))}
-            </div>
-          </div>
+        
           <div className="grid sm:grid-cols-4  grid-cols-2 gap-8 sm:col-span-2 lg:col-span-2">
             {[
               {
@@ -102,10 +78,37 @@ const Footer = () => {
               </div>
             ))}
           </div>
+
+            <div>
+            {/* <img
+              src="/images/FN-Main.png"
+              className="mr-5 h-32  mix-blend-screen"
+              alt="logo"
+            /> */}
+            <p className="max-w-xs !text-white mt-4 text-sm ">
+              First Floor, Lal Mandir Market, C-67, Main Rd, Shital Vihar, Khora
+              Colony, Sector 57, Noida, Uttar Pradesh 201301
+            </p>
+            <div className="flex mt-8 space-x-6 text-gray-600">
+              {socialLinks.map(({ label, icon, url, colorClass }, index) => (
+                <a
+                  href={url}
+                  key={index}
+                  aria-label={label}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="!text-white hover:text-gray-800 transition duration-300"
+                >
+                  <span className={`text-2xl ${colorClass}`}>{icon}</span>
+                </a>
+              ))}
+            </div>
+          </div>
         </div>
         <div className="pt-8 mt-8 border-t border-gray-300">
-          <p className="text-xs flex justify-center items-center flex-wrap gap-4 text-center !text-white">
-            &copy; 2024 fashionneedles.com. All rights reserved. <img src="/images/visa.svg" alt="fashion needles.com cloths " />
+          <p className="text-sm flex justify-center items-center flex-wrap gap-4 text-center !text-white">
+            &copy; 2024 fashionneedles.com. All rights reserved.{" "}
+            <img src="/images/visa.svg" alt="fashion needles.com cloths " />
           </p>
         </div>
       </div>

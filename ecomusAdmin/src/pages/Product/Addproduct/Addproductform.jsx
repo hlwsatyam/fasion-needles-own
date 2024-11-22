@@ -830,7 +830,7 @@ const Addproductform = () => {
                   </div>
                 </div>
               </div>
-              <div style={{ width: "19.866667%" }} className="col-2 px-2 pt-3">
+              {/* <div style={{ width: "19.866667%" }} className="col-2 px-2 pt-3">
                 <div className="row">
                   <div className="col-lg-12">
                     <label htmlFor="" className="form-label">
@@ -847,7 +847,7 @@ const Addproductform = () => {
                     />
                   </div>
                 </div>
-              </div>
+              </div> */}
 
               <div style={{ width: "19.866667%" }} className="col-2 px-2 pt-3">
                 <div className="row">

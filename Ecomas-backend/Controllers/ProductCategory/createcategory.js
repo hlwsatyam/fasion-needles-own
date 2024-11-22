@@ -2,55 +2,7 @@ const category = require("../../Models/category");
 const slugify = require("slugify");
 const createcategory = async (req, res) => {
   try {
-    // const checkname = await checkIfCategoryExists('name',req.body.category_name);
-    // if (checkname == true) {
-    //   const checkurl = await checkIfCategoryExists('url',req.body.category_url);
-    //   if (checkurl == true) {
-    //     const {
-    //       category_name,
-    //       category_url,
-    //       editor,
-    //       meta_description,
-    //       meta_title,
-    //       meta_keywords,
-    //       parent_category,
-    //       status,
-    //     } = req.body;
-    //     const addcategory = new category({
-    //       name: category_name,
-    //       url: slugify(category_url),
-    //       desc: editor,
-    //       metatitle: meta_title,
-    //       metadesc: meta_description,
-    //       status,
-    //       meta_keywords: meta_keywords,
-    //       parentcategory: parent_category == '' ? [] : parent_category,
-    //       banner: req.files.category_image[0].filename,
-    //     });
-    //     const rel = await addcategory.save();
-    //     res.status(201).json({ status: "successfull", data: rel });
-    //   } else {
-    //     res.status(404).json({
-    //       status: "faild",
-    //       error:{
-    //         url:{
-    //           message: "category with this url already exist",
-    //           path:"url"
-    //         }
-    //       }
-    //     });
-    //   }
-    // } else {
-    //   res.status(404).json({
-    //     status: "faild",
-    //     error:{
-    //       name:{
-    //         message: "category with this name already exist",
-    //         path:"name"
-    //       }
-    //     }
-    //   });
-    // }
+
     const {
       category_name,
       category_url,
@@ -59,8 +11,59 @@ const createcategory = async (req, res) => {
       meta_title,
       meta_keywords,
       parent_category,
+      parent_sub_category,
       status,
     } = req.body;
+
+    var condition = {}
+
+    if (parent_category == '' && parent_sub_category == '') {
+      console.log('ff')
+      condition = {
+        parentcategory: [],
+        parentsubcategory: [],
+      }
+    }
+    if (parent_category != '' && parent_sub_category == '') {
+      console.log('ffyy')
+      condition = {
+        parentcategory: [parent_category],
+        parentsubcategory: []
+      }
+    }
+    if (parent_category != '' && parent_sub_category != '') {
+
+      condition = {
+        parentcategory: [parent_category],
+        parentsubcategory: []
+
+      }
+      const addcategory = new category({
+        name: category_name,
+        url: slugify(category_url),
+        desc: editor,
+        metatitle: meta_title,
+        metadesc: meta_description,
+        status,
+        meta_keywords: meta_keywords,
+        ...condition,
+        banner: req.files.category_image[0].filename,
+      });
+
+      const rel = await addcategory.save();
+
+      await category.findByIdAndUpdate(
+        parent_category,
+        { $push: { parentsubcategory: rel._id } },
+        { new: true, useFindAndModify: false }
+      );
+
+
+
+      return res.status(201).json({ status: "successfull", data: rel });
+
+    }
+
 
     const addcategory = new category({
       name: category_name,
@@ -70,11 +73,23 @@ const createcategory = async (req, res) => {
       metadesc: meta_description,
       status,
       meta_keywords: meta_keywords,
-      parentcategory: parent_category == '' ? [] : parent_category,
+      ...condition,
       banner: req.files.category_image[0].filename,
     });
+
     const rel = await addcategory.save();
-    res.status(201).json({ status: "successfull", data: rel });
+
+
+
+    await category.findByIdAndUpdate(
+      parent_category,
+      { $push: { parentsubcategory: rel._id } },
+      { new: true, useFindAndModify: false }
+    );
+
+
+
+    return res.status(201).json({ status: "successfull", data: rel });
 
 
 

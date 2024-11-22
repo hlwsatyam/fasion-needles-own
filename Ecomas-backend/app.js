@@ -24,6 +24,7 @@ const app = express();
 const path = require('path');
 app.use(cors())
 const connectdb = require("./db/connection.js");
+const Product = require("./Models/product");
 require("./Models/contactus");
 require("./Models/category");
 require("./Models/attribute");
@@ -61,9 +62,28 @@ app.use("/api/brand", brandrouter);
 app.use("/api/address", addressrouter);
 app.use("/api/order", orderrouter);
 app.use("/api/verification", verificationrouter);
-app.get("/", (req, res) => {
-  res.send("hello world")
-})
+app.get("/", async (req, res) => {
+  try {
+    // const allProducts = await Product.find();
+
+    // await Promise.all(
+    //   allProducts.map(async (doc) => {
+    //     const sizes = doc.size.split(",");
+    //     await Product.findByIdAndUpdate(
+    //       doc._id,
+    //       { $set: { mutipleSize: sizes } },
+    //       { new: true }
+    //     );
+    //   })
+    // );
+
+    res.send("hello world");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("An error occurred");
+  }
+});
+
 app.listen(port, () => {
   console.log(`server is runing at ${port}`);
 });

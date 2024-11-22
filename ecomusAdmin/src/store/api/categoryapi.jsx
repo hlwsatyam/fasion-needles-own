@@ -21,6 +21,12 @@ export const categoryApi = createApi({
           method:'GET'
         })
       }),
+    getLevelTwoCategory: builder.query({
+        query: () => ({
+          url: `category/leveltwo`,
+          method:'GET'
+        })
+      }),
     postCategory: builder.mutation({
         query: (data) => ({
           url: `category`,
@@ -51,4 +57,4 @@ export const categoryApi = createApi({
   }),
 })
 
-export const { useGetAllCategoriesQuery, useGetSingleCategoryQuery,usePostCategoryMutation,useGetLevelOneCategoryQuery,usePatchCategoryMutation,useDeleteCategoryMutation,usePostFetchSubCategoryMutation } = categoryApi
+export const { useGetAllCategoriesQuery, useGetSingleCategoryQuery,usePostCategoryMutation,useGetLevelOneCategoryQuery,useGetLevelTwoCategoryQuery,usePatchCategoryMutation,useDeleteCategoryMutation,usePostFetchSubCategoryMutation } = categoryApi

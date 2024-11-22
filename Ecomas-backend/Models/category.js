@@ -34,6 +34,10 @@ var categorySchema = new mongoose.Schema({
         type:Array,
         default:[]
     },
+    parentsubcategory:{
+        type:Array,
+        default:[]
+    },
     attribute:{
         type:Array,
         default:[]

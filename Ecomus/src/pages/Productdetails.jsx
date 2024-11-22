@@ -23,6 +23,7 @@ import SharePage from "../components/ShareComp";
 import InfoList from "../components/InfoPage";
 import { useGetCommentMutation } from "../store/api/commentapi";
 import { toast } from "react-toastify";
+import HelmetTag from "../components/Header/Helmet";
 
 const options5 = {
   items: 1,
@@ -74,6 +75,7 @@ function Productdetails() {
   const [viewimg, setviewimg] = useState(null);
   const [qty, setqty] = useState(1);
   const [showoption, setshowoption] = useState(0);
+  const [selectedSize, setselectedSize] = useState(0);
   const [loading, setloading] = useState(true);
   const [delto, setdelto] = useState("");
   const [Data23, setData] = useState([]);
@@ -95,7 +97,6 @@ function Productdetails() {
         }
       );
       if (response.status === 200) {
-        console.log(response.data);
         setGetComment(response.data);
       }
     } catch (error) {
@@ -175,7 +176,7 @@ function Productdetails() {
         quantity: qty,
         price: Data23[showoption].selling_price,
         image: Data23[showoption].product_image1,
-        size: Data23[showoption].size,
+        size: Data23[0].mutipleSize[selectedSize],
         brand: Data23[showoption].brand,
         rating: 5,
       };
@@ -235,7 +236,7 @@ function Productdetails() {
       console.log(error);
     }
   };
-
+  console.log(data);
   const transfer = () => {
     nvg("/category", {
       state: {
@@ -261,7 +262,18 @@ function Productdetails() {
   ) : (
     <>
       <Header />
-
+      <HelmetTag
+      url={window.location.href}
+        description={data?.data?.sort_description}
+        keywords={data?.data?.meta_keywords}
+        title={
+          Data23?.[showoption]?.product_name +
+          " | " +
+          data?.parentcategory?.[0]?.name +
+          " | " +
+          data?.childcategory?.[0]?.name
+        }
+      />
       {/* breadcrumb start */}
       <div className="breadcrumb-main marginfromtop">
         <div className="container m-0">
@@ -717,33 +729,32 @@ function Productdetails() {
                               </h6>
                               <div className="size-box">
                                 <ul>
-                                  {Data23[0]?.size
-                                    ?.split(",")
-                                    ?.map((str, index) => (
-                                      <li
+                                  {Data23[0]?.mutipleSize?.map((str, index) => (
+                                    <li
+                                      onClick={() => setselectedSize(index)}
+                                      style={{
+                                        background:
+                                          selectedSize == index
+                                            ? "#059fe2"
+                                            : "#fff",
+                                      }}
+                                    >
+                                      {" "}
+                                      <a
+                                        href="javascript:void(0)"
                                         style={{
-                                          background:
-                                            showoption == index
-                                              ? "#059fe2"
-                                              : "#fff",
+                                          color:
+                                            selectedSize == index
+                                              ? "white"
+                                              : "#333",
                                         }}
+                                        onClick={() => {}}
                                       >
                                         {" "}
-                                        <a
-                                          href="javascript:void(0)"
-                                          style={{
-                                            color:
-                                              showoption == index
-                                                ? "white"
-                                                : "#333",
-                                          }}
-                                          onClick={() => {}}
-                                        >
-                                          {" "}
-                                          {str}
-                                        </a>{" "}
-                                      </li>
-                                    ))}
+                                        {str}
+                                      </a>{" "}
+                                    </li>
+                                  ))}
                                   {/* <li style={{ background: "#059fe2" }}><a style={{ color: "white" }} href="javascript:void(0)">l</a></li> */}
                                 </ul>
                               </div>

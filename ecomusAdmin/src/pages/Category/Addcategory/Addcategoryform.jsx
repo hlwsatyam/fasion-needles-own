@@ -8,6 +8,7 @@ import img3 from "../../../assets/selectbanner.webp";
 import { Categoryvalidation } from "../Validation/Categoryvalidation";
 import {
   useGetLevelOneCategoryQuery,
+  useGetLevelTwoCategoryQuery,
   usePostCategoryMutation,
 } from "../../../store/api/categoryapi";
 import { useGetAllAttributeQuery } from "../../../store/api/attributeapi";
@@ -15,9 +16,12 @@ const Addcategoryform = () => {
   const [apiresponse, setapiresponse] = useState({});
   const imageInputRef = useRef(null);
   const nvg = useNavigate();
-
+  const [parentCategory, setParentCategory] = useState(null); 
   let getlevelonecategory = useGetLevelOneCategoryQuery();
-  const { data: attributeData, isLoading } = useGetAllAttributeQuery();
+  let getleveltwocategory = useGetLevelTwoCategoryQuery(
+    { parent_category: parentCategory },
+    { skip: !parentCategory } // Skip query if no parent_category is selected
+  );
 
   const config = {
     height: "300px",
@@ -51,6 +55,7 @@ const Addcategoryform = () => {
           meta_description: "",
           editor: "",
           parent_category: [],
+          parent_sub_category: [],
           status: "",
           category_image: null,
         }}
@@ -65,6 +70,7 @@ const Addcategoryform = () => {
           formdata.append("meta_description", values.meta_description);
           formdata.append("editor", values.editor);
           formdata.append("parent_category", values.parent_category);
+          formdata.append("parent_sub_category", values.parent_sub_category);
           formdata.append("status", values.status);
           formdata.append("category_image", values.category_image);
           // formdata.append("attribute", values.attribute);
@@ -240,44 +246,47 @@ const Addcategoryform = () => {
                 </div>
               </div>
 
-              {/* <div className="col-md-12 px-2 pt-3">
+              <div className="col-md-12 px-2 pt-3">
                 <div className="row">
                   <div className="col-lg-2">
                     <label htmlFor="" className="form-label ">
-                    Addattribute <span style={{ color: "red" }}>*</span>{" "}
+                      Parent Sub Category{" "}
+                      <span style={{ color: "red" }}>*</span>{" "}
                     </label>
                   </div>
                   <div className="col-lg-10">
-                    {attributeData?.data ? (
+                    {getleveltwocategory?.data?.data ? (
                       <Multiselect
                         // isObject={false}
-                        options={attributeData?.data}
+                        options={getleveltwocategory?.data?.data}
                         onSelect={(selectedList) => {
-                          console.log("first",selectedList);
                           setFieldValue(
-                            "attribute",
-                            selectedList.map((item) => item.attributeName)
+                            "parent_sub_category",
+                            selectedList.map((item) => item._id)
                           );
                         }}
                         onRemove={(selectedList) => {
                           setFieldValue(
-                            "attribute",
-                            selectedList.map((item) => item.attributeName)
+                            "parent_sub_category",
+                            selectedList.map((item) => item.id)
                           );
                         }}
-                        displayValue="attributeName"
+                        displayValue="name"
                       />
                     ) : (
                       ""
                     )}
                   </div>
                   <div className="offset-lg-2 col-lg-10">
-                    {errors.parent_category && touched.parent_category ? (
-                      <p style={{ color: "red" }}>{errors.parent_category}</p>
+                    {errors.parent_sub_category &&
+                    touched.parent_sub_category ? (
+                      <p style={{ color: "red" }}>
+                        {errors.parent_sub_category}
+                      </p>
                     ) : null}
                   </div>
                 </div>
-              </div> */}
+              </div>
               <div className="col-md-12 px-2 pt-3">
                 <div className="row">
                   <div className="col-lg-2">

@@ -184,6 +184,40 @@ const Home = () => {
       </section>
       {/* home main banner section end */}
 
+
+    {/* brand start */}
+    <section className="brand-second section-big-mb-space">
+        <div className="container-fluid">
+          <div className="row brand-block">
+            <div className="col-12">
+              <div className="brand-slide12 no-arrow mb--5">
+                <OwlCarousel
+                  className="owl-theme"
+                  style={{ width: "100%", height: "100%" }}
+                  {...optionsforbrand}
+                >
+                  {brnaditem?.data.map((item, index) => (
+                    <div
+                      className="brand-box cursor-pointer h-[150px] !w-[150px]  rounded-full "
+                      onClick={() => {
+                        nvg(`/categoryforbrand/${item.brand_name}`);
+                      }}
+                    >
+                      <img
+                        src={`${process.env.REACT_APP_API_IMAGE_URL}${item.brand_image}`}
+                        alt=""
+                        className=" w-full h-full object-contain "
+                      />
+                    </div>
+                  ))}
+                </OwlCarousel>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      {/* brand start */}
+
       {/*home mine banner start*/}
       <section className="megastore-slide collection-banner section-py-space b-g-white">
         <div className="container-fluid">
@@ -393,38 +427,7 @@ const Home = () => {
       </div>
       {/*title-end*/}
 
-      {/* brand start */}
-      <section className="brand-second section-big-mb-space">
-        <div className="container-fluid">
-          <div className="row brand-block">
-            <div className="col-12">
-              <div className="brand-slide12 no-arrow mb--5">
-                <OwlCarousel
-                  className="owl-theme"
-                  style={{ width: "100%", height: "100%" }}
-                  {...optionsforbrand}
-                >
-                  {brnaditem?.data.map((item, index) => (
-                    <div
-                      className="brand-box cursor-pointer h-[150px] !w-[150px]  rounded-full "
-                      onClick={() => {
-                        nvg(`/categoryforbrand/${item.brand_name}`);
-                      }}
-                    >
-                      <img
-                        src={`${process.env.REACT_APP_API_IMAGE_URL}${item.brand_image}`}
-                        alt=""
-                        className=" w-full h-full object-contain "
-                      />
-                    </div>
-                  ))}
-                </OwlCarousel>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      {/* brand start */}
+  
 
       {/* slider 1*/}
       <section className="  sale-banenr mt-2  banner-style2 design2 marginfromtop">
