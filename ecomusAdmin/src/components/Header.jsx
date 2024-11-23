@@ -20,19 +20,19 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { AiOutlineDown } from "react-icons/ai";
 // import img2 from "../assets/loginlogo.png";
 import img2 from "../assets/fashion needles.webp";
-import axios from "axios";
-import { useContactlistlatestQuery } from "../store/api/webinfoapi";
+ 
+
 const Header = () => {
   const nvg = useNavigate();
   const userinfo = gettoken();
-  console.log("this user info", userinfo);
+
   const logoutevt = async () => {
     removeToken();
     nvg("/");
   };
   const sshh = getsoh();
 
-  const { data: userData, isLoading } = useContactlistlatestQuery();
+ 
 
   return userinfo ? (
     <div

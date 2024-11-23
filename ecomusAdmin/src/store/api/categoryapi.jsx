@@ -42,6 +42,13 @@ export const categoryApi = createApi({
         body: data,
       }),
     }),
+    postFetchchildCategory: builder.mutation({
+      query: (data) => ({
+        url: `category/childcategory`,
+        method: "POST",
+        body: data,
+      }),
+    }),
     patchCategory: builder.mutation({
       query: ({ data, id }) => ({
         url: `category/${id}`,
@@ -67,4 +74,5 @@ export const {
   usePatchCategoryMutation,
   useDeleteCategoryMutation,
   usePostFetchSubCategoryMutation,
+  usePostFetchchildCategoryMutation,
 } = categoryApi;

@@ -186,7 +186,7 @@ const Home = () => {
 
 
     {/* brand start */}
-    <section className="brand-second section-big-mb-space">
+    <section className="brand-second my-8 ">
         <div className="container-fluid">
           <div className="row brand-block">
             <div className="col-12">
@@ -330,7 +330,7 @@ const Home = () => {
       </section>
       {/* best seller end  */}
       {/* slider 1*/}
-      <section className="  sale-banenr mt-2  banner-style2 design2 marginfromtop">
+      {/* <section className="  sale-banenr mt-2  banner-style2 design2 marginfromtop">
         <OwlCarousel
           className="owl-theme"
           style={{ width: "100%", height: "100%" }}
@@ -358,7 +358,7 @@ const Home = () => {
             </div>
           ))}
         </OwlCarousel>
-      </section>
+      </section> */}
       {/* slider 1*/}
       {/* <ShopCard /> */}
 

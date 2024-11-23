@@ -17,7 +17,7 @@ const Nav = ({ togglesidebar, closesidebar }) => {
 
   // fetch all category api start here
   const { data: categoryData, isLoading } = useGetAllCategoriesQuery();
-
+ 
   const [noOfItems, setItems] = useState(0);
 
   useEffect(() => {
@@ -158,6 +158,7 @@ const Nav = ({ togglesidebar, closesidebar }) => {
           </div>
         </div>
       </div>
+      
       <div className="header7  bottomdgn">
         <div className="custom-container">
           <div className="row">
@@ -263,3 +264,5 @@ const Nav = ({ togglesidebar, closesidebar }) => {
 };
 
 export default Nav;
+
+

@@ -17,10 +17,13 @@ import { usePostProductMutation } from "../../../store/api/productapi";
 import { useGetAttributeByCategoryIdQuery } from "../../../store/api/attributeapi";
 const Addproductform = () => {
   const [subcategories, setsubcategories] = useState([]);
+  const [childsubcategories, setchildsubcategories] = useState([]);
   const [categoryid, setcategoryid] = useState([]);
   const [subcategoryid, setsubcategoryid] = useState([]);
+  const [childcategoryid, setchildcategoryid] = useState([]);
   const [allBrandid, setAllBrandid] = useState([]);
   const [apiresponse, setapiresponse] = useState({});
+  
   const imageInputRef1 = useRef(null);
   const imageInputRef2 = useRef(null);
   const imageInputRef3 = useRef(null);
@@ -50,21 +53,28 @@ const Addproductform = () => {
 
   // fetch sub category api start here
   const [getsubcatgory] = usePostFetchSubCategoryMutation();
+  const [getChildcatgory] = usePostFetchSubCategoryMutation();
   const FetchsubCategorys = async (value) => {
     try {
       const formdata = new FormData();
       formdata.append("categorys", value);
       const response = await getsubcatgory(formdata);
       setsubcategories(response.data.data[0].categories);
-    } catch (error) {}
+    } catch (error) {
+
+    }
+  };
+  const FetchchildCategorys = async (value) => {
+    try {
+      const formdata = new FormData();
+      formdata.append("categorys", value);
+      const response = await getChildcatgory(formdata);
+      setchildsubcategories(response.data.data[0].categories);
+    } catch (error) {
+      
+    }
   };
   // fetch sub category api end here
-
-  // fetch Attribute api start here
-  const { data: attributedata, isLoading } = useGetAttributeByCategoryIdQuery(
-    !subcategoryid[0] ? (!categoryid[0] ? 0 : categoryid[0]) : subcategoryid[0]
-  );
-  // fetch Attribute api end here
 
   return (
     <div className="container-fuild pb-4 pt-3 px-2 bg-white">
@@ -89,6 +99,8 @@ const Addproductform = () => {
           mutipleSize: [],
           mutipleColor: [],
           child_category: [],
+          child_sub_category: [],
+          gender:"",
           status: "",
           trendingproduct: "",
           newarrivedproduct: "",
@@ -113,10 +125,12 @@ const Addproductform = () => {
           formdata.append("editor", values.editor);
           formdata.append("parent_category", values.parent_category);
           formdata.append("child_category", values.child_category);
+          formdata.append("child_sub_category", values.child_sub_category);
           formdata.append("sort_description", values.sort_description);
           formdata.append("weight_type", values.weight_type);
           formdata.append("weight", values.weight);
           formdata.append("stock", values.stock);
+          formdata.append("gender", values.gender);
           formdata.append("mrp_price", values.mrp_price);
           formdata.append("selling_price", values.selling_price);
           formdata.append("status", values.status);
@@ -302,6 +316,29 @@ const Addproductform = () => {
                   </div>
                 </div>
               </div>
+              <div className="col-md-6 px-2 pt-3">
+                <div className="row">
+                  <div className="col-lg-4">
+                    <label htmlFor="" className="form-label">
+                     Gender <span style={{ color: "red" }}>*</span>
+                    </label>
+                  </div>
+                  <div className="col-lg-8">
+                    <Field as="select" name="gender" className="form-select">
+                      <option value="" disabled>
+                        gender
+                      </option>
+                      <option value="male">male</option>
+                      <option value="female">female</option>
+                    </Field>
+                  </div>
+                  <div className="offset-lg-4 col-lg-8">
+                    {errors.status && touched.status ? (
+                      <p style={{ color: "red" }}>{errors.status}</p>
+                    ) : null}
+                  </div>
+                </div>
+              </div>
               <div className="col-md-12 px-2 pt-3">
                 <div className="row">
                   <div className="col-lg-2">
@@ -368,6 +405,59 @@ const Addproductform = () => {
                           setsubcategoryid(
                             selectedList.map((item) => item._id)
                           );
+
+                          FetchchildCategorys(
+                            selectedList.map((item) => item._id)
+                          );
+                          
+                        }}
+                        onRemove={(selectedList) => {
+                          setFieldValue(
+                            "child_category",
+                            selectedList.map((item) => item.id)
+                          );
+                          setsubcategoryid(
+                            selectedList.map((item) => item._id)
+                          );
+
+                          FetchchildCategorys(
+                            selectedList.map((item) => item._id)
+                          );
+                          
+                        }}
+                        displayValue="name"
+                      />
+                    ) : (
+                      ""
+                    )}
+                  </div>
+                  <div className="offset-lg-2 col-lg-10">
+                    {errors.child_category && touched.child_category ? (
+                      <p style={{ color: "red" }}>{errors.child_category}</p>
+                    ) : null}
+                  </div>
+                </div>
+              </div>
+              <div className="col-md-12 px-2 pt-3">
+                <div className="row">
+                  <div className="col-lg-2">
+                    <label htmlFor="" className="form-label ">
+                      Child Sub Category <span style={{ color: "red" }}>*</span>{" "}
+                    </label>
+                  </div>
+                  <div className="col-lg-10">
+                    {getlevelonecategory?.data?.data ? (
+                      <Multiselect
+                        // isObject={false}
+                        options={childsubcategories}
+                        onSelect={(selectedList) => {
+                          setFieldValue(
+                            "child_sub_category",
+                            selectedList.map((item) => item._id)
+                          );
+                          setsubcategoryid(
+                            selectedList.map((item) => item._id)
+                          );
                         }}
                         onRemove={(selectedList) => {
                           setFieldValue(
@@ -391,6 +481,7 @@ const Addproductform = () => {
                   </div>
                 </div>
               </div>
+          
 
               <div className="col-3 pt-3">
                 <div className="row">

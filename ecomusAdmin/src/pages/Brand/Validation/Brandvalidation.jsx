@@ -7,7 +7,7 @@ export const Brandvalidation = Yup.object({
     .max(49)
     .required("Banner Name is required"),
     description: Yup.string()
-    .min(5)
+    
     .required("Description is required"),
     status: Yup.string()
     .required("Status is required")

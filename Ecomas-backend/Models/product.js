@@ -40,6 +40,11 @@ const productSchema = mongoose.Schema(
       // required: true,
       default: null,
     },
+    gender: {
+      type: String,
+      // required: true,
+      default: null,
+    },
     color: {
       type: String,
       // required: true,
@@ -50,6 +55,10 @@ const productSchema = mongoose.Schema(
       required: true,
     },
     child_category: {
+      type: Array,
+      default: [],
+    },
+    child_sub_category: {
       type: Array,
       default: [],
     },

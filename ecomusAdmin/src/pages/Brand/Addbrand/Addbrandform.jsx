@@ -5,8 +5,7 @@ import JoditEditor from "jodit-react";
 import { Field, Form, Formik } from "formik";
 import img3 from "../../../assets/selectbanner.webp";
 import { Brandvalidation } from "../Validation/Brandvalidation";
-import { usePostBannerMutation } from "../../../store/api/bannerapi";
-import { useGetAllBrandNameQuery, usePostBrandMutation } from "../../../store/api/brandapi";
+ import { useGetAllBrandNameQuery, usePostBrandMutation } from "../../../store/api/brandapi";
 const Addbrandform = () => {
   const imageInputRef = useRef(null);
   const nvg = useNavigate();

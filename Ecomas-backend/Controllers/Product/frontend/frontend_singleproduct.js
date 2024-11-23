@@ -30,12 +30,15 @@ const frontend_singleproduct = async (req, res) => {
     }
 
     let parentcategory = await fetchchildcategory(data.parent_category);
+ 
     let childcategory = await fetchchildcategory(data.child_category);
+    let child_sub_category = await fetchchildcategory(data.child_sub_category);
+     
     const productvariant = await variant.find({ product_id: req.params.id });
     const variantIds = productvariant.map((v) => v._id);
     const variantWishlistEntries = await wishlist.find(user_id == 0 ? {
       product_variant_id: { $in: [] },
-    } : {
+    } : { 
       user_id,
       product_variant_id: { $in: variantIds },
     });
@@ -63,6 +66,7 @@ const frontend_singleproduct = async (req, res) => {
       parentcategory,
       childcategory,
       brandLogo,
+      child_sub_category,
       productvariant: variantsWithWishlistStatus,
       uniqueAttributes,
       slug: data.product_url.replace(/-/g, " "),
@@ -74,9 +78,11 @@ const frontend_singleproduct = async (req, res) => {
 };
 
 const fetchchildcategory = async (categoryarray) => {
-  if (categoryarray[0]) {
+  if (categoryarray[0]) {  
+  
     try {
       const categoryIds = categoryarray[0].split(",");
+      console.log(categoryIds)
       const objectIdArray = categoryIds.map(
         (id) => new mongoose.Types.ObjectId(id)
       );

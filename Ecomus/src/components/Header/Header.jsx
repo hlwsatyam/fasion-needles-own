@@ -55,9 +55,9 @@ const Header = () => {
     refetch: refetchsearch,
     isError,
   } = useGetProductBySearchQuery(serchvalue);
-  console.log("eeddeeeeeee", isError);
+ 
   const searchresult = async (value) => {
-    console.log("kdkdd", searchapidata);
+ 
     if (value == undefined || value == null || value == "") {
       refetchsearch();
     } else {

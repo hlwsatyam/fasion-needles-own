@@ -1,12 +1,13 @@
 
 const product = require("../../Models/product");
-const slugify = require("slugify")
+const slugify = require("slugify")    
 const createproduct = async (req, res) => {
   try {
-    const { product_name, product_url, meta_title, meta_keywords, meta_description, featuredproduct, trendingproduct, newarrivedproduct, editor, parent_category, child_category, sort_description, weight_type, weight, stock, mrp_price, selling_price, status, color, brand, size, mutipleSize, mutipleColor } = req.body
-
+    const { product_name,gender, product_url, meta_title, meta_keywords, meta_description, featuredproduct, trendingproduct, newarrivedproduct, editor, parent_category, child_sub_category, child_category, sort_description, weight_type, weight, stock, mrp_price, selling_price, status, color, brand, size, mutipleSize, mutipleColor } = req.body
+ 
     const insertproduct = new product({
       product_name,
+      gender,
       sort_description,
       product_url: slugify(product_url),
       product_image1: req.files.product_image1[0].filename,
@@ -24,6 +25,7 @@ const createproduct = async (req, res) => {
       trendingproduct,
       featuredproduct,
       parent_category,
+      child_sub_category,
       child_category,
       meta_keywords,
       meta_description,

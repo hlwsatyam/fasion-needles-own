@@ -24,6 +24,7 @@ import InfoList from "../components/InfoPage";
 import { useGetCommentMutation } from "../store/api/commentapi";
 import { toast } from "react-toastify";
 import HelmetTag from "../components/Header/Helmet";
+import ZoomImgIff from "../components/ZoomImgEff";
 
 const options5 = {
   items: 1,
@@ -263,7 +264,7 @@ function Productdetails() {
     <>
       <Header />
       <HelmetTag
-      url={window.location.href}
+        url={window.location.href}
         description={data?.data?.sort_description}
         keywords={data?.data?.meta_keywords}
         title={
@@ -315,6 +316,18 @@ function Productdetails() {
                         }}
                       >
                         {data?.childcategory?.[0]?.name}
+                      </a>
+                    </li>
+                    <li style={{ fontSize: "12px" }}>&gt;</li>
+                    <li>
+                      <a
+                        href="javascript:void(0)"
+                        style={{
+                          fontSize: "12px",
+                          textTransform: "capitalize",
+                        }}
+                      >
+                        {data?.child_sub_category?.[0]?.name}
                       </a>
                     </li>
                   </ul>
@@ -511,7 +524,8 @@ function Productdetails() {
                         <div className="col-md-9 col-9">
                           <div className="product-slick ">
                             <div>
-                              <ReactImageMagnify
+                              {/* <ReactImageMagnify
+                          
                                 {...{
                                   smallImage: {
                                     alt: "Wristwatch by Versace",
@@ -533,11 +547,13 @@ function Productdetails() {
                                   },
                                   enlargedImagePosition: "over",
 
-                                  lensStyle: {
-                                    backgroundColor: "rgba(0,0,0,.6)",
-                                  },
+                                 
                                 }}
-                              />
+                              /> */}
+
+                              <ZoomImgIff img={ viewimg == null
+                                        ? `${process.env.REACT_APP_API_IMAGE_URL}${Data23?.[showoption]?.product_image1}`
+                                        : viewimg} />
                             </div>
                           </div>
                         </div>

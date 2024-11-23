@@ -7,7 +7,7 @@ const updatecategory = require('../Controllers/ProductCategory/updatecategory.js
 const upload = require('../middlewares/image-uploader.js');
 const {categorylist_level_one,categorylist_level_two} = require('../Controllers/ProductCategory/categorylist_level_one.js');
 const deletecategory = require('../Controllers/ProductCategory/deletecategory.js');
-const subcategorylist = require('../Controllers/ProductCategory/subcategorylist.js');
+const {subcategorylist,childcategorylist} = require('../Controllers/ProductCategory/subcategorylist.js');
 const frontendcategorylist = require('../Controllers/ProductCategory/frontend_category_list.js');
 const frontendattributelistbycategory = require('../Controllers/ProductCategory/frontend/frontend_filterlist_bycategory.js');
 const frontendattributelistbyproduct = require('../Controllers/ProductCategory/frontend/frontend_filterlist_byproduct.js');
@@ -20,6 +20,7 @@ routercate.post('/',upload.fields([
   routercate.get('/frontedcategorylist',frontendcategorylist);
   routercate.get('/attributelist/:id',frontendattributelistbyproduct);
   routercate.post('/subcategory',upload.none(),subcategorylist);
+  routercate.post('/childcategory',upload.none(),childcategorylist);
 routercate.get('/',categorylist);
 routercate.get('/:id',categorysingle);
 routercate.get('/attribute-by-category/:id',frontendattributelistbycategory)

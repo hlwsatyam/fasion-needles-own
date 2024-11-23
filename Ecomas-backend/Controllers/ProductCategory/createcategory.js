@@ -18,14 +18,14 @@ const createcategory = async (req, res) => {
     var condition = {}
 
     if (parent_category == '' && parent_sub_category == '') {
-      console.log('ff')
+     
       condition = {
         parentcategory: [],
         parentsubcategory: [],
       }
     }
     if (parent_category != '' && parent_sub_category == '') {
-      console.log('ffyy')
+      
       condition = {
         parentcategory: [parent_category],
         parentsubcategory: []
@@ -34,7 +34,7 @@ const createcategory = async (req, res) => {
     if (parent_category != '' && parent_sub_category != '') {
 
       condition = {
-        parentcategory: [parent_category],
+        parentcategory: [parent_sub_category],
         parentsubcategory: []
 
       }
@@ -53,8 +53,8 @@ const createcategory = async (req, res) => {
       const rel = await addcategory.save();
 
       await category.findByIdAndUpdate(
-        parent_category,
-        { $push: { parentsubcategory: rel._id } },
+        parent_sub_category,
+        { $push: { parentsubcategory: rel._id?.toString() } },
         { new: true, useFindAndModify: false }
       );
 
@@ -81,9 +81,9 @@ const createcategory = async (req, res) => {
 
 
 
-    await category.findByIdAndUpdate(
+    parent_category!="" && await category.findByIdAndUpdate(
       parent_category,
-      { $push: { parentsubcategory: rel._id } },
+      { $push: { parentsubcategory: rel._id.toString() } },
       { new: true, useFindAndModify: false }
     );
 
