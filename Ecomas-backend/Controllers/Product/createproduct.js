@@ -5,7 +5,6 @@ const createproduct = async (req, res) => {
   try {
     const { product_name, product_url, meta_title, meta_keywords, meta_description, featuredproduct, trendingproduct, newarrivedproduct, editor, parent_category, child_category, sort_description, weight_type, weight, stock, mrp_price, selling_price, status, color, brand, size, mutipleSize, mutipleColor } = req.body
 
-
     const insertproduct = new product({
       product_name,
       sort_description,
@@ -19,21 +18,21 @@ const createproduct = async (req, res) => {
       mutipleSize: mutipleSize.split(',').length > 1 ? mutipleSize.split(',') : [],
       mutipleColor: mutipleColor.split(',').length > 1 ? mutipleColor.split(',') : [],
       color,
-      brand             ,
-      meta_title        ,
-      newarrivedproduct ,
-      trendingproduct   ,
-      featuredproduct   ,
-      parent_category   ,
-      child_category    ,
-      meta_keywords     ,
-      meta_description  ,
-      weight_type       ,
-      selling_price     ,
-      mrp_price         ,
-      stock             ,
-      status            ,
-      weight            ,
+      brand,
+      meta_title,
+      newarrivedproduct,
+      trendingproduct,
+      featuredproduct,
+      parent_category,
+      child_category,
+      meta_keywords,
+      meta_description,
+      weight_type,
+      selling_price,
+      mrp_price,
+      stock,
+      status,
+      weight,
     })
 
     const response = await insertproduct.save()

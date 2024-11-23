@@ -13,19 +13,34 @@ const frontendcategorylist = async (req, res) => {
 
     // Populate the categoriesMap with categories
     categories.forEach((cat) => {
-      categoriesMap.set(cat._id.toString(), { ...cat._doc, subcategories: [] });
+      categoriesMap.set(cat._id.toString(), { ...cat._doc, subcategories: [], parentsubcategory: [] });
     });
+
 
     // Identify main categories and add subcategories
     categories.forEach((cat) => {
+
       if (cat.parentcategory.length === 0) {
         mainCategories.push(categoriesMap.get(cat._id.toString()));
-      } else {
+      }
+
+
+      else {
         const parentCategory = categoriesMap.get(cat.parentcategory[0].toString());
         if (parentCategory) {
           parentCategory.subcategories.push(cat);
         }
       }
+    });
+    // Identify main categories and add subcategories
+    categories.forEach((cat) => {
+
+      if (cat.parentcategory.length === 1) {
+        console.log(cat.parentcategory.length)
+      }
+
+
+      
     });
 
     // Send the organized categories as a response

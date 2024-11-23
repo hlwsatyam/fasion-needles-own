@@ -16,17 +16,15 @@ const Addcategoryform = () => {
   const [apiresponse, setapiresponse] = useState({});
   const imageInputRef = useRef(null);
   const nvg = useNavigate();
-  const [parentCategory, setParentCategory] = useState(null); 
+  const [parentCategory, setParentCategory] = useState(null);
   let getlevelonecategory = useGetLevelOneCategoryQuery();
   let getleveltwocategory = useGetLevelTwoCategoryQuery(
-    { parent_category: parentCategory },
+    { parentCategory },
     { skip: !parentCategory } // Skip query if no parent_category is selected
   );
-
   const config = {
     height: "300px",
   };
-
   // create category api start here
   const [postcategory, categoryresponse] = usePostCategoryMutation();
 
@@ -304,6 +302,7 @@ const Addcategoryform = () => {
                             "parent_category",
                             selectedList.map((item) => item._id)
                           );
+                          setParentCategory(selectedList[0]);
                         }}
                         onRemove={(selectedList) => {
                           setFieldValue(

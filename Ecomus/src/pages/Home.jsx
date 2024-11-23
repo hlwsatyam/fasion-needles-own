@@ -219,8 +219,8 @@ const Home = () => {
       {/* brand start */}
 
       {/*home mine banner start*/}
-      <section className="megastore-slide collection-banner section-py-space b-g-white">
-        <div className="container-fluid">
+      <section className="megastore-slide  collection-banner section-py-space b-g-white">
+        <div className="container-fluid ">
           <div className="row">
             <div className="col-xl-12 col-lg-12">
               <div className="row">

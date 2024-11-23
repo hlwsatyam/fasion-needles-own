@@ -16,7 +16,7 @@ routercate.post('/',upload.fields([
     { name: 'category_image', maxCount: 1 },
   ]),createcategory);
   routercate.get('/levelone',categorylist_level_one);
-  routercate.get('/leveltwo',categorylist_level_two);
+  routercate.post('/leveltwo',categorylist_level_two);
   routercate.get('/frontedcategorylist',frontendcategorylist);
   routercate.get('/attributelist/:id',frontendattributelistbyproduct);
   routercate.post('/subcategory',upload.none(),subcategorylist);

@@ -1,37 +1,39 @@
 import Header from "../components/Header/Header";
 import { useNavigate } from "react-router-dom";
 import { MdOutlineDeleteOutline } from "react-icons/md";
-import {  useGetWishlistProductQuery,usePostDeleteWishlistMutation} from "../store/api/wishlistapi";
+import {
+  useGetWishlistProductQuery,
+  usePostDeleteWishlistMutation,
+} from "../store/api/wishlistapi";
 import { useDispatch, useSelector } from "react-redux";
 import { addwishlist } from "../store/state/wishlist";
 import { gettoken } from "../Localstorage/Store";
 import { useEffect } from "react";
 
 const Wishlist = () => {
-
-
   useEffect(() => {
     if (gettoken() == null) {
       window.location.href = "/login";
     }
-  },[]);
-
-
-
+  }, []);
 
   const nvg = useNavigate();
-  const {data: wishlistdata,isLoading,refetch} = useGetWishlistProductQuery();
+  const {
+    data: wishlistdata,
+    isLoading,
+    refetch,
+  } = useGetWishlistProductQuery();
   const [removetowishlistapi] = usePostDeleteWishlistMutation();
   const dispatch = useDispatch();
   const globalvariable = useSelector((state) => state);
 
-  // redirect to pdp page 
+  // redirect to pdp page
   const transfer = (productid) => {
     nvg(`/productdetails/${productid}`);
   };
-  // redirect to pdp page 
+  // redirect to pdp page
 
-  // Remove item from wishlist start here 
+  // Remove item from wishlist start here
   const removewishlist = async (data) => {
     const wishlist_value = {
       product_id: data.product_id == null ? null : data.product_id._id,
@@ -46,7 +48,7 @@ const Wishlist = () => {
       refetch();
     }
   };
-  // Remove item from wishlist end here 
+  // Remove item from wishlist end here
 
   return isLoading == true ? (
     <></>
@@ -55,7 +57,10 @@ const Wishlist = () => {
       <Header />
 
       {/* breadcrumb start */}
-      <div className="breadcrumb-main marginfromtop" style={{backgroundColor:"#f9f9f9"}}>
+      <div
+        className="breadcrumb-main marginfromtop"
+        style={{ backgroundColor: "#f9f9f9" }}
+      >
         <div className="container m-0">
           <div className="">
             <div className="col">
@@ -122,7 +127,10 @@ const Wishlist = () => {
                                         >
                                           {" "}
                                           <img
-                                            src={`${process.env.REACT_APP_API_IMAGE_URL}${
+                                            src={`${
+                                              process.env
+                                                .REACT_APP_API_IMAGE_URL
+                                            }${
                                               item.product_id != null
                                                 ? item?.product_id
                                                     .product_image1

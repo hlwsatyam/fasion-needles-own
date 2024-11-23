@@ -20,7 +20,7 @@ const getCateg = async (req, res) => {
         const contactlisting = await category.find({
             parentcategory: { $size: 0 } // MongoDB query to find documents where parentcategory is an empty array
         });
-        console.log(contactlisting)
+        
         res.status(200).send(contactlisting);
     } catch (err) {
         console.error(`Error: ${err}`);

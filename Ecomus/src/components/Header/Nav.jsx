@@ -18,8 +18,6 @@ const Nav = ({ togglesidebar, closesidebar }) => {
   // fetch all category api start here
   const { data: categoryData, isLoading } = useGetAllCategoriesQuery();
 
-
-
   const [noOfItems, setItems] = useState(0);
 
   useEffect(() => {
@@ -27,14 +25,12 @@ const Nav = ({ togglesidebar, closesidebar }) => {
       const cartdata = localStorage.getItem("cart")
         ? JSON.parse(localStorage.getItem("cart"))
         : [];
-  
+
       setItems(cartdata?.length);
     }, 2000);
-  
+
     return () => clearInterval(interval); // Clean up the interval on component unmount
   }, []);
-
-
 
   // fetch all category api start here
   return isLoading == true ? (
@@ -252,7 +248,7 @@ const Nav = ({ togglesidebar, closesidebar }) => {
 
                       <div className="item-count-contain inverce">
                         {" "}
-                      {  noOfItems}
+                        {noOfItems}
                       </div>
                     </li>
                   </ul>
