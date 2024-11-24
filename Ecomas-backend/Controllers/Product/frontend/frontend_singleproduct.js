@@ -94,4 +94,4 @@ const fetchchildcategory = async (categoryarray) => {
     return [];
   }
 };
-module.exports = frontend_singleproduct;
+module.exports = frontend_singleproduct; 

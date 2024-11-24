@@ -530,7 +530,7 @@ function Productdetails() {
                         </div>
                         <div className="col-md-9 col-9">
                           <div className="product-slick ">
-                            <div>
+                            <div className="sm:h-[600px]  h-[400px] w-full">
                               {/* <ReactImageMagnify
                           
                                 {...{
@@ -693,7 +693,7 @@ function Productdetails() {
                                     : "none",
                               }}
                             >
-                              <h6 className="product-title">More Color</h6>
+                              <h6 className="product-title">Color</h6>
                               <div className="color-selector inline">
                                 <ul>
                                   {Data23.map((item, index) => (
@@ -714,42 +714,17 @@ function Productdetails() {
                                       ></div>
                                     </li>
                                   ))}
-
-                                  {/* 
-{Data23.map((item, index) => {
-        // Check if the color has been encountered before
-        const isDuplicate = Data23.findIndex((colorItem, i) => i < index && colorItem.color === item.color) !== -1;
-
-        // If not a duplicate, render the color
-        if (!isDuplicate) {
-          return (
-            <li key={index}>
-              <div className="color-4" style={{ display: 'block', background: `${item.color}` }}></div>
-            </li>
-          );
-        }
-
-        // If duplicate, don't render anything
-        return null;
-      })} */}
                                 </ul>
                               </div>
                             </div>
                           ))}
-
+{
+  console.log(Data23)
+}
                           {Data23.map((item, index) => (
                             <div
                               className="productdetailcontainer customwidth"
-                              style={{
-                                display:
-                                  index == 0 &&
-                                  item.size != "" &&
-                                  item.size != undefined &&
-                                  item.size != undefined &&
-                                  item.size != 0
-                                    ? "block"
-                                    : "none",
-                              }}
+                               
                             >
                               <h6 className="product-title mt-2">
                                 Available Size
@@ -760,6 +735,7 @@ function Productdetails() {
                                     <li
                                       onClick={() => setselectedSize(index)}
                                       style={{
+                                        padding:"4px",
                                         background:
                                           selectedSize == index
                                             ? "#059fe2"
@@ -942,7 +918,8 @@ function Productdetails() {
                           >
                             <div className="pro-group mt-4 ">
                               <h6 className="product-title flex items-center endlinetext">
-                                Deliver To <FaLocationDot color="blue " size={22} />
+                                Deliver To{" "}
+                                <FaLocationDot color="blue " size={22} />
                               </h6>
                               <div className="delivery-detail">
                                 <div className="delivery-detail-contian">

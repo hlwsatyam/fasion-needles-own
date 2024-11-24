@@ -24,10 +24,13 @@ export default function Testimonials() {
 
   return (
     <section className="sm:py-4 pt-0 pb-4">
+      <div className="flex justify-center my-2 items-center gap-x-1 text-sm sm:text-lg font-bold text-gray-700">
+      <div className="w-20 border-t-2 border-gray-400"></div>
+      <span className="uppercase tracking-wide px-1">Shop By Categories</span>
+      <div className="w-20 leading border-t-2 border-gray-400"></div>
+    </div>
       <div className="mx-auto px-2 sm:px-6 lg:px-8">
-        <h2 className="text-xl mb-2 text-center font-bold text-gray-900 lg:text-left">
-          Shop By Category
-        </h2>
+       
         <div className="flex flex-wrap mt-4 justify-center items-center gap-x-[7px] sm:gap-8">
           {allText.map((item) => {
             return (

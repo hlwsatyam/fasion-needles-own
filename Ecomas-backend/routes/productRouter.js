@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const createproduct = require('../Controllers/Product/createproduct.js');
 const upload = require('../middlewares/image-uploader.js');
-const productlist = require('../Controllers/Product/productlist.js');
+const {productlist,getLuxProduct} = require('../Controllers/Product/productlist.js');
 const singleproduct = require('../Controllers/Product/singleproduct.js');
 const updateproduct = require('../Controllers/Product/updateproduct.js');
 const deleteproduct = require('../Controllers/Product/deletecategory.js');
@@ -25,6 +25,7 @@ router.patch('/:id',upload.fields([
     { name: 'product_image4', maxCount: 1 },
   ]),updateproduct)
   router.get('/:id',singleproduct)
+  router.post('/luxProduct',getLuxProduct)
   router.get('/search/:name',searchitem)
   router.get('/product-by-category/:id',frontendproductlistbycategory)
   router.get('/product-detail/:id',checkuser,frontend_singleproduct)

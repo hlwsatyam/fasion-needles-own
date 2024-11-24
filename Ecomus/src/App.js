@@ -35,18 +35,20 @@ import Faq from "./pages/Faq";
 import ShippingPolicy from "./pages/ShiipingPc";
 import CancellationPolicy from "./pages/CancellationPol";
 import Blogs from "./pages/Blogs";
-import { useEffect } from "react";
+ 
 import ForgetPass from "./pages/ForgetPass";
 import OrderDetails from "./pages/profilepage/OrderDetails";
 import Error404 from "./pages/Error404";
 import PaymentFailed from "./pages/PaymentFailed";
 import OrderHistorytwo from "./pages/OrderHistorytwo";
 import OrderHistoryDetails from "./pages/OrderHistoryDetails";
-import { Helmet, HelmetProvider } from 'react-helmet-async';
+import {  HelmetProvider } from 'react-helmet-async';
+import CategoryDumm from "./pages/Category/CatDumm";
+ 
 function App() {
   return (
     <HelmetProvider>
-      <div className=" max-w-7xl mx-auto  ">
+      <div className="   mx-auto  ">
         <ToastContainer />
         <Routes >
           <Route path="/login" element={<Login />} />
@@ -57,7 +59,7 @@ function App() {
           <Route path="/wishlist" element={<Wishlist />} />
           <Route path="/checkout/" element={<OrderSummary />} />
           <Route path="/productdetails/:id" element={<Productdetails />} />
-          <Route path="/category/:id/:name/:url" element={<Category />} />
+          <Route path="/category/:id/:name/:url" element={<CategoryDumm />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/addresslist" element={<Addresslist />} />
           <Route path="/pay" element={<Pay />} />
@@ -69,6 +71,7 @@ function App() {
           <Route path="/contact-us" element={<ContactUs />} />
           <Route path="/track-order" element={<TrackDelevery />} />
           <Route path="/careers" element={<CareerPage />} />
+          
           <Route path="/faq" element={<Faq />} />
           <Route path="/shipping-policy" element={<ShippingPolicy />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />

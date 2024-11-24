@@ -17,6 +17,7 @@ import { useGetBrandQuery } from "../store/api/brandapi";
 import Testomonials from "../components/Testomonials";
 import ShopCard from "../components/ShopCard";
 import Categ from "../components/Categ";
+import LuxList from "../TestComp/luxList/LuxList";
 
 const Home = () => {
   const nvg = useNavigate();
@@ -182,8 +183,16 @@ const Home = () => {
         </OwlCarousel>
       </section>
       {/* home main banner section end */}
+
+      <div className="flex justify-center my-2 items-center gap-x-1 sm:text-lg text-sm  font-bold text-gray-700">
+      <div className="w-20 border-t-2 border-gray-400"></div>
+      <span className="uppercase tracking-wide px-1">Shop By Category</span>
+      <div className="w-20 leading border-t-2 border-gray-400"></div>
+    </div>
+
+
       {/* brand start */}
-      <section className="brand-second my-8 ">
+      <section className="brand-second mb-1 ">
         <div className="container-fluid">
           <div className="row brand-block">
             <div className="col-12">
@@ -274,11 +283,20 @@ const Home = () => {
         </div>
       </section>
       {/*home mine banner end*/}
-      <div className="title8">
+      {/* <div className="title8">
         <h4 style={{ fontSize: "16px" }}> new arrivals</h4>
-      </div>
+      </div> */}
+
+
+
+
+<div className="flex justify-center my-2 items-center gap-x-1 sm:text-lg   text-sm font-bold text-gray-700">
+      <div className="w-20 border-t-2 border-gray-400"></div>
+      <span className="uppercase tracking-wide px-1">New Arrival</span>
+      <div className="w-20 leading border-t-2 border-gray-400"></div>
+    </div>
       {/* new arrivals product tab start */}
-      <section className="section-big-mb-space ratio_square product">
+      <section className=" ratio_square product">
         <div className="container-fluid">
           <div className="row">
             <div className="col-12 pr-0">
@@ -298,9 +316,12 @@ const Home = () => {
         </div>
       </section>
       <Categ />
-      <div className="title8">
-        <h4 style={{ fontSize: "16px" }}>Best Sellers</h4>
-      </div>
+      <LuxList />
+      <div className="flex justify-center my-2 items-center gap-x-1 text-sm sm:text-lg font-bold text-gray-700">
+      <div className="w-20 border-t-2 border-gray-400"></div>
+      <span className="uppercase tracking-wide px-1">New Arrival</span>
+      <div className="w-20 leading border-t-2 border-gray-400"></div>
+    </div>
       {/* best seller start  */}
       <section className="section-big-mb-space ratio_square product">
         <div className="container-fluid">
@@ -354,9 +375,11 @@ const Home = () => {
       </section> */}
       {/* slider 1*/}
       {/* <ShopCard /> */}
-      <div className=" mt-4 title8">
-        <h4 style={{ fontSize: "16px" }}>Feature Product</h4>
-      </div>
+      <div className="flex justify-center my-2 items-center gap-x-1 sm:text-lg text-sm font-bold text-gray-700">
+      <div className="w-20 border-t-2 border-gray-400"></div>
+      <span className="uppercase tracking-wide px-1">Feature Product</span>
+      <div className="w-20 leading border-t-2 border-gray-400"></div>
+    </div>
       {/* best feature start  */}
       <section className="section-big-mb-space ratio_square product">
         <div className="container-fluid">
@@ -378,9 +401,7 @@ const Home = () => {
         </div>
       </section>
       {/* best feature end  */}
-      <div className="title8">
-        <h4 style={{ fontSize: "16px" }}>Promotion Slider</h4>
-      </div>
+      
       <section className="sale-banenr banner-style2 design2">
         <OwlCarousel
           className="owl-theme"

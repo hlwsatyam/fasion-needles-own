@@ -62,13 +62,13 @@ const Footer = () => {
               },
             ].map(({ heading, items }, index) => (
               <div key={index}>
-                <p className="font-medium !text-white">{heading}</p>
+                <p className="font-medium text-sm !text-white">{heading}</p>
                 <ul className="mt-6 flex-col flex space-y-4 text-sm">
                   {items.map((item, i) => (
                     <li key={i}>
                       <a
                         href={`/${item.replace(" ", "-").toLowerCase()}`}
-                        className="!text-white hover:text-gray-900 transition"
+                        className="!text-white hover:text-gray-900 text-xs transition"
                       >
                         {item}
                       </a>
@@ -85,7 +85,7 @@ const Footer = () => {
               className="mr-5 h-32  mix-blend-screen"
               alt="logo"
             /> */}
-            <p className="max-w-xs !text-white mt-4 text-sm ">
+            <p className="max-w-xs !text-white mt-4 text-xs ">
               First Floor, Lal Mandir Market, C-67, Main Rd, Shital Vihar, Khora
               Colony, Sector 57, Noida, Uttar Pradesh 201301
             </p>

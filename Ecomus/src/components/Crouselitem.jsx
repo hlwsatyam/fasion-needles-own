@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 const Crouselitem = ({ item }) => {
-  const nvg = useNavigate();
+  
   return (
     <div>
       <div
