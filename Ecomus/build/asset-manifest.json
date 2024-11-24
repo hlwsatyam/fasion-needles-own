@@ -1,13 +1,14 @@
 {
   "files": {
-    "main.css": "/static/css/main.1744b837.css",
-    "main.js": "/static/js/main.cadbc31c.js",
+    "main.css": "/static/css/main.84abbfe6.css",
+    "main.js": "/static/js/main.8bdbe615.js",
+    "static/media/fashion needles.webp": "/static/media/fashion needles.2c505b09d2a2543a4281.webp",
     "index.html": "/index.html",
-    "main.1744b837.css.map": "/static/css/main.1744b837.css.map",
-    "main.cadbc31c.js.map": "/static/js/main.cadbc31c.js.map"
+    "main.84abbfe6.css.map": "/static/css/main.84abbfe6.css.map",
+    "main.8bdbe615.js.map": "/static/js/main.8bdbe615.js.map"
   },
   "entrypoints": [
-    "static/css/main.1744b837.css",
-    "static/js/main.cadbc31c.js"
+    "static/css/main.84abbfe6.css",
+    "static/js/main.8bdbe615.js"
   ]
 }
