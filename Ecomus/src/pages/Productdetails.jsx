@@ -7,7 +7,14 @@ import "owl.carousel/dist/assets/owl.theme.default.css";
 import Footer from "../components/Footer";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-import { FaRegHeart, FaHeart, FaStar, FaHandPointRight } from "react-icons/fa6";
+import {
+  FaRegHeart,
+  FaHeart,
+  FaStar,
+  FaHandPointRight,
+  FaMap,
+  FaLocationDot,
+} from "react-icons/fa6";
 import { getrecetly, gettoken, recentlystore } from "../Localstorage/Store";
 import { useGetSingleProductQuery } from "../store/api/productapi";
 import { usePostCartItemMutation } from "../store/api/cartapi";
@@ -551,9 +558,13 @@ function Productdetails() {
                                 }}
                               /> */}
 
-                              <ZoomImgIff img={ viewimg == null
-                                        ? `${process.env.REACT_APP_API_IMAGE_URL}${Data23?.[showoption]?.product_image1}`
-                                        : viewimg} />
+                              <ZoomImgIff
+                                img={
+                                  viewimg == null
+                                    ? `${process.env.REACT_APP_API_IMAGE_URL}${Data23?.[showoption]?.product_image1}`
+                                    : viewimg
+                                }
+                              />
                             </div>
                           </div>
                         </div>
@@ -931,8 +942,7 @@ function Productdetails() {
                           >
                             <div className="pro-group mt-4 ">
                               <h6 className="product-title flex items-center endlinetext">
-                                Deliver To{" "}
-                                <img src={`/images/icon/place.png`} alt="404" />{" "}
+                                Deliver To <FaLocationDot color="blue " size={22} />
                               </h6>
                               <div className="delivery-detail">
                                 <div className="delivery-detail-contian">
