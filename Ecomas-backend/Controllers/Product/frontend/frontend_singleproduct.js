@@ -4,7 +4,6 @@ const variant = require("../../../Models/product_variant");
 const wishlist = require("../../../Models/wishlist");
 const mongoose = require("mongoose");
 const brand = require("../../../Models/brand");
-
 const frontend_singleproduct = async (req, res) => {
   let brandLogo
   try {
@@ -76,7 +75,6 @@ const frontend_singleproduct = async (req, res) => {
     res.status(500).send({ error: "An error occurred while fetching data" });
   }
 };
-
 const fetchchildcategory = async (categoryarray) => {
   if (categoryarray[0]) {  
   
@@ -96,5 +94,4 @@ const fetchchildcategory = async (categoryarray) => {
     return [];
   }
 };
-
 module.exports = frontend_singleproduct;

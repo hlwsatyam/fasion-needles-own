@@ -4,12 +4,10 @@ export const Bannervalidation = Yup.object({
   banner_name: Yup.string()
     .label("Banner Name")
     .min(2)
-    
     .required("Banner Name is required"),
     banner_alt: Yup.string()
     .label("Banner Alt")
     .min(2)
-  
     .required("Banner Alt is required"),
     banner_link: Yup.string()
     .label("Banner Link")

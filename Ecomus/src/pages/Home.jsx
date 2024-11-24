@@ -147,7 +147,6 @@ const Home = () => {
   ) : (
     <div className="bg-light">
       <Header />
-
       {/* home main banner section start */}
       <section className="  sale-banenr mt-2  banner-style2 design2 marginfromtop">
         <OwlCarousel
@@ -183,10 +182,8 @@ const Home = () => {
         </OwlCarousel>
       </section>
       {/* home main banner section end */}
-
-
-    {/* brand start */}
-    <section className="brand-second my-8 ">
+      {/* brand start */}
+      <section className="brand-second my-8 ">
         <div className="container-fluid">
           <div className="row brand-block">
             <div className="col-12">
@@ -217,7 +214,6 @@ const Home = () => {
         </div>
       </section>
       {/* brand start */}
-
       {/*home mine banner start*/}
       <section className="megastore-slide  collection-banner section-py-space b-g-white">
         <div className="container-fluid ">
@@ -278,7 +274,6 @@ const Home = () => {
         </div>
       </section>
       {/*home mine banner end*/}
-
       <div className="title8">
         <h4 style={{ fontSize: "16px" }}> new arrivals</h4>
       </div>
@@ -302,9 +297,7 @@ const Home = () => {
           </div>
         </div>
       </section>
-
       <Categ />
-
       <div className="title8">
         <h4 style={{ fontSize: "16px" }}>Best Sellers</h4>
       </div>
@@ -361,11 +354,9 @@ const Home = () => {
       </section> */}
       {/* slider 1*/}
       {/* <ShopCard /> */}
-
       <div className=" mt-4 title8">
         <h4 style={{ fontSize: "16px" }}>Feature Product</h4>
       </div>
-
       {/* best feature start  */}
       <section className="section-big-mb-space ratio_square product">
         <div className="container-fluid">
@@ -387,7 +378,6 @@ const Home = () => {
         </div>
       </section>
       {/* best feature end  */}
-
       <div className="title8">
         <h4 style={{ fontSize: "16px" }}>Promotion Slider</h4>
       </div>
@@ -420,55 +410,12 @@ const Home = () => {
           )}
         </OwlCarousel>
       </section>
-
-      {/*title-start*/}
-      <div className="title8 section-mb-space mt-4">
-        <h4 style={{ fontSize: "16px" }}>Shop By Brands</h4>
-      </div>
-      {/*title-end*/}
-
-  
-
-      {/* slider 1*/}
-      <section className="  sale-banenr mt-2  banner-style2 design2 marginfromtop">
-        <OwlCarousel
-          className="owl-theme"
-          style={{ width: "100%", height: "100%" }}
-          {...options}
-        >
-          {caraouselData1.map((item, index) => (
-            <div
-              key={index}
-              className="mobileorlaptop"
-              // style={{ height: isMobile ? '300px' : '400px'}}
-            >
-              <img
-                onClick={() => {
-                  window.location.href = item.link;
-                }}
-                src={item.img}
-                alt={`banner-${index}`}
-                className="img-fluid rounded-2xl mainbanner bg-img"
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "100% 100%",
-                }}
-              />
-            </div>
-          ))}
-        </OwlCarousel>
-      </section>
-      {/* slider 1*/}
-
       {/* testomonial */}
       <Testomonials />
-
       {/* footer start */}
       <Footer />
       {/* footer end */}
     </div>
   );
 };
-
 export default Home;
