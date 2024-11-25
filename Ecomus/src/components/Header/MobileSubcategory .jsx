@@ -19,13 +19,12 @@ const MobileSubcategory = ({ value, issubcategory }) => {
             transfer(value._id, value.name);
           }}
         >
-          {" "}
           <img
             src={value.image}
             style={{ width: "25px" }}
             alt={404}
             className="hideonlaptop"
-          />{" "}
+          />
           &nbsp; <span className="largefont"> {value.name} </span>
         </button>
       ) : (

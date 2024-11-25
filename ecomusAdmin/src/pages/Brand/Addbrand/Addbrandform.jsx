@@ -72,7 +72,7 @@ const Addbrandform = () => {
                       Brand Name<span style={{ color: "red" }}>*</span>
                     </label>
                   </div>
-                  <div className="col-lg-8">
+                  {/* <div className="col-lg-8">
                     <Field as="select" name="brand_name" className="form-select">
                       <option value="" disabled>
                         Select Brand
@@ -80,9 +80,18 @@ const Addbrandform = () => {
                       {brandnameloading == true ? "" : brandname.data.map((item)=>(
                       <option value={item}>{item}</option>
                       ))}
-                      {/* <option value="Slider">Slider</option> */}
+                      <option value="Slider">Slider</option>
                     </Field>
+                  </div> */}
+                  <div className="col-lg-8">
+                    <Field
+                      type="text"
+                      name="brand_name"
+                      className="form-control"
+                      placeholder="Enter Brand Name"
+                    />
                   </div>
+
                   <div className="offset-lg-4 col-lg-8">
                     {errors.brand_name && touched.brand_name ? (
                       <p style={{ color: "red" }}>{errors.brand_name}</p>

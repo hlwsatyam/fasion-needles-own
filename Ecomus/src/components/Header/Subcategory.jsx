@@ -43,60 +43,50 @@ const Subcategory = ({ value, issubcategory }) => {
           <ul className="mega-menu z-20 full-mega-menu  resultappear newwith">
             <div>
               <div className="container">
-                <div className="row">
-                  {
-                    // Break subcategories into chunks of 5 items each
-                    value.subcategories
-                      .reduce((resultArray, item, index) => {
-                        const chunkIndex = Math.floor(index / 5);
-                        if (!resultArray[chunkIndex]) {
-                          resultArray[chunkIndex] = []; // start a new chunk
-                        }
-                        resultArray[chunkIndex].push(item);
-                        return resultArray;
-                      }, [])
-                      .map((chunk, chunkIndex) => (
-                        <div
-                          key={chunkIndex}
-                          className="col-12 md:w-1/5 mega-box"
-                        >
-                          <div className="link-section !flex  gap-x-10">
-                            {chunk.map((item) => (
+                {
+                  // Break subcategories into chunks of 5 items each
+                  value.subcategories
+                    .reduce((resultArray, item, index) => {
+                      const chunkIndex = Math.floor(index / 5);
+                      if (!resultArray[chunkIndex]) {
+                        resultArray[chunkIndex] = []; // start a new chunk
+                      }
+                      resultArray[chunkIndex].push(item);
+                      return resultArray;
+                    }, [])
+                    .map((chunk, chunkIndex) => (
+                      <div className="link-section !flex  gap-x-10">
+                        {chunk.map((item) => (
+                          <div key={item._id} className="menu-title   mb-2">
+                            <h5
+                              onClick={() => {
+                                transfer2(item._id, item.name);
+                              }}
+                              style={{ cursor: "pointer" }}
+                              className=" !text-blue-500 border-b-2   hover:!rotate-2 !text-sm"
+                            >
+                              {item.name}
+                            </h5>
+
+                            {item?.subcategories?.map((i, idx) => (
                               <div key={item._id} className="menu-title mb-2">
                                 <h5
                                   onClick={() => {
                                     transfer2(item._id, item.name);
                                   }}
                                   style={{ cursor: "pointer" }}
-                                  className=" !text-blue-500 hover:!rotate-2 !text-sm"
+                                  className=" !text-black hover:!rotate-2 !text-xs"
                                 >
-                                  {item.name}
+                                  {i.name}
                                 </h5>
-
-                                {item?.subcategories?.map((i, idx) => (
-                                  <div
-                                    key={item._id}
-                                    className="menu-title mb-2"
-                                  >
-                                    <h5
-                                      onClick={() => {
-                                        transfer2(item._id, item.name);
-                                      }}
-                                      style={{ cursor: "pointer" }}
-                                      className=" !text-black hover:!rotate-2 !text-xs"
-                                    >
-                                      {i.name}
-                                    </h5>
-                                  </div>
-                                ))}
-                                <br className="w-full" />
                               </div>
                             ))}
+                            <br className="w-full" />
                           </div>
-                        </div>
-                      ))
-                  }
-                </div>
+                        ))}
+                      </div>
+                    ))
+                }
               </div>
             </div>
           </ul>

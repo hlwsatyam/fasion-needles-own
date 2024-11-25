@@ -125,7 +125,7 @@ const Sidebarmenu = ({ children }) => {
                   User
                 </MenuItem>
               </NavLink>
-              <NavLink
+              {/* <NavLink
                 to="/cartlist/0"
                 className={
                   location.pathname === "/" ||
@@ -140,27 +140,26 @@ const Sidebarmenu = ({ children }) => {
                   {" "}
                   Cart
                 </MenuItem>
-              </NavLink>
-
-
+              </NavLink> */}
               <NavLink
                 to="/categorylist/0"
                 className={
-                  location.pathname === "/addcategory" ||
-                  result === "/categorylist" ||
-                  result === "/editcategory"
-                    ? "nav active"
+                  location.pathname === "/" ||
+                  result === "/categorylist" ? "nav active"
                     : "nav"
                 }
               >
                 <MenuItem
                   className="nothover"
-                  icon={<img style={{width:"36px"}} src={img5} alt="qwdfgerct" />}
+                  icon={<img style={{width:"36px"}} src={img40} alt="qwdfgerct" />}
                 >
                   {" "}
-                  Category 
+                  Category
                 </MenuItem>
               </NavLink>
+
+
+           
               <NavLink
                 to="/orderlist/0"
                 className={

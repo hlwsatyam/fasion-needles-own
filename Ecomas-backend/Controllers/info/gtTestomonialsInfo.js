@@ -1,6 +1,9 @@
 const { default: axios } = require("axios");
 const category = require("../../Models/category");
 const testo = require("../../Models/testomonials");
+const Product = require("../../Models/product");
+const Usertable = require("../../Models/usertable");
+const order = require("../../Models/order");
 const getTesto = async (req, res) => {
     try {
         const contactlisting = await testo.find();
@@ -38,6 +41,26 @@ const deleteTesto = async (req, res) => {
         res.status(203).send({ status: "faild", errors: err })
     }
 }
+
+const countinfo = async (req, res) => {
+    try {
+        const totalOrder = await order.countDocuments(); // Fixed method name
+        const catCount = await category.countDocuments(); // Fixed method name
+        const userCount = await Usertable.countDocuments(); // Fixed method name
+        const orderLatest = await order.find().sort({ createdAt: -1 }).limit(10); // Corrected variable naming
+        const latestCustomer = await Usertable.find().sort({ createdAt: -1 }).limit(10); // Corrected variable naming
+         
+        res.status(200).send({
+            totalOrder,
+            catCount,
+            userCount,
+            orderLatest, 
+            latestCustomer // Include all results in response
+        });
+    } catch (err) {
+        res.status(500).send({ status: "failed", errors: err.message }); // Adjusted status code and error handling
+    }
+};
 const delAvailable = async (req, res) => {
     const { id } = req.params;
 
@@ -62,4 +85,4 @@ const delAvailable = async (req, res) => {
     }
 }
 
-module.exports = { getTesto, getCateg, delAvailable, deleteTesto }
+module.exports = { getTesto, countinfo,getCateg, delAvailable, deleteTesto }

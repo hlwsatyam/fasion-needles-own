@@ -57,9 +57,9 @@ const Webinfo = () => {
                 color: "#00693E",
               }}
             >
-              <p className="m-0 customfont">Name</p>
-              <p className="m-0 customfont">subject</p>
-              <p className="m-0 customfont">Description</p>
+              <p className="m-0  !text-xs customfont">Name</p>
+              <p className="m-0  !text-xs customfont">subject</p>
+              <p className="m-0  !text-xs customfont">Description</p>
               <div className=" m-0 customfont"> Star</div>
               <div className=" m-0 customfont"> Action</div>
             </div>
@@ -77,11 +77,11 @@ const Webinfo = () => {
                     color: "#00693E",
                   }}
                 >
-                  <p className="m-0 customfont">{item.name}</p>
-                  <p className="m-0 customfont">{item.subject}</p>
-                  <p className="m-0 customfont">{item.description}</p>
-                  <div className="m-0 customfont"> {item.noOfStar}</div>
-                  <div className="m-0 cursor-pointer customfont" onClick={()=>deleteHandle(item._id)}>Delete</div>
+                  <p className="m-0 !text-xs customfont">{item.name}</p>
+                  <p className="m-0 !text-xs customfont">{item.subject}</p>
+                  <p className="m-0 !text-xs customfont">{item.description}</p>
+                  <div className="m-0 !text-xs customfont"> {item.noOfStar}</div>
+                  <div className="m-0 !text-xs cursor-pointer customfont" onClick={()=>deleteHandle(item._id)}>Delete</div>
                 </div>
               </div>
             </div>

@@ -22,7 +22,8 @@ const Login = () => {
             paddingBottom: "76px",
           }}
         >
-          <div className="row align-items-center g-5 pt-5">
+
+          <div className=" align-items-center g-5 pt-5">
             <div className="col-lg-6 mt-0 offset-md-3">
               <div className="container newpadding hidepadding">
                 <div className="card p-1 " style={{ border: "none" }}>

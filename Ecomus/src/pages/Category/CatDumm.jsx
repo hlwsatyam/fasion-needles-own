@@ -12,6 +12,9 @@ const CategoryDumm = () => {
   const nvg = useNavigate();
   const [pricevalue, setpricevalue] = useState(14000);
   const [brand, setbrand] = useState(true);
+  const [category, setcategory] = useState(true);
+  const [childcategory, setchildcategory] = useState(true);
+  const [subcategory, setsubcategory] = useState(true);
   const [color, setcolor] = useState(true);
   const [size, setsize] = useState(true);
   const [price, setprice] = useState(true);
@@ -22,7 +25,6 @@ const CategoryDumm = () => {
   const [sortby, setsortby] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
   const [pageSize, setpageSize] = useState(12);
-
   const transfer = (productid) => {
     nvg(`/productdetails/${productid}`);
     window.location.reload();
@@ -78,7 +80,6 @@ const CategoryDumm = () => {
       doublefilterstep2(key2, newData2, finalurl);
     }
   };
-
   const doublefilterstep2 = (key, newData, url) => {
     let finalurl;
     let exists = url.includes(`${key}=`);
@@ -102,7 +103,6 @@ const CategoryDumm = () => {
     }
   };
   // double condition function end here
-
   const updateDataValueforsort = (key, newData) => {
     let finalurl;
     let exists = url.includes(`${key}=`);
@@ -169,9 +169,7 @@ const CategoryDumm = () => {
       }
     }
   };
-
   const [categories, setCategories] = useState([]);
-
   useEffect(() => {
     let regex = /max_price=(\d+)/;
     let hasMaxPrice = regex.test(url);
@@ -183,7 +181,6 @@ const CategoryDumm = () => {
       }
     }
   }, [url]);
-
   return isLoading == true || attributeloading == true ? (
     <></>
   ) : (
@@ -300,7 +297,7 @@ const CategoryDumm = () => {
                       <i className="fa fa-angle-left" aria-hidden="true" /> back
                     </span>
                   </div>
-                  <div className="collection-collapse-block open">
+                  {/* <div className="collection-collapse-block open">
                     <h4>CATEGORIES</h4>
                     <h6
                       style={{
@@ -314,6 +311,7 @@ const CategoryDumm = () => {
                         ? data4.parentcategoryname?.name
                         : data4.categorydata?.name}
                     </h6>
+                    {console.log(data4)}
                     <h6
                       style={{
                         color: `#black`,
@@ -329,8 +327,202 @@ const CategoryDumm = () => {
                         ? data4.categorydata?.name
                         : ""}
                     </h6>
+                  </div> */}
+                  <div
+                    className="collection-collapse-block open"
+                    style={{
+                      display: data4.availableFilters.category?.[0]
+                        ? "block"
+                        : "none",
+                    }}
+                  >
+                    <h3
+                      className={
+                        category == true
+                          ? "collapse-block-title dynamic-after2"
+                          : "collapse-block-title dynamic-after"
+                      }
+                      onClick={() => {
+                        category == false
+                          ? setcategory(true)
+                          : setcategory(false);
+                      }}
+                    >
+                      Find By Category
+                    </h3>
+                    <div
+                      className="collection-collapse-block-content"
+                      style={{
+                        display: category == false ? "none" : "block",
+                      }}
+                    >
+                      <div className="collection-brand-filter">
+                        {data4.availableFilters.brand.map((item, index) => (
+                          <div className="custom-control custom-checkbox  form-check collection-filter-checkbox">
+                            {!url.includes(`brand=${item}`) ? (
+                              <input
+                                type="checkbox"
+                                className="custom-control-input form-check-input"
+                                onClick={() => {
+                                  setpageSize(0);
+                                  updateDataValue("brand", item);
+                                }}
+                                id="item2"
+                              />
+                            ) : (
+                              <input
+                                type="checkbox"
+                                onClick={() => {
+                                  updateDataValue("brand", item);
+                                }}
+                                className="custom-control-input form-check-input"
+                                id="item2"
+                                checked
+                              />
+                            )}
+                            <label
+                              className="custom-control-label form-check-label"
+                              htmlFor="item2"
+                            >
+                              {item}
+                            </label>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
                   </div>
-                  {/* brand  filter start here  */}
+                  {console.log(data4)}
+                  <div
+                    className="collection-collapse-block open"
+                    style={{
+                      display: data4.availableFilters.childCatoryData?.[0]
+                        ? "block"
+                        : "none",
+                    }}
+                  >
+                    <h3
+                      className={
+                        childcategory == true
+                          ? "collapse-block-title dynamic-after2"
+                          : "collapse-block-title dynamic-after"
+                      }
+                      onClick={() => {
+                        childcategory == false
+                          ? setchildcategory(true)
+                          : setchildcategory(false);
+                      }}
+                    >
+                      Find By Category
+                    </h3>
+                    <div
+                      className="collection-collapse-block-content"
+                      style={{
+                        display: childcategory == false ? "none" : "block",
+                      }}
+                    >
+                      <div className="collection-brand-filter">
+                        {data4.availableFilters.childCatoryData.map(
+                          (item, index) => (
+                            <div className="custom-control custom-checkbox  form-check collection-filter-checkbox">
+                              {!url.includes(`brand=${item}`) ? (
+                                <input
+                                  type="checkbox"
+                                  className="custom-control-input form-check-input"
+                                  onClick={() => {
+                                    setpageSize(0);
+                                    updateDataValue("brand", item);
+                                  }}
+                                  id="item2"
+                                />
+                              ) : (
+                                <input
+                                  type="checkbox"
+                                  onClick={() => {
+                                    updateDataValue("brand", item);
+                                  }}
+                                  className="custom-control-input form-check-input"
+                                  id="item2"
+                                  checked
+                                />
+                              )}
+                              <label
+                                className="custom-control-label form-check-label"
+                                htmlFor="item2"
+                              >
+                                {item.name}
+                              </label>
+                            </div>
+                          )
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    className="collection-collapse-block open"
+                    style={{
+                      display: data4.availableFilters.subCategory
+                      ?.[0]
+                        ? "block"
+                        : "none",
+                    }}
+                  >
+                    <h3
+                      className={
+                        subcategory == true
+                          ? "collapse-block-title dynamic-after2"
+                          : "collapse-block-title dynamic-after"
+                      }
+                      onClick={() => {
+                        subcategory == false
+                          ? setsubcategory(true)
+                          : setsubcategory(false);
+                      }}
+                    >
+                      Sub Category
+                    </h3>
+                    <div
+                      className="collection-collapse-block-content"
+                      style={{
+                        display: subcategory == false ? "none" : "block",
+                      }}
+                    >
+                      <div className="collection-brand-filter">
+                        {data4.availableFilters.subCategory.map(
+                          (item, index) => (
+                            <div className="custom-control custom-checkbox  form-check collection-filter-checkbox">
+                              {!url.includes(`brand=${item}`) ? (
+                                <input
+                                  type="checkbox"
+                                  className="custom-control-input form-check-input"
+                                  onClick={() => {
+                                    setpageSize(0);
+                                    updateDataValue("brand", item);
+                                  }}
+                                  id="item2"
+                                />
+                              ) : (
+                                <input
+                                  type="checkbox"
+                                  onClick={() => {
+                                    updateDataValue("brand", item);
+                                  }}
+                                  className="custom-control-input form-check-input"
+                                  id="item2"
+                                  checked
+                                />
+                              )}
+                              <label
+                                className="custom-control-label form-check-label"
+                                htmlFor="item2"
+                              >
+                                {item?.name}
+                              </label>
+                            </div>
+                          )
+                        )}
+                      </div>
+                    </div>
+                  </div>
                   <div
                     className="collection-collapse-block open"
                     style={{
@@ -392,9 +584,7 @@ const CategoryDumm = () => {
                       </div>
                     </div>
                   </div>
-                  {/* brand  filter end here  */}
-
-                  {/* color  filter start here  */}
+               
                   <div
                     className="collection-collapse-block open"
                     style={{
@@ -1096,7 +1286,7 @@ const CategoryDumm = () => {
                                           {" "}
                                           <img
                                             src={`${process.env.REACT_APP_API_IMAGE_URL}${item?.product_image1}`}
-                                            className="img-fluid object-cover h-[250px]"
+                                            className="img-fluid mx-auto object-cover h-[250px]"
                                             alt="product"
                                           />{" "}
                                         </button>

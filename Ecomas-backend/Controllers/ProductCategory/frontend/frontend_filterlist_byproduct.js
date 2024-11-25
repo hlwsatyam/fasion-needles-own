@@ -1,5 +1,6 @@
 const product = require("../../../Models/product");
 const category = require("../../../Models/category");
+const login = require("../../user/login");
 
 const frontendattributelistbyproduct = async (req, res) => {
   try {
@@ -7,11 +8,13 @@ const frontendattributelistbyproduct = async (req, res) => {
 
     const categorydata = await category
       .findById(req.params.id)
-      .select("name parentcategory");
-      let parentcategoryname = "";
-      if (categorydata.parentcategory && categorydata.parentcategory.length > 0) {
-        parentcategoryname = await category.findById(categorydata.parentcategory[0]).select("name -_id");
-      }
+
+
+
+    let parentcategoryname = "";
+    if (categorydata.parentcategory && categorydata.parentcategory.length > 0) {
+      parentcategoryname = await category.findById(categorydata.parentcategory[0]).select("name -_id");
+    }
 
     const colors = await product.distinct("color", {
       $or: [
@@ -25,16 +28,46 @@ const frontendattributelistbyproduct = async (req, res) => {
         { child_category: categoryId },
       ],
     });
-    const sizes = await product.distinct("size", {
+    const childCatoryData = await category.find({ parentcategory: categoryId })
+
+    // const subCategory = await Promise.all(
+    //   childCatoryData.flatMap(child =>
+    //     child.parentsubcategory.map(subCatId => {
+    //       const data=category.findById(subCatId).select("name _id")
+    //       return data && data
+    //     } )
+    //   )
+    // );
+    
+    const filteredSubCategory  = await Promise.all(
+      childCatoryData.flatMap(child =>
+        child.parentsubcategory.map(async subCatId => {
+          const data = await category.findById(subCatId).select("name _id");
+          return data || null; // Return null if category is not found
+        })
+      )
+    );
+    
+    // Filter out null values (skip unavailable categories)
+      subCategory = filteredSubCategory .filter(Boolean);
+    
+
+
+
+
+    const uniqueSizes = await product.distinct("mutipleSize", {
+      child_category: { $in: categorydata.parentsubcategory }, // Match categories in parentsubcategory
+    });
+
+    // Normalize and remove duplicates
+    const sizes = [...new Set(uniqueSizes.map(size => size.trim().toUpperCase()))];
+
+    const weights = await product.distinct("weight", {
       $or: [
         { parent_category: categoryId },
         { child_category: categoryId },
-      ],
+      ], weight: { $gt: 0 }
     });
-    const weights = await product.distinct("weight", {$or: [
-      { parent_category: categoryId },
-      { child_category: categoryId },
-    ], weight: { $gt: 0 } });
     const weightTypes = await product.distinct("weight_type", {
       $or: [
         { parent_category: categoryId },
@@ -64,6 +97,8 @@ const frontendattributelistbyproduct = async (req, res) => {
       combinedWeight: combinedWeights,
       minPrice,
       maxPrice,
+      childCatoryData,
+      subCategory,
       // Add other filters here
     };
 
@@ -71,6 +106,7 @@ const frontendattributelistbyproduct = async (req, res) => {
       status: "success",
       availableFilters,
       categorydata,
+    
       parentcategoryname
     });
   } catch (error) {

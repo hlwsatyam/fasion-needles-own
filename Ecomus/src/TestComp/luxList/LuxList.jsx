@@ -8,9 +8,9 @@ function LuxList() {
   const [allProducts, setAllProducts] = useState([]);
 
   useEffect(() => {
-    setTimeout(() => {
+   
       fetchData();
-    }, 5000)
+  
   }, [ ]);
 
   const fetchData = async () => {
@@ -19,8 +19,9 @@ function LuxList() {
         `${process.env.REACT_APP_API_URL}/product/luxProduct`
       );
       if (res.status === 200) {
+        
         setAllProducts(res.data.data);
-        console.log(res.data);
+       
       }
     } catch (error) {
       console.log(error);
@@ -58,29 +59,34 @@ function LuxList() {
   };
   return (
     <div className="mb-4">
-      <Header />
-      <div className="mt-2  ">
+    <Header />
+    <div className="mt-2">
       <section className="section-big-mb-space ratio_square product">
         <div className="container-fluid">
           <div className="row">
             <div className="col-12 pr-0">
               <div className="product-slide-5 product-m no-arrow">
-                <OwlCarousel 
-                  className="owl-theme"
-                  style={{ width: "100%", height: "100%" }}
-                  {...options2}
-                >
-                  {allProducts?.map((item) => (
-                    <Crouselitem item={item} />
-                  ))}
-                </OwlCarousel>
+                {allProducts.length > 0 ? (
+                  <OwlCarousel
+                    className="owl-theme"
+                    style={{ width: "100%", height: "100%" }}
+                    {...options2}
+                  >
+                    {allProducts.map((item) => (
+                      <Crouselitem key={item.id} item={item} />
+                    ))}
+                  </OwlCarousel>
+                ) : (
+                  <p>Loading products...</p> // Show a loading state
+                )}
               </div>
             </div>
           </div>
         </div>
       </section>
-      </div>
     </div>
+  </div>
+  
   );
 }
 

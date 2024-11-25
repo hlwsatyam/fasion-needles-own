@@ -11,19 +11,7 @@ const Breadcupdash = ({ name }) => {
         <div className="col-6"><p style={{fontWeight:'700', fontSize:'22px',margin:'0px'}}>Dashboard</p></div>
         <div className="col-6">
         <div className="d-flex justify-content-end" style={{gap:"11px"}}>
-        <div className="_width_57">
-          <select
-            name=""
-            id=""
-            className="form-select"
-            aria-label="Default select example"
-          >
-            <option value="ytrewq">Customer</option>
-            <option value="qwerty">Order</option>
-            <option value="zxcvb">Cart</option>
-            <option value="bvcxz">Wishlist</option>
-          </select>
-        </div>
+        
         <div className="_width_20 addnew">
           <button className="btn text-white customcolor2">
             <NavLink
@@ -31,7 +19,7 @@ const Breadcupdash = ({ name }) => {
               style={{ textDecoration: "none", color: "white" }}
             >
               {" "}
-              Apply Filter
+              Add Produtct
             </NavLink>
           </button>
         </div>

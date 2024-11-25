@@ -282,7 +282,7 @@ const Editcategoryform = ({ id }) => {
                   </div>
                 </div>
               </div> */}
-              <div className="col-md-12 px-2 pt-3">
+              {/* <div className="col-md-12 px-2 pt-3">
                 <div className="row">
                   <div className="col-lg-2">
                     <label htmlFor="" className="form-label ">
@@ -319,7 +319,7 @@ const Editcategoryform = ({ id }) => {
                     ) : null}
                   </div>
                 </div>
-              </div>
+              </div> */}
 
               <div className="col-12 pt-3">
                 <div className="row">

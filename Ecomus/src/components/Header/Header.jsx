@@ -55,9 +55,8 @@ const Header = () => {
     refetch: refetchsearch,
     isError,
   } = useGetProductBySearchQuery(serchvalue);
- 
+
   const searchresult = async (value) => {
- 
     if (value == undefined || value == null || value == "") {
       refetchsearch();
     } else {
@@ -66,18 +65,12 @@ const Header = () => {
       // setsearchdata(response.data.data)
     }
   };
-
   useEffect(() => {
     if (isLoading == false && wislistloading == false) {
       dispatch(addItem(cartcount?.totalItems || 0));
       dispatch(addwishlist(wishlistcount?.totalItems || 0));
     }
   }, [isLoading, cartcount, wislistloading, wishlistcount]);
-
-  const logoutfunction = () => {
-    removeToken();
-    nvg("/");
-  };
 
   useEffect(() => {
     refetch();
@@ -132,6 +125,7 @@ const Header = () => {
                     closesidebar={closesidebar}
                   />
                 )}
+
 
                 <div
                   className="hidden md:block"
@@ -362,7 +356,6 @@ const Header = () => {
                     </span>
                     <li className="mobile-cart item-count showaccountcontent">
                       <NavLink to="/cart">
-                        {" "}
                         <img
                           src={`${process.env.PUBLIC_URL}/images/mega-store/brand/cart.png`}
                           className="newwidthpro"
@@ -393,7 +386,6 @@ const Header = () => {
             </div>
           </div>
         </div>
-
         <div className="searchbar-input">
           <div className="input-group">
             <div className="input-group-append">
@@ -435,11 +427,6 @@ const Header = () => {
         </div>
       </div>
       {/* top header end here  */}
-
-      {/* menu start here  */}
-
-      {/* menu start here  */}
-
       {/* Search bar for mobile start here  */}
       <div
         className="modal fade"
@@ -483,100 +470,86 @@ const Header = () => {
                   aria-label="Close"
                 ></button>
               </div>
-            
-
 
               {
-                <ul
-                className="     shadow-2xl"
-               
-              >
-                {isError == false ? (
-                  searchapidata?.results?.[0]?.product_name ? (
-                    searchapidata?.results
-                      .map((item, index) => (
-                        <li>
-                          <div
-                            className="p-1 flex  items-center"
-                            style={{ gap: "10px", cursor: "pointer" }}
-                            onClick={() => {
-                              transfer(item._id, item.title);
-                            }}
-                          >
-                            
+                <ul className="     shadow-2xl">
+                  {isError == false ? (
+                    searchapidata?.results?.[0]?.product_name ? (
+                      searchapidata?.results
+                        .map((item, index) => (
+                          <li>
+                            <div
+                              className="p-1 flex  items-center"
+                              style={{ gap: "10px", cursor: "pointer" }}
+                              onClick={() => {
+                                transfer(item._id, item.title);
+                              }}
+                            >
                               <img
                                 src={`${process.env.REACT_APP_API_IMAGE_URL}${item.product_image1}`}
                                 className="   h-[100px] w-[100px] "
                                 alt="product"
                               />
-                           
-                            <div className="cartinfo">
-                              <h6
-                                style={{
-                                  fontSize: "12px",
-                                  color: "#059fe2",
-                                  fontWeight: "600",
-                                  padding: "3px 0px",
-                                }}
-                              >
-                                {item.product_name}
-                              </h6>
-                              <h6
-                                style={{
-                                  fontSize: "12px",
-                                  color: "#059fe2",
-                                  padding: "3px 0px",
-                                }}
-                              >
-                                ₹{item.selling_price}
-                              </h6>
-                            
+
+                              <div className="cartinfo">
+                                <h6
+                                  style={{
+                                    fontSize: "12px",
+                                    color: "#059fe2",
+                                    fontWeight: "600",
+                                    padding: "3px 0px",
+                                  }}
+                                >
+                                  {item.product_name}
+                                </h6>
+                                <h6
+                                  style={{
+                                    fontSize: "12px",
+                                    color: "#059fe2",
+                                    padding: "3px 0px",
+                                  }}
+                                >
+                                  ₹{item.selling_price}
+                                </h6>
+                              </div>
                             </div>
-                          </div>
-                        </li>
-                      ))
-                      .slice(0, 5)
-                  ) : serchvalue == "" ? (
-                    ""
-                  ) : (
-                    <li style={{ width: "100%" }}>
-                      <div
-                        className="p-1 d-flex"
-                        style={{
-                          gap: "10px",
-                          padding: "4px 0px",
-                          cursor: "pointer",
-                          width: "100%",
-                          display: "flex",
-                          justifyContent: "center",
-                        }}
-                      >
-                        <h6
+                          </li>
+                        ))
+                        .slice(0, 5)
+                    ) : serchvalue == "" ? (
+                      ""
+                    ) : (
+                      <li style={{ width: "100%" }}>
+                        <div
+                          className="p-1 d-flex"
                           style={{
-                            fontSize: "14px",
-                            color: "#333",
-                            fontWeight: "600",
-                            padding: "3px 0px",
+                            gap: "10px",
+                            padding: "4px 0px",
+                            cursor: "pointer",
+                            width: "100%",
+                            display: "flex",
+                            justifyContent: "center",
                           }}
                         >
-                          No Record Fount
-                        </h6>
-                      </div>
-                    </li>
-                  )
-                ) : (
-                  ""
-                )}
-              </ul>
+                          <h6
+                            style={{
+                              fontSize: "14px",
+                              color: "#333",
+                              fontWeight: "600",
+                              padding: "3px 0px",
+                            }}
+                          >
+                            No Record Fount
+                          </h6>
+                        </div>
+                      </li>
+                    )
+                  ) : (
+                    ""
+                  )}
+                </ul>
               }
-
-
-
-
             </div>
-
-
-          
           </div>
         </div>
       </div>
