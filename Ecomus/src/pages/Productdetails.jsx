@@ -32,6 +32,7 @@ import { useGetCommentMutation } from "../store/api/commentapi";
 import { toast } from "react-toastify";
 import HelmetTag from "../components/Header/Helmet";
 import ZoomImgIff from "../components/ZoomImgEff";
+import Features from "../components/Testomonials";
 
 const options5 = {
   items: 1,
@@ -718,14 +719,9 @@ function Productdetails() {
                               </div>
                             </div>
                           ))}
-{
-  console.log(Data23)
-}
+                          {console.log(Data23)}
                           {Data23.map((item, index) => (
-                            <div
-                              className="productdetailcontainer customwidth"
-                               
-                            >
+                            <div className="productdetailcontainer customwidth">
                               <h6 className="product-title mt-2">
                                 Available Size
                               </h6>
@@ -735,7 +731,7 @@ function Productdetails() {
                                     <li
                                       onClick={() => setselectedSize(index)}
                                       style={{
-                                        padding:"4px",
+                                        padding: "4px",
                                         background:
                                           selectedSize == index
                                             ? "#059fe2"
@@ -1026,13 +1022,13 @@ function Productdetails() {
         </div>
       </section>
       <InfoList />
-      <p className="mt-4 container text-xl">Related Product</p>
-
-      <RelativeProduct />
+      <RelativeProduct  parentCat= {data?.parentcategory?.[0]} childCat={data?.childcategory?.[0]} subChildCat={data?.child_sub_category?.[0]}   />
       <OverviewSection3 getComment={getComment} />
+      <Features />
       <Footer />
     </>
   );
 }
 
 export default Productdetails;
+ 

@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 const Subcategory = ({ value, issubcategory }) => {
   const nvg = useNavigate();
-  console.log(value);
+  
   const transfer2 = (id, title) => {
     nvg(`/category/${id}/${title}/none`);
     // nvg("/category", { state: { id: id } });

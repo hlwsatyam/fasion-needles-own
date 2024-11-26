@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const upload = require('../middlewares/image-uploader.js');
 const createbrand = require('../Controllers/Brand/createbrand.js');
-const brandlist = require('../Controllers/Brand/brand_list.js');
+const {brandlist,list} = require('../Controllers/Brand/brand_list.js');
 const admin_brandlist = require('../Controllers/Brand/brandlist.js');
 const deletebrand = require('../Controllers/Brand/deletebrand.js');
 const brandsingle = require('../Controllers/Brand/brandsingle.js');
@@ -16,6 +16,7 @@ router.post('/',upload.fields([
 router.get('/',admin_brandlist);
 router.get('/frontend',frontend_brandlist);
 router.get('/brandlist',brandlist);
+router.post('/fetchallbrand',list);
 router.get('/frontend/:name',productbybrand);
 router.get('/:id',brandsingle);
 router.delete('/:id',deletebrand);

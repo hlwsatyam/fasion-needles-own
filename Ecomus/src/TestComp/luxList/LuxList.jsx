@@ -4,7 +4,7 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import OwlCarousel from "react-owl-carousel";
 import Crouselitem from "../../components/Crouselitem";
-function LuxList() {
+function LuxList({title,subChildCat,parentCat,childCat}) {
   const [allProducts, setAllProducts] = useState([]);
 
   useEffect(() => {
@@ -16,7 +16,9 @@ function LuxList() {
   const fetchData = async () => {
     try {
       const res = await axios.post(
-        `${process.env.REACT_APP_API_URL}/product/luxProduct`
+        `${process.env.REACT_APP_API_URL}/product/luxProduct`,{
+          subChildCat,childCat,parentCat
+        }
       );
       if (res.status === 200) {
         
@@ -59,7 +61,7 @@ function LuxList() {
   };
   return (
     <div className="mb-4">
-    <Header />
+    <Header title={title} />
     <div className="mt-2">
       <section className="section-big-mb-space ratio_square product">
         <div className="container-fluid">
@@ -92,11 +94,11 @@ function LuxList() {
 
 export default LuxList;
 
-function Header() {
+function Header({title}) {
   return (
     <div className="flex justify-center items-center gap-x-1 sm:text-lg text-sm font-bold text-gray-700">
       <div className="w-20 border-t-2 border-gray-400"></div>
-      <span className="uppercase tracking-wide px-1">Luxury Products</span>
+      <span className="uppercase tracking-wide px-1">{  title ||  "Luxury Products"}</span>
       <div className="w-20 border-t-2 border-gray-400"></div>
     </div>
   );

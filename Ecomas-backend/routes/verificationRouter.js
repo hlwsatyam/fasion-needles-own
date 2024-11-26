@@ -54,7 +54,7 @@ router.post('/resetPassword', async (req, res) => {
         const salt = await bcrypt.genSalt(10)
         const bcrypt_password = await bcrypt.hash(newPassword, salt)
         await usertable.findOneAndUpdate({ mobile: phone }, { password: bcrypt_password })
-        // Return the response from Fast2SMS
+        
         res.status(200).json({ message: 'Password reset successfully', });
     } catch (error) {
         console.error('Error sending OTP:', error);

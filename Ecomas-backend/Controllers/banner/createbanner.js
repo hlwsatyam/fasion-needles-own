@@ -15,7 +15,7 @@ const createbanner = async (req, res) => {
     const data = await addbanner.save();
     res.status(201).json({ status: "successfull", data });
   } catch (error) {
-    console.log("error",error)
+ 
     res.send({ status: "faild", error: error });
   }
 };

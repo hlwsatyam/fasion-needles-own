@@ -1,6 +1,6 @@
 const attribute = require("../../Models/attribute");
 const deleteattribute = async (req, res) => {
-  console.log("dfgh");
+ 
   try {
     const attributedata = await attribute.findByIdAndDelete(req.params.id);
     res.send({

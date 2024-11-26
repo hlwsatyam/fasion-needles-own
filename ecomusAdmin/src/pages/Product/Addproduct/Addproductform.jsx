@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "../../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import { useNavigate } from "react-router-dom";
 import Multiselect from "multiselect-react-dropdown";
@@ -15,6 +15,7 @@ import {
 } from "../../../store/api/categoryapi";
 import { usePostProductMutation } from "../../../store/api/productapi";
 import { useGetAttributeByCategoryIdQuery } from "../../../store/api/attributeapi";
+import axios from "axios";
 const Addproductform = () => {
   const [subcategories, setsubcategories] = useState([]);
   const [childsubcategories, setchildsubcategories] = useState([]);
@@ -23,7 +24,7 @@ const Addproductform = () => {
   const [childcategoryid, setchildcategoryid] = useState([]);
   const [allBrandid, setAllBrandid] = useState([]);
   const [apiresponse, setapiresponse] = useState({});
-  
+  const [allBrands, setAllBrands] = useState([]);
   const imageInputRef1 = useRef(null);
   const imageInputRef2 = useRef(null);
   const imageInputRef3 = useRef(null);
@@ -51,6 +52,21 @@ const Addproductform = () => {
   };
   // create product api end here
 
+  useEffect(() => {
+    fetchAllBrand();
+  }, []);
+
+  const fetchAllBrand = async () => {
+    try {
+      const res = await axios.post(
+        `${process.env.REACT_APP_API_URL}/brand/fetchallbrand`
+      );
+      if (res.status === 200) {
+        setAllBrands(res.data.data);
+      }
+    } catch (error) {}
+  };
+
   // fetch sub category api start here
   const [getsubcatgory] = usePostFetchSubCategoryMutation();
   const [getChildcatgory] = usePostFetchSubCategoryMutation();
@@ -60,9 +76,7 @@ const Addproductform = () => {
       formdata.append("categorys", value);
       const response = await getsubcatgory(formdata);
       setsubcategories(response.data.data[0].categories);
-    } catch (error) {
-
-    }
+    } catch (error) {}
   };
   const FetchchildCategorys = async (value) => {
     try {
@@ -70,9 +84,7 @@ const Addproductform = () => {
       formdata.append("categorys", value);
       const response = await getChildcatgory(formdata);
       setchildsubcategories(response.data.data[0].categories);
-    } catch (error) {
-      
-    }
+    } catch (error) {}
   };
   // fetch sub category api end here
 
@@ -100,7 +112,7 @@ const Addproductform = () => {
           mutipleColor: [],
           child_category: [],
           child_sub_category: [],
-          gender:"",
+          gender: "",
           status: "",
           trendingproduct: "",
           newarrivedproduct: "",
@@ -320,7 +332,7 @@ const Addproductform = () => {
                 <div className="row">
                   <div className="col-lg-4">
                     <label htmlFor="" className="form-label">
-                     Gender <span style={{ color: "red" }}>*</span>
+                      Gender <span style={{ color: "red" }}>*</span>
                     </label>
                   </div>
                   <div className="col-lg-8">
@@ -409,7 +421,6 @@ const Addproductform = () => {
                           FetchchildCategorys(
                             selectedList.map((item) => item._id)
                           );
-                          
                         }}
                         onRemove={(selectedList) => {
                           setFieldValue(
@@ -423,7 +434,6 @@ const Addproductform = () => {
                           FetchchildCategorys(
                             selectedList.map((item) => item._id)
                           );
-                          
                         }}
                         displayValue="name"
                       />
@@ -481,7 +491,6 @@ const Addproductform = () => {
                   </div>
                 </div>
               </div>
-          
 
               <div className="col-3 pt-3">
                 <div className="row">
@@ -856,21 +865,37 @@ const Addproductform = () => {
                     </label>
                   </div>
                   <div className="col-lg-12">
-                    <Field
+                    {/* <Field
                       name="brand"
-                      type="text"
+                      type="select"
                       className="form-control"
                       placeholder="Brand"
                       value={values.brand}
                     />
 
-                    {allBrandid.map((item) => {
+                    {allBrands.map((item) => {
                       return (
-                        <span className="  text-white px-2 py-1 rounded-md mt-2 w-full">
-                          fgfg
-                        </span>
+                        <option className="  text-white px-2 py-1 rounded-md mt-2 w-full">
+                          {item.brand_name}
+                        </option>
                       );
-                    })}
+                    })} */}
+
+                    <Field
+                      as="select"
+                      name="brand"
+                      className="form-control"
+                      value={values.brand}
+                    >
+                      <option value="" disabled>
+                        Select Brand
+                      </option>
+                      {allBrands.map((item, index) => (
+                        <option key={index} value={item.brand_name}>
+                          {item.brand_name}
+                        </option>
+                      ))}
+                    </Field>
                   </div>
 
                   <div className="col-12">

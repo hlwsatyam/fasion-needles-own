@@ -29,7 +29,7 @@ const subcategorylist = async (req, res) => {
   }
 };
 const childcategorylist = async (req, res) => {
-  console.log("dffffffffffff") 
+    
   try {
     // Extract category IDs from the request body as an array
     const categoryIds = req.body.categorys ? req.body.categorys.split(',').map(id => id.trim()) : [];

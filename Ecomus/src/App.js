@@ -2,6 +2,7 @@ import "./App.css";
 import {
   Routes,
   Route,
+  Navigate,
 } from "react-router-dom";
 import Home from "./pages/Home";
 
@@ -35,31 +36,33 @@ import Faq from "./pages/Faq";
 import ShippingPolicy from "./pages/ShiipingPc";
 import CancellationPolicy from "./pages/CancellationPol";
 import Blogs from "./pages/Blogs";
- 
+
 import ForgetPass from "./pages/ForgetPass";
 import OrderDetails from "./pages/profilepage/OrderDetails";
 import Error404 from "./pages/Error404";
 import PaymentFailed from "./pages/PaymentFailed";
 import OrderHistorytwo from "./pages/OrderHistorytwo";
 import OrderHistoryDetails from "./pages/OrderHistoryDetails";
-import {  HelmetProvider } from 'react-helmet-async';
-import CategoryDumm from "./pages/Category/CatDumm";
- 
+import { HelmetProvider } from 'react-helmet-async';
+import BrandFilter from "./pages/BrandFilter";
+import CatFilter from "./pages/CatDumm";
+
 function App() {
   return (
     <HelmetProvider>
-      <div className="   mx-auto  ">
+      <div className="mx-auto">
         <ToastContainer />
         <Routes >
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<Home />} />
-          <Route path="/home" element={<Home />} />
+          <Route path="/home" element={<Navigate to={'/'} />} />
           <Route path="/about" element={<About />} />
           <Route path="/cart" element={<Cart2 />} />
           <Route path="/wishlist" element={<Wishlist />} />
           <Route path="/checkout/" element={<OrderSummary />} />
           <Route path="/productdetails/:id" element={<Productdetails />} />
-          <Route path="/category/:id/:name/:url" element={<CategoryDumm />} />
+          <Route path="/category/:name" element={<CatFilter />} />
+          <Route path="/brand/:name" element={<BrandFilter />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/addresslist" element={<Addresslist />} />
           <Route path="/pay" element={<Pay />} />
@@ -71,13 +74,13 @@ function App() {
           <Route path="/contact-us" element={<ContactUs />} />
           <Route path="/track-order" element={<TrackDelevery />} />
           <Route path="/careers" element={<CareerPage />} />
-          
+
           <Route path="/faq" element={<Faq />} />
           <Route path="/shipping-policy" element={<ShippingPolicy />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/cancellation-policy" element={<CancellationPolicy />} />
           <Route path="/blogs" element={<Blogs />} />
-          
+
           <Route path="/forget-pass" element={<ForgetPass />} />
           <Route path="/payment-failed" element={<PaymentFailed />} />
           <Route path="/customer-order/:txnId" element={<OrderDetails />} />
@@ -88,5 +91,5 @@ function App() {
 
   )
 }
- 
+
 export default App;

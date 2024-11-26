@@ -6,7 +6,7 @@ try{
     res.send({status:"sucessfully",data:productlisting})
 
 }catch(err){
-    console.log(`  here is errror ${err}`);
+    
     res.send({status:"faild",errors:err})
 
 }

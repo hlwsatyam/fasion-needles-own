@@ -34,7 +34,7 @@ try{
     res.send({ status: "successfully update", data: updatedbanner });
 
 }catch(err){
-    console.log(`  here is errror ${err}`);
+    
     res.send({status:"faild",errors:err})
 
 }

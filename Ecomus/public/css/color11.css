@@ -12498,13 +12498,13 @@
             }
             
             .collection-collapse-block .collapse-block-title:after {
-              position: absolute;
+              /* position: absolute;
               display: block;
               top: 0;
               right: -3px;
               content: "\f0d7";
               font-family: FontAwesome;
-              color: #333333;
+              color: #333333; */
             }
             
             .collection-collapse-block .collection-collapse-block-content .color-selector {

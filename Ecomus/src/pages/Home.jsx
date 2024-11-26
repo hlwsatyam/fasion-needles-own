@@ -185,11 +185,10 @@ const Home = () => {
       {/* home main banner section end */}
 
       <div className="flex justify-center my-2 items-center gap-x-1 sm:text-lg text-sm  font-bold text-gray-700">
-      <div className="w-20 border-t-2 border-gray-400"></div>
-      <span className="uppercase tracking-wide px-1">Shop By Category</span>
-      <div className="w-20 leading border-t-2 border-gray-400"></div>
-    </div>
-
+        <div className="w-20 border-t-2 border-gray-400"></div>
+        <span className="uppercase tracking-wide px-1">Shop By Brand</span>
+        <div className="w-20 leading border-t-2 border-gray-400"></div>
+      </div>
 
       {/* brand start */}
       <section className="brand-second mb-1 ">
@@ -202,16 +201,19 @@ const Home = () => {
                   style={{ width: "100%", height: "100%" }}
                   {...optionsforbrand}
                 >
+                  {console.log(brnaditem)}
                   {brnaditem?.data.map((item, index) => (
                     <div
                       className="brand-box cursor-pointer h-[150px] !w-[150px]  rounded-full "
                       onClick={() => {
-                        nvg(`/categoryforbrand/${item.brand_name}`);
+                        nvg(`/brand/${item.brand_name?.replace(/ /g, "-")}`, {
+                          state: { brandId: item._id, name: item.brand_name },
+                        });
                       }}
                     >
                       <img
                         src={`${process.env.REACT_APP_API_IMAGE_URL}${item.brand_image}`}
-                        alt=""
+                        alt={item.brand_name}
                         className=" w-full h-full object-contain "
                       />
                     </div>
@@ -223,6 +225,7 @@ const Home = () => {
         </div>
       </section>
       {/* brand start */}
+      
       {/*home mine banner start*/}
       <section className="megastore-slide  collection-banner section-py-space b-g-white">
         <div className="container-fluid ">
@@ -283,18 +286,13 @@ const Home = () => {
         </div>
       </section>
       {/*home mine banner end*/}
-      {/* <div className="title8">
-        <h4 style={{ fontSize: "16px" }}> new arrivals</h4>
-      </div> */}
+       
 
-
-
-
-<div className="flex justify-center my-2 items-center gap-x-1 sm:text-lg   text-sm font-bold text-gray-700">
-      <div className="w-20 border-t-2 border-gray-400"></div>
-      <span className="uppercase tracking-wide px-1">New Arrival</span>
-      <div className="w-20 leading border-t-2 border-gray-400"></div>
-    </div>
+      <div className="flex justify-center my-2 items-center gap-x-1 sm:text-lg   text-sm font-bold text-gray-700">
+        <div className="w-20 border-t-2 border-gray-400"></div>
+        <span className="uppercase tracking-wide px-1">New Arrival</span>
+        <div className="w-20 leading border-t-2 border-gray-400"></div>
+      </div>
       {/* new arrivals product tab start */}
       <section className=" ratio_square product">
         <div className="container-fluid">
@@ -318,10 +316,10 @@ const Home = () => {
       <Categ />
       <LuxList />
       <div className="flex justify-center my-2 items-center gap-x-1 text-sm sm:text-lg font-bold text-gray-700">
-      <div className="w-20 border-t-2 border-gray-400"></div>
-      <span className="uppercase tracking-wide px-1">New Arrival</span>
-      <div className="w-20 leading border-t-2 border-gray-400"></div>
-    </div>
+        <div className="w-20 border-t-2 border-gray-400"></div>
+        <span className="uppercase tracking-wide px-1">New Arrival</span>
+        <div className="w-20 leading border-t-2 border-gray-400"></div>
+      </div>
       {/* best seller start  */}
       <section className="section-big-mb-space ratio_square product">
         <div className="container-fluid">
@@ -343,43 +341,13 @@ const Home = () => {
         </div>
       </section>
       {/* best seller end  */}
-      {/* slider 1*/}
-      {/* <section className="  sale-banenr mt-2  banner-style2 design2 marginfromtop">
-        <OwlCarousel
-          className="owl-theme"
-          style={{ width: "100%", height: "100%" }}
-          {...options}
-        >
-          {caraouselData2.map((item, index) => (
-            <div
-              key={index}
-              className="mobileorlaptop"
-              // style={{ height: isMobile ? '300px' : '400px'}}
-            >
-              <img
-                onClick={() => {
-                  window.location.href = item.link;
-                }}
-                src={item.img}
-                alt={`banner-${index}`}
-                className="img-fluid rounded-2xl mainbanner bg-img"
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "100% 100%",
-                }}
-              />
-            </div>
-          ))}
-        </OwlCarousel>
-      </section> */}
-      {/* slider 1*/}
+       
       {/* <ShopCard /> */}
       <div className="flex justify-center my-2 items-center gap-x-1 sm:text-lg text-sm font-bold text-gray-700">
-      <div className="w-20 border-t-2 border-gray-400"></div>
-      <span className="uppercase tracking-wide px-1">Feature Product</span>
-      <div className="w-20 leading border-t-2 border-gray-400"></div>
-    </div>
+        <div className="w-20 border-t-2 border-gray-400"></div>
+        <span className="uppercase tracking-wide px-1">Feature Product</span>
+        <div className="w-20 leading border-t-2 border-gray-400"></div>
+      </div>
       {/* best feature start  */}
       <section className="section-big-mb-space ratio_square product">
         <div className="container-fluid">
@@ -401,7 +369,6 @@ const Home = () => {
         </div>
       </section>
       {/* best feature end  */}
-      
       <section className="sale-banenr banner-style2 design2">
         <OwlCarousel
           className="owl-theme"
