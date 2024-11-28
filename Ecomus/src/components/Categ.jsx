@@ -36,7 +36,7 @@ export default function Testimonials() {
             return (
               <div
                 onClick={() =>
-                  nvg(`/category/${item.name.toLowerCase()}`, {
+                  nvg(`/category/${item.name}`, {
                     state: { id: item._id},
                   })
                 }

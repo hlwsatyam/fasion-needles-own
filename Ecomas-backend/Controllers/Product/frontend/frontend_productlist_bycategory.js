@@ -1,10 +1,13 @@
+const category = require("../../../Models/category");
 const product = require("../../../Models/product");
 
 const frontendproductlistbycategory = async (req, res) => {
-  const { none, page, max_price, min_price, order,orderby,brand,size,color,weight } =
+  const { none, page, max_price, min_price, order, orderby, brand, size, color, weight } =
     req.query;
   try {
-    const categoryId = req.params.id;
+    const categoryId = req.params.name;
+    const cat = await category.findOne({ name: categoryId });
+console.log(cat)
     const itemsPerPage = 12;
     const pageNumber = parseInt(page) || 1;
     const skip = (pageNumber - 1) * itemsPerPage;
@@ -20,13 +23,17 @@ const frontendproductlistbycategory = async (req, res) => {
       if (orderby == "selling_price") {
         sortOptions[orderby] = order === "ASE" ? 1 : -1;
       }
-    }else{
+    } else {
       sortOptions['selling_price'] = 1;
     }
 
     // Build the base query for finding products by category
     const baseQuery = {
-      $or: [{ parent_category: categoryId }, { child_category: categoryId }],
+      $or: [
+        { parent_category: { $in: [cat._id.toString()] } },
+        { child_sub_category: { $in: [cat._id.toString()] } },
+        { child_category: { $in: [cat._id.toString()] } },
+      ],
     };
 
     // Add price filtering to the base query
@@ -36,11 +43,11 @@ const frontendproductlistbycategory = async (req, res) => {
       if (max_price) baseQuery.selling_price.$lte = parseInt(max_price);
     }
 
-if(weight){
-  const [weightnum, weighttype] = weight.split(' ');
-   baseQuery.weight = weightnum;
-    baseQuery.weight_type = weighttype;
-}
+    if (weight) {
+      const [weightnum, weighttype] = weight.split(' ');
+      baseQuery.weight = weightnum;
+      baseQuery.weight_type = weighttype;
+    }
     if (color) baseQuery.color = color;
     if (size) baseQuery.size = size;
     if (brand) baseQuery.brand = brand;
@@ -54,19 +61,19 @@ if(weight){
       .sort(sortOptions)
       .skip(skip)
       .limit(itemsPerPage);
+    console.log(productsBeforeFilter);
+    const totalItems = totalCountBeforeFilter;
+    const totalPages = Math.ceil(totalItems / itemsPerPage);
 
-      const totalItems = totalCountBeforeFilter;
-      const totalPages = Math.ceil(totalItems / itemsPerPage);
+    res.status(200).json({
+      status: "success",
+      data: productsBeforeFilter,
+      totalPages,
+      itemsPerPage,
+      totalItems,
+      pageNumber,
+    });
 
-      res.status(200).json({
-        status: "success",
-        data: productsBeforeFilter,
-        totalPages,
-        itemsPerPage,
-        totalItems,
-        pageNumber,
-      });
-    
   } catch (error) {
     res.status(500).json({ status: "failed", error: error.message });
   }

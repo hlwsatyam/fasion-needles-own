@@ -74,13 +74,11 @@ function App() {
           <Route path="/contact-us" element={<ContactUs />} />
           <Route path="/track-order" element={<TrackDelevery />} />
           <Route path="/careers" element={<CareerPage />} />
-
           <Route path="/faq" element={<Faq />} />
           <Route path="/shipping-policy" element={<ShippingPolicy />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/cancellation-policy" element={<CancellationPolicy />} />
           <Route path="/blogs" element={<Blogs />} />
-
           <Route path="/forget-pass" element={<ForgetPass />} />
           <Route path="/payment-failed" element={<PaymentFailed />} />
           <Route path="/customer-order/:txnId" element={<OrderDetails />} />

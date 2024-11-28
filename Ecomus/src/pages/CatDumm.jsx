@@ -7,6 +7,7 @@ import ReactPaginate from "react-paginate";
 
 import { useGetItemByBrandQuery } from "../store/api/brandapi";
 import Footer from "../components/Footer";
+import { useGetProductByCategoryQuery } from "../store/api/productapi";
 const CatFilter = () => {
   const { name } = useParams();
 
@@ -31,9 +32,17 @@ const CatFilter = () => {
     });
     window.location.reload();
   };
-  const { data: itembybrand, isLoading: brandloading } = useGetItemByBrandQuery(
-    name.replace(/-/g, " ")
-  );
+  // const { data: itembybrand, isLoading: brandloading } = useGetItemByBrandQuery(
+  //   name.replace(/-/g, " ")
+  // );
+
+  const {
+    data: itembybrand,
+    isLoading:brandloading,
+    refetch,
+  } = useGetProductByCategoryQuery(name.replace(/-/g, " "));
+
+
   const [categories, setCategories] = useState([]);
   const [totalrecords, settotalrecords] = useState(0);
   const [filterList, setFilterList] = useState(null);
@@ -307,14 +316,7 @@ const CatFilter = () => {
                     </div>
                   </div>
                   <div className="collection-collapse-block open">
-                    <h3
-                      className={"collapse-block-title dynamic-after2"}
-                      // className={
-                      //   item.name.length > 6
-                      //     ? "collapse-block-title dynamic-after2"
-                      //     : "collapse-block-title dynamic-after"
-                      // }
-                    >
+                    <h3 className={"collapse-block-title dynamic-after2"}>
                       Brands
                     </h3>
                     <div
@@ -326,7 +328,7 @@ const CatFilter = () => {
                       <div className="collection-brand-filter">
                         {filterList?.brands.map((item2, index2) => (
                           <div className="custom-control custom-checkbox  form-check collection-filter-checkbox">
-                           <label
+                            <label
                               className="custom-control-label form-check-label"
                               htmlFor="item2"
                             >
@@ -398,14 +400,9 @@ const CatFilter = () => {
             left:110px;
           }`}
                         </style>
-                        
-                          
-                       
                       }
                     </h3>
-                    {
-                      console.log(filterList?.colors)
-                    }
+                    {console.log(filterList?.colors)}
                     <div
                       className="collection-collapse-block-content"
                       style={{
@@ -425,12 +422,13 @@ const CatFilter = () => {
                                 );
                               }}
                             />
-{
-  console.log(item2)
-}
+
                             <label
-                              className={`custom-control-label w-6 h-6 rounded-full    bg-[${item2.toString()}] form-check-label`}
+                              className={`custom-control-label w-6 h-6 rounded-full form-check-label`}
                               htmlFor="item2"
+                              style={{
+                                background: `${item2}`,
+                              }}
                             ></label>
                           </div>
                         ))}

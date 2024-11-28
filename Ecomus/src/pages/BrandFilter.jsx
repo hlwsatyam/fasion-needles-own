@@ -367,13 +367,6 @@ const BrandFilter = () => {
             left:110px;
           }`}
                         </style>
-                        //  : <style>
-                        //   {`
-                        //   .dynamic-after::after {
-                        //     left:50px;
-                        //   }
-                        // `}
-                        // </style>
                       }
                     </h3>
                     <div
@@ -383,25 +376,33 @@ const BrandFilter = () => {
                       }}
                     >
                       <div className="collection-brand-filter">
-                        {filterList?.colors.map((item2, index2) => (
-                          <div className="custom-control  flex items-center gap-x-4  custom-checkbox  form-check collection-filter-checkbox">
-                            <input
-                              type="checkbox"
-                              className="custom-control-input  form-check-input"
-                              id="item2"
-                              onClick={() => {
-                                nvg(
-                                  `/category/${item2[0]}/${item2[1]}/&attr_name_Brand=Brand&attr_value_Brand=${name}`
-                                );
-                              }}
-                            />
+                        {filterList?.colors.length > 0 &&
+                          filterList?.colors.map(
+                            (item2, index2) =>
+                              item2 && (
+                                <div className="custom-control  flex items-center gap-x-4  custom-checkbox  form-check collection-filter-checkbox">
+                                  <input
+                                    type="checkbox"
+                                    className="custom-control-input  form-check-input"
+                                    id="item2"
+                                    onClick={() => {
+                                      nvg(
+                                        `/category/${item2[0]}/${item2[1]}/&attr_name_Brand=Brand&attr_value_Brand=${name}`
+                                      );
+                                    }}
+                                  />
 
-                            <label
-                              className={`custom-control-label w-6 h-6 rounded-full   bg-[${item2}] form-check-label`}
-                              htmlFor="item2"
-                            ></label>
-                          </div>
-                        ))}
+                                  <label
+                                    className={`custom-control-label w-6 h-6 rounded-full    form-check-label`}
+                                    htmlFor="item2"
+                                    style={{
+                                      background: `${item2}`,
+                                  
+                                    }}
+                                  ></label>
+                                </div>
+                              )
+                          )}
                       </div>
                     </div>
                   </div>
@@ -546,7 +547,7 @@ const BrandFilter = () => {
                                       fontWeight: 100,
                                     }}
                                   >
-                                    Showing Products{" "}
+                                    Showing Products
                                     {(currentPage == 0
                                       ? currentPage
                                       : currentPage - 1) * pageSize}

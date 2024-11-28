@@ -100,7 +100,7 @@ const CategoryListproduct = async (req, res) => {
     const allColors = await product.distinct("color", { parent_category: upcomingCat._id.toString() });
 
     const uniqueColors = [...new Set(allColors.map(color => color.trim().toLowerCase()))];
-    console.log(uniqueColors)
+    
     // Fetch and normalize unique sizes
     const uniqueSizes = await product.distinct("mutipleSize", { parent_category: upcomingCat._id.toString() });
     const sizes = [...new Set(uniqueSizes.map(size => size.trim().toUpperCase()))];
@@ -161,7 +161,7 @@ const CategoryListproduct = async (req, res) => {
       try {
         
         const s = await brand.find({ brand_name: { $in: allBrand } });
-        console.log(s)
+        
         uniqueAllBrand = s.filter((cat, index, self) =>
           index === self.findIndex((c) => c._id.toString() === cat._id.toString())
         );

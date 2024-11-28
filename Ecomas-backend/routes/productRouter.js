@@ -32,7 +32,7 @@ router.get('/ByBrand/:name', BrandListproduct)
 router.get('/ByCategory/:name', CategoryListproduct)
 router.post('/luxProduct', getLuxProduct)
 router.get('/search/:name', searchitem)
-router.get('/product-by-category/:id', frontendproductlistbycategory)
+router.get('/product-by-category/:name', frontendproductlistbycategory)
 router.get('/product-detail/:id', checkuser, frontend_singleproduct)
 router.delete('/:id', deleteproduct)
 
