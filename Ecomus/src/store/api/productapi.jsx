@@ -11,11 +11,13 @@ export const productApi = createApi({
   },}),
   endpoints: (builder) => ({
     getProductByCategory: builder.query({
-        query: (name) => ({
-          url: `product-by-category/${name}`,
-          method:'GET'
-        })
+      query: ({ name, filter }) => ({
+        url: `product-by-category/${name}`,
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: filter, // Send the filter in the body
       }),
+    }),
     getProductBySearch: builder.query({
         query: (name) => ({
           url: `search/${name}`,

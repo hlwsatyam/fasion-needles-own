@@ -20,6 +20,7 @@ const singleproduct = async (req, res) => {
   }
 };
 const BrandListproduct = async (req, res) => {
+
   try {
     // Fetch distinct colors and ensure uniqueness
     const allColors = await product.distinct("color", { brand: req.params.name });
@@ -82,6 +83,7 @@ const BrandListproduct = async (req, res) => {
     res.status(200).send({
       colors: uniqueColors,
       sizes,
+
       categories: uniqueCategories,
       cildCategories: uniqueChildCategories,
       childSubCategories: uniqueChildSubCategories,
@@ -94,19 +96,38 @@ const BrandListproduct = async (req, res) => {
 const CategoryListproduct = async (req, res) => {
 
   try {
-    const upcomingCat = await category.findOne({ name: req.params.name.toUpperCase() })
+    const upcomingCat = await category.findOne({ name: req.params.name })
 
     // Fetch distinct colors and ensure uniqueness
-    const allColors = await product.distinct("color", { parent_category: upcomingCat._id.toString() });
+    const allColors = await product.distinct("color", {
+      $or: [
+        { parent_category: { $in: [upcomingCat._id.toString()] } },
+        { child_category: { $in: [upcomingCat._id.toString()] } },
+        { child_sub_category: { $in: [upcomingCat._id.toString()] } }
+      ]
+    });
+    
 
     const uniqueColors = [...new Set(allColors.map(color => color.trim().toLowerCase()))];
-    
+
     // Fetch and normalize unique sizes
-    const uniqueSizes = await product.distinct("mutipleSize", { parent_category: upcomingCat._id.toString() });
-    const sizes = [...new Set(uniqueSizes.map(size => size.trim().toUpperCase()))];
+    const uniqueSizes = await product.distinct("mutipleSize", {
+      $or: [
+        { parent_category: { $in: [upcomingCat._id.toString()] } },
+        { child_category: { $in: [upcomingCat._id.toString()] } },
+        { child_sub_category: { $in: [upcomingCat._id.toString()] } }
+      ]
+    });
+    const sizes = [...new Set(uniqueSizes.map(size => size))];
 
     // Fetch unique parent categories
-    const allCat = await product.distinct("parent_category", { parent_category: upcomingCat._id.toString() });
+    const allCat = await product.distinct("parent_category",{
+      $or: [
+        { parent_category: { $in: [upcomingCat._id.toString()] } },
+        { child_category: { $in: [upcomingCat._id.toString()] } },
+        { child_sub_category: { $in: [upcomingCat._id.toString()] } }
+      ]
+    });
     let uniqueCategories = [];
 
     if (allCat.length > 0) {
@@ -122,7 +143,13 @@ const CategoryListproduct = async (req, res) => {
       }
     }
     // Fetch unique child categories
-    const allChildCat = await product.distinct("child_category", { parent_category: upcomingCat._id.toString() });
+    const allChildCat = await product.distinct("child_category", {
+      $or: [
+        { parent_category: { $in: [upcomingCat._id.toString()] } },
+        { child_category: { $in: [upcomingCat._id.toString()] } },
+        { child_sub_category: { $in: [upcomingCat._id.toString()] } }
+      ]
+    });
     let uniqueChildCategories = [];
 
     if (allChildCat.length > 0) {
@@ -138,7 +165,13 @@ const CategoryListproduct = async (req, res) => {
       }
     }
     // Fetch unique subchild categories
-    const allChildSubCat = await product.distinct("child_sub_category", { parent_category: upcomingCat._id.toString() });
+    const allChildSubCat = await product.distinct("child_sub_category", {
+      $or: [
+        { parent_category: { $in: [upcomingCat._id.toString()] } },
+        { child_category: { $in: [upcomingCat._id.toString()] } },
+        { child_sub_category: { $in: [upcomingCat._id.toString()] } }
+      ]
+    });
     let uniqueChildSubCategories = [];
 
     if (allChildSubCat.length > 0) {
@@ -154,14 +187,20 @@ const CategoryListproduct = async (req, res) => {
       }
     }
     // Fetch unique brand categories
-    const allBrand = await product.distinct("brand", { parent_category: upcomingCat._id.toString() });
+    const allBrand = await product.distinct("brand",{
+      $or: [
+        { parent_category: { $in: [upcomingCat._id.toString()] } },
+        { child_category: { $in: [upcomingCat._id.toString()] } },
+        { child_sub_category: { $in: [upcomingCat._id.toString()] } }
+      ]
+    });
     let uniqueAllBrand = [];
 
     if (allBrand.length > 0) {
       try {
-        
+
         const s = await brand.find({ brand_name: { $in: allBrand } });
-        
+
         uniqueAllBrand = s.filter((cat, index, self) =>
           index === self.findIndex((c) => c._id.toString() === cat._id.toString())
         );
@@ -169,7 +208,7 @@ const CategoryListproduct = async (req, res) => {
         console.error("Error fetching categories:", err);
       }
     }
-    
+
     // Send the response
     res.status(200).send({
       colors: uniqueColors,

@@ -48,9 +48,7 @@ const BrandFilter = () => {
       if (response.status === 200) {
         setFilterList(response.data);
       }
-      settotalrecords(response.data.count);
-      setData(response.data.results.results);
-      setData4(response.data.results.categories);
+      
       setloading(false);
     } catch (error) {
       console.log(error);
@@ -548,17 +546,8 @@ const BrandFilter = () => {
                                     }}
                                   >
                                     Showing Products
-                                    {(currentPage == 0
-                                      ? currentPage
-                                      : currentPage - 1) * pageSize}
-                                    -
-                                    {Math.min(
-                                      (currentPage == 0
-                                        ? currentPage + 1
-                                        : currentPage) * 12,
-                                      totalrecords
-                                    )}{" "}
-                                    of {totalrecords} Result
+                                    0-
+                                     {itembybrand?.data?.length} of{" "}Result
                                   </h5>
                                 </div>
                                 <div

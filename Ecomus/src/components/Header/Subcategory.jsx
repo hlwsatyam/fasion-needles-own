@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 const Subcategory = ({ value, issubcategory }) => {
   const nvg = useNavigate();
-  
+
   const transfer2 = (id, title) => {
     nvg(`/category/${id}/${title}/none`);
     // nvg("/category", { state: { id: id } });
@@ -13,9 +13,7 @@ const Subcategory = ({ value, issubcategory }) => {
       {issubcategory == 0 ? (
         <button
           type="button"
-          onClick={() => {
-            transfer2(value._id, value.name);
-          }}
+          onClick={() => (window.location.href = `/category/${value.name}`)}
           className="btn dark-menu-item desgin1 ulappear"
           style={{ padding: "6px 18px 0px 18px" }}
         >
@@ -25,9 +23,7 @@ const Subcategory = ({ value, issubcategory }) => {
         <>
           {" "}
           <button
-            onClick={() =>
-              (window.location.href = `/category/${value._id}/${value.name}/none`)
-            }
+            onClick={() => (window.location.href = `/category/${value.name}`)}
             type="button"
             className="btn dark-menu-item desgin1 ulappear"
             style={{ padding: "6px 18px 0px 18px" }}
@@ -59,9 +55,12 @@ const Subcategory = ({ value, issubcategory }) => {
                         {chunk.map((item) => (
                           <div key={item._id} className="menu-title   mb-2">
                             <h5
-                              onClick={() => {
-                                transfer2(item._id, item.name);
-                              }}
+                             onClick={() =>
+                              (window.location.href = `/category/${item.name.replace(
+                                / /g,
+                                "-"
+                              )}`)
+                            }
                               style={{ cursor: "pointer" }}
                               className=" !text-blue-500 border-b-2   hover:!rotate-2 !text-sm"
                             >
@@ -71,9 +70,12 @@ const Subcategory = ({ value, issubcategory }) => {
                             {item?.subcategories?.map((i, idx) => (
                               <div key={item._id} className="menu-title mb-2">
                                 <h5
-                                  onClick={() => {
-                                    transfer2(item._id, item.name);
-                                  }}
+                                  onClick={() =>
+                                    (window.location.href = `/category/${i.name.replace(
+                                      / /g,
+                                      "-"
+                                    )}`)
+                                  }
                                   style={{ cursor: "pointer" }}
                                   className=" !text-black hover:!rotate-2 !text-xs"
                                 >

@@ -66,7 +66,7 @@ const phonepeActivate = async (req, res, pdata, token) => {
         }
         2
     } catch (e) {
-        console.log(e)
+         
         res.status(203).json({ message: e.message, success: false });
     }
 }

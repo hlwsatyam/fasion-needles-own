@@ -4,10 +4,21 @@ const product = require("../../../Models/product");
 const frontendproductlistbycategory = async (req, res) => {
   const { none, page, max_price, min_price, order, orderby, brand, size, color, weight } =
     req.query;
+  const filter =
+    req.body;
+  
+  //filter={
+  //   Category: [ 'WOMEN' ],
+  //   Brand: [ 'Zara', 'Asos' ],
+  //   childCategory: [ 'Western Wear' ],
+  //   subChildCategory: [ 'Jumpsuits ' ],
+  //   Color: [ 'black', '#dedcd6' ],
+  //   Size: [ 'L', 'XL', 'XS' ]
+  // }
   try {
     const categoryId = req.params.name;
     const cat = await category.findOne({ name: categoryId });
-console.log(cat)
+
     const itemsPerPage = 12;
     const pageNumber = parseInt(page) || 1;
     const skip = (pageNumber - 1) * itemsPerPage;
@@ -48,9 +59,20 @@ console.log(cat)
       baseQuery.weight = weightnum;
       baseQuery.weight_type = weighttype;
     }
-    if (color) baseQuery.color = color;
-    if (size) baseQuery.size = size;
-    if (brand) baseQuery.brand = brand;
+    // if (color) baseQuery.color = color;
+    if (filter.Color && filter.Color.length > 0) {
+      baseQuery.color = { $in: filter.Color };
+    }
+    // // if (size) baseQuery.size = size;
+    if (filter.Size && filter.Size.length > 0) {
+      baseQuery.mutipleSize = { $in: filter.Size }; // Ensure filter.Size exists and is not empty
+    }
+
+    // if (brand) baseQuery.brand = brand;
+    if (filter.Brand && filter.Brand.length > 0) {
+      baseQuery.brand = { $in: filter.Brand };
+    }
+
 
     // Get total count before applying filters
     const totalCountBeforeFilter = await product.countDocuments(baseQuery);
@@ -61,7 +83,7 @@ console.log(cat)
       .sort(sortOptions)
       .skip(skip)
       .limit(itemsPerPage);
-    console.log(productsBeforeFilter);
+
     const totalItems = totalCountBeforeFilter;
     const totalPages = Math.ceil(totalItems / itemsPerPage);
 

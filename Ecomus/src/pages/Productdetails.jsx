@@ -100,7 +100,6 @@ function Productdetails() {
     try {
       const response = await axios.post(
         ` ${process.env.REACT_APP_API_URL}/user/comment/getcomment`,
-
         {
           product_id: id,
         }
@@ -1022,7 +1021,7 @@ function Productdetails() {
         </div>
       </section>
       <InfoList />
-      <RelativeProduct  parentCat= {data?.parentcategory?.[0]} childCat={data?.childcategory?.[0]} subChildCat={data?.child_sub_category?.[0]}   />
+      <RelativeProduct productId={id}  parentCat= {data?.parentcategory?.[0]} childCat={data?.childcategory?.[0]} subChildCat={data?.child_sub_category?.[0]}   />
       <OverviewSection3 getComment={getComment} />
       <Features />
       <Footer />

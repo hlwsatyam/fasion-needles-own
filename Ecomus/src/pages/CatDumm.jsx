@@ -8,9 +8,18 @@ import ReactPaginate from "react-paginate";
 import { useGetItemByBrandQuery } from "../store/api/brandapi";
 import Footer from "../components/Footer";
 import { useGetProductByCategoryQuery } from "../store/api/productapi";
+import { Shop } from "@mui/icons-material";
+import { FaHeart } from "react-icons/fa";
 const CatFilter = () => {
   const { name } = useParams();
-
+  const [shortName, setShortName] = useState({
+    Category: [],
+    Brand: [],
+    childCategory: [],
+    subChildCategory: [],
+    Color: [],
+    Size: [],
+  });
   const nvg = useNavigate();
   const [brand, setbrand] = useState(true);
   const [categoriesbtn, setcategoriesbtn] = useState(true);
@@ -38,10 +47,16 @@ const CatFilter = () => {
 
   const {
     data: itembybrand,
-    isLoading:brandloading,
+    isLoading: brandloading,
     refetch,
-  } = useGetProductByCategoryQuery(name.replace(/-/g, " "));
+  } = useGetProductByCategoryQuery({
+    name: name.replace(/-/g, " "), // Replace dashes with spaces in the name
+    filter: shortName, // Pass the filter directly
+  });
 
+  useEffect(() => {
+    refetch();
+  }, [shortName]);
 
   const [categories, setCategories] = useState([]);
   const [totalrecords, settotalrecords] = useState(0);
@@ -53,13 +68,11 @@ const CatFilter = () => {
         process.env.REACT_APP_API_URL
       }/product/ByCategory/${name?.replace(/-/g, " ")}/?offset=${pagenumber}`;
       const response = await axios.get(urlapi);
-      console.log(response.data);
+
       if (response.status === 200) {
         setFilterList(response.data);
       }
-      settotalrecords(response.data.count);
-      setData(response.data.results.results);
-      setData4(response.data.results.categories);
+
       setloading(false);
     } catch (error) {
       console.log(error);
@@ -253,10 +266,16 @@ const CatFilter = () => {
                               type="checkbox"
                               className="custom-control-input form-check-input"
                               id="item2"
-                              onClick={() => {
-                                nvg(
-                                  `/category/${item2[0]}/${item2[1]}/&attr_name_Brand=Brand&attr_value_Brand=${name}`
-                                );
+                              checked={shortName.Category.includes(item2.name)} // Dynamically set based on state
+                              onChange={() => {
+                                setShortName((prev) => ({
+                                  ...prev,
+                                  Category: prev.Category.includes(item2.name)
+                                    ? prev.Category.filter(
+                                        (category) => category !== item2.name
+                                      ) // Remove if exists
+                                    : [...prev.Category, item2.name], // Add if not exists
+                                }));
                               }}
                             />
 
@@ -297,10 +316,20 @@ const CatFilter = () => {
                               type="checkbox"
                               className="custom-control-input form-check-input"
                               id="item2"
-                              onClick={() => {
-                                nvg(
-                                  `/category/${item2[0]}/${item2[1]}/&attr_name_Brand=Brand&attr_value_Brand=${name}`
-                                );
+                              checked={shortName.childCategory.includes(
+                                item2.name
+                              )} // Dynamically set based on state
+                              onChange={() => {
+                                setShortName((prev) => ({
+                                  ...prev,
+                                  childCategory: prev.childCategory.includes(
+                                    item2.name
+                                  )
+                                    ? prev.childCategory.filter(
+                                        (category) => category !== item2.name
+                                      ) // Remove if exists
+                                    : [...prev.childCategory, item2.name], // Add if not exists
+                                }));
                               }}
                             />
 
@@ -328,6 +357,25 @@ const CatFilter = () => {
                       <div className="collection-brand-filter">
                         {filterList?.brands.map((item2, index2) => (
                           <div className="custom-control custom-checkbox  form-check collection-filter-checkbox">
+                            <input
+                              type="checkbox"
+                              className="custom-control-input form-check-input"
+                              id="item2"
+                              checked={shortName.Brand.includes(
+                                item2.brand_name
+                              )} // Dynamically set based on state
+                              onChange={() => {
+                                setShortName((prev) => ({
+                                  ...prev,
+                                  Brand: prev.Brand.includes(item2.brand_name)
+                                    ? prev.Brand.filter(
+                                        (category) =>
+                                          category !== item2.brand_name
+                                      ) // Remove if exists
+                                    : [...prev.Brand, item2.brand_name], // Add if not exists
+                                }));
+                              }}
+                            />
                             <label
                               className="custom-control-label form-check-label"
                               htmlFor="item2"
@@ -363,10 +411,19 @@ const CatFilter = () => {
                               type="checkbox"
                               className="custom-control-input form-check-input"
                               id="item2"
-                              onClick={() => {
-                                nvg(
-                                  `/category/${item2[0]}/${item2[1]}/&attr_name_Brand=Brand&attr_value_Brand=${name}`
-                                );
+                              checked={shortName.subChildCategory.includes(
+                                item2.name
+                              )} // Dynamically set based on state
+                              onChange={() => {
+                                setShortName((prev) => ({
+                                  ...prev,
+                                  subChildCategory:
+                                    prev.subChildCategory.includes(item2.name)
+                                      ? prev.subChildCategory.filter(
+                                          (category) => category !== item2.name
+                                        ) // Remove if exists
+                                      : [...prev.subChildCategory, item2.name], // Add if not exists
+                                }));
                               }}
                             />
 
@@ -402,7 +459,7 @@ const CatFilter = () => {
                         </style>
                       }
                     </h3>
-                    {console.log(filterList?.colors)}
+
                     <div
                       className="collection-collapse-block-content"
                       style={{
@@ -416,10 +473,16 @@ const CatFilter = () => {
                               type="checkbox"
                               className="custom-control-input  form-check-input"
                               id="item2"
-                              onClick={() => {
-                                nvg(
-                                  `/category/${item2[0]}/${item2[1]}/&attr_name_Brand=Brand&attr_value_Brand=${name}`
-                                );
+                              checked={shortName.Color.includes(item2)} // Dynamically set based on state
+                              onChange={() => {
+                                setShortName((prev) => ({
+                                  ...prev,
+                                  Color: prev.Color.includes(item2)
+                                    ? prev.Color.filter(
+                                        (category) => category !== item2
+                                      ) // Remove if exists
+                                    : [...prev.Color, item2], // Add if not exists
+                                }));
                               }}
                             />
 
@@ -470,21 +533,28 @@ const CatFilter = () => {
                       }}
                     >
                       <div className="collection-brand-filter">
+                        {console.log(filterList?.sizes)}
                         {filterList?.sizes.map((item2, index2) => (
                           <div className="custom-control custom-checkbox  form-check collection-filter-checkbox">
                             <input
                               type="checkbox"
                               className="custom-control-input form-check-input"
                               id="item2"
-                              onClick={() => {
-                                nvg(
-                                  `/category/${item2[0]}/${item2[1]}/&attr_name_Brand=Brand&attr_value_Brand=${name}`
-                                );
+                              checked={shortName.Size.includes(item2)} // Dynamically set based on state
+                              onChange={() => {
+                                setShortName((prev) => ({
+                                  ...prev,
+                                  Size: prev.Size.includes(item2)
+                                    ? prev.Size.filter(
+                                        (category) => category !== item2
+                                      ) // Remove if exists
+                                    : [...prev.Size, item2], // Add if not exists
+                                }));
                               }}
                             />
 
                             <label
-                              className="custom-control-label form-check-label"
+                              className="custom-control-label uppercase form-check-label"
                               htmlFor="item2"
                             >
                               {item2}
@@ -576,18 +646,8 @@ const CatFilter = () => {
                                       fontWeight: 100,
                                     }}
                                   >
-                                    Showing Products{" "}
-                                    {(currentPage == 0
-                                      ? currentPage
-                                      : currentPage - 1) * pageSize}
-                                    -
-                                    {Math.min(
-                                      (currentPage == 0
-                                        ? currentPage + 1
-                                        : currentPage) * 12,
-                                      totalrecords
-                                    )}{" "}
-                                    of {totalrecords} Result
+                                    Showing Products 0-{" "}
+                                    {itembybrand?.data?.length} of Result
                                   </h5>
                                 </div>
                                 <div
@@ -605,7 +665,7 @@ const CatFilter = () => {
                           <div className="row !w-full removepadding additionalgap">
                             {itembybrand.data[0] ? (
                               itembybrand.data.map((item, index) => (
-                                <div className="col-xl-3 col-md-4 col-sm-6 col-12">
+                                <div className="col-xl-3 hover:shadow-2xl  col-md-4 col-sm-6 col-12">
                                   <div
                                     className="bg-white catbox"
                                     style={{ margin: "3px 4px" }}
@@ -617,13 +677,16 @@ const CatFilter = () => {
                                           className="btn fixedhight"
                                           style={{ width: "100%" }}
                                           onClick={() => {
-                                            transfer(item.id, item.title);
+                                            window.open(
+                                              `/productdetails/${item?._id}`,
+                                              "_blank"
+                                            );
                                           }}
                                         >
-                                          {" "}
+                                          <FaHeart />{" "}
                                           <img
                                             src={`${process.env.REACT_APP_API_IMAGE_URL}${item?.product_image1}`}
-                                            className="img-fluid  "
+                                            className="img-fluid h-[300px] object-contain w-[300px] "
                                             alt={item.product_name}
                                           />{" "}
                                         </button>
@@ -631,6 +694,9 @@ const CatFilter = () => {
                                     </div>
                                     <div className="product-detail detail-center detail-inverse">
                                       <div className="detail-title">
+                                        <p className="text-center text-sm text-yellow-800">
+                                          {item?.brand}
+                                        </p>
                                         <div className="detail-left">
                                           <div
                                             style={{
@@ -665,6 +731,7 @@ const CatFilter = () => {
                                             </button>
                                           </div>
                                         </div>
+
                                         <div
                                           className="detail-right"
                                           style={{ width: "100%" }}

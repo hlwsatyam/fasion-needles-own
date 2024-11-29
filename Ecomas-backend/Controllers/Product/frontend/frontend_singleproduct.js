@@ -80,7 +80,7 @@ const fetchchildcategory = async (categoryarray) => {
   
     try {
       const categoryIds = categoryarray[0].split(",");
-      console.log(categoryIds)
+   
       const objectIdArray = categoryIds.map(
         (id) => new mongoose.Types.ObjectId(id)
       );
