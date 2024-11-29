@@ -75,7 +75,7 @@ function LuxList({ title, subChildCat, productId, parentCat, childCat }) {
                       {allProducts.map(
                         (item) =>
                           item._id.toString() != productId && (
-                            <Crouselitem key={item.id} item={item} />
+                            <Crouselitem key={item._id.toString()} item={item} />
                           )
                       )}
                     </OwlCarousel>

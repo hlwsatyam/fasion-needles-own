@@ -2,13 +2,12 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 const Crouselitem = ({ item }) => {
-  
   return (
     <div>
       <div
         className="product-box product-box2"
         onClick={() => {
-          window.location.href=(`/productdetails/${item._id}`);
+          window.location.href = `/productdetails/${item._id}`;
         }}
       >
         <div className="product-imgbox">
@@ -16,7 +15,8 @@ const Crouselitem = ({ item }) => {
             <a href="javascript:void(0)">
               <img
                 src={`${process.env.REACT_APP_API_IMAGE_URL}${item.product_image1}`}
-                alt=""
+                srcSet={`${process.env.REACT_APP_API_IMAGE_URL}${item.product_image1}`}
+                alt={item.product_name}
                 className="h-[300px]   object-fill "
               />
             </a>

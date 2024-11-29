@@ -51,9 +51,9 @@ const Subcategory = ({ value, issubcategory }) => {
                       return resultArray;
                     }, [])
                     .map((chunk, chunkIndex) => (
-                      <div className="link-section !flex  gap-x-10">
-                        {chunk.map((item) => (
-                          <div key={item._id} className="menu-title   mb-2">
+                      <div key={chunkIndex*new Date().getTime()} className= "link-section !flex  gap-x-10">
+                        {chunk.map((item,i) => (
+                          <div  key={i*new Date().getTime()*1000}  className="menu-title   mb-2">
                             <h5
                              onClick={() =>
                               (window.location.href = `/category/${item.name.replace(
@@ -68,7 +68,7 @@ const Subcategory = ({ value, issubcategory }) => {
                             </h5>
 
                             {item?.subcategories?.map((i, idx) => (
-                              <div key={item._id} className="menu-title mb-2">
+                              <div   key={idx*new Date().getTime()*10000}  className="menu-title mb-2">
                                 <h5
                                   onClick={() =>
                                     (window.location.href = `/category/${i.name.replace(

@@ -9,13 +9,13 @@ export default function Testimonials() {
     fetchData();
   }, []);
   const fetchData = async () => {
-    console.log(process.env.REACT_APP_API_URL);
+   
     try {
       const res = await axios.get(
         `${process.env.REACT_APP_API_URL}/categoryInfo-info`
       );
       if (res.status === 200) {
-        console.log(res.data);
+        
         setAllText(res.data);
       }
     } catch (error) {
@@ -32,9 +32,10 @@ export default function Testimonials() {
       </div>
       <div className="mx-auto px-2 sm:px-6 lg:px-8">
         <div className="flex flex-wrap mt-4 justify-center items-center gap-x-[7px] sm:gap-8">
-          {allText.map((item) => {
+          {allText.map((item,i) => {
             return (
               <div
+                key={i*1000}
                 onClick={() =>
                   nvg(`/category/${item.name}`, {
                     state: { id: item._id},
@@ -42,7 +43,9 @@ export default function Testimonials() {
                 }
                 className="rounded-full sha h-20 shadow sm:w-32 sm:h-32  w-20 bg-white s"
               >
+                
                 <img
+                srcSet={`${process.env.REACT_APP_API_IMAGE_URL}${item.banner}`}
                   src={`${process.env.REACT_APP_API_IMAGE_URL}${item.banner}`}
                   alt={item.metatitle}
                   className="  mix-blend-multiply cursor-pointer rounded-full w-full h-full object-contain object-center mb-4"

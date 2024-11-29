@@ -15,7 +15,7 @@ import {
 import Crouselitem from "../components/Crouselitem";
 import { useGetBrandQuery } from "../store/api/brandapi";
 import Testomonials from "../components/Testomonials";
-import ShopCard from "../components/ShopCard";
+// import ShopCard from "../components/ShopCard";
 import Categ from "../components/Categ";
 import LuxList from "../TestComp/luxList/LuxList";
 import HelmetTag from "../components/Header/Helmet";
@@ -171,12 +171,13 @@ const Home = () => {
                 className="mobileorlaptop"
                 // style={{ height: isMobile ? '300px' : '400px'}}
               >
-                <img
+                 
+                <img loading="lazy"
                   onClick={() => {
                     window.location.href = item.banner_link;
                   }}
                   src={`${process.env.REACT_APP_API_IMAGE_URL}${item.banner}`}
-                  alt={`banner-${index}`}
+                  alt={`${item?.banner_alt}`}
                   className="img-fluid   mainbanner bg-img"
                   style={{
                     width: "100%",
@@ -210,9 +211,10 @@ const Home = () => {
                   style={{ width: "100%", height: "100%" }}
                   {...optionsforbrand}
                 >
-                  {console.log(brnaditem)}
+         
                   {brnaditem?.data.map((item, index) => (
                     <div
+                    key={index*new Date().getTime()}
                       className="brand-box cursor-pointer h-[150px] !w-[150px]  rounded-full "
                       onClick={() => {
                         nvg(`/brand/${item.brand_name?.replace(/ /g, "-")}`, {
@@ -220,7 +222,8 @@ const Home = () => {
                         });
                       }}
                     >
-                      <img
+                      <img loading="lazy"
+
                         src={`${process.env.REACT_APP_API_IMAGE_URL}${item.brand_image}`}
                         alt={item.brand_name}
                         className=" w-full h-full object-contain "
@@ -313,8 +316,8 @@ const Home = () => {
                   style={{ width: "100%", height: "100%" }}
                   {...options2}
                 >
-                  {newarrivals?.data.map((item) => (
-                    <Crouselitem item={item} />
+                  {newarrivals?.data.map((item,index) => (
+                    <Crouselitem item={item}   key={index*new Date().getTime()} />
                   ))}
                 </OwlCarousel>
               </div>
@@ -340,8 +343,8 @@ const Home = () => {
                   style={{ width: "100%", height: "100%" }}
                   {...options2}
                 >
-                  {bestseller?.data.map((item) => (
-                    <Crouselitem item={item} />
+                  {bestseller?.data.map((item,index) => (
+                    <Crouselitem   key={index*new Date().getTime()} item={item} />
                   ))}
                 </OwlCarousel>
               </div>
@@ -368,8 +371,8 @@ const Home = () => {
                   style={{ width: "100%", height: "100%" }}
                   {...options2}
                 >
-                  {featureitem?.data.map((item) => (
-                    <Crouselitem item={item} />
+                  {featureitem?.data.map((item,index) => (
+                    <Crouselitem key={index*new Date().getTime()} item={item} />
                   ))}
                 </OwlCarousel>
               </div>
@@ -387,12 +390,12 @@ const Home = () => {
           {Banner?.data.map((item, index) =>
             item.banner_type == "Slider" ? (
               <div key={index} style={{ height: isMobile ? "200px" : "400px" }}>
-                <img
+                <img loading="lazy"
                   onClick={() => {
                     window.location.href = item.banner_link;
                   }}
                   src={`${process.env.REACT_APP_API_IMAGE_URL}${item.banner}`}
-                  alt={`banner-${index}`}
+                  alt={`${item?.banner_alt}`}
                   className="img-fluid mainbanner bg-img"
                   style={{
                     width: "100%",
