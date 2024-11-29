@@ -17,7 +17,7 @@ router.get('/',admin_brandlist);
 router.get('/frontend',frontend_brandlist);
 router.get('/brandlist',brandlist);
 router.post('/fetchallbrand',list);
-router.get('/frontend/:name',productbybrand);
+router.post('/frontend/:name',productbybrand);
 router.get('/:id',brandsingle);
 router.delete('/:id',deletebrand);
 router.patch('/:id',upload.fields([

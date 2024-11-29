@@ -90,7 +90,7 @@ const CatFilter = () => {
       <Header />
       <div className="category-header7" style={{ zIndex: 9991 }}>
         <div className="container-fluid">
-          <div className="row !w-full">
+          <div className="row !w-full ">
             <div className="col-12">
               <div className="category-contain">
                 <div className="category-left showandhide ">
@@ -195,7 +195,7 @@ const CatFilter = () => {
       >
         <div className="collection-wrapper" style={{ background: "#f9f9f9" }}>
           <div className="custom-container">
-            <div className="row !w-full" style={{ background: "#f9f9f9" }}>
+            <div className="row  !p-0 !m-0   !w-full" style={{ background: "#f9f9f9" }}>
               <div
                 className="col-sm-3 collection-filter category-page-side"
                 style={{
@@ -533,7 +533,7 @@ const CatFilter = () => {
                       }}
                     >
                       <div className="collection-brand-filter">
-                        {console.log(filterList?.sizes)}
+                    
                         {filterList?.sizes.map((item2, index2) => (
                           <div className="custom-control custom-checkbox  form-check collection-filter-checkbox">
                             <input
@@ -615,12 +615,12 @@ const CatFilter = () => {
               </div>
 
               {/* filter for sort by end here */}
-              <div className="collection-content col">
-                <div className="page-main-content  !p-0">
-                  <div className="row !w-full">
-                    <div className="col-sm-12">
+              <div className="collection-content  !p-0 !m-0   col">
+                <div className="page-main-content  !p-0 !m-0    !p-0">
+                  <div className="row  !p-0 !m-0   !w-full">
+                    <div className=" !p-0 !m-0    col-sm-12">
                       <div
-                        className="collection-product-wrapper"
+                        className="  !p-0 !m-0   collection-product-wrapper"
                         style={{ background: "#f9f9f9" }}
                       >
                         <div className="product-top-filter">
@@ -661,8 +661,8 @@ const CatFilter = () => {
                             </div>
                           </div>
                         </div>
-                        <div className="product-wrapper-grid product">
-                          <div className="row !w-full removepadding additionalgap">
+                        <div className="product-wrapper-grid   !p-0 !m-0   product">
+                          <div className="row !p-0 !m-0   !w-full removepadding additionalgap">
                             {itembybrand.data[0] ? (
                               itembybrand.data.map((item, index) => (
                                 <div className="col-xl-3 hover:shadow-2xl  col-md-4 col-sm-6 col-12">
@@ -692,7 +692,7 @@ const CatFilter = () => {
                                         </button>
                                       </div>
                                     </div>
-                                    <div className="product-detail detail-center detail-inverse">
+                                    {/* <div className="product-detail detail-center detail-inverse"> */}
                                       <div className="detail-title">
                                         <p className="text-center text-sm text-yellow-800">
                                           {item?.brand}
@@ -788,7 +788,7 @@ const CatFilter = () => {
                                           </div>
                                         </div>
                                       </div>
-                                    </div>
+                                    {/* </div> */}
                                   </div>
                                 </div>
                               ))
@@ -925,7 +925,7 @@ const CatFilter = () => {
                                   <i className="fa fa-bars sidebar-bar" />
                                 </div>
 
-                                <div className="collection-collapse">
+                                {/* <div className="collection-collapse">
                                   <h3
                                     className="collapse-block-title mt-0"
                                     onClick={() => {
@@ -941,7 +941,7 @@ const CatFilter = () => {
                                       }}
                                     />
                                   </h3>
-                                </div>
+                                </div> */}
                               </div>
                             </div>
                           </div>

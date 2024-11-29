@@ -11,9 +11,11 @@ export const brandApi = createApi({
       })
     }),
     getItemByBrand: builder.query({
-      query: (name) => ({
+      query: ({ name, filter }) => ({
         url: `frontend/${name}`,
-        method:'GET'
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: filter, // Send the filter in the body
       })
     }),
     getNewArrival: builder.query({

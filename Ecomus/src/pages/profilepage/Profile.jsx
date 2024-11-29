@@ -15,6 +15,7 @@ import {
   useGetUserAddressQuery,
 } from "../../store/api/addressapi";
 import { useGetOrderByUserQuery } from "../../store/api/orderapi";
+import Footer from "../../components/Footer";
 export const Profile = () => {
   useEffect(() => {
     if (gettoken() == null) {
@@ -982,7 +983,7 @@ export const Profile = () => {
         </div>
         {/* </div> */}
 
-        {/* <Footer /> */}
+        <Footer />
 
         {/* footer start */}
       </div>

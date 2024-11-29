@@ -24,11 +24,11 @@ const BrandListproduct = async (req, res) => {
   try {
     // Fetch distinct colors and ensure uniqueness
     const allColors = await product.distinct("color", { brand: req.params.name });
-    const uniqueColors = [...new Set(allColors.map(color => color.trim().toLowerCase()))];
-
+    const uniqueColors = [...new Set(allColors.map(color => color ))];
+console.log(allColors)
     // Fetch and normalize unique sizes
     const uniqueSizes = await product.distinct("mutipleSize", { brand: req.params.name });
-    const sizes = [...new Set(uniqueSizes.map(size => size.trim().toUpperCase()))];
+    const sizes = [...new Set(uniqueSizes.map(size => size))];
 
     // Fetch unique parent categories
     const allCat = await product.distinct("parent_category", { brand: req.params.name });

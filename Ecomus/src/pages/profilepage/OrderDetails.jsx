@@ -7,7 +7,7 @@ const OrderDetails = () => {
   const { item: order } = useLocation().state;
 
   return (
-    <div className="bg-gradient-to-r from-blue-50 to-blue-100 min-h-screen">
+    <div className=" min-h-screen">
       <Header />
       <div className="  mx-auto bg-white rounded-lg shadow-lg overflow-hidden my-8">
         {/* Order Info */}

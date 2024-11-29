@@ -7,9 +7,17 @@ import ReactPaginate from "react-paginate";
 
 import { useGetItemByBrandQuery } from "../store/api/brandapi";
 import Footer from "../components/Footer";
+import { FaHeart } from "react-icons/fa";
 const BrandFilter = () => {
   const { name } = useParams();
-
+  const [shortName, setShortName] = useState({
+    Category: [],
+    Brand: [],
+    childCategory: [],
+    subChildCategory: [],
+    Color: [],
+    Size: [],
+  });
   const nvg = useNavigate();
   const [brand, setbrand] = useState(true);
   const [categoriesbtn, setcategoriesbtn] = useState(true);
@@ -31,9 +39,17 @@ const BrandFilter = () => {
     });
     window.location.reload();
   };
-  const { data: itembybrand, isLoading: brandloading } = useGetItemByBrandQuery(
-    name.replace(/-/g, " ")
+  const { data: itembybrand, isLoading: brandloading , refetch} = useGetItemByBrandQuery(
+    {
+      name: name.replace(/-/g, " "), // Replace dashes with spaces in the name
+      filter: shortName, // Pass the filter directly
+    }
   );
+
+
+
+
+
   const [categories, setCategories] = useState([]);
   const [totalrecords, settotalrecords] = useState(0);
   const [filterList, setFilterList] = useState(null);
@@ -58,6 +74,10 @@ const BrandFilter = () => {
   useEffect(() => {
     filterdata(0);
   }, []);
+  useEffect(() => {
+    refetch();
+  }, [shortName]);
+
   const pageCount = Math.ceil(totalrecords / 12);
   return brandloading == true ? (
     <></>
@@ -166,12 +186,12 @@ const BrandFilter = () => {
       {/* breadcrumb End */}
       {/* section start */}
       <section
-        className="section-big-pt-space ratio_asos b-g-light"
+        className="section-big-pt-space !p-0 !m-0  ratio_asos b-g-light"
         style={{ padding: "0px" }}
       >
-        <div className="collection-wrapper" style={{ background: "#f9f9f9" }}>
-          <div className="custom-container">
-            <div className="row !w-full" style={{ background: "#f9f9f9" }}>
+        <div className="collection-wrapper !p-0 !m-0 " style={{ background: "#f9f9f9" }}>
+          <div className="custom-container !p-0 !m-0 ">
+            <div className="row  !p-0 !m-0  !w-full" style={{ background: "#f9f9f9" }}>
               <div
                 className="col-sm-3 collection-filter category-page-side"
                 style={{
@@ -242,10 +262,16 @@ const BrandFilter = () => {
                               type="checkbox"
                               className="custom-control-input form-check-input"
                               id="item2"
-                              onClick={() => {
-                                nvg(
-                                  `/category/${item2[0]}/${item2[1]}/&attr_name_Brand=Brand&attr_value_Brand=${name}`
-                                );
+                              checked={shortName.Category.includes(item2.name)} // Dynamically set based on state
+                              onChange={() => {
+                                setShortName((prev) => ({
+                                  ...prev,
+                                  Category: prev.Category.includes(item2.name)
+                                    ? prev.Category.filter(
+                                        (category) => category !== item2.name
+                                      ) // Remove if exists
+                                    : [...prev.Category, item2.name], // Add if not exists
+                                }));
                               }}
                             />
 
@@ -286,10 +312,20 @@ const BrandFilter = () => {
                               type="checkbox"
                               className="custom-control-input form-check-input"
                               id="item2"
-                              onClick={() => {
-                                nvg(
-                                  `/category/${item2[0]}/${item2[1]}/&attr_name_Brand=Brand&attr_value_Brand=${name}`
-                                );
+                              checked={shortName.childCategory.includes(
+                                item2.name
+                              )} // Dynamically set based on state
+                              onChange={() => {
+                                setShortName((prev) => ({
+                                  ...prev,
+                                  childCategory: prev.childCategory.includes(
+                                    item2.name
+                                  )
+                                    ? prev.childCategory.filter(
+                                        (category) => category !== item2.name
+                                      ) // Remove if exists
+                                    : [...prev.childCategory, item2.name], // Add if not exists
+                                }));
                               }}
                             />
 
@@ -328,10 +364,19 @@ const BrandFilter = () => {
                               type="checkbox"
                               className="custom-control-input form-check-input"
                               id="item2"
-                              onClick={() => {
-                                nvg(
-                                  `/category/${item2[0]}/${item2[1]}/&attr_name_Brand=Brand&attr_value_Brand=${name}`
-                                );
+                              checked={shortName.subChildCategory.includes(
+                                item2.name
+                              )} // Dynamically set based on state
+                              onChange={() => {
+                                setShortName((prev) => ({
+                                  ...prev,
+                                  subChildCategory:
+                                    prev.subChildCategory.includes(item2.name)
+                                      ? prev.subChildCategory.filter(
+                                          (category) => category !== item2.name
+                                        ) // Remove if exists
+                                      : [...prev.subChildCategory, item2.name], // Add if not exists
+                                }));
                               }}
                             />
 
@@ -383,10 +428,16 @@ const BrandFilter = () => {
                                     type="checkbox"
                                     className="custom-control-input  form-check-input"
                                     id="item2"
-                                    onClick={() => {
-                                      nvg(
-                                        `/category/${item2[0]}/${item2[1]}/&attr_name_Brand=Brand&attr_value_Brand=${name}`
-                                      );
+                                    checked={shortName.Color.includes(item2)} // Dynamically set based on state
+                                    onChange={() => {
+                                      setShortName((prev) => ({
+                                        ...prev,
+                                        Color: prev.Color.includes(item2)
+                                          ? prev.Color.filter(
+                                              (category) => category !== item2
+                                            ) // Remove if exists
+                                          : [...prev.Color, item2], // Add if not exists
+                                      }));
                                     }}
                                   />
 
@@ -445,15 +496,21 @@ const BrandFilter = () => {
                               type="checkbox"
                               className="custom-control-input form-check-input"
                               id="item2"
-                              onClick={() => {
-                                nvg(
-                                  `/category/${item2[0]}/${item2[1]}/&attr_name_Brand=Brand&attr_value_Brand=${name}`
-                                );
+                              checked={shortName.Size.includes(item2)} // Dynamically set based on state
+                              onChange={() => {
+                                setShortName((prev) => ({
+                                  ...prev,
+                                  Size: prev.Size.includes(item2)
+                                    ? prev.Size.filter(
+                                        (category) => category !== item2
+                                      ) // Remove if exists
+                                    : [...prev.Size, item2], // Add if not exists
+                                }));
                               }}
                             />
 
                             <label
-                              className="custom-control-label form-check-label"
+                              className="custom-control-label uppercase form-check-label"
                               htmlFor="item2"
                             >
                               {item2}
@@ -514,10 +571,10 @@ const BrandFilter = () => {
               </div>
 
               {/* filter for sort by end here */}
-              <div className="collection-content col">
-                <div className="page-main-content  !p-0">
-                  <div className="row !w-full">
-                    <div className="col-sm-12">
+              <div className="collection-content  !p-0 !m-0   col">
+                <div className="page-main-content  !p-0 !m-0   ">
+                  <div className="row !w-full  !p-0 !m-0 ">
+                    <div className="col-sm-12  !p-0 !m-0 ">
                       <div
                         className="collection-product-wrapper"
                         style={{ background: "#f9f9f9" }}
@@ -527,7 +584,7 @@ const BrandFilter = () => {
                             className="row !w-full"
                             style={{ background: "#f9f9f9" }}
                           ></div>
-                          <div className="row !w-full">
+                          <div className="row !w-full  !p-0 !m-0 ">
                             <div className="col-12">
                               <div className="product-filter-content">
                                 <div
@@ -562,10 +619,10 @@ const BrandFilter = () => {
                           </div>
                         </div>
                         <div className="product-wrapper-grid product">
-                          <div className="row !w-full removepadding additionalgap">
+                          <div className="row !w-full  !p-0 !m-0  removepadding additionalgap">
                             {itembybrand.data[0] ? (
                               itembybrand.data.map((item, index) => (
-                                <div className="col-xl-3 col-md-4 col-sm-6 col-12">
+                                <div className="col-xl-3 hover:shadow-2xl  col-md-4 col-sm-6 col-12">
                                   <div
                                     className="bg-white catbox"
                                     style={{ margin: "3px 4px" }}
@@ -577,20 +634,29 @@ const BrandFilter = () => {
                                           className="btn fixedhight"
                                           style={{ width: "100%" }}
                                           onClick={() => {
-                                            transfer(item.id, item.title);
+                                            window.open(
+                                              `/productdetails/${item?._id}`,
+                                              "_blank"
+                                            );
                                           }}
                                         >
-                                          {" "}
+                                           <FaHeart />{" "}
                                           <img
                                             src={`${process.env.REACT_APP_API_IMAGE_URL}${item?.product_image1}`}
-                                            className="img-fluid  "
+                                            className="img-fluid h-[300px] object-contain w-[300px] "
                                             alt={item.product_name}
                                           />{" "}
                                         </button>
                                       </div>
                                     </div>
+                                    {
+                                      
+                                    }
                                     <div className="product-detail detail-center detail-inverse">
                                       <div className="detail-title">
+                                      <p className="text-center text-sm text-yellow-800">
+                                          {item?.brand}
+                                        </p>
                                         <div className="detail-left">
                                           <div
                                             style={{
@@ -768,8 +834,8 @@ const BrandFilter = () => {
               </div>
 
               <div className="header7 bottomdgn">
-                <div className="custom-container">
-                  <div className="row !w-full">
+                <div className="custom-container  !p-0 !m-0 ">
+                  <div className="row !w-full  !p-0 !m-0 ">
                     <div className="col-12">
                       <div
                         className="header-contain"
@@ -818,7 +884,7 @@ const BrandFilter = () => {
                                   <i className="fa fa-bars sidebar-bar" />
                                 </div>
 
-                                <div className="collection-collapse">
+                                {/* <div className="collection-collapse">
                                   <h3
                                     className="collapse-block-title mt-0"
                                     onClick={() => {
@@ -834,7 +900,7 @@ const BrandFilter = () => {
                                       }}
                                     />
                                   </h3>
-                                </div>
+                                </div> */}
                               </div>
                             </div>
                           </div>
