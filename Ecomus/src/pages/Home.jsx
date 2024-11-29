@@ -18,6 +18,7 @@ import Testomonials from "../components/Testomonials";
 import ShopCard from "../components/ShopCard";
 import Categ from "../components/Categ";
 import LuxList from "../TestComp/luxList/LuxList";
+import HelmetTag from "../components/Header/Helmet";
 
 const Home = () => {
   const nvg = useNavigate();
@@ -148,6 +149,14 @@ const Home = () => {
   ) : (
     <div className="bg-light">
       <Header />
+      <HelmetTag
+        url={window.location.href}
+        description={"Explore Fashion Needles for the latest in trendy and elegant collections. From timeless classics to modern must-haves, redefine your wardrobe today. Shop now for exclusive styles and unmatched quality."}
+        keywords={"Trendy fashion for men, elegant clothing collections, stylish casual wear online, formal attire for men, sustainable fashion trends, latest men's streetwear, designer outfits for men, premium men's accessories, affordable men's clothing, best seasonal fashion deals, men's winter wardrobe essentials, cool summer outfits 2024, fashionable workwear, smart-casual style guide, men's fashion inspirations, luxury men's fashion brands, budget-friendly fashion ideas, men's capsule wardrobe basics, minimalist men's clothing, trending outfits this month, iconic men's wear collections, everyday versatile fashion, festival-ready outfits, fashion blog for men, best men's wardrobe upgrades, timeless men’s outfit ideas, street-style looks online, comfortable activewear, slim-fit clothing deals, weekend style essentials, latest outfit combinations, affordable denim collection, men's accessories trends, urban men’s fashion store, office-ready styles, tailored suits online, trending men’s jackets, casual layering ideas, seasonal must-have styles, urban casual looks, lightweight summer clothing, eco-friendly fashion choices, quick-dry activewear, affordable luxury fashion, monochrome outfit trends, classic vintage styles, elegant wedding suits, sporty casual ensembles, refined formal wear."}
+        title={
+         "Fashion Needles: Trendy & Elegant Styles for Every Occasion"
+        }
+      />
       {/* home main banner section start */}
       <section className="  sale-banenr mt-2  banner-style2 design2 marginfromtop">
         <OwlCarousel

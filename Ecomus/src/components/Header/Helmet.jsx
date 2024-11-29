@@ -20,6 +20,9 @@ const HelmetTag = ({ title,alt, url, keywords, description }) => {
           "men's fashion, trendy clothes, accessories, affordable fashion, Fashion Needles"
         }
       />
+        <meta property="article:publisher" content="https://www.facebook.com/fashionneedles2/" />
+        <meta property="article:modified_time" content="2024-11-24T08:55:37+00:00"/>
+
       <meta name="author" content="Fashion Needles" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <meta charSet="UTF-8" />
@@ -66,9 +69,10 @@ const HelmetTag = ({ title,alt, url, keywords, description }) => {
           "Discover the latest trends in men's fashion at Fashion Needles. Stylish clothing and accessories at affordable prices."
         }
       />
+      <link rel="shortlink" href="https://fashionneedles.com/"></link>
       <meta
         name="twitter:image"
-        content="https://www.fashionneedles.com/twitter-image.jpg"
+        content={"https://fashionneedles.in/wp-content/uploads/2024/10/courier-bag-1.png"}
       />
       <meta
         name="twitter:image:alt"
