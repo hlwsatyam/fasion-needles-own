@@ -12498,13 +12498,13 @@
             }
             
             .collection-collapse-block .collapse-block-title:after {
-              position: absolute;
+              /* position: absolute;
               display: block;
               top: 0;
               right: -3px;
               content: "\f0d7";
               font-family: FontAwesome;
-              color: #333333;
+              color: #333333; */
             }
             
             .collection-collapse-block .collection-collapse-block-content .color-selector {
@@ -15922,8 +15922,7 @@
             }
             
             .size-box ul li {
-              width: calc(26px + (45 - 40) * ((100vw - 320px) / (1920 - 320)));
-              height: calc(24px + (35 - 30) * ((100vw - 320px) / (1920 - 320)));
+          
               border-radius: 5px;
               cursor: pointer;
               border: 1px solid #dddddd;
