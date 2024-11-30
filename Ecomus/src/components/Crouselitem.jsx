@@ -7,8 +7,10 @@ const Crouselitem = ({ item }) => {
       <div
         className="product-box product-box2"
         onClick={() => {
-          window.location.href = `/productdetails/${item.
-            product_name.replace(/ /g, "-")}/${item._id}`;
+          window.location.href = `/productdetails/${item.product_name.replace(
+            / /g,
+            "-"
+          )}/${item._id}`;
         }}
       >
         <div className="product-imgbox">
@@ -23,7 +25,17 @@ const Crouselitem = ({ item }) => {
             </a>
           </div>
 
-          <div className="on-sale1">on sale</div>
+          
+       {(item?.trendingproduct === "Active" || item?.newarrivedproduct === "Active") && (
+  <p
+    className={`absolute top-1 left-1 text-white text-[11px] px-2 rounded ${
+      item?.trendingproduct === "Active" ? "bg-green-500 " : "bg-red-500"
+    }`}
+  >
+    {item?.trendingproduct === "Active" ? "Trending" : "new"}
+  </p>
+)}
+
         </div>
         <div className="product-detail product-detail2">
           <a href="javascript:void(0)">

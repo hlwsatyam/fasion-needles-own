@@ -38,8 +38,12 @@ function LuxList({ title, subChildCat, productId, parentCat, childCat }) {
     responsiveClass: true,
     dots: false,
     responsive: {
+      1700: {
+        items: 11,
+        // stagePadding: 50,
+      },
       1200: {
-        items: 5,
+        items: 7,
         // stagePadding: 50,
       },
       920: {

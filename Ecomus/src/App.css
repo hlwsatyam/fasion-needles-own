@@ -41,7 +41,7 @@ body{
   font-family: "Inter" !important;
 }
 .mobileorlaptop{
-  height: 500px;
+  height: auto;
 }
 
 ul > li.page-item{
@@ -480,7 +480,7 @@ display: block;
         left: 4px;
     }
     .mobileorlaptop{
-      height: 200px;
+      height: auto;
     }
     }
     @media screen and (max-width: 600px) {

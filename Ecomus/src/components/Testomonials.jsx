@@ -13,11 +13,11 @@ const Features = () => {
   ];
 
   return (
-    <div className="flex flex-wrap justify-center gap-4 bg-gray-100  my-2 rounded-lg shadow-md">
+    <div className="flex flex-wrap justify-center   gap-6 bg-gray-100  my-7 rounded-lg ">
       {features.map((feature, index) => (
         <div
           key={index*new Date().getTime()}
-          className="flex flex-col items-center text-center space-y-1 p-1 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow w-[170px] sm:w-[250px] "
+          className="flex flex-col items-center text-center space-y-1 p-2 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow w-[170px] sm:w-[250px] "
         >
           <div className="text-3xl text-blue-500">{feature.icon}</div>
           <h3 className="font-semibold text-xs text-gray-800">{feature.title}</h3>

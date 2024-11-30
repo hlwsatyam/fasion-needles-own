@@ -6,7 +6,7 @@ const PrivacyPolicy = () => {
   return (
     <div>
       <Header />
-      <div className="  mx-auto px-2 bg-white shadow-md rounded-lg">
+      <div className="  py-8 sm:px-8 md:px-12 md:py-12 mx-auto bg-white shadow-md rounded-lg">
         <h1 className="text-4xl font-bold mb-4">Privacy Policy</h1>
         <p className="text-gray-700 mb-4">
           Welcome to Fashion Needles! Your privacy is of utmost importance to

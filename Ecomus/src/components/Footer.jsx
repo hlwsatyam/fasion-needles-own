@@ -37,7 +37,7 @@ const Footer = () => {
     },
   ];
   return (
-    <footer className="bg-gradient-to-r !text-white bg-black/80">
+    <footer className="bg-gradient-to-r pt-3 !text-white bg-black/80">
       <div className="max-w-screen-xl px-4 sm:mb-0 mb-[68px]  sm:py-8 mx-auto sm:px-6 lg:px-8">
         <div className="grid grid-cols- gap-8 lg:grid-cols-3">
           <div className="grid sm:grid-cols-5  grid-cols-3 gap-8 sm:col-span-2 lg:col-span-2">
@@ -56,7 +56,7 @@ const Footer = () => {
               },
               {
                 heading: "Product",
-                items: ["Track Order", "wishlist", "Whatsapp"],
+                items: ["Track Order", "wishlist",  ],
               },
               {
                 heading: "Policies",
@@ -69,7 +69,7 @@ const Footer = () => {
               },
             ].map(({ heading, items }, index) => (
               <div key={index}>
-                <p className="font-medium text-sm !text-white">{heading}</p>
+                <p className="font-medium text-sm !text-white ">{heading}</p>
                 <ul className="mt-6 flex-col flex space-y-4 text-sm">
                   {items.map((item, i) => (
                     <li key={i}>

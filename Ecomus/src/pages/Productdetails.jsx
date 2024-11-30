@@ -462,7 +462,7 @@ function Productdetails() {
                                   );
                                 }}
                                 alt
-                                style={{ aspectRatio: "1/1" }}
+                                
                                 className="img-fluid  image_zoom_cls-0"
                               />
                             </div>

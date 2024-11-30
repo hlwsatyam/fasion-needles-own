@@ -64,8 +64,12 @@ const Home = () => {
     responsiveClass: true,
     dots: false,
     responsive: {
+      1700: {
+        items: 11,
+        // stagePadding: 50,
+      },
       1200: {
-        items: 5,
+        items: 7,
         // stagePadding: 50,
       },
       920: {
@@ -92,21 +96,21 @@ const Home = () => {
     dots: false,
     responsive: {
       1200: {
-        items: 6,
+        items: 9,
         // stagePadding: 50,
       },
       920: {
-        items: 5,
+        items: 7,
       },
       700: {
-        items: 4,
+        items: 6,
       },
 
       300: {
-        items: 2,
+        items: 3,
       },
       310: {
-        items: 2,
+        items: 3,
       },
     },
   };
@@ -194,18 +198,18 @@ const Home = () => {
       </section>
       {/* home main banner section end */}
 
-      <div className="flex justify-center my-2 items-center gap-x-1 sm:text-lg text-sm  font-bold text-gray-700">
+      <div className="flex justify-center my-2 mt-4 items-center gap-x-1 sm:text-lg text-sm  font-bold text-gray-700">
         <div className="w-20 border-t-2 border-gray-400"></div>
         <span className="uppercase tracking-wide px-1">Shop By Brand</span>
         <div className="w-20 leading border-t-2 border-gray-400"></div>
       </div>
 
       {/* brand start */}
-      <section className="brand-second mb-1 ">
+      <section className="brand-second  ">
         <div className="container-fluid">
           <div className="row brand-block">
             <div className="col-12">
-              <div className="brand-slide12 no-arrow mb--5">
+              <div className="brand-slide12 no-arrow ">
                 <OwlCarousel
                   className="owl-theme"
                   style={{ width: "100%", height: "100%" }}
@@ -215,7 +219,7 @@ const Home = () => {
                   {brnaditem?.data.map((item, index) => (
                     <div
                     key={index*new Date().getTime()}
-                      className="brand-box cursor-pointer h-[150px] !w-[150px]  rounded-full "
+                      className=" bg-white flex items-center  sm:p-6 !p-3 justify-center   cursor-pointer h-[90px] w-[90px] sm:h-[150px] sm:!w-[150px]   "
                       onClick={() => {
                         nvg(`/brand/${item.brand_name?.replace(/ /g, "-")}`, {
                           state: { brandId: item._id, name: item.brand_name },
@@ -226,7 +230,7 @@ const Home = () => {
 
                         src={`${process.env.REACT_APP_API_IMAGE_URL}${item.brand_image}`}
                         alt={item.brand_name}
-                        className=" w-full h-full object-contain "
+                        className="bg-white    object-contain "
                       />
                     </div>
                   ))}
@@ -389,7 +393,7 @@ const Home = () => {
         >
           {Banner?.data.map((item, index) =>
             item.banner_type == "Slider" ? (
-              <div key={index} style={{ height: isMobile ? "200px" : "400px" }}>
+              <div key={index} style={{ height: "auto" }}>
                 <img loading="lazy"
                   onClick={() => {
                     window.location.href = item.banner_link;
