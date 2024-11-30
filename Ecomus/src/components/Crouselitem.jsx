@@ -7,7 +7,8 @@ const Crouselitem = ({ item }) => {
       <div
         className="product-box product-box2"
         onClick={() => {
-          window.location.href = `/productdetails/${item._id}`;
+          window.location.href = `/productdetails/${item.
+            product_name.replace(/ /g, "-")}/${item._id}`;
         }}
       >
         <div className="product-imgbox">
@@ -17,7 +18,7 @@ const Crouselitem = ({ item }) => {
                 src={`${process.env.REACT_APP_API_IMAGE_URL}${item.product_image1}`}
                 srcSet={`${process.env.REACT_APP_API_IMAGE_URL}${item.product_image1}`}
                 alt={item.product_name}
-                className="h-[300px]   object-fill "
+                className="h-[275px]   object-fill "
               />
             </a>
           </div>

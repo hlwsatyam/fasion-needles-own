@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addwishlist } from "../store/state/wishlist";
 import { gettoken } from "../Localstorage/Store";
 import { useEffect } from "react";
+import Footer from "../components/Footer";
 
 const Wishlist = () => {
   useEffect(() => {
@@ -125,7 +126,6 @@ const Wishlist = () => {
                                             position: "relative",
                                           }}
                                         >
-                                          {" "}
                                           <img
                                             src={`${
                                               process.env
@@ -138,14 +138,14 @@ const Wishlist = () => {
                                                     .product_image1
                                             }`}
                                             onClick={() => {
-                                              transfer(
-                                                item.product_id == null
-                                                  ? item.product_variant_id
-                                                      .product_id
-                                                  : item.product_id._id
+                                              window.open(
+                                                `/productdetails/${item.product_name.replace(
+                                                  / /g,
+                                                  "-"
+                                                )}/${item.product_id?._id}`
                                               );
                                             }}
-                                            className="img-fluid   object-cover h-[250px]"
+                                            className="img-fluid mx-auto  object-cover h-[250px]"
                                             alt="product"
                                           />{" "}
                                           <span
@@ -340,7 +340,7 @@ const Wishlist = () => {
         </div>
       </section>
       {/* section End */}
-
+      <Footer />
       {/* <Footer /> */}
     </>
   );

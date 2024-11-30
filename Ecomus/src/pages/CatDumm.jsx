@@ -661,8 +661,8 @@ const CatFilter = () => {
                             </div>
                           </div>
                         </div>
-                        <div className="product-wrapper-grid   !p-0 !m-0   product">
-                          <div className="row !p-0 !m-0   !w-full removepadding additionalgap">
+                        <div className="product-wrapper-grid !p-0 !m-0   product">
+                          <div className="row !p-0 !m-0 !w-full removepadding additionalgap">
                             {itembybrand.data[0] ? (
                               itembybrand.data.map((item, index) => (
                                 <div className="col-xl-3 hover:shadow-2xl  col-md-4 col-sm-6 col-12">
@@ -678,7 +678,7 @@ const CatFilter = () => {
                                           style={{ width: "100%" }}
                                           onClick={() => {
                                             window.open(
-                                              `/productdetails/${item?._id}`,
+                                             `/productdetails/${item.product_name.replace(/ /g, "-")}/${item?._id}`,
                                               "_blank"
                                             );
                                           }}
@@ -874,8 +874,8 @@ const CatFilter = () => {
                 </div>
               </div>
 
-              <div className="header7 bottomdgn">
-                <div className="custom-container">
+              <div className="header7 !p-0 bottomdgn">
+                <div className="custom-container !p-0 ">
                   <div className="row !w-full">
                     <div className="col-12">
                       <div

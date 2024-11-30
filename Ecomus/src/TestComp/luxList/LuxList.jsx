@@ -9,7 +9,7 @@ function LuxList({ title, subChildCat, productId, parentCat, childCat }) {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [title, subChildCat, productId, parentCat, childCat]);
 
   const fetchData = async () => {
     try {
@@ -58,37 +58,42 @@ function LuxList({ title, subChildCat, productId, parentCat, childCat }) {
     },
   };
   return (
-    <div className="mb-4">
-      <Header title={title} />
-      <div className="mt-2">
-        <section className="section-big-mb-space ratio_square product">
-          <div className="container-fluid">
-            <div className="row">
-              <div className="col-12 pr-0">
-                <div className="product-slide-5 product-m no-arrow">
-                  {allProducts.length > 0 ? (
-                    <OwlCarousel
-                      className="owl-theme"
-                      style={{ width: "100%", height: "100%" }}
-                      {...options2}
-                    >
-                      {allProducts.map(
-                        (item) =>
-                          item._id.toString() != productId && (
-                            <Crouselitem key={item._id.toString()} item={item} />
-                          )
-                      )}
-                    </OwlCarousel>
-                  ) : (
-                    <p>Loading products...</p> // Show a loading state
-                  )}
+    allProducts.length > 0 && (
+      <div className="mb-4">
+        <Header title={title} />
+        <div className="mt-2">
+          <section className="section-big-mb-space ratio_square product">
+            <div className="container-fluid">
+              <div className="row">
+                <div className="col-12 pr-0">
+                  <div className="product-slide-5 product-m no-arrow">
+                    {allProducts.length > 0 ? (
+                      <OwlCarousel
+                        className="owl-theme"
+                        style={{ width: "100%", height: "100%" }}
+                        {...options2}
+                      >
+                        {allProducts.map(
+                          (item) =>
+                            item._id.toString() != productId && (
+                              <Crouselitem
+                                key={item._id.toString()}
+                                item={item}
+                              />
+                            )
+                        )}
+                      </OwlCarousel>
+                    ) : (
+                      <p>Loading products...</p> // Show a loading state
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
+        </div>
       </div>
-    </div>
+    )
   );
 }
 

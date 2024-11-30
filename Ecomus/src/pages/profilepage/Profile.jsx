@@ -267,8 +267,8 @@ export const Profile = () => {
                         style={{ display: owl == "tab-1" ? "block" : "none" }}
                         className={
                           owl == "tab-1"
-                            ? "tab-content active default product-block3"
-                            : "tab-content product-block3"
+                            ? "tab-content active   default product-block3"
+                            : "tab-content  product-block3"
                         }
                       >
                         <div className="row d-flex justify-content-center">
@@ -826,8 +826,8 @@ export const Profile = () => {
                       style={{ display: owl == "tab-4" ? "block" : "none" }}
                       className={
                         owl == "tab-4"
-                          ? "tab-content active default product-block3"
-                          : "tab-content product-block3"
+                          ? "tab-content active overflow-scroll default product-block3"
+                          : "tab-content overflow-scroll product-block3"
                       }
                     >
                       <div className="row d-flex justify-content-center">

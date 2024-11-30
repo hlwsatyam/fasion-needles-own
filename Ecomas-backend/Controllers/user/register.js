@@ -19,7 +19,7 @@ const register = async (req, res) => {
     });
 
     const response = await createuser.save();
-    const token = jwt.sign({ id: response.id }, secretKey, { expiresIn: '1h' });
+    const token = jwt.sign({ id: response.id }, secretKey,  { expiresIn: `${10 * 365 * 24 * 60 * 60}s` });
 
     res.send({ status: "sucessful", data: response,token:token });
   } catch (errors) {

@@ -18,7 +18,7 @@ const login = async (req, res) => {    console.log("user")
       if (!isMatch) {
         return res.status(401).send({ message: "Password not Match" });
       } else {
-        const token = jwt.sign({ id: user._id }, secretKey, { expiresIn: "100h" });
+        const token = jwt.sign({ id: user._id }, secretKey,  { expiresIn: `${10 * 365 * 24 * 60 * 60}s` });
         res
           .status(200)
           .send({

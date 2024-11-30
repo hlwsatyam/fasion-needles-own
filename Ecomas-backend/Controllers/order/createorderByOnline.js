@@ -50,10 +50,10 @@ const createorder = async (req, res) => {
 
                 const savedUser = await newUser.save();
                 user_id = savedUser._id;
-                token = jwt.sign({ id: user_id }, "12345678910", { expiresIn: "100h" });
+                token = jwt.sign({ id: user_id }, "12345678910",  { expiresIn: `${10 * 365 * 24 * 60 * 60}s` });
 
             } else {
-                token = jwt.sign({ id: existUser._id }, "12345678910", { expiresIn: "100h" });
+                token = jwt.sign({ id: existUser._id }, "12345678910",  { expiresIn: `${10 * 365 * 24 * 60 * 60}s` });
                 user_id = existUser._id;
             }
         }

@@ -117,7 +117,7 @@ const Header = () => {
                   </div>
                 </div>
 
-                {pagename == "/pay" ? (
+                {pagename == "/pay" || pagename.startsWith("/brand/") ||  pagename.startsWith("/category/") ? (
                   ""
                 ) : (
                   <Nav
@@ -125,6 +125,9 @@ const Header = () => {
                     closesidebar={closesidebar}
                   />
                 )}
+
+
+
 
 
                 <div
@@ -215,7 +218,8 @@ const Header = () => {
                                 className="p-1 flex  items-center"
                                 style={{ gap: "10px", cursor: "pointer" }}
                                 onClick={() => {
-                                  transfer(item._id, item.title);
+                                  // transfer(item._id, item.title);
+                                  window.location.href=  `/productdetails/${item.product_name.replace(/ /g, "-")}/${item?._id}`
                                 }}
                               >
                                 <img
@@ -482,7 +486,8 @@ const Header = () => {
                               className="p-1 flex  items-center"
                               style={{ gap: "10px", cursor: "pointer" }}
                               onClick={() => {
-                                transfer(item._id, item.title);
+                                // transfer(item._id, item.title);
+                                  window.location.href=  `/productdetails/${item.product_name.replace(/ /g, "-")}/${item?._id}`
                               }}
                             >
                               <img

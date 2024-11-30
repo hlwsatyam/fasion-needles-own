@@ -8,6 +8,7 @@ import ReactPaginate from "react-paginate";
 import { useGetItemByBrandQuery } from "../store/api/brandapi";
 import Footer from "../components/Footer";
 import { FaHeart } from "react-icons/fa";
+import BottomPagination from "../components/BottomPagination";
 const BrandFilter = () => {
   const { name } = useParams();
   const [shortName, setShortName] = useState({
@@ -39,16 +40,14 @@ const BrandFilter = () => {
     });
     window.location.reload();
   };
-  const { data: itembybrand, isLoading: brandloading , refetch} = useGetItemByBrandQuery(
-    {
-      name: name.replace(/-/g, " "), // Replace dashes with spaces in the name
-      filter: shortName, // Pass the filter directly
-    }
-  );
-
-
-
-
+  const {
+    data: itembybrand,
+    isLoading: brandloading,
+    refetch,
+  } = useGetItemByBrandQuery({
+    name: name.replace(/-/g, " "), // Replace dashes with spaces in the name
+    filter: shortName, // Pass the filter directly
+  });
 
   const [categories, setCategories] = useState([]);
   const [totalrecords, settotalrecords] = useState(0);
@@ -64,7 +63,7 @@ const BrandFilter = () => {
       if (response.status === 200) {
         setFilterList(response.data);
       }
-      
+
       setloading(false);
     } catch (error) {
       console.log(error);
@@ -109,7 +108,7 @@ const BrandFilter = () => {
                       >
                         <i className="fa fa-angle-left" /> back
                       </li>
-
+cccc
                       {categories.map((item, index) => (
                         <MobileSubcategory value={item} />
                       ))}
@@ -189,9 +188,15 @@ const BrandFilter = () => {
         className="section-big-pt-space !p-0 !m-0  ratio_asos b-g-light"
         style={{ padding: "0px" }}
       >
-        <div className="collection-wrapper !p-0 !m-0 " style={{ background: "#f9f9f9" }}>
+        <div
+          className="collection-wrapper !p-0 !m-0 "
+          style={{ background: "#f9f9f9" }}
+        >
           <div className="custom-container !p-0 !m-0 ">
-            <div className="row  !p-0 !m-0  !w-full" style={{ background: "#f9f9f9" }}>
+            <div
+              className="row  !p-0 !m-0  !w-full"
+              style={{ background: "#f9f9f9" }}
+            >
               <div
                 className="col-sm-3 collection-filter category-page-side"
                 style={{
@@ -446,7 +451,6 @@ const BrandFilter = () => {
                                     htmlFor="item2"
                                     style={{
                                       background: `${item2}`,
-                                  
                                     }}
                                   ></label>
                                 </div>
@@ -602,9 +606,8 @@ const BrandFilter = () => {
                                       fontWeight: 100,
                                     }}
                                   >
-                                    Showing Products
-                                    0-
-                                     {itembybrand?.data?.length} of{" "}Result
+                                    Showing Products 0-
+                                    {itembybrand?.data?.length} of Result
                                   </h5>
                                 </div>
                                 <div
@@ -635,12 +638,12 @@ const BrandFilter = () => {
                                           style={{ width: "100%" }}
                                           onClick={() => {
                                             window.open(
-                                              `/productdetails/${item?._id}`,
+                                              `/productdetails/${item.product_name.replace(/ /g, "-")}/${item?._id}`,
                                               "_blank"
                                             );
                                           }}
                                         >
-                                           <FaHeart />{" "}
+                                          <FaHeart />{" "}
                                           <img
                                             src={`${process.env.REACT_APP_API_IMAGE_URL}${item?.product_image1}`}
                                             className="img-fluid h-[300px] object-contain w-[300px] "
@@ -649,12 +652,10 @@ const BrandFilter = () => {
                                         </button>
                                       </div>
                                     </div>
-                                    {
-                                      
-                                    }
+                                    {}
                                     <div className="product-detail detail-center detail-inverse">
                                       <div className="detail-title">
-                                      <p className="text-center text-sm text-yellow-800">
+                                        <p className="text-center text-sm text-yellow-800">
                                           {item?.brand}
                                         </p>
                                         <div className="detail-left">
@@ -763,8 +764,13 @@ const BrandFilter = () => {
                                 No Result Found !
                               </h2>
                             )}
+                            <div className=" my-2">
+                              {" "}
+                              <BottomPagination />
+                            </div>
                           </div>
                         </div>
+                        
                         {/* {loading == true ? "" : data[0] ? ( */}
                         {data[0] ? (
                           <div className="product-pagination">
@@ -795,8 +801,8 @@ const BrandFilter = () => {
                                               className="fa fa-chevron-left"
                                               aria-hidden="true"
                                             />
-                                          </span>{" "}
-                                          <span className="sr-only">
+                                          </span> 
+                                          <span className=" !hidden sm:!block">
                                             Previous
                                           </span>
                                         </a>
@@ -833,7 +839,7 @@ const BrandFilter = () => {
                 </div>
               </div>
 
-              <div className="header7 bottomdgn">
+              <div className="header7   bottomdgn">
                 <div className="custom-container  !p-0 !m-0 ">
                   <div className="row !w-full  !p-0 !m-0 ">
                     <div className="col-12">
@@ -883,24 +889,6 @@ const BrandFilter = () => {
                                 >
                                   <i className="fa fa-bars sidebar-bar" />
                                 </div>
-
-                                {/* <div className="collection-collapse">
-                                  <h3
-                                    className="collapse-block-title mt-0"
-                                    onClick={() => {
-                                      setsortby(!sortby);
-                                    }}
-                                  >
-                                    <i
-                                      class="fa-solid fa-arrow !w-full-down-wide-short"
-                                      style={{ color: "#4150b5" }}
-                                      onClick={() => {
-                                        setsortby(!sortby);
-                                        console.log("click me");
-                                      }}
-                                    />
-                                  </h3>
-                                </div> */}
                               </div>
                             </div>
                           </div>

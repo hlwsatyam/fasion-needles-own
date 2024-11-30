@@ -76,7 +76,7 @@ const options5 = {
 function Productdetails() {
   const location = useLocation();
   const nvg = useNavigate();
-  const { id } = useParams();
+  const { id, name } = useParams();
   const recentlydata = getrecetly();
   const dispatch = useDispatch();
   const checktoken = gettoken();
@@ -530,7 +530,7 @@ function Productdetails() {
                         </div>
                         <div className="col-md-9 col-9">
                           <div className="product-slick ">
-                            <div className="sm:h-[600px]  h-[400px] w-full">
+                            <div className="sm:h-[600px]  h-[350px] w-full">
                               {/* <ReactImageMagnify
                           
                                 {...{
@@ -598,7 +598,10 @@ function Productdetails() {
                           </div>
                           <div className="">
                             <a
-                              href="javascript:void(0)"
+                              href={`/brand/${data?.data?.brand?.replace(
+                                / /g,
+                                "-"
+                              )}`}
                               style={{ color: "#fff" }}
                             >
                               <img
@@ -632,7 +635,8 @@ function Productdetails() {
                                 0 ? (
                                   ""
                                 ) : (
-                                  <>
+                                  Data23?.[showoption]?.mrp_price !=
+                                  Data23?.[showoption]?.selling_price &&  <>
                                     {" "}
                                     MRP{" "}
                                     <span
@@ -665,11 +669,13 @@ function Productdetails() {
                                       fontWeight: "400",
                                     }}
                                   >
-                                    {`(${parseInt(
-                                      ((Data23?.[showoption]?.mrp_price -
-                                        Data23?.[showoption]?.selling_price) /
-                                        Data23?.[showoption]?.mrp_price) *
-                                        100
+                                    {Data23?.[showoption]?.mrp_price !=
+                                        Data23?.[showoption]?.selling_price &&`(${parseInt(
+                                      
+                                        ((Data23?.[showoption]?.mrp_price -
+                                          Data23?.[showoption]?.selling_price) /
+                                          Data23?.[showoption]?.mrp_price) *
+                                          100
                                     )}%off)`}
                                   </span>
                                 )}
@@ -1021,7 +1027,12 @@ function Productdetails() {
         </div>
       </section>
       <InfoList />
-      <RelativeProduct productId={id}  parentCat= {data?.parentcategory?.[0]} childCat={data?.childcategory?.[0]} subChildCat={data?.child_sub_category?.[0]}   />
+      <RelativeProduct
+        productId={id}
+        parentCat={data?.parentcategory?.[0]}
+        childCat={data?.childcategory?.[0]}
+        subChildCat={data?.child_sub_category?.[0]}
+      />
       <OverviewSection3 getComment={getComment} />
       <Features />
       <Footer />
@@ -1030,4 +1041,3 @@ function Productdetails() {
 }
 
 export default Productdetails;
- 

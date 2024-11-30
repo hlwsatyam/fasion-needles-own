@@ -60,7 +60,8 @@ function App() {
           <Route path="/cart" element={<Cart2 />} />
           <Route path="/wishlist" element={<Wishlist />} />
           <Route path="/checkout/" element={<OrderSummary />} />
-          <Route path="/productdetails/:id" element={<Productdetails />} />
+          <Route path="/productdetails/:name/:id" element={<Productdetails />} />
+          {/* <Route path="/productdetails/:id/:name" element={<Productdetails />} /> */}
           <Route path="/category/:name" element={<CatFilter />} />
           <Route path="/brand/:name" element={<BrandFilter />} />
           <Route path="/profile" element={<Profile />} />

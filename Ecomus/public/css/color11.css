@@ -3852,7 +3852,7 @@
             
             .product .product-box .product-imgbox img {
               margin: 0 auto;
-              width: 100%;
+              width: auto;
             }
             
             .product .product-box .product-imgbox .product-front {

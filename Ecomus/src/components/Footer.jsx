@@ -39,12 +39,16 @@ const Footer = () => {
   return (
     <footer className="bg-gradient-to-r !text-white bg-black/80">
       <div className="max-w-screen-xl px-4 sm:mb-0 mb-[68px]  sm:py-8 mx-auto sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
-          <div className="grid sm:grid-cols-4  grid-cols-2 gap-8 sm:col-span-2 lg:col-span-2">
+        <div className="grid grid-cols- gap-8 lg:grid-cols-3">
+          <div className="grid sm:grid-cols-5  grid-cols-3 gap-8 sm:col-span-2 lg:col-span-2">
             {[
               {
                 heading: "Category",
-                items: ["Product", "Men", "Women", "Kids"],
+                items: ["MEN", "WOMEN", "LUXURY"],
+              },
+              {
+                heading: "Brands",
+                items: ["Calvin-Klein","Zara", "dior",  "Chanel"],
               },
               {
                 heading: "Discover",
@@ -70,7 +74,13 @@ const Footer = () => {
                   {items.map((item, i) => (
                     <li key={i}>
                       <a
-                        href={`/${item.replace(" ", "-").toLowerCase()}`}
+                        href={
+                          heading === "Category"
+                            ? `/category/${item.replace(" ", "-")}`
+                            : heading === "Brands"
+                            ? `/brand/${item.replace(" ", "-")}`
+                            : `/${item.replace(" ", "-")}`
+                        }
                         className="!text-white hover:text-gray-900 text-xs transition"
                       >
                         {item}
@@ -89,8 +99,9 @@ const Footer = () => {
               alt="logo"
             /> */}
             <p className="max-w-xs flex items-start gap-x-1 !text-white mt-4 text-xs ">
-              <FaBuilding size={23}/> First Floor, Lal Mandir Market, C-67, Main Rd,
-              Shital Vihar, Khora Colony, Sector 57, Noida, Uttar Pradesh 201301
+              <FaBuilding size={23} /> First Floor, Lal Mandir Market, C-67,
+              Main Rd, Shital Vihar, Khora Colony, Sector 57, Noida, Uttar
+              Pradesh 201301
             </p>
             <p className="mt-2  flex items-start gap-x-1 text-xs">
               {" "}
@@ -98,7 +109,10 @@ const Footer = () => {
             </p>
             <p className="mt-2  flex items-start gap-x-1 text-xs">
               {" "}
-              <FaEnvelope /> Email: <a href="mailto:support@fashionneedles.com">support@fashionneedles.com</a>
+              <FaEnvelope /> Email:{" "}
+              <a href="mailto:support@fashionneedles.com">
+                support@fashionneedles.com
+              </a>
             </p>
             <div className="flex mt-8 space-x-6 text-gray-600">
               {socialLinks.map(({ label, icon, url, colorClass }, index) => (
