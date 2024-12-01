@@ -86,7 +86,7 @@ const generateSitemap = () => {
         { path: "/category/WOMEN", priority: 1.0, lastmod: "2024-12-01" },
         { path: "/category/KIDS", priority: 1.0, lastmod: "2024-12-01" },
         { path: "/category/Topwear", priority: 1.0, lastmod: "2024-12-01" },
-        { path: "category/Western-Wear", priority: 1.0, lastmod: "2024-12-01" },
+        { path: "/category/Western-Wear", priority: 1.0, lastmod: "2024-12-01" },
         { path: "/category/Ethnic-Wear", priority: 1.0, lastmod: "2024-12-01" },
 
 
