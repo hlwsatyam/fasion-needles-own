@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const brand = require("../../Models/brand");
 
 const singleproduct = async (req, res) => {
-  try {
+  try { 
     const data = await product.findById(req.params.id);
 
     if (!data) {
@@ -164,6 +164,8 @@ const CategoryListproduct = async (req, res) => {
         console.error("Error fetching categories:", err);
       }
     }
+    console.log(allChildCat)
+
     // Fetch unique subchild categories
     const allChildSubCat = await product.distinct("child_sub_category", {
       $or: [

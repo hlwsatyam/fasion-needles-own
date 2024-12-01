@@ -15,7 +15,7 @@ const Login = () => {
         style={{ width: "100%" }}
       >
         <div
-          className="container"
+          className=" "
           style={{
             background: "white",
             marginTop: "50px",

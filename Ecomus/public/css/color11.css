@@ -15500,12 +15500,12 @@
             }
             
             .creative-card {
-              padding: 30px;
+              padding:20px;
               background-color: #ffffff;
             }
             
             .creative-card.creative-inner {
-              border-width: 15px;
+              border-width: 13px;
             }
             
             .review-box {

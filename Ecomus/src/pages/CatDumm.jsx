@@ -9,7 +9,7 @@ import { useGetItemByBrandQuery } from "../store/api/brandapi";
 import Footer from "../components/Footer";
 import { useGetProductByCategoryQuery } from "../store/api/productapi";
 import { Shop } from "@mui/icons-material";
-import { FaHeart } from "react-icons/fa";
+import { FaHeart, FaMinus, FaPlus } from "react-icons/fa";
 const CatFilter = () => {
   const { name } = useParams();
   const [shortName, setShortName] = useState({
@@ -20,6 +20,15 @@ const CatFilter = () => {
     Color: [],
     Size: [],
   });
+  const [isFilterShown, setIsFilterShown] = useState({
+    Category: true,
+    Brand: true,
+    childCategory: true,
+    subChildCategory: true,
+    Color: true,
+    Size: true,
+  });
+
   const nvg = useNavigate();
   const [brand, setbrand] = useState(true);
   const [categoriesbtn, setcategoriesbtn] = useState(true);
@@ -83,6 +92,14 @@ const CatFilter = () => {
     filterdata(0);
   }, []);
   const pageCount = Math.ceil(totalrecords / 12);
+
+  const handleFilterShown = (name, condition) => {
+    setIsFilterShown((prev) => ({
+      ...prev,
+      [name]: condition === "+" ? false : true,
+    }));
+  };
+
   return brandloading == true ? (
     <></>
   ) : (
@@ -195,9 +212,12 @@ const CatFilter = () => {
       >
         <div className="collection-wrapper" style={{ background: "#f9f9f9" }}>
           <div className="custom-container">
-            <div className="row  !p-0 !m-0   !w-full" style={{ background: "#f9f9f9" }}>
+            <div
+              className="row  !p-0 !m-0   !w-full"
+              style={{ background: "#f9f9f9" }}
+            >
               <div
-                className="col-sm-3 collection-filter category-page-side"
+                className="col-sm-2 collection-filter category-page-side"
                 style={{
                   zIndex: currentwdith < 990 ? 9991 : 1,
                   left: "-15px",
@@ -225,344 +245,364 @@ const CatFilter = () => {
                     </span>
                   </div>
 
-                  <div className="collection-collapse-block open">
+                  <div className="collection-collapse-block ">
                     <h3
-                      className={"collapse-block-title dynamic-after2"}
-                      // className={
-                      //   item.name.length > 6
-                      //     ? "collapse-block-title dynamic-after2"
-                      //     : "collapse-block-title dynamic-after"
-                      // }
+                      className={
+                        "collapse-block-title flex items-center justify-between dynamic-after2"
+                      }
                     >
                       CATEGORIES
-                      {
-                        // item.name.length > 7 ?
-                        <style>
-                          {`.dynamic-after::after {
-            left:51px;
-          }  .dynamic-after2::after {
-            left:110px;
-          }`}
-                        </style>
-                        //  : <style>
-                        //   {`
-                        //   .dynamic-after::after {
-                        //     left:50px;
-                        //   }
-                        // `}
-                        // </style>
-                      }
+                      {isFilterShown.Category ? (
+                        <FaMinus
+                          onClick={() => handleFilterShown("Category", "+")}
+                        />
+                      ) : (
+                        <FaPlus
+                          onClick={() => handleFilterShown("Category", "-")}
+                        />
+                      )}
                     </h3>
-                    <div
-                      className="collection-collapse-block-content"
-                      style={{
-                        display: categoriesbtn == true ? "block" : "none",
-                      }}
-                    >
-                      <div className="collection-brand-filter">
-                        {filterList?.categories.map((item2, index2) => (
-                          <div className="custom-control custom-checkbox  form-check collection-filter-checkbox">
-                            <input
-                              type="checkbox"
-                              className="custom-control-input form-check-input"
-                              id="item2"
-                              checked={shortName.Category.includes(item2.name)} // Dynamically set based on state
-                              onChange={() => {
-                                setShortName((prev) => ({
-                                  ...prev,
-                                  Category: prev.Category.includes(item2.name)
-                                    ? prev.Category.filter(
-                                        (category) => category !== item2.name
-                                      ) // Remove if exists
-                                    : [...prev.Category, item2.name], // Add if not exists
-                                }));
-                              }}
-                            />
-
-                            <label
-                              className="custom-control-label form-check-label"
-                              htmlFor="item2"
-                            >
-                              {item2.name}
-                            </label>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                  <div className="collection-collapse-block open">
-                    <h3 className={"collapse-block-title dynamic-after2"}>
-                      Highlights
-                      {
-                        <style>
-                          {`.dynamic-after::after {
-            left:51px;
-          }  .dynamic-after2::after {
-            left:110px;
-          }`}
-                        </style>
-                      }
-                    </h3>
-                    <div
-                      className="collection-collapse-block-content"
-                      style={{
-                        display: categoriesbtn == true ? "block" : "none",
-                      }}
-                    >
-                      <div className="collection-brand-filter">
-                        {filterList?.cildCategories.map((item2, index2) => (
-                          <div className="custom-control custom-checkbox  form-check collection-filter-checkbox">
-                            <input
-                              type="checkbox"
-                              className="custom-control-input form-check-input"
-                              id="item2"
-                              checked={shortName.childCategory.includes(
-                                item2.name
-                              )} // Dynamically set based on state
-                              onChange={() => {
-                                setShortName((prev) => ({
-                                  ...prev,
-                                  childCategory: prev.childCategory.includes(
-                                    item2.name
-                                  )
-                                    ? prev.childCategory.filter(
-                                        (category) => category !== item2.name
-                                      ) // Remove if exists
-                                    : [...prev.childCategory, item2.name], // Add if not exists
-                                }));
-                              }}
-                            />
-
-                            <label
-                              className="custom-control-label form-check-label"
-                              htmlFor="item2"
-                            >
-                              {item2.name}
-                            </label>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                  <div className="collection-collapse-block open">
-                    <h3 className={"collapse-block-title dynamic-after2"}>
-                      Brands
-                    </h3>
-                    <div
-                      className="collection-collapse-block-content"
-                      style={{
-                        display: categoriesbtn == true ? "block" : "none",
-                      }}
-                    >
-                      <div className="collection-brand-filter">
-                        {filterList?.brands.map((item2, index2) => (
-                          <div className="custom-control custom-checkbox  form-check collection-filter-checkbox">
-                            <input
-                              type="checkbox"
-                              className="custom-control-input form-check-input"
-                              id="item2"
-                              checked={shortName.Brand.includes(
-                                item2.brand_name
-                              )} // Dynamically set based on state
-                              onChange={() => {
-                                setShortName((prev) => ({
-                                  ...prev,
-                                  Brand: prev.Brand.includes(item2.brand_name)
-                                    ? prev.Brand.filter(
-                                        (category) =>
-                                          category !== item2.brand_name
-                                      ) // Remove if exists
-                                    : [...prev.Brand, item2.brand_name], // Add if not exists
-                                }));
-                              }}
-                            />
-                            <label
-                              className="custom-control-label form-check-label"
-                              htmlFor="item2"
-                            >
-                              {item2.brand_name}
-                            </label>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                  <div className="collection-collapse-block open">
-                    <h3
-                      className={"collapse-block-title dynamic-after2"}
-                      // className={
-                      //   item.name.length > 6
-                      //     ? "collapse-block-title dynamic-after2"
-                      //     : "collapse-block-title dynamic-after"
-                      // }
-                    >
-                      List
-                    </h3>
-                    <div
-                      className="collection-collapse-block-content"
-                      style={{
-                        display: categoriesbtn == true ? "block" : "none",
-                      }}
-                    >
-                      <div className="collection-brand-filter">
-                        {filterList?.childSubCategories.map((item2, index2) => (
-                          <div className="custom-control custom-checkbox  form-check collection-filter-checkbox">
-                            <input
-                              type="checkbox"
-                              className="custom-control-input form-check-input"
-                              id="item2"
-                              checked={shortName.subChildCategory.includes(
-                                item2.name
-                              )} // Dynamically set based on state
-                              onChange={() => {
-                                setShortName((prev) => ({
-                                  ...prev,
-                                  subChildCategory:
-                                    prev.subChildCategory.includes(item2.name)
-                                      ? prev.subChildCategory.filter(
+                    {isFilterShown.Category && (
+                      <div
+                        className="  collection-collapse-block-content"
+                        style={{
+                          display: categoriesbtn == true ? "block" : "none",
+                        }}
+                      >
+                        <div className="collection-brand-filter">
+                          {filterList?.categories.map((item2, index2) => (
+                            <div className="custom-control custom-checkbox  form-check collection-filter-checkbox">
+                              <input
+                                type="checkbox"
+                                className="custom-control-input form-check-input"
+                                id="item2"
+                                checked={shortName.Category.includes(
+                                  item2.name
+                                )} // Dynamically set based on state
+                                onChange={() => {
+                                  setShortName((prev) => ({
+                                    ...prev,
+                                    Category: prev.Category.includes(item2.name)
+                                      ? prev.Category.filter(
                                           (category) => category !== item2.name
                                         ) // Remove if exists
-                                      : [...prev.subChildCategory, item2.name], // Add if not exists
-                                }));
-                              }}
-                            />
+                                      : [...prev.Category, item2.name], // Add if not exists
+                                  }));
+                                }}
+                              />
 
-                            <label
-                              className="custom-control-label form-check-label"
-                              htmlFor="item2"
-                            >
-                              {item2.name}
-                            </label>
-                          </div>
-                        ))}
+                              <label className="custom-control-label form-check-label">
+                                {item2.name}
+                              </label>
+                            </div>
+                          ))}
+                        </div>
                       </div>
-                    </div>
+                    )}
                   </div>
                   <div className="collection-collapse-block open">
                     <h3
-                      className={"collapse-block-title dynamic-after2"}
-                      // className={
-                      //   item.name.length > 6
-                      //     ? "collapse-block-title dynamic-after2"
-                      //     : "collapse-block-title dynamic-after"
-                      // }
+                      className={
+                        "collapse-block-title flex items-center justify-between dynamic-after2"
+                      }
+                    >
+                      Highlights
+                      {isFilterShown.childCategory ? (
+                        <FaMinus
+                          onClick={() =>
+                            handleFilterShown("childCategory", "+")
+                          }
+                        />
+                      ) : (
+                        <FaPlus
+                          onClick={() =>
+                            handleFilterShown("childCategory", "-")
+                          }
+                        />
+                      )}
+                    </h3>
+                    {isFilterShown.childCategory && (
+                      <div
+                        className="  collection-collapse-block-content"
+                        style={{
+                          display: categoriesbtn == true ? "block" : "none",
+                        }}
+                      >
+                        <div className="collection-brand-filter">
+                          {filterList?.cildCategories.map((item2, index2) => (
+                            <div className="custom-control custom-checkbox  form-check collection-filter-checkbox">
+                              <input
+                                type="checkbox"
+                                className="custom-control-input form-check-input"
+                                id="item2"
+                                checked={shortName.childCategory.includes(
+                                  item2.name
+                                )} // Dynamically set based on state
+                                onChange={() => {
+                                  setShortName((prev) => ({
+                                    ...prev,
+                                    childCategory: prev.childCategory.includes(
+                                      item2.name
+                                    )
+                                      ? prev.childCategory.filter(
+                                          (category) => category !== item2.name
+                                        ) // Remove if exists
+                                      : [...prev.childCategory, item2.name], // Add if not exists
+                                  }));
+                                }}
+                              />
+
+                              <label className="custom-control-label form-check-label">
+                                {item2.name}
+                              </label>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                  <div className="collection-collapse-block open">
+                    <h3
+                      className={
+                        "collapse-block-title flex items-center justify-between dynamic-after2"
+                      }
+                    >
+                      Brands
+                      {isFilterShown.Brand ? (
+                        <FaMinus
+                          onClick={() => handleFilterShown("Brand", "+")}
+                        />
+                      ) : (
+                        <FaPlus
+                          onClick={() => handleFilterShown("Brand", "-")}
+                        />
+                      )}
+                    </h3>
+                    {isFilterShown.Brand && (
+                      <div
+                        className="  custom-scrollbar  h-[170px] overflow-y-scroll  collection-collapse-block-content"
+                        style={{
+                          display: categoriesbtn == true ? "block" : "none",
+                        }}
+                      >
+                        <div className="collection-brand-filter">
+                          {filterList?.brands.map((item2, index2) => (
+                            <div className="custom-control custom-checkbox  form-check collection-filter-checkbox">
+                              <input
+                                type="checkbox"
+                                className="custom-control-input form-check-input"
+                                id="item2"
+                                checked={shortName.Brand.includes(
+                                  item2.brand_name
+                                )} // Dynamically set based on state
+                                onChange={() => {
+                                  setShortName((prev) => ({
+                                    ...prev,
+                                    Brand: prev.Brand.includes(item2.brand_name)
+                                      ? prev.Brand.filter(
+                                          (category) =>
+                                            category !== item2.brand_name
+                                        ) // Remove if exists
+                                      : [...prev.Brand, item2.brand_name], // Add if not exists
+                                  }));
+                                }}
+                              />
+                              <label
+                                className="custom-control-label form-check-label"
+                                 
+                              >
+                                {item2.brand_name}
+                              </label>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                  <div className="collection-collapse-block open">
+                    <h3
+                      className={
+                        "collapse-block-title flex items-center justify-between dynamic-after2"
+                      }
+                    >
+                      List
+                      {isFilterShown.subChildCategory ? (
+                        <FaMinus
+                          onClick={() =>
+                            handleFilterShown("subChildCategory", "+")
+                          }
+                        />
+                      ) : (
+                        <FaPlus
+                          onClick={() =>
+                            handleFilterShown("subChildCategory", "-")
+                          }
+                        />
+                      )}
+                    </h3>
+                    {isFilterShown.subChildCategory && (
+                      <div
+                        className="  custom-scrollbar  h-[170px] overflow-y-scroll collection-collapse-block-content"
+                        style={{
+                          display: categoriesbtn == true ? "block" : "none",
+                        }}
+                      >
+                        <div className="collection-brand-filter">
+                          {filterList?.childSubCategories.map(
+                            (item2, index2) => (
+                              <div className="custom-control custom-checkbox  form-check collection-filter-checkbox">
+                                <input
+                                  type="checkbox"
+                                  className="custom-control-input form-check-input"
+                                  id="item2"
+                                  checked={shortName.subChildCategory.includes(
+                                    item2.name
+                                  )} // Dynamically set based on state
+                                  onChange={() => {
+                                    setShortName((prev) => ({
+                                      ...prev,
+                                      subChildCategory:
+                                        prev.subChildCategory.includes(
+                                          item2.name
+                                        )
+                                          ? prev.subChildCategory.filter(
+                                              (category) =>
+                                                category !== item2.name
+                                            ) // Remove if exists
+                                          : [
+                                              ...prev.subChildCategory,
+                                              item2.name,
+                                            ], // Add if not exists
+                                    }));
+                                  }}
+                                />
+
+                                <label
+                                  className="custom-control-label form-check-label"
+                                 
+                                >
+                                  {item2.name}
+                                </label>
+                              </div>
+                            )
+                          )}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                  <div className="collection-collapse-block open">
+                    <h3
+                      className={
+                        "collapse-block-title flex items-center justify-between dynamic-after2"
+                      }
                     >
                       Colors
-                      {
-                        // item.name.length > 7 ?
-                        <style>
-                          {`.dynamic-after::after {
-            left:51px;
-          }  .dynamic-after2::after {
-            left:110px;
-          }`}
-                        </style>
-                      }
+                      {isFilterShown.Color ? (
+                        <FaMinus
+                          onClick={() => handleFilterShown("Color", "+")}
+                        />
+                      ) : (
+                        <FaPlus
+                          onClick={() => handleFilterShown("Color", "-")}
+                        />
+                      )}
                     </h3>
 
-                    <div
-                      className="collection-collapse-block-content"
-                      style={{
-                        display: categoriesbtn == true ? "block" : "none",
-                      }}
-                    >
-                      <div className="collection-brand-filter">
-                        {filterList?.colors.map((item2, index2) => (
-                          <div className="custom-control  flex items-center gap-x-4  custom-checkbox  form-check collection-filter-checkbox">
-                            <input
-                              type="checkbox"
-                              className="custom-control-input  form-check-input"
-                              id="item2"
-                              checked={shortName.Color.includes(item2)} // Dynamically set based on state
-                              onChange={() => {
-                                setShortName((prev) => ({
-                                  ...prev,
-                                  Color: prev.Color.includes(item2)
-                                    ? prev.Color.filter(
-                                        (category) => category !== item2
-                                      ) // Remove if exists
-                                    : [...prev.Color, item2], // Add if not exists
-                                }));
-                              }}
-                            />
+                    {isFilterShown.Color && (
+                      <div
+                        className="  custom-scrollbar  h-[170px] overflow-y-scroll collection-collapse-block-content"
+                        style={{
+                          display: categoriesbtn == true ? "block" : "none",
+                        }}
+                      >
+                        <div className="collection-brand-filter">
+                          {filterList?.colors.map((item2, index2) => (
+                            <div className="custom-control  flex items-center gap-x-4  custom-checkbox  form-check collection-filter-checkbox">
+                              <input
+                                type="checkbox"
+                                className="custom-control-input  form-check-input"
+                                id="item2"
+                                checked={shortName.Color.includes(item2)} // Dynamically set based on state
+                                onChange={() => {
+                                  setShortName((prev) => ({
+                                    ...prev,
+                                    Color: prev.Color.includes(item2)
+                                      ? prev.Color.filter(
+                                          (category) => category !== item2
+                                        ) // Remove if exists
+                                      : [...prev.Color, item2], // Add if not exists
+                                  }));
+                                }}
+                              />
 
-                            <label
-                              className={`custom-control-label w-6 h-6 rounded-full form-check-label`}
-                              htmlFor="item2"
-                              style={{
-                                background: `${item2}`,
-                              }}
-                            ></label>
-                          </div>
-                        ))}
+                              <label
+                                className={`custom-control-label w-6 h-6 rounded-full form-check-label`}
+                            
+                                style={{
+                                  background: `${item2}`,
+                                }}
+                              ></label>
+                            </div>
+                          ))}
+                        </div>
                       </div>
-                    </div>
+                    )}
                   </div>
                   <div className="collection-collapse-block open">
                     <h3
-                      className={"collapse-block-title dynamic-after2"}
-                      // className={
-                      //   item.name.length > 6
-                      //     ? "collapse-block-title dynamic-after2"
-                      //     : "collapse-block-title dynamic-after"
-                      // }
+                      className={
+                        "collapse-block-title flex items-center justify-between dynamic-after2"
+                      }
                     >
                       Sizes
-                      {
-                        // item.name.length > 7 ?
-                        <style>
-                          {`.dynamic-after::after {
-            left:51px;
-          }  .dynamic-after2::after {
-            left:110px;
-          }`}
-                        </style>
-                        //  : <style>
-                        //   {`
-                        //   .dynamic-after::after {
-                        //     left:50px;
-                        //   }
-                        // `}
-                        // </style>
-                      }
+                      {isFilterShown.Size ? (
+                        <FaMinus
+                          onClick={() => handleFilterShown("Size", "+")}
+                        />
+                      ) : (
+                        <FaPlus
+                          onClick={() => handleFilterShown("Size", "-")}
+                        />
+                      )}
                     </h3>
-                    <div
-                      className="collection-collapse-block-content"
-                      style={{
-                        display: categoriesbtn == true ? "block" : "none",
-                      }}
-                    >
-                      <div className="collection-brand-filter">
-                    
-                        {filterList?.sizes.map((item2, index2) => (
-                          <div className="custom-control custom-checkbox  form-check collection-filter-checkbox">
-                            <input
-                              type="checkbox"
-                              className="custom-control-input form-check-input"
-                              id="item2"
-                              checked={shortName.Size.includes(item2)} // Dynamically set based on state
-                              onChange={() => {
-                                setShortName((prev) => ({
-                                  ...prev,
-                                  Size: prev.Size.includes(item2)
-                                    ? prev.Size.filter(
-                                        (category) => category !== item2
-                                      ) // Remove if exists
-                                    : [...prev.Size, item2], // Add if not exists
-                                }));
-                              }}
-                            />
+                    {isFilterShown.Size && (
+                      <div
+                        className="  custom-scrollbar  h-[170px] overflow-y-scroll collection-collapse-block-content"
+                        style={{
+                          display: categoriesbtn == true ? "block" : "none",
+                        }}
+                      >
+                        <div className="collection-brand-filter">
+                          {filterList?.sizes.map((item2, index2) => (
+                            <div className="custom-control custom-checkbox  form-check collection-filter-checkbox">
+                              <input
+                                type="checkbox"
+                                className="custom-control-input form-check-input"
+                                id="item2"
+                                checked={shortName.Size.includes(item2)} // Dynamically set based on state
+                                onChange={() => {
+                                  setShortName((prev) => ({
+                                    ...prev,
+                                    Size: prev.Size.includes(item2)
+                                      ? prev.Size.filter(
+                                          (category) => category !== item2
+                                        ) // Remove if exists
+                                      : [...prev.Size, item2], // Add if not exists
+                                  }));
+                                }}
+                              />
 
-                            <label
-                              className="custom-control-label uppercase form-check-label"
-                              htmlFor="item2"
-                            >
-                              {item2}
-                            </label>
-                          </div>
-                        ))}
+                              <label
+                                className="custom-control-label uppercase form-check-label"
+                                
+                              >
+                                {item2}
+                              </label>
+                            </div>
+                          ))}
+                        </div>
                       </div>
-                    </div>
+                    )}
                   </div>
                 </div>
               </div>
@@ -570,7 +610,7 @@ const CatFilter = () => {
               {/* filter for sort by start here */}
 
               <div
-                className="col-sm-3 collection-filter category-page-side"
+                className="col-sm-2 collection-filter category-page-side"
                 style={{
                   zIndex: currentwdith < 790 ? 9991 : 1,
                   left: "-15px",
@@ -678,7 +718,10 @@ const CatFilter = () => {
                                           style={{ width: "100%" }}
                                           onClick={() => {
                                             window.open(
-                                             `/productdetails/${item.product_name.replace(/ /g, "-")}/${item?._id}`,
+                                              `/productdetails/${item.product_name.replace(
+                                                / /g,
+                                                "-"
+                                              )}/${item?._id}`,
                                               "_blank"
                                             );
                                           }}
@@ -693,101 +736,101 @@ const CatFilter = () => {
                                       </div>
                                     </div>
                                     {/* <div className="product-detail detail-center detail-inverse"> */}
-                                      <div className="detail-title">
-                                        <p className="text-center text-sm text-yellow-800">
-                                          {item?.brand}
-                                        </p>
-                                        <div className="detail-left">
+                                    <div className="detail-title">
+                                      <p className="text-center text-sm text-yellow-800">
+                                        {item?.brand}
+                                      </p>
+                                      <div className="detail-left">
+                                        <div
+                                          style={{
+                                            display: "flex",
+                                            justifyContent: "center",
+                                          }}
+                                        >
+                                          {" "}
+                                          <button
+                                            type="button"
+                                            className="btn"
+                                            onClick={() => {
+                                              transfer(
+                                                item.id,
+                                                item.product_name
+                                              );
+                                            }}
+                                          >
+                                            <h6
+                                              className="price-title catbox2"
+                                              style={{
+                                                fontSize: "12px",
+                                                fontWeight: "600",
+                                                display: "-webkit-box",
+                                                WebkitLineClamp: "1",
+                                                WebkitBoxOrient: "vertical",
+                                                overflow: "hidden",
+                                              }}
+                                            >
+                                              {item?.product_name}
+                                            </h6>{" "}
+                                          </button>
+                                        </div>
+                                      </div>
+
+                                      <div
+                                        className="detail-right"
+                                        style={{ width: "100%" }}
+                                      >
+                                        <div
+                                          className="price"
+                                          style={{ width: "100%" }}
+                                        >
                                           <div
                                             style={{
                                               display: "flex",
                                               justifyContent: "center",
+                                              color: "#000",
+                                              fontSize: "12px",
+                                              fontWeight: "500",
                                             }}
                                           >
-                                            {" "}
-                                            <button
-                                              type="button"
-                                              className="btn"
-                                              onClick={() => {
-                                                transfer(
-                                                  item.id,
-                                                  item.product_name
-                                                );
-                                              }}
-                                            >
-                                              <h6
-                                                className="price-title catbox2"
-                                                style={{
-                                                  fontSize: "12px",
-                                                  fontWeight: "600",
-                                                  display: "-webkit-box",
-                                                  WebkitLineClamp: "1",
-                                                  WebkitBoxOrient: "vertical",
-                                                  overflow: "hidden",
-                                                }}
-                                              >
-                                                {item?.product_name}
-                                              </h6>{" "}
-                                            </button>
+                                            ₹{item?.selling_price}
+                                            {item.mrp_price &&
+                                              item.mrp_price >
+                                                item.selling_price && (
+                                                <>
+                                                  <span
+                                                    style={{
+                                                      fontSize: "10px",
+                                                      color: "#c1c1c1",
+                                                      lineHeight: "20px",
+                                                      textDecoration:
+                                                        "line-through",
+                                                      paddingLeft: "3px",
+                                                      fontWeight: "400",
+                                                    }}
+                                                  >
+                                                    ₹{item.mrp_price}
+                                                  </span>
+                                                  <span
+                                                    style={{
+                                                      fontSize: "10px",
+                                                      color: "#230bb3",
+                                                      lineHeight: "20px",
+                                                      paddingLeft: "3px",
+                                                      fontWeight: "400",
+                                                    }}
+                                                  >
+                                                    {item.mrp_price -
+                                                      item.selling_price}{" "}
+                                                    off
+                                                  </span>
+                                                </>
+                                              )}
                                           </div>
-                                        </div>
 
-                                        <div
-                                          className="detail-right"
-                                          style={{ width: "100%" }}
-                                        >
-                                          <div
-                                            className="price"
-                                            style={{ width: "100%" }}
-                                          >
-                                            <div
-                                              style={{
-                                                display: "flex",
-                                                justifyContent: "center",
-                                                color: "#000",
-                                                fontSize: "12px",
-                                                fontWeight: "500",
-                                              }}
-                                            >
-                                              ₹{item?.selling_price}
-                                              {item.mrp_price &&
-                                                item.mrp_price >
-                                                  item.selling_price && (
-                                                  <>
-                                                    <span
-                                                      style={{
-                                                        fontSize: "10px",
-                                                        color: "#c1c1c1",
-                                                        lineHeight: "20px",
-                                                        textDecoration:
-                                                          "line-through",
-                                                        paddingLeft: "3px",
-                                                        fontWeight: "400",
-                                                      }}
-                                                    >
-                                                      ₹{item.mrp_price}
-                                                    </span>
-                                                    <span
-                                                      style={{
-                                                        fontSize: "10px",
-                                                        color: "#230bb3",
-                                                        lineHeight: "20px",
-                                                        paddingLeft: "3px",
-                                                        fontWeight: "400",
-                                                      }}
-                                                    >
-                                                      {item.mrp_price -
-                                                        item.selling_price}{" "}
-                                                      off
-                                                    </span>
-                                                  </>
-                                                )}
-                                            </div>
-
-                                            {/* <div className="price text-align-center" style={{display:'flex',justifyContent:'center'}}>  ₹{item.price} </div> */}
-                                          </div>
+                                          {/* <div className="price text-align-center" style={{display:'flex',justifyContent:'center'}}>  ₹{item.price} </div> */}
                                         </div>
                                       </div>
+                                    </div>
                                     {/* </div> */}
                                   </div>
                                 </div>

@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import Header from "../components/Header/Header";
 
-import ReactImageMagnify from "react-image-magnify";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 import Footer from "../components/Footer";
@@ -306,7 +305,13 @@ function Productdetails() {
                     <li>
                       <p
                         onClick={() => {
-                          transfer();
+                          window.open(
+                            `/category/${data?.parentcategory?.[0]?.name.replace(
+                              / /g,
+                              "-"
+                            )}`,
+                            "_blank"
+                          );
                         }}
                         style={{ cursor: "pointer", fontSize: "12px" }}
                       >
@@ -316,19 +321,25 @@ function Productdetails() {
                     <li style={{ fontSize: "12px" }}>&gt;</li>
                     <li>
                       <a
-                        href="javascript:void(0)"
+                        href={ `/category/${data?.childcategory?.[0]?.name.replace(
+                          / /g,
+                          "-"
+                        )}`}
                         style={{
                           fontSize: "12px",
                           textTransform: "capitalize",
                         }}
                       >
-                        {data?.childcategory?.[0]?.name}
+                         {data?.childcategory?.[0]?.name}
                       </a>
                     </li>
                     <li style={{ fontSize: "12px" }}>&gt;</li>
                     <li>
                       <a
-                        href="javascript:void(0)"
+                          href={ `/category/${data?.child_sub_category?.[0]?.name.replace(
+                            / /g,
+                            "-"
+                          )}`}
                         style={{
                           fontSize: "12px",
                           textTransform: "capitalize",
@@ -462,7 +473,6 @@ function Productdetails() {
                                   );
                                 }}
                                 alt
-                                
                                 className="img-fluid  image_zoom_cls-0"
                               />
                             </div>
@@ -632,28 +642,28 @@ function Productdetails() {
                                 {/* ₹{Data23?.[showoption]?.selling_price} */}₹
                                 {Data23?.[showoption]?.selling_price}{" "}
                                 {Data23?.[showoption]?.stock_record?.discount ==
-                                0 ? (
-                                  ""
-                                ) : (
-                                  Data23?.[showoption]?.mrp_price !=
-                                  Data23?.[showoption]?.selling_price &&  <>
-                                    {" "}
-                                    MRP{" "}
-                                    <span
-                                      style={{
-                                        fontSize: "13px",
-                                        margin: "0px",
-                                        color: "#c1c1c1",
-                                        lineHeight: "20px",
-                                        textDecoration: "line-through",
-                                        paddingLeft: "0px",
-                                        fontWeight: "400",
-                                      }}
-                                    >
-                                      ₹{Data23?.[showoption]?.mrp_price}
-                                    </span>
-                                  </>
-                                )}
+                                0
+                                  ? ""
+                                  : Data23?.[showoption]?.mrp_price !=
+                                      Data23?.[showoption]?.selling_price && (
+                                      <>
+                                        {" "}
+                                        MRP{" "}
+                                        <span
+                                          style={{
+                                            fontSize: "13px",
+                                            margin: "0px",
+                                            color: "#c1c1c1",
+                                            lineHeight: "20px",
+                                            textDecoration: "line-through",
+                                            paddingLeft: "0px",
+                                            fontWeight: "400",
+                                          }}
+                                        >
+                                          ₹{Data23?.[showoption]?.mrp_price}
+                                        </span>
+                                      </>
+                                    )}
                                 {Data23?.[showoption]?.stock_record?.discount ==
                                 0 ? (
                                   ""
@@ -670,13 +680,13 @@ function Productdetails() {
                                     }}
                                   >
                                     {Data23?.[showoption]?.mrp_price !=
-                                        Data23?.[showoption]?.selling_price &&`(${parseInt(
-                                      
+                                      Data23?.[showoption]?.selling_price &&
+                                      `(${parseInt(
                                         ((Data23?.[showoption]?.mrp_price -
                                           Data23?.[showoption]?.selling_price) /
                                           Data23?.[showoption]?.mrp_price) *
                                           100
-                                    )}%off)`}
+                                      )}%off)`}
                                   </span>
                                 )}
                               </li>
@@ -865,6 +875,7 @@ function Productdetails() {
                               {/* </span> */}
                             </div>
                           </div>
+
                           <div className="productdetailcontainer customwidth">
                             <div className="product-buttons ">
                               <a
