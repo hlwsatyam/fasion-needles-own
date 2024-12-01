@@ -109,45 +109,44 @@ const generateSitemap = () => {
       
     ];
 
-    // Build URL entries
-    const buildUrlEntry = ({ path, lastmod, priority }) => `
-    <url>
-        <loc>https://fashionneedles.com${path}</loc>
-        <changefreq>${priority === 1.0 ? "weekly" : "weekly"}</changefreq>
-        <priority>${priority}</priority>
-        <lastmod>${lastmod || new Date().toISOString()}</lastmod>
-    </url>`;
 
-    const staticUrls = staticRoutes.map(route =>
-        buildUrlEntry({
-            path: route.path,
-            priority: route.priority,
-        })
-    );
+   // Escape special XML characters
+   const escapeXml = (string) =>
+    string.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
-    const dynamicUrls = dynamicRoutes.map(route =>
-        buildUrlEntry({
-            path: route.path,
-            lastmod: route.lastmod,
-            priority: route.priority,
-        })
-    );
+// Build URL entry
+const buildUrlEntry = ({ path, lastmod, priority }) => `
+<url>
+    <loc>${escapeXml(`https://fashionneedles.com${path}`)}</loc>
+    <changefreq>${priority === 1.0 ? "weekly" : "weekly"}</changefreq>
+    <priority>${priority}</priority>
+    <lastmod>${lastmod || new Date().toISOString()}</lastmod>
+</url>`;
 
-    const allUrls = [
-        ...staticUrls,
-        ...dynamicUrls,
-    ];
+// Generate static and dynamic URLs
+const staticUrls = staticRoutes.map(route =>
+    buildUrlEntry({ path: route.path, priority: route.priority })
+);
 
-    // Generate sitemap content
-    const sitemapContent = `<?xml version="1.0" encoding="UTF-8"?>
+const dynamicUrls = dynamicRoutes.map(route =>
+    buildUrlEntry({ path: route.path, lastmod: route.lastmod, priority: route.priority })
+);
+
+const allUrls = [...staticUrls, ...dynamicUrls];
+
+// Generate sitemap content
+const sitemapContent = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-    ${allUrls.join("")}
+${allUrls.join("")}
 </urlset>`;
 
-    // Save the sitemap
-    const outputPath = path.join(__dirname, "/public/sitemap.xml");
-    fs.writeFileSync(outputPath, sitemapContent, "utf8");
-    console.log("Sitemap generated successfully at:", outputPath);
+// Save the sitemap
+const outputPath = path.join(__dirname, "/public/sitemap.xml");
+fs.writeFileSync(outputPath, sitemapContent, "utf8");
+console.log("Sitemap generated successfully at:", outputPath);
+
+
+ 
 };
 
 generateSitemap();
