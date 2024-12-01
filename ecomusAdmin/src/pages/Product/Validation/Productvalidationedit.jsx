@@ -4,12 +4,12 @@ export const Productvalidationedit = Yup.object({
   product_name: Yup.string()
     .label("Product Name")
     .min(2)
-    .max(19)
+     
     .required("Please Enter Product Name"),
   product_url: Yup.string()
     .label("Product Url")
     .min(2)
-    .max(19)
+   
     .required("Please Enter Product Url"),
   selling_price: Yup.number()
     .label("Selling Price")
@@ -21,27 +21,20 @@ export const Productvalidationedit = Yup.object({
     .label("Stock")
     .min(2)
     .required("Please Enter Stock"),
-  weight: Yup.number()
-    .label("Weight")
-    .required("Please Enter Weight"),
-    // attribute: Yup.array()
-    // .label("Attribute"),
-  weight_type: Yup.string()
-    .required("Please Enter Weight type")
-    .oneOf(["ML","L","GM"], "Invalid Weight Type"),
+
+     
+  
+   
   meta_title: Yup.string()
     .label("Meta Title")
     .min(2)
-    .max(19)
     .required("Please Enter Meta Title"),
   meta_keywords: Yup.string()
     .label("Meta Keywords")
     .min(2)
-    .max(19)
     .required("Please Enter Meta Keywords"),
   meta_description: Yup.string()
     .min(2)
-    .max(19)
     .required("Please Enter Meta Description"),
   sort_description: Yup.string()
     .min(10)

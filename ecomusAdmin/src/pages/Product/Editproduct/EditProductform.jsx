@@ -1,24 +1,24 @@
 import React, { useEffect, useRef, useState } from "react";
 import "../../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
-import { NavLink, useNavigate } from "react-router-dom";
-import Multiselect from "multiselect-react-dropdown";
+import { useNavigate } from "react-router-dom";
+
 import JoditEditor from "jodit-react";
+
 import { Field, Form, Formik } from "formik";
-import img3 from "../../../assets/selectbanner.webp";
-import { IoAddCircle } from "react-icons/io5";
-import {
-  useGetAllCategoriesQuery,
-  useGetLevelOneCategoryQuery,
-  usePostFetchSubCategoryMutation,
-} from "../../../store/api/categoryapi";
+
+import { usePostFetchSubCategoryMutation } from "../../../store/api/categoryapi";
+
 import {
   useGetSingleProductQuery,
   usePatchProductMutation,
-  usePostProductMutation,
 } from "../../../store/api/productapi";
+
 import { Productvalidationedit } from "../Validation/Productvalidationedit";
 import { useGetAttributeByCategoryIdQuery } from "../../../store/api/attributeapi";
 import { useGetAllVariantQuery } from "../../../store/api/variantapi";
+
+import axios from "axios";
+import TagsInput from "react-tagsinput";
 const EditProductform = ({ id }) => {
   const [apiresponse, setapiresponse] = useState({});
   const imageInputRef1 = useRef(null);
@@ -29,8 +29,6 @@ const EditProductform = ({ id }) => {
   const [subcategoryid, setsubcategoryid] = useState([]);
   const [selectedatt, setselectedatt] = useState([]);
   const nvg = useNavigate();
-
-  let getlevelonecategory = useGetLevelOneCategoryQuery();
 
   const config = {
     height: "300px",
@@ -122,6 +120,23 @@ const EditProductform = ({ id }) => {
   );
   // fetch Attribute api end here
 
+  const [allBrands, setAllBrands] = useState([]);
+
+  useEffect(() => {
+    fetchAllBrand();
+  }, []);
+
+  const fetchAllBrand = async () => {
+    try {
+      const res = await axios.post(
+        `${process.env.REACT_APP_API_URL}/brand/fetchallbrand`
+      );
+      if (res.status === 200) {
+        setAllBrands(res.data.data);
+      }
+    } catch (error) {}
+  };
+
   useEffect(() => {
     if (data) {
       FetchsubCategorys(data.data.parent_category);
@@ -152,6 +167,7 @@ const EditProductform = ({ id }) => {
           child_category: data.data.child_category,
           status: data.data.status,
           brand: data.data.brand,
+          mutipleSize: data.data.mutipleSize,
           color: data.data.color,
           size: data.data.size,
           // attribute: data.data.dynamicAttributes,
@@ -177,6 +193,8 @@ const EditProductform = ({ id }) => {
           formdata.append("sort_description", values.sort_description);
           formdata.append("weight_type", values.weight_type);
           formdata.append("weight", values.weight);
+          formdata.append("mutipleSize", values.mutipleSize);
+
           formdata.append("stock", values.stock);
           formdata.append("mrp_price", values.mrp_price);
           formdata.append("selling_price", values.selling_price);
@@ -376,7 +394,7 @@ const EditProductform = ({ id }) => {
                   </div>
                 </div>
               </div>
-              <div className="col-md-12 px-2 pt-3">
+              {/* <div className="col-md-12 px-2 pt-3">
                 <div className="row">
                   <div className="col-lg-2">
                     <label htmlFor="" className="form-label ">
@@ -422,8 +440,8 @@ const EditProductform = ({ id }) => {
                     ) : null}
                   </div>
                 </div>
-              </div>
-              <div className="col-md-12 px-2 pt-3">
+              </div> */}
+              {/* <div className="col-md-12 px-2 pt-3">
                 <div className="row">
                   <div className="col-lg-2">
                     <label htmlFor="" className="form-label ">
@@ -466,7 +484,7 @@ const EditProductform = ({ id }) => {
                     ) : null}
                   </div>
                 </div>
-              </div>
+              </div> */}
 
               <div className="col-3 pt-3">
                 <div className="row">
@@ -879,21 +897,37 @@ const EditProductform = ({ id }) => {
                 </div>
               </div>
 
-              <div style={{width:"19.866667%"}} className="col-2 px-2 pt-3">
+              <div style={{ width: "19.866667%" }} className="col-2 px-2 pt-3">
                 <div className="row">
                   <div className="col-lg-12">
                     <label htmlFor="" className="form-label">
-                    Brand <span style={{ color: "red" }}>*</span>{" "}
+                      Brand <span style={{ color: "red" }}>*</span>{" "}
                     </label>
                   </div>
                   <div className="col-lg-12">
-                    <Field
+                    {/* <Field
                       name="brand"
                       type="text"
                       className="form-control"
                       placeholder="Brand"
                       value={values.brand}
-                    />
+                    /> */}
+
+                    <Field
+                      as="select"
+                      name="brand"
+                      className="form-control"
+                      value={values.brand}
+                    >
+                      <option value="" disabled>
+                        Select Brand
+                      </option>
+                      {allBrands.map((item, index) => (
+                        <option key={index} value={item.brand_name}>
+                          {item.brand_name}
+                        </option>
+                      ))}
+                    </Field>
                   </div>
                   <div className="col-12">
                     {errors.brand && touched.brand ? (
@@ -902,11 +936,11 @@ const EditProductform = ({ id }) => {
                   </div>
                 </div>
               </div>
-              <div style={{width:"19.866667%"}} className="col-2 px-2 pt-3">
+              <div style={{ width: "19.866667%" }} className="col-2 px-2 pt-3">
                 <div className="row">
                   <div className="col-lg-12">
                     <label htmlFor="" className="form-label">
-                    Color <span style={{ color: "red" }}>*</span>{" "}
+                      Color <span style={{ color: "red" }}>*</span>{" "}
                     </label>
                   </div>
                   <div className="col-lg-12">
@@ -925,20 +959,28 @@ const EditProductform = ({ id }) => {
                   </div>
                 </div>
               </div>
-              <div style={{width:"19.866667%"}} className="col-2 px-2 pt-3">
+              <div style={{ width: "19.866667%" }} className="col-2 px-2 pt-3">
                 <div className="row">
                   <div className="col-lg-12">
                     <label htmlFor="" className="form-label">
-                    Size <span style={{ color: "red" }}>*</span>{" "}
+                      Size <span style={{ color: "red" }}>*</span>{" "}
                     </label>
                   </div>
                   <div className="col-lg-12">
-                    <Field
+                    {/* <Field
                       name="size"
                       type="text"
                       className="form-control"
                       placeholder="size"
                       value={values.size}
+                    /> */}
+
+                    <Field
+                      name="mutipleSize"
+                      type="text"
+                      className="form-control"
+                      placeholder="Color"
+                      component={TagsField}
                     />
                   </div>
                   <div className="col-12">
@@ -1013,10 +1055,23 @@ const EditProductform = ({ id }) => {
           </Form>
         )}
       </Formik>
-
-
     </div>
   );
 };
 
 export default EditProductform;
+
+const TagsField = ({ field, form }) => {
+  const handleChange = (tags) => {
+    form.setFieldValue(field.name, tags); // Update Formik value
+  };
+
+  return <TagsInput value={field.value || []} onChange={handleChange} />;
+};
+const mutipleColorField = ({ field, form }) => {
+  const handleChange = (tags) => {
+    form.setFieldValue(field.name, tags); // Update Formik value
+  };
+
+  return <TagsInput value={field.value || []} onChange={handleChange} />;
+};

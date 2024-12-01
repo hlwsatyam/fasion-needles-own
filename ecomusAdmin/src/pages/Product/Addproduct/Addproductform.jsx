@@ -1064,13 +1064,13 @@ const TagsField = ({ field, form }) => {
   const handleChange = (tags) => {
     form.setFieldValue(field.name, tags); // Update Formik value
   };
-
   return <TagsInput value={field.value || []} onChange={handleChange} />;
 };
+
+
 const mutipleColorField = ({ field, form }) => {
   const handleChange = (tags) => {
     form.setFieldValue(field.name, tags); // Update Formik value
   };
-
   return <TagsInput value={field.value || []} onChange={handleChange} />;
 };
