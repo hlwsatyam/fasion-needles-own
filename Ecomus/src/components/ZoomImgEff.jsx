@@ -1,9 +1,11 @@
- 
-
-
-
 import { useRef, useState } from "react";
 import styled from "styled-components";
+import Zoom from "react-medium-image-zoom";
+import "react-medium-image-zoom/dist/styles.css";
+
+// import InnerImageZoom from "react-inner-image-zoom";
+
+// import "react-inner-image-zoom/lib/InnerImageZoom/styles.min.css";
 
 const Container = styled.div`
   position: relative;
@@ -33,8 +35,7 @@ const Target = styled.img.attrs((props) => ({
     opacity: props.opacity,
     pointerEvents: "none",
     transition: "opacity 0.2s ease-in-out",
-   
-  }
+  },
 }))`
   position: absolute;
   width: 200%; /* Zoom level */
@@ -54,36 +55,6 @@ export default function ZoomImgIff({ img }) {
   const [opacity, setOpacity] = useState(0);
   const [offset, setOffset] = useState({ left: 0, top: 0 });
 
- /*  const handleMouseEnter = () => {
-    setOpacity(1); // Show zoomed area
-  };
-
-  const handleMouseLeave = () => {
-    setOpacity(0); // Hide zoomed area
-  }; */
-
-  // const handleMouseMove = (e) => {
-  //   const containerRect = containerRef.current.getBoundingClientRect();
-  //   const targetRect = targetRef.current.getBoundingClientRect();
-
-  //   const xRatio = (targetRect.width - containerRect.width) / containerRect.width;
-  //   const yRatio = (targetRect.height - containerRect.height) / containerRect.height;
-
-  //   const left = Math.max(
-  //     Math.min(e.clientX - containerRect.left, containerRect.width),
-  //     0
-  //   );
-  //   const top = Math.max(
-  //     Math.min(e.clientY - containerRect.top, containerRect.height),
-  //     0
-  //   );
-
-  //   setOffset({
-  //     left: -left * 2*xRatio,
-  //     top: -top * 2*yRatio,
-  //   });
-  // };
-
   return (
     <Container
       ref={containerRef}
@@ -91,15 +62,33 @@ export default function ZoomImgIff({ img }) {
       // onMouseLeave={handleMouseLeave}
       // onMouseMove={handleMouseMove}
     >
-      <Image ref={sourceRef}   style={{width:'auto',borderRadius:'10px', margin:'auto', height:'100%'}}   alt="source" source={img} />
-      <Target
+      <Zoom>
+        <Image ref={sourceRef}   style={{width:'auto',borderRadius:'10px', margin:'auto', height:'100%'}}   alt="source" source={img} />
+        {/* <InnerImageZoom
+          style={{
+            width: "auto",
+            borderRadius: "10px",
+            margin: "auto",
+            height: "100%",
+          }}
+          height={"100%"}
+          width={"auto"}
+          alt="source"
+          hideHint={true}
+          zoomSrc={img}
+          zoomType="hover"
+          zoomPreload={true}
+          src={img}
+        /> */}
+      </Zoom>
+      {/* <Target
         ref={targetRef}
         alt="target"
           
         opacity={opacity}
         offset={offset}
         source={img}
-      />
+      /> */}
     </Container>
   );
 }

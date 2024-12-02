@@ -25,15 +25,10 @@ const Subcategory = ({ value, issubcategory }) => {
           <button
             // onClick={() => (window.location.href = `/category/${value.name}`)}
             type="button"
-            className="btn dark-menu-item desgin1 ulappear"
-            style={{ padding: "6px 18px 0px 18px" }}
+            className="btn dark-menu-item desgin1      ulappear"
+            
           >
-            {/* <img
-              src={`${process.env.REACT_APP_API_IMAGE_URL}${value.banner}`}
-              style={{ width: "25px" }}
-              alt={404}
-              className="hideonlaptop"
-            />{" "} */}
+           
             &nbsp; <span className="largefont"> {value.name}</span>
           </button>
           <ul className="mega-menu z-20 full-mega-menu  resultappear newwith">

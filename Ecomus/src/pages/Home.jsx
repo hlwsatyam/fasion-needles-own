@@ -68,8 +68,12 @@ const Home = () => {
         items: 6,
         // stagePadding: 50,
       },
-      1200: {
+      1500: {
         items: 5,
+        // stagePadding: 50,
+      },
+      1200: {
+        items: 4,
         // stagePadding: 50,
       },
       920: {
@@ -95,12 +99,16 @@ const Home = () => {
     responsiveClass: true,
     dots: false,
     responsive: {
-      1200: {
+      1500: {
         items: 7,
         // stagePadding: 50,
       },
-      920: {
+      1200: {
         items: 6,
+        // stagePadding: 50,
+      },
+      920: {
+        items: 5,
       },
       700: {
         items: 4,
@@ -219,7 +227,7 @@ const Home = () => {
                   {brnaditem?.data.map((item, index) => (
                     <div
                     key={index*new Date().getTime()}
-                      className=" bg-white flex items-center  sm:p-6 !p-3 justify-center   cursor-pointer h-[90px] w-[90px] sm:h-[150px] sm:!w-[150px]   "
+                      className=" bg-white flex items-center  sm:p-6 !p-3 justify-center   cursor-pointer h-[90px] w-[90px] sm:h-[130px] sm:!w-[130px]   "
                       onClick={() => {
                         // nvg(`/brand/${item.brand_name?.replace(/ /g, "-")}`, {
                         //   state: { brandId: item._id, name: item.brand_name },

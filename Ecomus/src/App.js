@@ -47,10 +47,12 @@ import { HelmetProvider } from 'react-helmet-async';
 import BrandFilter from "./pages/BrandFilter";
 import CatFilter from "./pages/CatDumm";
 import Footer from "./components/Footer";
+import Header from "./components/Header/Header";
 
 function App() {
   return (
     <HelmetProvider>
+      
       <div className="mx-auto container">
         <ToastContainer />
         <Routes >

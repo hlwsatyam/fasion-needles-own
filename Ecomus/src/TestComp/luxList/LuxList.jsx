@@ -42,8 +42,12 @@ function LuxList({ title, subChildCat, productId, parentCat, childCat }) {
         items: 6,
         // stagePadding: 50,
       },
-      1200: {
+      1500: {
         items: 5,
+        // stagePadding: 50,
+      },
+      1200: {
+        items: 4,
         // stagePadding: 50,
       },
       920: {

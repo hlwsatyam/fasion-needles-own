@@ -61,11 +61,11 @@ const InfoList = () => {
     //   </div>
     // </div>
 
-    <div className="flex flex-wrap justify-center   gap-6 bg-gray-100  my-9 rounded-lg ">
+    <div className="flex flex-wrap sm:!flex-nowrap justify-center   gap-6 bg-gray-100  my-9 rounded-lg ">
       {additionalContent.map((feature, index) => (
         <div
           key={index * new Date().getTime()}
-          className="flex flex-col items-center text-center space-y-1 p-2 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow w-[170px] sm:w-[250px] "
+          className="flex flex-col items-center text-center space-y-1 p-2 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow w-[150px] sm:w-[250px] "
         >
           <div className="text-3xl text-blue-500">{feature.icon}</div>
           <h3 className="font-semibold text-sm text-gray-800">

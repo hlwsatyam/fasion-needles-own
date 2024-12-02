@@ -533,7 +533,7 @@ function Productdetails() {
                               style={{ color: "#fff" }}
                             >
                               <img
-                                className="sm:h-20 sm:w-26 h-12 w-18"
+                                className="h-[50px] w-[100px]"
                                 src={`${process.env.REACT_APP_API_IMAGE_URL}${data?.brandLogo}`}
                                 alt=""
                               />

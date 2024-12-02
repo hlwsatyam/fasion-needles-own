@@ -14,11 +14,11 @@ function ShortNofProFil({ className, shortName, setShortName }) {
     >
       {/* Sort Options */}
       <div className="w-full  md:w-1/4">
-        <label className="block text-sm font-medium text-gray-700 mb-1">
+        <label className="block  text-[12px]  font-medium text-gray-700 mb-1">
           Sort by
         </label>
         <select
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+          className="w-full  text-[12px]  px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
           value={ shortName.shortBy}
           onChange={(e) =>
             setShortName((p) => ({
@@ -34,11 +34,11 @@ function ShortNofProFil({ className, shortName, setShortName }) {
 
       {/* Products Per Page */}
       <div className="w-full md:w-1/4">
-        <label className="block text-sm font-medium text-gray-700 mb-1">
+        <label className="block  text-[12px] font-medium text-gray-700 mb-1">
           Products per page
         </label>
         <select
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+          className="w-full text-[12px]  px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
           
           value={ shortName.productPerPage}
           onChange={(e) =>
@@ -57,11 +57,11 @@ function ShortNofProFil({ className, shortName, setShortName }) {
 
       {/* Category Filter */}
       <div className="w-full md:w-1/4">
-        <label className="block text-sm font-medium text-gray-700 mb-1">
+        <label className="block  text-[12px]  font-medium text-gray-700 mb-1">
           Gender
         </label>
         <select
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+          className="w-full text-[12px]  px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
           value={ shortName.gender}
           onChange={(e) =>
             setShortName((p) => ({
