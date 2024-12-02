@@ -152,7 +152,6 @@ function Productdetails() {
       const response = await addtowishlistapi(wishlist_value);
       if (response.data.status == "successfully") {
         dispatch(addwishlist(globalvariable.wishlist + 1));
-
         refetch();
       }
     } else {
@@ -321,7 +320,7 @@ function Productdetails() {
                     <li style={{ fontSize: "12px" }}>&gt;</li>
                     <li>
                       <a
-                        href={ `/category/${data?.childcategory?.[0]?.name.replace(
+                        href={`/category/${data?.childcategory?.[0]?.name.replace(
                           / /g,
                           "-"
                         )}`}
@@ -330,16 +329,16 @@ function Productdetails() {
                           textTransform: "capitalize",
                         }}
                       >
-                         {data?.childcategory?.[0]?.name}
+                        {data?.childcategory?.[0]?.name}
                       </a>
                     </li>
                     <li style={{ fontSize: "12px" }}>&gt;</li>
                     <li>
                       <a
-                          href={ `/category/${data?.child_sub_category?.[0]?.name.replace(
-                            / /g,
-                            "-"
-                          )}`}
+                        href={`/category/${data?.child_sub_category?.[0]?.name.replace(
+                          / /g,
+                          "-"
+                        )}`}
                         style={{
                           fontSize: "12px",
                           textTransform: "capitalize",
@@ -350,93 +349,12 @@ function Productdetails() {
                     </li>
                   </ul>
                 </div>
-                <div
-                  className="header-contain"
-                  style={{ padding: "8px 0px 0px 0px" }}
-                >
-                  <div
-                    className="icon-block  twoicon"
-                    style={{ width: "100%", display: "none" }}
-                  >
-                    <ul
-                      className="theme-color"
-                      style={{
-                        width: "100%",
-                        background: "",
-                        justifyContent: "space-around",
-                        paddingRight: "10px",
-                      }}
-                    >
-                      <li
-                        className=" icon-md-block"
-                        onClick={() => redirectfun("/")}
-                      ></li>
-                      <li></li>
-                      <li
-                        className="mobile-setting "
-                        onClick={() => redirectfun("/order-history")}
-                      ></li>
-                      <li
-                        className="mobile-wishlist item-count icon-desk-none"
-                        onClick={() => redirectfun("/wishlist")}
-                      >
-                        <img
-                          src="/images/mega-store/brand/heart.png"
-                          className="newwidthpro hellopooja"
-                          alt="heart"
-                        />
-                        <label
-                          htmlFor=""
-                          style={{ fontSize: "10px", margin: "0px" }}
-                        >
-                          Wishlist
-                        </label>
-                        <div
-                          className="item-count-contain inverce"
-                          style={{ top: "-4px", left: "9px" }}
-                        >
-                          {" "}
-                          1{" "}
-                        </div>
-                      </li>
-                      <li
-                        className="mobile-cart
-                      item-count"
-                        onClick={() => {
-                          redirectfun("/cart");
-                        }}
-                      >
-                        <img
-                          src="/images/mega-store/brand/shopping-cart.png"
-                          className="newwidthpro  hellopooja"
-                          alt="cart"
-                        />
-                        <label
-                          htmlFor=""
-                          style={{ fontSize: "10px", margin: "0px" }}
-                        >
-                          Cart
-                        </label>
-
-                        <div
-                          className="item-count-contain inverce"
-                          style={{ top: "-4px", left: "9px" }}
-                        >
-                          {" "}
-                          {2}{" "}
-                        </div>
-                        {/* <div className="item-count-contain inverce" style={{top:'-4px',left:'9px'}}> {Cartnumber} </div> */}
-                      </li>
-                    </ul>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      {/* breadcrumb End */}
-      {/* section start */}
+
       <section
         className="section-big-pt-space b-g-light"
         style={{ background: "white" }}
@@ -1046,7 +964,7 @@ function Productdetails() {
       />
       <OverviewSection3 getComment={getComment} />
       <Features />
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }

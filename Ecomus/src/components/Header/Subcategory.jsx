@@ -23,7 +23,7 @@ const Subcategory = ({ value, issubcategory }) => {
         <>
           {" "}
           <button
-            onClick={() => (window.location.href = `/category/${value.name}`)}
+            // onClick={() => (window.location.href = `/category/${value.name}`)}
             type="button"
             className="btn dark-menu-item desgin1 ulappear"
             style={{ padding: "6px 18px 0px 18px" }}
@@ -55,12 +55,12 @@ const Subcategory = ({ value, issubcategory }) => {
                         {chunk.map((item,i) => (
                           <div  key={i*new Date().getTime()*1000}  className="menu-title   mb-2">
                             <h5
-                             onClick={() =>
-                              (window.location.href = `/category/${item.name.replace(
-                                / /g,
-                                "-"
-                              )}`)
-                            }
+                            //  onClick={() =>
+                            //   (window.location.href = `/category/${item.name.replace(
+                            //     / /g,
+                            //     "-"
+                            //   )}`)
+                            // }
                               style={{ cursor: "pointer" }}
                               className=" !text-blue-500 border-b-2   hover:!rotate-2 !text-sm"
                             >

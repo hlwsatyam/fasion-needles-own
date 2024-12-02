@@ -129,7 +129,7 @@ const Pay = () => {
       {/* section start */}
       <section
         className="section-big-py-space b-g-light"
-        style={{ marginTop: "65px" }}
+        style={{ marginTop: "0px" }}
       >
         <div className="custom-container">
           <div className="checkout-page contact-page">

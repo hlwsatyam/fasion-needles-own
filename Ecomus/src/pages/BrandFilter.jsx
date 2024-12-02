@@ -851,12 +851,12 @@ cccc
                           className="collection-product-wrapper"
                           style={{ width: "100%" }}
                         >
-                          <div className="product-top-filter">
+                          <div className="  product-top-filter">
                             <div className="row !w-full">
                               <div
                                 className="col-xl-12"
                                 style={{
-                                  paddingTop: "10px",
+                                  padding: "20px 0",
                                   display: "flex",
                                   justifyContent: "space-around",
                                 }}

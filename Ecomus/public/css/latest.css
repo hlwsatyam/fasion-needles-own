@@ -299,7 +299,7 @@ body{
     }
     .largefont:hover{
         font-size: 12px;
-        color: white !important;
+   
     }
     
     .largesize{
@@ -321,7 +321,7 @@ body{
     width: 260px !important;
    }
    .marginfromtop {
-    margin-top: -1rem;
+    margin-top: 0rem;
 }
 }
 @media screen and (max-width: 1100px) {

@@ -20,7 +20,7 @@ const Crouselitem = ({ item }) => {
                 src={`${process.env.REACT_APP_API_IMAGE_URL}${item.product_image1}`}
                 srcSet={`${process.env.REACT_APP_API_IMAGE_URL}${item.product_image1}`}
                 alt={item.product_name}
-                className="h-[275px]   object-fill "
+                className="h-[240px] !w-full object-fill "
               />
             </a>
           </div>

@@ -312,7 +312,7 @@ const OrderHistoryDetails = () => {
         </div>
       </section>
       {/*section end*/}
-      <Footer />
+       
     </>
   );
 };

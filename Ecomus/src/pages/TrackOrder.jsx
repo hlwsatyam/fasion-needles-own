@@ -133,7 +133,7 @@ const TrackOrder = () => {
           </Alert>
         </Snackbar>
       </Box>
-      <Footer />
+ 
     </div>
   );
 };

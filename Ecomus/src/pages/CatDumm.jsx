@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Header from "../components/Header/Header";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
@@ -19,6 +19,8 @@ const CatFilter = () => {
     subChildCategory: [],
     Color: [],
     Size: [],
+    Price: [],
+    searchText: "",
   });
   const [isFilterShown, setIsFilterShown] = useState({
     Category: true,
@@ -28,7 +30,7 @@ const CatFilter = () => {
     Color: true,
     Size: true,
   });
-
+  const debounceTimeout = useRef(null);
   const nvg = useNavigate();
   const [brand, setbrand] = useState(true);
   const [categoriesbtn, setcategoriesbtn] = useState(true);
@@ -211,7 +213,7 @@ const CatFilter = () => {
         style={{ padding: "0px" }}
       >
         <div className="collection-wrapper" style={{ background: "#f9f9f9" }}>
-          <div className="custom-container">
+          <div className="custom-container  mb-7 ">
             <div
               className="row  !p-0 !m-0   !w-full"
               style={{ background: "#f9f9f9" }}
@@ -237,7 +239,6 @@ const CatFilter = () => {
                     className="collection-mobile-back"
                     onClick={() => {
                       setfilter(!filter);
-                      console.log("click me");
                     }}
                   >
                     <span className="filter-back">
@@ -248,7 +249,7 @@ const CatFilter = () => {
                   <div className="collection-collapse-block ">
                     <h3
                       className={
-                        "collapse-block-title flex items-center justify-between dynamic-after2"
+                        "collapse-block-title border-b-2 pb-3 flex items-center justify-between dynamic-after2"
                       }
                     >
                       CATEGORIES
@@ -262,7 +263,7 @@ const CatFilter = () => {
                         />
                       )}
                     </h3>
-                    {isFilterShown.Category && (
+                    {/* {isFilterShown.Category && (
                       <div
                         className="  collection-collapse-block-content"
                         style={{
@@ -298,9 +299,34 @@ const CatFilter = () => {
                           ))}
                         </div>
                       </div>
+                    )} */}
+
+                    {isFilterShown.Category && (
+                      <div className="mt-4 mb-12">
+                        <input
+                          value={shortName.searchText}
+                          className="border rounded-md w-full py-2 px-3 w-fulll"
+                          placeholder="Search..."
+                          type="text"
+                          onChange={(e) => {
+                            const value = e.target.value;
+
+                            if (debounceTimeout.current) {
+                              clearTimeout(debounceTimeout.current);
+                            }
+
+                            debounceTimeout.current = setTimeout(() => {
+                              setShortName((prev) => ({
+                                ...prev,
+                                searchText: value,
+                              }));
+                             }, 100); // Adjust debounce delay as needed
+                          }}
+                        />
+                      </div>
                     )}
                   </div>
-                  <div className="collection-collapse-block open">
+                  {/* <div className="collection-collapse-block open">
                     <h3
                       className={
                         "collapse-block-title flex items-center justify-between dynamic-after2"
@@ -360,11 +386,11 @@ const CatFilter = () => {
                         </div>
                       </div>
                     )}
-                  </div>
+                  </div> */}
                   <div className="collection-collapse-block open">
                     <h3
                       className={
-                        "collapse-block-title flex items-center justify-between dynamic-after2"
+                        "collapse-block-title border-b-2 pb-3 flex items-center justify-between dynamic-after2"
                       }
                     >
                       Brands
@@ -380,7 +406,7 @@ const CatFilter = () => {
                     </h3>
                     {isFilterShown.Brand && (
                       <div
-                        className="  custom-scrollbar  h-[170px] overflow-y-scroll  collection-collapse-block-content"
+                        className=" mt-4  collection-collapse-block-content"
                         style={{
                           display: categoriesbtn == true ? "block" : "none",
                         }}
@@ -407,10 +433,7 @@ const CatFilter = () => {
                                   }));
                                 }}
                               />
-                              <label
-                                className="custom-control-label form-check-label"
-                                 
-                              >
+                              <label className="custom-control-label form-check-label">
                                 {item2.brand_name}
                               </label>
                             </div>
@@ -422,10 +445,10 @@ const CatFilter = () => {
                   <div className="collection-collapse-block open">
                     <h3
                       className={
-                        "collapse-block-title flex items-center justify-between dynamic-after2"
+                        "collapse-block-title border-b-2 pb-3 flex items-center justify-between dynamic-after2"
                       }
                     >
-                      List
+                      All Categories
                       {isFilterShown.subChildCategory ? (
                         <FaMinus
                           onClick={() =>
@@ -442,7 +465,7 @@ const CatFilter = () => {
                     </h3>
                     {isFilterShown.subChildCategory && (
                       <div
-                        className="  custom-scrollbar  h-[170px] overflow-y-scroll collection-collapse-block-content"
+                        className="  custom-scrollbar mt-3  h-[170px] overflow-y-scroll collection-collapse-block-content"
                         style={{
                           display: categoriesbtn == true ? "block" : "none",
                         }}
@@ -455,32 +478,34 @@ const CatFilter = () => {
                                   type="checkbox"
                                   className="custom-control-input form-check-input"
                                   id="item2"
-                                  checked={shortName.subChildCategory.includes(
-                                    item2.name
-                                  )} // Dynamically set based on state
+                                  checked={
+                                    name.replace(/-/g, " ") === item2.name
+                                  } // Dynamically set based on state
                                   onChange={() => {
-                                    setShortName((prev) => ({
-                                      ...prev,
-                                      subChildCategory:
-                                        prev.subChildCategory.includes(
-                                          item2.name
-                                        )
-                                          ? prev.subChildCategory.filter(
-                                              (category) =>
-                                                category !== item2.name
-                                            ) // Remove if exists
-                                          : [
-                                              ...prev.subChildCategory,
-                                              item2.name,
-                                            ], // Add if not exists
-                                    }));
+                                    // setShortName((prev) => ({
+                                    //   ...prev,
+                                    //   subChildCategory:
+                                    //     prev.subChildCategory.includes(
+                                    //       item2.name
+                                    //     )
+                                    //       ? prev.subChildCategory.filter(
+                                    //           (category) =>
+                                    //             category !== item2.name
+                                    //         ) // Remove if exists
+                                    //       : [
+                                    //           ...prev.subChildCategory,
+                                    //           item2.name,
+                                    //         ], // Add if not exists
+                                    // }));
+
+                                    window.location.href = `/category/${item2.name.replace(
+                                      / /g,
+                                      "-"
+                                    )}`;
                                   }}
                                 />
 
-                                <label
-                                  className="custom-control-label form-check-label"
-                                 
-                                >
+                                <label className="custom-control-label form-check-label">
                                   {item2.name}
                                 </label>
                               </div>
@@ -490,7 +515,8 @@ const CatFilter = () => {
                       </div>
                     )}
                   </div>
-                  <div className="collection-collapse-block open">
+
+                  {/* <div className="collection-collapse-block open">
                     <h3
                       className={
                         "collapse-block-title flex items-center justify-between dynamic-after2"
@@ -537,7 +563,6 @@ const CatFilter = () => {
 
                               <label
                                 className={`custom-control-label w-6 h-6 rounded-full form-check-label`}
-                            
                                 style={{
                                   background: `${item2}`,
                                 }}
@@ -592,14 +617,129 @@ const CatFilter = () => {
                                 }}
                               />
 
-                              <label
-                                className="custom-control-label uppercase form-check-label"
-                                
-                              >
+                              <label className="custom-control-label uppercase form-check-label">
                                 {item2}
                               </label>
                             </div>
                           ))}
+                        </div>
+                      </div>
+                    )}
+                  </div> */}
+
+                  <div className="collection-collapse-block open">
+                    <h3
+                      className={
+                        "collapse-block-title border-b-2 pb-3  flex items-center justify-between dynamic-after2"
+                      }
+                    >
+                      Short By Prices
+                      {isFilterShown.Size ? (
+                        <FaMinus
+                          onClick={() => handleFilterShown("Size", "+")}
+                        />
+                      ) : (
+                        <FaPlus
+                          onClick={() => handleFilterShown("Size", "-")}
+                        />
+                      )}
+                    </h3>
+                    {isFilterShown.Size && (
+                      <div
+                        className=" collection-collapse-block-content"
+                        style={{
+                          display: categoriesbtn == true ? "block" : "none",
+                        }}
+                      >
+                        <div className="collection-brand-filter">
+                          <div className="custom-control custom-checkbox  form-check collection-filter-checkbox">
+                            <input
+                              type="checkbox"
+                              className="custom-control-input form-check-input"
+                              id="item2"
+                              checked={shortName.Price.includes("500-1000")} // Dynamically set based on state
+                              onChange={() => {
+                                setShortName((prev) => ({
+                                  ...prev,
+                                  Price: prev.Price.includes("500-1000")
+                                    ? prev.Price.filter(
+                                        (category) => category !== "500-1000"
+                                      ) // Remove if exists
+                                    : [...prev.Price, "500-1000"], // Add if not exists
+                                }));
+                              }}
+                            />
+
+                            <label className="custom-control-label uppercase form-check-label">
+                              ₹500 - ₹1000
+                            </label>
+                          </div>
+                          <div className="custom-control custom-checkbox  form-check collection-filter-checkbox">
+                            <input
+                              type="checkbox"
+                              className="custom-control-input form-check-input"
+                              id="item2"
+                              checked={shortName.Price.includes("1000-5000")} // Dynamically set based on state
+                              onChange={() => {
+                                setShortName((prev) => ({
+                                  ...prev,
+                                  Price: prev.Price.includes("1000-5000")
+                                    ? prev.Price.filter(
+                                        (category) => category !== "1000-5000"
+                                      ) // Remove if exists
+                                    : [...prev.Price, "1000-5000"], // Add if not exists
+                                }));
+                              }}
+                            />
+
+                            <label className="custom-control-label uppercase form-check-label">
+                              ₹1000 - ₹5000
+                            </label>
+                          </div>
+                          <div className="custom-control custom-checkbox  form-check collection-filter-checkbox">
+                            <input
+                              type="checkbox"
+                              className="custom-control-input form-check-input"
+                              id="item2"
+                              checked={shortName.Price.includes("5000-10000")} // Dynamically set based on state
+                              onChange={() => {
+                                setShortName((prev) => ({
+                                  ...prev,
+                                  Price: prev.Price.includes("5000-10000")
+                                    ? prev.Price.filter(
+                                        (category) => category !== "5000-10000"
+                                      ) // Remove if exists
+                                    : [...prev.Price, "5000-10000"], // Add if not exists
+                                }));
+                              }}
+                            />
+
+                            <label className="custom-control-label uppercase form-check-label">
+                              ₹5000 - ₹10000
+                            </label>
+                          </div>
+                          <div className="custom-control custom-checkbox  form-check collection-filter-checkbox">
+                            <input
+                              type="checkbox"
+                              className="custom-control-input form-check-input"
+                              id="item2"
+                              checked={shortName.Price.includes("10000-20000")} // Dynamically set based on state
+                              onChange={() => {
+                                setShortName((prev) => ({
+                                  ...prev,
+                                  Price: prev.Price.includes("10000-20000")
+                                    ? prev.Price.filter(
+                                        (category) => category !== "10000-20000"
+                                      ) // Remove if exists
+                                    : [...prev.Price, "10000-20000"], // Add if not exists
+                                }));
+                              }}
+                            />
+
+                            <label className="custom-control-label uppercase form-check-label">
+                              ₹10000 - ₹20000
+                            </label>
+                          </div>
                         </div>
                       </div>
                     )}
@@ -701,11 +841,12 @@ const CatFilter = () => {
                             </div>
                           </div>
                         </div>
+
                         <div className="product-wrapper-grid !p-0 !m-0   product">
-                          <div className="row !p-0 !m-0 !w-full removepadding additionalgap">
+                          <div className=" flex items-center justify-center sm:gap-x-3 gap-2 sm:gap-y-4  flex-wrap !p-0 !m-0 !w-full removepadding additionalgap">
                             {itembybrand.data[0] ? (
                               itembybrand.data.map((item, index) => (
-                                <div className="col-xl-3 hover:shadow-2xl  col-md-4 col-sm-6 col-12">
+                                <div className=" w-[175px] sm:w-[240px]   hover:shadow-2xl">
                                   <div
                                     className="bg-white catbox"
                                     style={{ margin: "3px 4px" }}
@@ -714,7 +855,7 @@ const CatFilter = () => {
                                       <div className="product-front">
                                         <button
                                           type="button"
-                                          className="btn fixedhight"
+                                          className=" fixedhight"
                                           style={{ width: "100%" }}
                                           onClick={() => {
                                             window.open(
@@ -729,7 +870,7 @@ const CatFilter = () => {
                                           <FaHeart />{" "}
                                           <img
                                             src={`${process.env.REACT_APP_API_IMAGE_URL}${item?.product_image1}`}
-                                            className="img-fluid h-[300px] object-contain w-[300px] "
+                                            className="sm:h-[255px] h-[250px] !w-full object-fill "
                                             alt={item.product_name}
                                           />{" "}
                                         </button>
@@ -849,6 +990,7 @@ const CatFilter = () => {
                             )}
                           </div>
                         </div>
+
                         {/* {loading == true ? "" : data[0] ? ( */}
                         {data[0] ? (
                           <div className="product-pagination">
@@ -934,7 +1076,7 @@ const CatFilter = () => {
                               <div
                                 className="col-xl-12"
                                 style={{
-                                  paddingTop: "10px",
+                                  padding: "17px 0",
                                   display: "flex",
                                   justifyContent: "space-around",
                                 }}
@@ -999,7 +1141,7 @@ const CatFilter = () => {
         </div>
       </section>
       {/* section End */}
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };

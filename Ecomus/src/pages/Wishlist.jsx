@@ -340,7 +340,7 @@ const Wishlist = () => {
         </div>
       </section>
       {/* section End */}
-      <Footer />
+  
       {/* <Footer /> */}
     </>
   );

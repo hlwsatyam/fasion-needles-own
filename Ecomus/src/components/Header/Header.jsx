@@ -106,7 +106,7 @@ const Header = () => {
                     {" "}
                     <i className="fa fa-bars sidebar-bar" />
                   </div>
-                  <div className="brand-logo logo-sm-center">
+                  <div style={{ marginLeft: "30px" }} className="brand-logo logo-sm-center">
                     <NavLink to="/home">
                       <img
                         src={`/images/FN-Main.png`}
@@ -117,7 +117,7 @@ const Header = () => {
                   </div>
                 </div>
 
-                {pagename == "/pay" || pagename.startsWith("/brand/") ||  pagename.startsWith("/category/") ? (
+                {pagename == "/pay" || pagename.startsWith("/brand/")  ? (
                   ""
                 ) : (
                   <Nav
@@ -125,11 +125,6 @@ const Header = () => {
                     closesidebar={closesidebar}
                   />
                 )}
-
-
-
-
-
                 <div
                   className="hidden md:block"
                   style={{ position: "relative" }}

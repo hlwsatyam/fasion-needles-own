@@ -54,11 +54,36 @@ const MobileSubcategory = ({ value, issubcategory }) => {
                       <div className="link-section">
                         <div className="menu-title">
                           <h5
-                            onClick={() => {
-                              transfer(value._id, value.name);
-                            }}
+                             
                           >
-                            {item.name}
+                            <span className="border-b-2 mb-3 text-sm pb-1 text-red-700 font-semibold">
+                              {" "}
+                              {item.name}{" "}
+                            </span>
+
+                            {item.subcategories.map((item, index) => (
+                              <div
+                                className=" ml-4 mt-2 col mega-box"
+                                key={index}
+                              >
+                                <div className="link-section">
+                                  <div className=" text-xs menu-title">
+                                    <h5
+                                      className="!mb-0 !pb-0"
+                                      onClick={() =>
+                                        (window.location.href = `/category/${item.name.replace(
+                                          / /g,
+                                          "-"
+                                        )}`)
+                                      }
+                                    >
+                                      {item.name}
+                                    </h5>
+                                  </div>
+                                  {/* <Subsubcategory subvalue={item.children} /> */}
+                                </div>
+                              </div>
+                            ))}
                           </h5>
                         </div>
                         {/* <Subsubcategory subvalue={item.children} /> */}

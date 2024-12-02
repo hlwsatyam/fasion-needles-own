@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
 import {
   Container,
   Typography,
@@ -10,10 +11,44 @@ import {
   Box,
 } from "@mui/material";
 import { FaPhone, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer";
 
 const Contact = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_URL}/contact-form`,
+        formData
+      );
+      if (response.status === 200) {
+        toast.success("Message sent successfully!", {
+          autoClose: 3000,
+        });
+        setFormData({ name: "", email: "", subject: "", message: "" });
+      }
+    } catch (error) {
+      toast.error("Failed to send message. Please try again.", {
+        autoClose: 3000,
+      });
+    }
+  };
+
   return (
     <div>
       <Header />
@@ -89,11 +124,14 @@ const Contact = () => {
                 >
                   Send Us a Message
                 </Typography>
-                <form>
+                <form onSubmit={handleSubmit}>
                   <Grid container spacing={2}>
                     <Grid item xs={12} sm={6}>
                       <TextField
                         label="Your Name"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
                         variant="outlined"
                         fullWidth
                         required
@@ -103,6 +141,9 @@ const Contact = () => {
                     <Grid item xs={12} sm={6}>
                       <TextField
                         label="Your Email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
                         variant="outlined"
                         fullWidth
                         required
@@ -112,6 +153,9 @@ const Contact = () => {
                     <Grid item xs={12}>
                       <TextField
                         label="Subject"
+                        name="subject"
+                        value={formData.subject}
+                        onChange={handleChange}
                         variant="outlined"
                         fullWidth
                         required
@@ -121,6 +165,9 @@ const Contact = () => {
                     <Grid item xs={12}>
                       <TextField
                         label="Your Message (optional)"
+                        name="message"
+                        value={formData.message}
+                        onChange={handleChange}
                         variant="outlined"
                         multiline
                         rows={4}
@@ -170,7 +217,8 @@ const Contact = () => {
           ></iframe>
         </Box>
       </Container>
-      <Footer />
+      <ToastContainer />
+      {/* <Footer /> */}
     </div>
   );
 };

@@ -32,22 +32,22 @@ function LuxList({ title, subChildCat, productId, parentCat, childCat }) {
 
   const options2 = {
     items: 5,
-    loop: true,
+    loop: false,
     autoplay: true,
     nav: true,
     responsiveClass: true,
     dots: false,
     responsive: {
       1700: {
-        items: 11,
+        items: 8,
         // stagePadding: 50,
       },
       1200: {
-        items: 7,
+        items: 6,
         // stagePadding: 50,
       },
       920: {
-        items: 4,
+        items: 3,
       },
 
       504: {

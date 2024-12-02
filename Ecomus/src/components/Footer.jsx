@@ -46,10 +46,10 @@ const Footer = () => {
                 heading: "Category",
                 items: ["MEN", "WOMEN", "LUXURY"],
               },
-              {
-                heading: "Brands",
-                items: ["Calvin-Klein","Zara", "dior",  "Chanel"],
-              },
+              // {
+              //   heading: "Brands",
+              //   items: ["Calvin-Klein","Zara", "dior",  "Chanel"],
+              // },
               {
                 heading: "Discover",
                 items: ["Contact Us", "Blogs"],

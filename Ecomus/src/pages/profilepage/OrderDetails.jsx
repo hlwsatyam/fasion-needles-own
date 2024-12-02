@@ -136,7 +136,7 @@ const OrderDetails = () => {
           </p>
         </div>
       </div>
-      <Footer />
+  
     </div>
   );
 };

@@ -46,11 +46,12 @@ import OrderHistoryDetails from "./pages/OrderHistoryDetails";
 import { HelmetProvider } from 'react-helmet-async';
 import BrandFilter from "./pages/BrandFilter";
 import CatFilter from "./pages/CatDumm";
+import Footer from "./components/Footer";
 
 function App() {
   return (
     <HelmetProvider>
-      <div className="mx-auto">
+      <div className="mx-auto container">
         <ToastContainer />
         <Routes >
           <Route path="/login" element={<Login />} />
@@ -86,6 +87,7 @@ function App() {
           <Route path="*" element={<Error404 />} />
         </Routes>
       </div>
+      <Footer />
     </HelmetProvider>
 
   )

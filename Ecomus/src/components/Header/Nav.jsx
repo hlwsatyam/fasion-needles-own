@@ -64,7 +64,7 @@ const Nav = ({ togglesidebar, closesidebar }) => {
                       >
                         <i className="fa fa-angle-left" /> back
                       </li>
-
+ 
                       {categoryData?.data.map((item, index) => (
                         <MobileSubcategory
                           value={item}
@@ -75,7 +75,10 @@ const Nav = ({ togglesidebar, closesidebar }) => {
                     </ul>
                   </div>
                   <div className="logo-block">
-                    <div className="brand-logo logo-sm-center">
+                    <div
+                      
+                      className="  brand-logo logo-sm-center"
+                    >
                       <NavLink to="/home">
                         <img
                           src="images/logo.png"

@@ -7,7 +7,10 @@ const getwebinfo = require('../Controllers/info/getwebinfo.js');
 const editwebinfo = require('../Controllers/info/editwebinfo.js');
 const contactlist = require('../Controllers/info/contactlist.js');
 const {getTesto,delAvailable,countinfo, deleteTesto, getCateg} = require('../Controllers/info/gtTestomonialsInfo.js');
+const { submitContactForm } = require('../Controllers/Contact.js');
 router.get('/contactus', contactlist)
+router.post('/contact-form', submitContactForm)
+
 router.get('/categoryInfo-info', getCateg)
 router.get('/testomonials-info', getTesto);
 router.get('/testomonials-info/deleteHandle/:id', deleteTesto);

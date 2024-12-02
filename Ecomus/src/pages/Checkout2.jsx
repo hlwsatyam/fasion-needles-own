@@ -415,7 +415,7 @@ const handleSubmit = (e) => {
         </div>
       </div>
 
-      <Footer />
+       
     </form>
   );
 };

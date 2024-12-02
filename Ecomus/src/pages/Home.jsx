@@ -27,7 +27,7 @@ const Home = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const options = {
     items: 1,
-    loop: true,
+    loop: false,
     autoplay: true,
     nav: false,
     responsiveClass: true,
@@ -58,22 +58,22 @@ const Home = () => {
   };
   const options2 = {
     items: 5,
-    loop: true,
+    loop: false,
     autoplay: true,
     nav: true,
     responsiveClass: true,
     dots: false,
     responsive: {
       1700: {
-        items: 11,
+        items: 8,
         // stagePadding: 50,
       },
       1200: {
-        items: 7,
+        items: 6,
         // stagePadding: 50,
       },
       920: {
-        items: 4,
+        items: 3,
       },
 
       504: {
@@ -89,21 +89,21 @@ const Home = () => {
   };
   const optionsforbrand = {
     items: 6,
-    loop: true,
+    loop: false,
     autoplay: true,
     nav: false,
     responsiveClass: true,
     dots: false,
     responsive: {
       1200: {
-        items: 9,
+        items: 7,
         // stagePadding: 50,
       },
       920: {
-        items: 7,
+        items: 6,
       },
       700: {
-        items: 6,
+        items: 4,
       },
 
       300: {
@@ -178,7 +178,7 @@ const Home = () => {
                  
                 <img loading="lazy"
                   onClick={() => {
-                    window.location.href = item.banner_link;
+                   // window.location.href = item.banner_link;
                   }}
                   src={`${process.env.REACT_APP_API_IMAGE_URL}${item.banner}`}
                   alt={`${item?.banner_alt}`}
@@ -221,9 +221,9 @@ const Home = () => {
                     key={index*new Date().getTime()}
                       className=" bg-white flex items-center  sm:p-6 !p-3 justify-center   cursor-pointer h-[90px] w-[90px] sm:h-[150px] sm:!w-[150px]   "
                       onClick={() => {
-                        nvg(`/brand/${item.brand_name?.replace(/ /g, "-")}`, {
-                          state: { brandId: item._id, name: item.brand_name },
-                        });
+                        // nvg(`/brand/${item.brand_name?.replace(/ /g, "-")}`, {
+                        //   state: { brandId: item._id, name: item.brand_name },
+                        // });
                       }}
                     >
                       <img loading="lazy"
@@ -243,64 +243,7 @@ const Home = () => {
       {/* brand start */}
       
       {/*home mine banner start*/}
-      <section className="megastore-slide  collection-banner section-py-space b-g-white">
-        <div className="container-fluid ">
-          <div className="row">
-            <div className="col-xl-12 col-lg-12">
-              <div className="row">
-                {categories.map((category) => (
-                  <div
-                    className="col-md-4"
-                    style={{ paddingBottom: 12 }}
-                    key={category.id}
-                  >
-                    <div className="collection-banner-main banner-18 banner-style7 collection-color13 p-left text-center">
-                      <div className="collection-img">
-                        {/* Use the category image URL if available */}
-                        <img
-                          onClick={() => {
-                            window.location.href = category.link;
-                          }}
-                          src={
-                            category.image
-                              ? `https://adminoneupv1.stackerbee.com${category.image}`
-                              : "images/mega-store/slider/banner/placeholder.jpg"
-                          }
-                          className="img-fluid bg-img"
-                          alt={category.category_name}
-                        />
-                      </div>
-                      <div className="collection-banner-contain">
-                        <div>
-                          <h3>{category.category_name}</h3>
-                          <h3>{category.title}</h3>
-
-                          <div
-                            dangerouslySetInnerHTML={{
-                              __html: category.description,
-                            }}
-                          />
-                          <button
-                            type="button"
-                            onClick={() => {
-                              window.location.href = category.Link;
-                            }}
-                            //  onClick={()=>{transfer(category.category,category.breadcrumbs)} }
-                            className="btn btn-rounded"
-                            style={{ padding: "12px 24px" }}
-                          >
-                            Shop Now
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      
       {/*home mine banner end*/}
        
 
@@ -396,7 +339,7 @@ const Home = () => {
               <div key={index} style={{ height: "auto" }}>
                 <img loading="lazy"
                   onClick={() => {
-                    window.location.href = item.banner_link;
+                  //  window.location.href = item.banner_link;
                   }}
                   src={`${process.env.REACT_APP_API_IMAGE_URL}${item.banner}`}
                   alt={`${item?.banner_alt}`}
@@ -417,7 +360,7 @@ const Home = () => {
       {/* testomonial */}
       <Testomonials />
       {/* footer start */}
-      <Footer />
+      {/* <Footer /> */}
       {/* footer end */}
     </div>
   );

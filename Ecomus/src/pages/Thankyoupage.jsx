@@ -69,7 +69,7 @@ const Thankyoupage = () => {
       </section>
 
       {/* footer start */}
-      <Footer />
+   
       {/* footer end */}
     </div>
   );

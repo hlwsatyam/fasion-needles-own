@@ -6,14 +6,16 @@ const frontendproductlistbycategory = async (req, res) => {
     req.query;
   const filter =
     req.body;
-  
+  console.log(filter);
   //filter={
   //   Category: [ 'WOMEN' ],
   //   Brand: [ 'Zara', 'Asos' ],
   //   childCategory: [ 'Western Wear' ],
   //   subChildCategory: [ 'Jumpsuits ' ],
   //   Color: [ 'black', '#dedcd6' ],
-  //   Size: [ 'L', 'XL', 'XS' ]
+  //   Size: [ 'L', 'XL', 'XS' ],
+  //   searchText:''
+  Price: ['10000-20000', '5000-10000', '1000-5000']
   // }
   try {
     const categoryId = req.params.name;
@@ -67,11 +69,32 @@ const frontendproductlistbycategory = async (req, res) => {
     if (filter.Size && filter.Size.length > 0) {
       baseQuery.mutipleSize = { $in: filter.Size }; // Ensure filter.Size exists and is not empty
     }
+    // Add price filtering
+    if (filter.Price && filter.Price.length > 0) {
+      const priceRanges = filter.Price.map((range) => {
+        const [min, max] = range.split("-").map(Number);
+        return { $gte: min, $lte: max }; 
+      });
+  
+      baseQuery.$or = priceRanges.map((range) => ({
+        selling_price: range,
+      }));
+    }
 
     // if (brand) baseQuery.brand = brand;
     if (filter.Brand && filter.Brand.length > 0) {
       baseQuery.brand = { $in: filter.Brand };
     }
+    if (filter.searchText && filter.searchText.trim() !== "") {
+      const searchRegex = new RegExp(filter.searchText.trim(), "i"); // Case-insensitive search
+    
+      baseQuery.$or = [
+        { product_name: { $regex: searchRegex } },
+         { description: { $regex: searchRegex } },
+        { brand: { $regex: searchRegex } },
+      ];
+    }
+    
 
 
     // Get total count before applying filters

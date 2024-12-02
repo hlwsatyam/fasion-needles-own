@@ -983,7 +983,7 @@ export const Profile = () => {
         </div>
         {/* </div> */}
 
-        <Footer />
+      
 
         {/* footer start */}
       </div>

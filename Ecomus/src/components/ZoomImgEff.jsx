@@ -54,44 +54,44 @@ export default function ZoomImgIff({ img }) {
   const [opacity, setOpacity] = useState(0);
   const [offset, setOffset] = useState({ left: 0, top: 0 });
 
-  const handleMouseEnter = () => {
+ /*  const handleMouseEnter = () => {
     setOpacity(1); // Show zoomed area
   };
 
   const handleMouseLeave = () => {
     setOpacity(0); // Hide zoomed area
-  };
+  }; */
 
-  const handleMouseMove = (e) => {
-    const containerRect = containerRef.current.getBoundingClientRect();
-    const targetRect = targetRef.current.getBoundingClientRect();
+  // const handleMouseMove = (e) => {
+  //   const containerRect = containerRef.current.getBoundingClientRect();
+  //   const targetRect = targetRef.current.getBoundingClientRect();
 
-    const xRatio = (targetRect.width - containerRect.width) / containerRect.width;
-    const yRatio = (targetRect.height - containerRect.height) / containerRect.height;
+  //   const xRatio = (targetRect.width - containerRect.width) / containerRect.width;
+  //   const yRatio = (targetRect.height - containerRect.height) / containerRect.height;
 
-    const left = Math.max(
-      Math.min(e.clientX - containerRect.left, containerRect.width),
-      0
-    );
-    const top = Math.max(
-      Math.min(e.clientY - containerRect.top, containerRect.height),
-      0
-    );
+  //   const left = Math.max(
+  //     Math.min(e.clientX - containerRect.left, containerRect.width),
+  //     0
+  //   );
+  //   const top = Math.max(
+  //     Math.min(e.clientY - containerRect.top, containerRect.height),
+  //     0
+  //   );
 
-    setOffset({
-      left: -left * 2*xRatio,
-      top: -top * 2*yRatio,
-    });
-  };
+  //   setOffset({
+  //     left: -left * 2*xRatio,
+  //     top: -top * 2*yRatio,
+  //   });
+  // };
 
   return (
     <Container
       ref={containerRef}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      onMouseMove={handleMouseMove}
+      // onMouseEnter={handleMouseEnter}
+      // onMouseLeave={handleMouseLeave}
+      // onMouseMove={handleMouseMove}
     >
-      <Image ref={sourceRef}   style={{width:'auto', margin:'auto', height:'100%'}}   alt="source" source={img} />
+      <Image ref={sourceRef}   style={{width:'auto',borderRadius:'10px', margin:'auto', height:'100%'}}   alt="source" source={img} />
       <Target
         ref={targetRef}
         alt="target"

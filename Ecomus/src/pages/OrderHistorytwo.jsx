@@ -100,7 +100,7 @@ const OrderHistorytwo = () => {
         </div>
       </div>
 
-      <Footer />
+ 
     </div>
   );
 };

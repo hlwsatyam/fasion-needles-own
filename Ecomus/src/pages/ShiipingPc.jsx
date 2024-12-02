@@ -6,7 +6,7 @@ const ShippingPolicy = () => {
   return (
   <div>
     <Header/>
-    <div className="   py-8 sm:px-8 md:px-12 md:py-12 mx-auto bg-white shadow-md rounded-lg">
+    <div className=" px-3  py-8 sm:px-8 md:px-12 md:py-12 mx-auto bg-white shadow-md rounded-lg">
       <h1 className="text-4xl font-bold mb-4">Shipping Policy</h1>
       <p className="text-gray-700 mb-4">
         Welcome to Fashion Needles! At www.fashionneedles.in, we are dedicated to delivering your purchases quickly, efficiently, and reliably. This Shipping Policy provides detailed information about our shipping practices, rates, timelines, and more.
@@ -102,7 +102,7 @@ const ShippingPolicy = () => {
         Thank you for choosing Fashion Needles! We are committed to ensuring a seamless shipping experience and look forward to serving you.
       </p>
     </div>
-    <Footer/>
+    
   </div>
   );
 };

@@ -164,30 +164,41 @@ const CategoryListproduct = async (req, res) => {
         console.error("Error fetching categories:", err);
       }
     }
-    console.log(allChildCat)
+   
 
-    // Fetch unique subchild categories
-    const allChildSubCat = await product.distinct("child_sub_category", {
-      $or: [
-        { parent_category: { $in: [upcomingCat._id.toString()] } },
-        { child_category: { $in: [upcomingCat._id.toString()] } },
-        { child_sub_category: { $in: [upcomingCat._id.toString()] } }
-      ]
-    });
-    let uniqueChildSubCategories = [];
+   // Fetch unique subchild categories
+const allChildSubCat = await product.distinct("child_sub_category", {});
 
-    if (allChildSubCat.length > 0) {
-      try {
-        const categoryIds = [...new Set(allChildSubCat[0].split(",").map(id => id.trim()))];
-        const objectIdArray = categoryIds.map(id => new mongoose.Types.ObjectId(id));
-        const categories = await category.find({ _id: { $in: objectIdArray } });
-        uniqueChildSubCategories = categories.filter((cat, index, self) =>
-          index === self.findIndex((c) => c._id.toString() === cat._id.toString())
-        );
-      } catch (err) {
-        console.error("Error fetching categories:", err);
-      }
-    }
+let uniqueChildSubCategories = [];
+
+if (allChildSubCat.length > 0) {
+  try {
+    // Flatten all child sub-categories into a single array and remove duplicates
+    const categoryIds = [...new Set(
+      allChildSubCat
+        .flatMap(subCat => subCat.split(",").map(id => id.trim())) // Split and trim all entries
+    )];
+
+    // Convert category IDs to MongoDB ObjectId
+    const objectIdArray = categoryIds.map(id => new mongoose.Types.ObjectId(id));
+
+    // Fetch all matching categories from the database
+    const categories = await category.find({ _id: { $in: objectIdArray } });
+
+    // Ensure uniqueness of categories
+    uniqueChildSubCategories = categories.filter((cat, index, self) =>
+      index === self.findIndex((c) => c._id.toString() === cat._id.toString())
+    );
+
+  } catch (err) {
+    console.error("Error fetching categories:", err);
+  }
+}
+
+ 
+     
+
+
     // Fetch unique brand categories
     const allBrand = await product.distinct("brand",{
       $or: [
