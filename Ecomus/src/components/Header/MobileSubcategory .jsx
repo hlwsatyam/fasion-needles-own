@@ -15,9 +15,7 @@ const MobileSubcategory = ({ value, issubcategory }) => {
         <button
           className="btn dark-menu-item desgin1"
           style={{ padding: "6px 18px 0px 18px" }}
-          onClick={() => {
-            transfer(value._id, value.name);
-          }}
+         
         >
           <img
             src={value.image}
