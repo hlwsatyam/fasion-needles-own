@@ -13,7 +13,7 @@ const Subcategory = ({ value, issubcategory }) => {
       {issubcategory == 0 ? (
         <button
           type="button"
-          onClick={() => (window.location.href = `/category/${value.name}`)}
+          
           className="btn dark-menu-item desgin1 ulappear"
           style={{ padding: "6px 18px 0px 18px" }}
         >
