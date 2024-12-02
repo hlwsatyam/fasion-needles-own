@@ -96,7 +96,13 @@ const ShoppingCart = () => {
             {items.map((item) => (
               <div
                 key={item.id}
-                className="flex flex-wrap items-center border-b py-4"
+                onClick={() => {
+                  window.location.href = `/productdetails/${item.name.replace(
+                    / /g,
+                    "-"
+                  )}/${item.id}`;
+                }}
+                className="flex cursor-pointer flex-wrap items-center border-b py-4"
               >
                 <img
                   src={`${process.env.REACT_APP_API_IMAGE_URL}${item?.image}`}

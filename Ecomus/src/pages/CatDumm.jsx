@@ -10,6 +10,7 @@ import Footer from "../components/Footer";
 import { useGetProductByCategoryQuery } from "../store/api/productapi";
 import { Shop } from "@mui/icons-material";
 import { FaHeart, FaMinus, FaPlus } from "react-icons/fa";
+import ShortNofProFil from "../components/ShortNofProFil";
 const CatFilter = () => {
   const { name } = useParams();
   const [shortName, setShortName] = useState({
@@ -21,6 +22,9 @@ const CatFilter = () => {
     Size: [],
     Price: [],
     searchText: "",
+    shortBy: "lowToHigh",
+    productPerPage: 12,
+    gender: "all",
   });
   const [isFilterShown, setIsFilterShown] = useState({
     Category: true,
@@ -133,9 +137,14 @@ const CatFilter = () => {
                         <i className="fa fa-angle-left" /> back
                       </li>
 
-                      {categories.map((item, index) => (
+                      {/* {categories.map((item, index) => (
                         <MobileSubcategory value={item} />
-                      ))}
+                      ))} */}
+
+                      <ShortNofProFil
+                        shortName={shortName}
+                        setShortName={setShortName}
+                      />
                     </ul>
                   </div>
                 </div>
@@ -320,7 +329,7 @@ const CatFilter = () => {
                                 ...prev,
                                 searchText: value,
                               }));
-                             }, 100); // Adjust debounce delay as needed
+                            }, 100); // Adjust debounce delay as needed
                           }}
                         />
                       </div>
@@ -810,15 +819,14 @@ const CatFilter = () => {
                           ></div>
                           <div className="row !w-full">
                             <div className="col-12">
-                              <div className="product-filter-content">
-                                <div
-                                  className="search-count text-start"
-                                  style={{
-                                    border: "none",
-                                    padding: "20px 0px 7px 0px",
-                                  }}
-                                >
-                                  {/* <h5 style={{fontWeight: 400, fontSize: 13}}>Showing Products 1-24 of 10 Result</h5> */}
+                              <div className="    product-filter-content">
+                                <div className="search-count !border-none !w-full sm:gap-x-10 gap-x-4 flex items-center justify-between text-start">
+                                  <ShortNofProFil
+                                    shortName={shortName}
+                                    setShortName={setShortName}
+                                    className="md:flex flex-1 hidden flex-col pt-3   md:flex-row   items-center  bg-transparent   rounded-lg   space-y-4 md:space-y-0 md:space-x-4 animate-fadeIn"
+                                  />
+
                                   <h5
                                     style={{
                                       fontSize: 13,
@@ -826,24 +834,17 @@ const CatFilter = () => {
                                       fontWeight: 100,
                                     }}
                                   >
-                                    Showing Products 0-{" "}
-                                    {itembybrand?.data?.length} of Result
+                                    Products 0- {itembybrand?.data?.length} of
+                                    Result
                                   </h5>
                                 </div>
-                                <div
-                                  className="collection-view"
-                                  style={{
-                                    width: "100%",
-                                    paddingBottom: "0px",
-                                  }}
-                                ></div>
                               </div>
                             </div>
                           </div>
                         </div>
 
-                        <div className="product-wrapper-grid !p-0 !m-0   product">
-                          <div className=" flex items-center justify-center sm:gap-x-3 gap-2 sm:gap-y-4  flex-wrap !p-0 !m-0 !w-full removepadding additionalgap">
+                        <div className="product-wrapper-grid !p-0 !m-0    product">
+                          <div className=" flex !pt-3 sm:!pt-5 items-center justify-center sm:gap-x-3 gap-2 sm:gap-y-4  flex-wrap !p-0 !m-0 !w-full removepadding additionalgap">
                             {itembybrand.data[0] ? (
                               itembybrand.data.map((item, index) => (
                                 <div className=" w-[175px] sm:w-[240px]   hover:shadow-2xl">
@@ -870,7 +871,7 @@ const CatFilter = () => {
                                           <FaHeart />{" "}
                                           <img
                                             src={`${process.env.REACT_APP_API_IMAGE_URL}${item?.product_image1}`}
-                                            className="sm:h-[255px] h-[250px] !w-full object-fill "
+                                            className="sm:h-[350px]  h-[275px]  object-cover "
                                             alt={item.product_name}
                                           />{" "}
                                         </button>

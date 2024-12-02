@@ -39,11 +39,11 @@ function LuxList({ title, subChildCat, productId, parentCat, childCat }) {
     dots: false,
     responsive: {
       1700: {
-        items: 8,
+        items: 6,
         // stagePadding: 50,
       },
       1200: {
-        items: 6,
+        items: 5,
         // stagePadding: 50,
       },
       920: {

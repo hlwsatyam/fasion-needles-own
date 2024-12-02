@@ -15,13 +15,16 @@ const frontendproductlistbycategory = async (req, res) => {
   //   Color: [ 'black', '#dedcd6' ],
   //   Size: [ 'L', 'XL', 'XS' ],
   //   searchText:''
-  Price: ['10000-20000', '5000-10000', '1000-5000']
+  //gender:''
+  //productPerPage=4, 'all
+  // Price: ['10000-20000', '5000-10000', '1000-5000']
+  //shortBy
   // }
   try {
     const categoryId = req.params.name;
     const cat = await category.findOne({ name: categoryId });
 
-    const itemsPerPage = 12;
+    const itemsPerPage = filter.productPerPage!="all"? filter.productPerPage : 10000|| 5000;
     const pageNumber = parseInt(page) || 1;
     const skip = (pageNumber - 1) * itemsPerPage;
     let sortOptions = {};
@@ -39,6 +42,15 @@ const frontendproductlistbycategory = async (req, res) => {
     } else {
       sortOptions['selling_price'] = 1;
     }
+
+    if (filter.shortBy == "lowToHigh") {
+      sortOptions["selling_price"] =   1;
+    }
+   else {
+    sortOptions['selling_price'] = -1;
+  }
+
+
 
     // Build the base query for finding products by category
     const baseQuery = {
@@ -64,6 +76,9 @@ const frontendproductlistbycategory = async (req, res) => {
     // if (color) baseQuery.color = color;
     if (filter.Color && filter.Color.length > 0) {
       baseQuery.color = { $in: filter.Color };
+    }
+    if (filter.gender && filter.gender!="all") {
+      baseQuery.gender =  filter.gender ;
     }
     // // if (size) baseQuery.size = size;
     if (filter.Size && filter.Size.length > 0) {

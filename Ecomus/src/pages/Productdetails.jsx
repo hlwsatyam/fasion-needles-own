@@ -526,10 +526,10 @@ function Productdetails() {
                           </div>
                           <div className="">
                             <a
-                              href={`/brand/${data?.data?.brand?.replace(
-                                / /g,
-                                "-"
-                              )}`}
+                              // href={`/brand/${data?.data?.brand?.replace(
+                              //   / /g,
+                              //   "-"
+                              // )}`}
                               style={{ color: "#fff" }}
                             >
                               <img
