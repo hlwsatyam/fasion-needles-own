@@ -19,6 +19,7 @@ import Testomonials from "../components/Testomonials";
 import Categ from "../components/Categ";
 import LuxList from "../TestComp/luxList/LuxList";
 import HelmetTag from "../components/Header/Helmet";
+import PrevViewPro from "../components/PrevViewPro";
 
 const Home = () => {
   const nvg = useNavigate();
@@ -163,11 +164,13 @@ const Home = () => {
       <Header />
       <HelmetTag
         url={window.location.href}
-        description={"Explore Fashion Needles for the latest in trendy and elegant collections. From timeless classics to modern must-haves, redefine your wardrobe today. Shop now for exclusive styles and unmatched quality."}
-        keywords={"Trendy fashion for men, elegant clothing collections, stylish casual wear online, formal attire for men, sustainable fashion trends, latest men's streetwear, designer outfits for men, premium men's accessories, affordable men's clothing, best seasonal fashion deals, men's winter wardrobe essentials, cool summer outfits 2024, fashionable workwear, smart-casual style guide, men's fashion inspirations, luxury men's fashion brands, budget-friendly fashion ideas, men's capsule wardrobe basics, minimalist men's clothing, trending outfits this month, iconic men's wear collections, everyday versatile fashion, festival-ready outfits, fashion blog for men, best men's wardrobe upgrades, timeless men’s outfit ideas, street-style looks online, comfortable activewear, slim-fit clothing deals, weekend style essentials, latest outfit combinations, affordable denim collection, men's accessories trends, urban men’s fashion store, office-ready styles, tailored suits online, trending men’s jackets, casual layering ideas, seasonal must-have styles, urban casual looks, lightweight summer clothing, eco-friendly fashion choices, quick-dry activewear, affordable luxury fashion, monochrome outfit trends, classic vintage styles, elegant wedding suits, sporty casual ensembles, refined formal wear."}
-        title={
-         "Fashion Needles: Trendy & Elegant Styles for Every Occasion"
+        description={
+          "Explore Fashion Needles for the latest in trendy and elegant collections. From timeless classics to modern must-haves, redefine your wardrobe today. Shop now for exclusive styles and unmatched quality."
         }
+        keywords={
+          "Trendy fashion for men, elegant clothing collections, stylish casual wear online, formal attire for men, sustainable fashion trends, latest men's streetwear, designer outfits for men, premium men's accessories, affordable men's clothing, best seasonal fashion deals, men's winter wardrobe essentials, cool summer outfits 2024, fashionable workwear, smart-casual style guide, men's fashion inspirations, luxury men's fashion brands, budget-friendly fashion ideas, men's capsule wardrobe basics, minimalist men's clothing, trending outfits this month, iconic men's wear collections, everyday versatile fashion, festival-ready outfits, fashion blog for men, best men's wardrobe upgrades, timeless men’s outfit ideas, street-style looks online, comfortable activewear, slim-fit clothing deals, weekend style essentials, latest outfit combinations, affordable denim collection, men's accessories trends, urban men’s fashion store, office-ready styles, tailored suits online, trending men’s jackets, casual layering ideas, seasonal must-have styles, urban casual looks, lightweight summer clothing, eco-friendly fashion choices, quick-dry activewear, affordable luxury fashion, monochrome outfit trends, classic vintage styles, elegant wedding suits, sporty casual ensembles, refined formal wear."
+        }
+        title={"Fashion Needles: Trendy & Elegant Styles for Every Occasion"}
       />
       {/* home main banner section start */}
       <section className="  sale-banenr mt-2  banner-style2 design2 marginfromtop">
@@ -183,10 +186,10 @@ const Home = () => {
                 className="mobileorlaptop"
                 // style={{ height: isMobile ? '300px' : '400px'}}
               >
-                 
-                <img loading="lazy"
+                <img
+                  loading="lazy"
                   onClick={() => {
-                   // window.location.href = item.banner_link;
+                    // window.location.href = item.banner_link;
                   }}
                   src={`${process.env.REACT_APP_API_IMAGE_URL}${item.banner}`}
                   alt={`${item?.banner_alt}`}
@@ -223,10 +226,9 @@ const Home = () => {
                   style={{ width: "100%", height: "100%" }}
                   {...optionsforbrand}
                 >
-         
                   {brnaditem?.data.map((item, index) => (
                     <div
-                    key={index*new Date().getTime()}
+                      key={index * new Date().getTime()}
                       className=" bg-white flex items-center  sm:p-6 !p-3 justify-center   cursor-pointer h-[90px] w-[90px] sm:h-[130px] sm:!w-[130px]   "
                       onClick={() => {
                         // nvg(`/brand/${item.brand_name?.replace(/ /g, "-")}`, {
@@ -234,8 +236,8 @@ const Home = () => {
                         // });
                       }}
                     >
-                      <img loading="lazy"
-
+                      <img
+                        loading="lazy"
                         src={`${process.env.REACT_APP_API_IMAGE_URL}${item.brand_image}`}
                         alt={item.brand_name}
                         className="bg-white    object-contain "
@@ -249,11 +251,10 @@ const Home = () => {
         </div>
       </section>
       {/* brand start */}
-      
+
       {/*home mine banner start*/}
-      
+
       {/*home mine banner end*/}
-       
 
       <div className="flex justify-center my-2 items-center gap-x-1 sm:text-lg   text-sm font-bold text-gray-700">
         <div className="w-20 border-t-2 border-gray-400"></div>
@@ -271,8 +272,11 @@ const Home = () => {
                   style={{ width: "100%", height: "100%" }}
                   {...options2}
                 >
-                  {newarrivals?.data.map((item,index) => (
-                    <Crouselitem item={item}   key={index*new Date().getTime()} />
+                  {newarrivals?.data.map((item, index) => (
+                    <Crouselitem
+                      item={item}
+                      key={index * new Date().getTime()}
+                    />
                   ))}
                 </OwlCarousel>
               </div>
@@ -298,8 +302,11 @@ const Home = () => {
                   style={{ width: "100%", height: "100%" }}
                   {...options2}
                 >
-                  {bestseller?.data.map((item,index) => (
-                    <Crouselitem   key={index*new Date().getTime()} item={item} />
+                  {bestseller?.data.map((item, index) => (
+                    <Crouselitem
+                      key={index * new Date().getTime()}
+                      item={item}
+                    />
                   ))}
                 </OwlCarousel>
               </div>
@@ -308,7 +315,7 @@ const Home = () => {
         </div>
       </section>
       {/* best seller end  */}
-       
+
       {/* <ShopCard /> */}
       <div className="flex justify-center my-2 items-center gap-x-1 sm:text-lg text-sm font-bold text-gray-700">
         <div className="w-20 border-t-2 border-gray-400"></div>
@@ -326,8 +333,11 @@ const Home = () => {
                   style={{ width: "100%", height: "100%" }}
                   {...options2}
                 >
-                  {featureitem?.data.map((item,index) => (
-                    <Crouselitem key={index*new Date().getTime()} item={item} />
+                  {featureitem?.data.map((item, index) => (
+                    <Crouselitem
+                      key={index * new Date().getTime()}
+                      item={item}
+                    />
                   ))}
                 </OwlCarousel>
               </div>
@@ -336,6 +346,9 @@ const Home = () => {
         </div>
       </section>
       {/* best feature end  */}
+
+      <PrevViewPro />
+
       <section className="sale-banenr banner-style2 design2">
         <OwlCarousel
           className="owl-theme"
@@ -345,9 +358,10 @@ const Home = () => {
           {Banner?.data.map((item, index) =>
             item.banner_type == "Slider" ? (
               <div key={index} style={{ height: "auto" }}>
-                <img loading="lazy"
+                <img
+                  loading="lazy"
                   onClick={() => {
-                  //  window.location.href = item.banner_link;
+                    //  window.location.href = item.banner_link;
                   }}
                   src={`${process.env.REACT_APP_API_IMAGE_URL}${item.banner}`}
                   alt={`${item?.banner_alt}`}

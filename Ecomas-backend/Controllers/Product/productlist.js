@@ -13,6 +13,29 @@ const productlist = async (req, res) => {
 
 
 }
+const prevIew = async (req, res) => {
+  try {
+    const { allId } = req.body;
+
+    if (!allId || !Array.isArray(allId)) {
+      return res.status(400).send({ status: "failed", error: "Invalid allId provided" });
+    }
+
+   
+
+    // Fetch products using $in
+    const productListing = await product.find({ _id: { $in: allId } });
+
+    // Sort the results to match the order of allId
+    const sortedProductListing = allId.map(id => productListing.find(product => product._id.toString() === id));
+
+    res.send({ status: "success", data: sortedProductListing });
+  } catch (err) {
+    console.error(`Error: ${err}`);
+    res.status(500).send({ status: "failed", error: err.message });
+  }
+};
+
 const getLuxProduct = async (req, res) => {
   const { subChildCat, parentCat, childCat } = req.body;
 
@@ -73,4 +96,4 @@ const getLuxProduct = async (req, res) => {
 
 
 
-module.exports = { productlist, getLuxProduct }
+module.exports = { productlist,prevIew, getLuxProduct }

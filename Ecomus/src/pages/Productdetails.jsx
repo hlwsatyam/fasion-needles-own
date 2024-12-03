@@ -32,6 +32,7 @@ import { toast } from "react-toastify";
 import HelmetTag from "../components/Header/Helmet";
 import ZoomImgIff from "../components/ZoomImgEff";
 import Features from "../components/Testomonials";
+import PrevView from "../components/PrevViewPro";
 
 const options5 = {
   items: 1,
@@ -108,6 +109,25 @@ function Productdetails() {
       }
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    p(id);
+  }, [id]); // Ensure `id` is included in the dependency array for proper reactivity
+
+  const p = async (id) => {
+    try {
+      const allId = localStorage.getItem("allId");
+      const allIdArray = allId ? JSON.parse(allId) : []; // Parse the array or initialize as an empty array if null
+
+      if (!allIdArray.includes(id)) {
+        // Check if the id is not already present
+        allIdArray.unshift(id); // Add the id to the array
+        localStorage.setItem("allId", JSON.stringify(allIdArray)); // Save the updated array back to localStorage
+      }
+    } catch (error) {
+      console.error("An error occurred:", error); // Log any errors that might occur
     }
   };
 
@@ -964,6 +984,7 @@ function Productdetails() {
       />
       <OverviewSection3 getComment={getComment} />
       <Features />
+      <PrevView />
       {/* <Footer /> */}
     </>
   );

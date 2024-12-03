@@ -49,10 +49,10 @@ const createorder = async (req, res) => {
 
                 const savedUser = await newUser.save();
                 user_id = savedUser._id;
-                token = jwt.sign({ id: user_id }, "12345678910",  { expiresIn: `${10 * 365 * 24 * 60 * 60}s` });
+                token = jwt.sign({ id: user_id }, "12345678910", { expiresIn: `${10 * 365 * 24 * 60 * 60}s` });
 
             } else {
-                token = jwt.sign({ id: existUser._id }, "12345678910",  { expiresIn: `${10 * 365 * 24 * 60 * 60}s` });
+                token = jwt.sign({ id: existUser._id }, "12345678910", { expiresIn: `${10 * 365 * 24 * 60 * 60}s` });
                 user_id = existUser._id;
             }
         }
@@ -107,7 +107,7 @@ const createorder = async (req, res) => {
         //  const existingCartItem = await cart.find({ orderid: savedOrder.orderid }).populate('product_variant_id', 'product_name product_image1 description selling_price mrp_price weight weighttype').populate('product_id', 'product_name product_image1 description selling_price mrp_price weight weighttype');
 
         const emailHtml = `<div class="row">
-<div class="col-xs-12">
+     <div class="col-xs-12">
     <div class="container-fluid">
         <table width="99%" border="0" align="center" cellpadding="0" cellspacing="0" style="font-family: Arial, Helvetica, sans-serif; font-size: 12px; border: 1px solid #eee;">
             <tbody> 
