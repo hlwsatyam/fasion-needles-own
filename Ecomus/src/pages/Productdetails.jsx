@@ -530,7 +530,7 @@ function Productdetails() {
                       >
                         <div className=" flex items-center justify-between">
                           <div>
-                            <h2>{Data23?.[showoption]?.product_name}</h2>
+                            <h2 className="font-semibold">{Data23?.[showoption]?.product_name}</h2>
 
                             <div className=" flex items-center mt-2 justify-between">
                               <div className="flex border w-fit px-2 py-1 cursor-pointer items-center gap-x-2">

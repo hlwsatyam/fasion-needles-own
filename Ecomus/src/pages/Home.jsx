@@ -160,7 +160,7 @@ const Home = () => {
     featureitemloading == true ? (
     <></>
   ) : (
-    <div className="bg-light">
+    <div className=" overflow-hidden  bg-light">
       <Header />
       <HelmetTag
         url={window.location.href}

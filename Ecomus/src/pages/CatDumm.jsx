@@ -197,7 +197,7 @@ const CatFilter = () => {
                 <div>
                   <ul>
                     <li>
-                      <a href="javascript:void(0)">home</a>
+                      <a href="/">home</a>
                     </li>
                     {/* <li style={{fontSize:"12px"}}>&gt;</li>
                 <li><a href="javascript:void(0)">Category</a></li> */}

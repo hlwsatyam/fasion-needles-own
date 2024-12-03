@@ -1,7 +1,8 @@
-import { useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import styled from "styled-components";
 import Zoom from "react-medium-image-zoom";
 import "react-medium-image-zoom/dist/styles.css";
+import { Controlled as ControlledZoom } from 'react-medium-image-zoom'
 
 // import InnerImageZoom from "react-inner-image-zoom";
 
@@ -54,7 +55,11 @@ export default function ZoomImgIff({ img }) {
 
   const [opacity, setOpacity] = useState(0);
   const [offset, setOffset] = useState({ left: 0, top: 0 });
+  const [isZoomed, setIsZoomed] = useState(false)
 
+  const handleZoomChange = useCallback(shouldZoom => {
+    setIsZoomed(shouldZoom)
+  }, [])
   return (
     <Container
       ref={containerRef}
@@ -62,7 +67,29 @@ export default function ZoomImgIff({ img }) {
       // onMouseLeave={handleMouseLeave}
       // onMouseMove={handleMouseMove}
     >
-      <Zoom>
+      {/* <Zoom> */}
+        {/* <Image ref={sourceRef}   style={{width:'auto',borderRadius:'10px', margin:'auto', height:'100%'}}   alt="source" source={img} /> */}
+        {/* <InnerImageZoom
+          style={{
+            width: "auto",
+            borderRadius: "10px",
+            margin: "auto",
+            height: "100%",
+          }}
+          height={"100%"}
+          width={"auto"}
+          alt="source"
+          hideHint={true}
+          zoomSrc={img}
+          zoomType="hover"
+          zoomPreload={true}
+          src={img}
+        /> */}
+      {/* </Zoom> */}
+
+
+
+      <ControlledZoom isZoomed={isZoomed} onZoomChange={handleZoomChange}>
         <Image ref={sourceRef}   style={{width:'auto',borderRadius:'10px', margin:'auto', height:'100%'}}   alt="source" source={img} />
         {/* <InnerImageZoom
           style={{
@@ -80,7 +107,18 @@ export default function ZoomImgIff({ img }) {
           zoomPreload={true}
           src={img}
         /> */}
-      </Zoom>
+   </ControlledZoom>
+
+
+
+
+
+
+
+
+
+
+
       {/* <Target
         ref={targetRef}
         alt="target"
