@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import Header from "../components/Header/Header";
-
+import ModalImage from "react-modal-image";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
-import Footer from "../components/Footer";
+
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import {
@@ -506,13 +506,50 @@ function Productdetails() {
                                 }}
                               /> */}
 
-                              <ZoomImgIff
+                              {/* <ZoomImgIff
                                 img={
                                   viewimg == null
                                     ? `${process.env.REACT_APP_API_IMAGE_URL}${Data23?.[showoption]?.product_image1}`
                                     : viewimg
                                 }
-                              />
+                              /> */}
+
+<ModalImage
+  small={ viewimg == null
+    ? `${process.env.REACT_APP_API_IMAGE_URL}${Data23?.[showoption]?.product_image1}`
+    : viewimg}
+  large={ viewimg == null
+    ? `${process.env.REACT_APP_API_IMAGE_URL}${Data23?.[showoption]?.product_image1}`
+    : viewimg}
+  alt="Hello World!"
+  style={{
+    width: "auto",
+    borderRadius: "10px",
+    margin: "auto",
+    height: "100%",
+  }}
+  height={"100%"}
+  width={"auto"}
+/>;
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
                             </div>
                           </div>
                         </div>

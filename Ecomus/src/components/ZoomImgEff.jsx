@@ -1,6 +1,6 @@
 import { useCallback, useRef, useState } from "react";
 import styled from "styled-components";
-import Zoom from "react-medium-image-zoom";
+ 
 import "react-medium-image-zoom/dist/styles.css";
 import { Controlled as ControlledZoom } from 'react-medium-image-zoom'
 
@@ -89,7 +89,7 @@ export default function ZoomImgIff({ img }) {
 
 
 
-      <ControlledZoom isZoomed={isZoomed} onZoomChange={handleZoomChange}>
+      {/* <ControlledZoom isZoomed={isZoomed} onZoomChange={handleZoomChange}> */}
         <Image ref={sourceRef}   style={{width:'auto',borderRadius:'10px', margin:'auto', height:'100%'}}   alt="source" source={img} />
         {/* <InnerImageZoom
           style={{
@@ -107,7 +107,7 @@ export default function ZoomImgIff({ img }) {
           zoomPreload={true}
           src={img}
         /> */}
-   </ControlledZoom>
+   {/* </ControlledZoom> */}
 
 
 
