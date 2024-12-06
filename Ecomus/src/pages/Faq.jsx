@@ -206,7 +206,7 @@ const FAQSection = () => {
     <div>
       <Header />
       <div
-        className="  mx-auto px-4 py-12"
+        className="  mx-auto sm:!px-32 !px-4 py-12"
         role="region"
         aria-label="Frequently Asked Questions"
       >

@@ -93,7 +93,45 @@ const getLuxProduct = async (req, res) => {
     res.status(500).send({ status: "failed", errors: err.message });
   }
 };
+const getRecProduct = async (req, res) => {
+  const { items } = req.body;
+
+  try {
+    let productListing;
+console.log(items.length)
+     if (items && items.length === 0) {
+      productListing = await product.find({
+        selling_price: {
+          $gt: 5000
+        }, // Filter by price > 5000
+      })
+        .limit(30)
+        .exec();
+        console.log("productListing")
+     }
+    
+else{
+
+const getAllBrand = items.map(item => item.brand);
+
+    productListing = await product.find({
+      brand: { $in: getAllBrand}
+    })
+    .limit(30)
+    .exec();
+
+
+}
 
 
 
-module.exports = { productlist,prevIew, getLuxProduct }
+    res.status(200).send({ status: "success", data: productListing });
+  } catch (err) {
+    console.error(`Error: ${err}`);
+    res.status(500).send({ status: "failed", errors: err.message });
+  }
+};
+
+
+
+module.exports = { productlist,prevIew,getRecProduct, getLuxProduct }

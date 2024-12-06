@@ -9,7 +9,7 @@ function Blogs() {
   return (
     <div>
       <Header />
-      <div className="py-5 px-4">
+      <div className=" mx-auto sm:!px-32 !px-4 py-12">
         <Typography
           variant="h4"
           align="center"

@@ -5,43 +5,18 @@ import Footer from "../components/Footer";
 import { FaTrash } from "react-icons/fa6";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import RecomendedPro from "../components/RecomendedPro";
 
 const ShoppingCart = () => {
   const [items, setItems] = useState([
-    {
-      id: 1,
-      name: "Classic T-Shirt",
-      price: 25.99,
-      quantity: 1,
-      size: "M",
-      rating: 4,
-      image: "https://source.unsplash.com/random/150x150?t-shirt",
-    },
-    {
-      id: 2,
-      name: "Denim Jeans",
-      price: 49.99,
-      quantity: 1,
-      size: "32",
-      rating: 5,
-      image: "https://source.unsplash.com/random/150x150?jeans",
-    },
-    {
-      id: 3,
-      name: "Leather Jacket",
-      price: 199.99,
-      quantity: 1,
-      size: "L",
-      rating: 3,
-      image: "https://source.unsplash.com/random/150x150?leather-jacket",
-    },
+   
   ]);
 
   useEffect(() => {
     const cartdata = localStorage.getItem("cart")
       ? JSON.parse(localStorage.getItem("cart"))
       : [];
-    console.log(cartdata);
+   
     setItems(cartdata);
   }, []);
 
@@ -81,6 +56,9 @@ const ShoppingCart = () => {
 
   const navigate = useNavigate();
   const handleSubmit = (e) => {
+    if(items.length===0){
+    return  toast(`Please add item to cart`);
+    }
     e.preventDefault();
     navigate("/checkout", { state: { items, total } });
   };
@@ -88,29 +66,36 @@ const ShoppingCart = () => {
   return (
     <div>
       <Header />
-
       <div className="container mx-auto p-4 bg-gray-100 ">
         <div className="flex flex-col md:flex-row gap-8">
           <div className="md:w-2/3 bg-white rounded-lg shadow-md p-6">
             <h2 className="text-2xl font-bold mb-4">Shopping Cart</h2>
             {items.map((item) => (
               <div
-                key={item.id}
-                onClick={() => {
-                  window.location.href = `/productdetails/${item.name.replace(
-                    / /g,
-                    "-"
-                  )}/${item.id}`;
-                }}
+                key={item?._id}
                 className="flex cursor-pointer flex-wrap items-center border-b py-4"
               >
                 <img
                   src={`${process.env.REACT_APP_API_IMAGE_URL}${item?.image}`}
                   alt={item.name}
+                  onClick={() => {
+                    window.location.href = `/productdetails/${item.name.replace(
+                      / /g,
+                      "-"
+                    )}/${item.id}`;
+                  }}
                   className="w-24 h-24 object-cover rounded-md mr-4"
                 />
                 <div className="flex-grow">
-                  <h3 className="text-lg font-semibold truncate w-[200px]">
+                  <h3
+                    onClick={() => {
+                      window.location.href = `/productdetails/${item.name.replace(
+                        / /g,
+                        "-"
+                      )}/${item.id}`;
+                    }}
+                    className="text-lg font-semibold truncate w-[200px]"
+                  >
                     {item.name}
                   </h3>
                   <p className="text-gray-600">Brand: {item.brand}</p>
@@ -175,7 +160,7 @@ const ShoppingCart = () => {
           </div>
         </div>
       </div>
-       
+      <RecomendedPro items={items} title={'Recommended Products'}   />
     </div>
   );
 };

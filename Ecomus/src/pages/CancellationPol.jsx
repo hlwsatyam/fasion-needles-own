@@ -4,9 +4,9 @@ import Footer from "../components/Footer";
 
 const CancellationPolicy = () => {
   return (
-    <div    >
+    <div  className=""  >
       <Header />
-      <div className=" py-8 sm:px-8 px-3 md:px-12 md:py-12 mx-auto bg-white shadow-md rounded-lg">
+      <div className=" py-8 sm:!px-32 !px-4 mx-auto bg-white shadow-md rounded-lg">
         <h1 className="text-4xl font-bold mb-4">
           Cancellation, Return & Exchange Policy
         </h1>

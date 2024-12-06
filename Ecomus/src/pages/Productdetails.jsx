@@ -86,7 +86,7 @@ function Productdetails() {
   const [viewimg, setviewimg] = useState(null);
   const [qty, setqty] = useState(1);
   const [showoption, setshowoption] = useState(0);
-  const [selectedSize, setselectedSize] = useState(0);
+  const [selectedSize, setselectedSize] = useState();
   const [loading, setloading] = useState(true);
   const [delto, setdelto] = useState("");
   const [Data23, setData] = useState([]);
@@ -102,12 +102,10 @@ function Productdetails() {
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       const lightbox = GLightbox({
-        selector: '.glightbox',
+        selector: ".glightbox",
       });
-    }, 2000); // Delay initialization by 100ms to ensure all elements are loaded
-
-    return () => clearTimeout(timeoutId);
-  }, [id]);
+    }, 200); // Delay initialization by 100ms to ensure all elements are loaded
+  }, [id, Data23]);
 
   const fetchComment = async (e) => {
     try {
@@ -157,10 +155,6 @@ function Productdetails() {
     nvg(linkpage);
   };
 
-  const profilepage = (val) => {
-    nvg("/profile", { state: { id: val } });
-  };
-
   const incrementcart = () => {
     setqty(qty + 1);
   };
@@ -208,6 +202,12 @@ function Productdetails() {
 
   // add to cart start here
   const addtocartfun = async () => {
+    console.log(selectedSize)
+    if (Data23[0]?.mutipleSize.length > 0) {
+      if (selectedSize===undefined || selectedSize === null) {
+        return toast("Please select size");
+      }
+    }
     try {
       const cart_value = {
         name: Data23[showoption].product_name,
@@ -245,7 +245,7 @@ function Productdetails() {
     }
   };
 
-  let ispresent = false;
+ 
   useEffect(() => {
     setloading(true);
     if (isLoading == false) {
@@ -275,27 +275,10 @@ function Productdetails() {
       console.log(error);
     }
   };
-  console.log(data);
-  const transfer = () => {
-    nvg("/category", {
-      state: {
-        id: location.state?.categoryid,
-        pagename: location.state?.pagename,
-      },
-    });
-    window.location.reload();
-  };
 
-  const transfer3 = (productid) => {
-    nvg("/productdetails", {
-      state: {
-        id: productid,
-        categoryid: location.state?.categoryid,
-        pagename: location.state?.pagename,
-      },
-    });
-    window.location.reload();
-  };
+  
+
+ 
   return isLoading == true ? (
     ""
   ) : (
@@ -532,7 +515,7 @@ function Productdetails() {
                                     ? `${process.env.REACT_APP_API_IMAGE_URL}${Data23?.[showoption]?.product_image1}`
                                     : viewimg
                                 }
-                                className="glightbox"
+                                className="glightbox block !h-full !w-full "
                               >
                                 <img
                                   src={
@@ -540,7 +523,7 @@ function Productdetails() {
                                       ? `${process.env.REACT_APP_API_IMAGE_URL}${Data23?.[showoption]?.product_image1}`
                                       : viewimg
                                   }
-                                  className="!w-full"
+                                  className="h-full w-auto object-cover"
                                   alt="Thumbnail"
                                 />
                               </a>
@@ -609,7 +592,7 @@ function Productdetails() {
                               style={{ color: "#fff" }}
                             >
                               <img
-                                className="h-[50px] w-[100px]"
+                                className="!h-auto  !w-auto"
                                 src={`${process.env.REACT_APP_API_IMAGE_URL}${data?.brandLogo}`}
                                 alt=""
                               />
@@ -728,46 +711,53 @@ function Productdetails() {
                               </div>
                             </div>
                           ))}
-                          {console.log(Data23)}
-                          {Data23.map((item, index) => (
-                            <div className="productdetailcontainer customwidth">
-                              <h6 className="product-title mt-2">
-                                Available Size
-                              </h6>
-                              <div className="size-box">
-                                <ul>
-                                  {Data23[0]?.mutipleSize?.map((str, index) => (
-                                    <li
-                                      onClick={() => setselectedSize(index)}
-                                      style={{
-                                        padding: "4px",
-                                        background:
-                                          selectedSize == index
-                                            ? "#059fe2"
-                                            : "#fff",
-                                      }}
-                                    >
-                                      {" "}
-                                      <a
-                                        href="javascript:void(0)"
-                                        style={{
-                                          color:
-                                            selectedSize == index
-                                              ? "white"
-                                              : "#333",
-                                        }}
-                                        onClick={() => {}}
-                                      >
-                                        {" "}
-                                        {str}
-                                      </a>{" "}
-                                    </li>
-                                  ))}
-                                  {/* <li style={{ background: "#059fe2" }}><a style={{ color: "white" }} href="javascript:void(0)">l</a></li> */}
-                                </ul>
-                              </div>
-                            </div>
-                          ))}
+
+                          {Data23?.map(
+                            (item, index) =>
+                              Data23[0]?.mutipleSize.length > 0 && (
+                                <div className="productdetailcontainer customwidth">
+                                  <h6 className="product-title mt-2">
+                                    Available Size
+                                  </h6>
+                                  <div className="size-box">
+                                    <ul>
+                                      {Data23[0]?.mutipleSize?.map(
+                                        (str, index) => (
+                                          <li
+                                            onClick={() =>
+                                              setselectedSize(index)
+                                            }
+                                            style={{
+                                              padding: "4px",
+                                              background:
+                                                selectedSize == index
+                                                  ? "#059fe2"
+                                                  : "#fff",
+                                            }}
+                                          >
+                                            {" "}
+                                            <a
+                                           
+                                              style={{
+                                                color:
+                                                  selectedSize == index
+                                                    ? "white"
+                                                    : "#333",
+                                              }}
+                                             
+                                            >
+                                              {" "}
+                                              {str}
+                                            </a>{" "}
+                                          </li>
+                                        )
+                                      )}
+                                      {/* <li style={{ background: "#059fe2" }}><a style={{ color: "white" }} href="javascript:void(0)">l</a></li> */}
+                                    </ul>
+                                  </div>
+                                </div>
+                              )
+                          )}
 
                           {Data23.map((item, index) => (
                             <div
