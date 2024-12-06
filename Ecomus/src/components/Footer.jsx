@@ -56,7 +56,7 @@ const Footer = () => {
               },
               {
                 heading: "Product",
-                items: ["Track Order", "wishlist",  ],
+                items: ["Track Order", "wishlist"],
               },
               {
                 heading: "Policies",

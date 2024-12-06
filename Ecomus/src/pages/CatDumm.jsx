@@ -44,9 +44,8 @@ const CatFilter = () => {
   const [sortby, setsortby] = useState(false);
   const [loading, setloading] = useState(true);
   const [data, setData] = useState([]);
-  const [data4, setData4] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
-  const [pageSize, setpageSize] = useState(12);
+
   const transfer = (productid, pname) => {
     nvg("/productdetails", {
       state: {
@@ -68,7 +67,7 @@ const CatFilter = () => {
     name: name.replace(/-/g, " "), // Replace dashes with spaces in the name
     filter: shortName, // Pass the filter directly
   });
-
+  
   useEffect(() => {
     refetch();
   }, [shortName]);
@@ -94,11 +93,13 @@ const CatFilter = () => {
     }
   };
 
+
   useEffect(() => {
     filterdata(0);
-  }, []);
-  const pageCount = Math.ceil(totalrecords / 12);
+  }, [name]);
 
+  const pageCount = Math.ceil(totalrecords / 12);
+  
   const handleFilterShown = (name, condition) => {
     setIsFilterShown((prev) => ({
       ...prev,
@@ -845,8 +846,8 @@ const CatFilter = () => {
 
                         <div className="product-wrapper-grid !p-0 !m-0    product">
                           <div className=" flex !pt-3 sm:!pt-5 items-center justify-start sm:gap-x-3 gap-2 sm:gap-y-4  flex-wrap !p-0 !m-0 !w-full removepadding additionalgap">
-                            {itembybrand.data[0] ? (
-                              itembybrand.data.map((item, index) => (
+                            {itembybrand?.data[0] ? (
+                              itembybrand?.data.map((item, index) => (
                                 <div className=" w-[175px] sm:w-[240px]   hover:shadow-2xl">
                                   <div
                                     className="bg-white catbox"

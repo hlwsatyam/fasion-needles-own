@@ -3,6 +3,8 @@ import Header from "../components/Header/Header";
 import ModalImage from "react-modal-image";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
+import GLightbox from "glightbox";
+import "glightbox/dist/css/glightbox.min.css";
 
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
@@ -96,6 +98,17 @@ function Productdetails() {
   const [removetowishlistapi] = usePostDeleteWishlistMutation();
 
   const [getComment, setGetComment] = useState(null);
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      const lightbox = GLightbox({
+        selector: '.glightbox',
+      });
+    }, 2000); // Delay initialization by 100ms to ensure all elements are loaded
+
+    return () => clearTimeout(timeoutId);
+  }, [id]);
+
   const fetchComment = async (e) => {
     try {
       const response = await axios.post(
@@ -505,7 +518,6 @@ function Productdetails() {
                                  
                                 }}
                               /> */}
-
                               {/* <ZoomImgIff
                                 img={
                                   viewimg == null
@@ -514,42 +526,47 @@ function Productdetails() {
                                 }
                               /> */}
 
-<ModalImage
-  small={ viewimg == null
-    ? `${process.env.REACT_APP_API_IMAGE_URL}${Data23?.[showoption]?.product_image1}`
-    : viewimg}
-  large={ viewimg == null
-    ? `${process.env.REACT_APP_API_IMAGE_URL}${Data23?.[showoption]?.product_image1}`
-    : viewimg}
-  alt="Hello World!"
-  style={{
-    width: "auto",
-    borderRadius: "10px",
-    margin: "auto",
-    height: "100%",
-  }}
-  height={"100%"}
-  width={"auto"}
-/>;
+                              <a
+                                href={
+                                  viewimg == null
+                                    ? `${process.env.REACT_APP_API_IMAGE_URL}${Data23?.[showoption]?.product_image1}`
+                                    : viewimg
+                                }
+                                className="glightbox"
+                              >
+                                <img
+                                  src={
+                                    viewimg == null
+                                      ? `${process.env.REACT_APP_API_IMAGE_URL}${Data23?.[showoption]?.product_image1}`
+                                      : viewimg
+                                  }
+                                  className="!w-full"
+                                  alt="Thumbnail"
+                                />
+                              </a>
 
-
-
-
-
-
-
- 
-
-
-
-
-
-
-
-
-
-
-
+                              {/* <ModalImage
+                                small={
+                                  viewimg == null
+                                    ? `${process.env.REACT_APP_API_IMAGE_URL}${Data23?.[showoption]?.product_image1}`
+                                    : viewimg
+                                }
+                                large={
+                                  viewimg == null
+                                    ? `${process.env.REACT_APP_API_IMAGE_URL}${Data23?.[showoption]?.product_image1}`
+                                    : viewimg
+                                }
+                                alt="Hello World!"
+                                style={{
+                                  width: "auto",
+                                  borderRadius: "10px",
+                                  margin: "auto",
+                                  height: "100%",
+                                }}
+                                imageBackgroundColor="red"
+                                height={"100%"}
+                                width={"auto"}
+                              /> */}
                             </div>
                           </div>
                         </div>
@@ -567,7 +584,9 @@ function Productdetails() {
                       >
                         <div className=" flex items-center justify-between">
                           <div>
-                            <h2 className="font-semibold">{Data23?.[showoption]?.product_name}</h2>
+                            <h2 className="font-semibold">
+                              {Data23?.[showoption]?.product_name}
+                            </h2>
 
                             <div className=" flex items-center mt-2 justify-between">
                               <div className="flex border w-fit px-2 py-1 cursor-pointer items-center gap-x-2">

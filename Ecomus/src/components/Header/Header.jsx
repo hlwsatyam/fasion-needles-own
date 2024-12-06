@@ -61,10 +61,16 @@ const Header = () => {
       refetchsearch();
     } else {
       refetchsearch();
-
       // setsearchdata(response.data.data)
     }
   };
+
+  const checkText = async (e) => {
+    if (e.key === "Enter" && serchvalue != "") {
+      nvg(`/category/${serchvalue.replace(/ /g, "-")}`);
+    }
+  };
+
   useEffect(() => {
     if (isLoading == false && wislistloading == false) {
       dispatch(addItem(cartcount?.totalItems || 0));
@@ -106,7 +112,10 @@ const Header = () => {
                     {" "}
                     <i className="fa fa-bars sidebar-bar" />
                   </div>
-                  <div style={{ marginLeft: "30px" }} className="brand-logo logo-sm-center">
+                  <div
+                    style={{ marginLeft: "30px" }}
+                    className="brand-logo logo-sm-center"
+                  >
                     <NavLink to="/home">
                       <img
                         src={`/images/FN-Main.png`}
@@ -117,7 +126,7 @@ const Header = () => {
                   </div>
                 </div>
 
-                {pagename == "/pay" || pagename.startsWith("/brand/")  ? (
+                {pagename == "/pay" || pagename.startsWith("/brand/") ? (
                   ""
                 ) : (
                   <Nav
@@ -158,9 +167,11 @@ const Header = () => {
                         value={serchvalue}
                         onChange={(e) => {
                           searchresult(e.target.value);
+
                           setserchvalue(e.target.value);
                           setshowrecords(true);
                         }}
+                        onKeyDown={(e) => checkText(e)}
                         // onBlur={()=>{setshowrecords(false);searchresult([]);setserchvalue('')}}
                         placeholder="Search for Product"
                       />
@@ -214,7 +225,10 @@ const Header = () => {
                                 style={{ gap: "10px", cursor: "pointer" }}
                                 onClick={() => {
                                   // transfer(item._id, item.title);
-                                  window.location.href=  `/productdetails/${item.product_name.replace(/ /g, "-")}/${item?._id}`
+                                  window.location.href = `/productdetails/${item.product_name.replace(
+                                    / /g,
+                                    "-"
+                                  )}/${item?._id}`;
                                 }}
                               >
                                 <img
@@ -271,7 +285,7 @@ const Header = () => {
                                 padding: "3px 0px",
                               }}
                             >
-                              No Record Fount
+                              No Record Found
                             </h6>
                           </div>
                         </li>
@@ -458,9 +472,11 @@ const Header = () => {
                   value={serchvalue}
                   onChange={(e) => {
                     searchresult(e.target.value);
+
                     setserchvalue(e.target.value);
                     setshowrecords(true);
                   }}
+                  onKeyDown={(e) => checkText(e)}
                 />{" "}
                 <button
                   type="button"
@@ -482,7 +498,10 @@ const Header = () => {
                               style={{ gap: "10px", cursor: "pointer" }}
                               onClick={() => {
                                 // transfer(item._id, item.title);
-                                  window.location.href=  `/productdetails/${item.product_name.replace(/ /g, "-")}/${item?._id}`
+                                window.location.href = `/productdetails/${item.product_name.replace(
+                                  / /g,
+                                  "-"
+                                )}/${item?._id}`;
                               }}
                             >
                               <img
@@ -539,7 +558,7 @@ const Header = () => {
                               padding: "3px 0px",
                             }}
                           >
-                            No Record Fount
+                            No Record Found
                           </h6>
                         </div>
                       </li>

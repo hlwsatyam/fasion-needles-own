@@ -18,6 +18,7 @@
     "bootstrap": "^5.3.1",
     "country-state-city": "^1.0.4",
     "formik": "^2.4.5",
+    "glightbox": "^3.3.0",
     "jquery": "^3.7.1",
     "react": "^18.2.0",
     "react-animated-3d-card": "^1.0.2",

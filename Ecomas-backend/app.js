@@ -64,18 +64,7 @@ app.use("/api/order", orderrouter);
 app.use("/api/verification", verificationrouter);
 app.get("/", async (req, res) => {
   try {
-    // const allProducts = await Product.find();
-
-    // await Promise.all(
-    //   allProducts.map(async (doc) => {
-    //     const sizes = doc.size.split(",");
-    //     await Product.findByIdAndUpdate(
-    //       doc._id,
-    //       { $set: { mutipleSize: sizes } },
-    //       { new: true }
-    //     );
-    //   })
-    // );
+   
 
     res.send("hello world");
   } catch (error) {
