@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const createproduct = require('../Controllers/Product/createproduct.js');
 const upload = require('../middlewares/image-uploader.js');
-const { productlist,prevIew,getRecProduct, getLuxProduct } = require('../Controllers/Product/productlist.js');
+const { productlist,catList,prevIew,list1,getRecProduct, getLuxProduct } = require('../Controllers/Product/productlist.js');
 const { singleproduct,CategoryListproduct, BrandListproduct } = require('../Controllers/Product/singleproduct.js');
 const updateproduct = require('../Controllers/Product/updateproduct.js');
 const deleteproduct = require('../Controllers/Product/deletecategory.js');
@@ -33,6 +33,8 @@ router.get('/ByCategory/:name', CategoryListproduct)
 router.post('/luxProduct', getLuxProduct)
 router.post('/recProduct', getRecProduct)
 router.post('/prevIew', prevIew)
+router.post('/list1', list1)
+router.post('/catList', catList)
 router.get('/search/:name', searchitem)
 router.post('/product-by-category/:name', frontendproductlistbycategory)
 router.get('/product-detail/:id', checkuser, frontend_singleproduct)

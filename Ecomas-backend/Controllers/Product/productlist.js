@@ -1,4 +1,5 @@
 
+const category = require("../../Models/category");
 const product = require("../../Models/product");
 const productlist = async (req, res) => {
   try {
@@ -21,7 +22,7 @@ const prevIew = async (req, res) => {
       return res.status(400).send({ status: "failed", error: "Invalid allId provided" });
     }
 
-   
+
 
     // Fetch products using $in
     const productListing = await product.find({ _id: { $in: allId } });
@@ -70,7 +71,7 @@ const getLuxProduct = async (req, res) => {
         .limit(30)
         .exec();
 
-     
+
     }
 
 
@@ -84,9 +85,9 @@ const getLuxProduct = async (req, res) => {
       })
         .limit(30)
         .exec();
-        
+
     }
-    
+
     res.status(200).send({ status: "success", data: productListing });
   } catch (err) {
     console.error(`Error: ${err}`);
@@ -98,8 +99,8 @@ const getRecProduct = async (req, res) => {
 
   try {
     let productListing;
-console.log(items.length)
-     if (items && items.length === 0) {
+
+    if (items && items.length === 0) {
       productListing = await product.find({
         selling_price: {
           $gt: 5000
@@ -107,23 +108,53 @@ console.log(items.length)
       })
         .limit(30)
         .exec();
-        console.log("productListing")
-     }
-    
-else{
+      console.log("productListing")
+    }
 
-const getAllBrand = items.map(item => item.brand);
+    else {
 
-    productListing = await product.find({
-      brand: { $in: getAllBrand}
-    })
-    .limit(30)
-    .exec();
+      const getAllBrand = items.map(item => item.brand);
 
-
-}
+      productListing = await product.find({
+        brand: { $in: getAllBrand }
+      })
+        .limit(30)
+        .exec();
 
 
+    }
+
+
+
+    res.status(200).send({ status: "success", data: productListing });
+  } catch (err) {
+    console.error(`Error: ${err}`);
+    res.status(500).send({ status: "failed", errors: err.message });
+  }
+};
+const list1 = async (req, res) => {
+  const { count } = req.body;
+
+  try {
+    // Use MongoDB's aggregation framework with $sample
+    const productListing = await product.aggregate([
+      { $sample: { size: count } } // Randomly select `count` documents
+    ]);
+
+    res.status(200).send({ status: "success", data: productListing });
+  } catch (err) {
+    console.error(`Error: ${err}`);
+    res.status(500).send({ status: "failed", errors: err.message });
+  }
+};
+const catList = async (req, res) => {
+
+
+  try {
+    // Use MongoDB's aggregation framework with $sample
+    const productListing = await category.aggregate([
+      { $sample: { size: 10000 } } // Randomly select `count` documents
+    ]);
 
     res.status(200).send({ status: "success", data: productListing });
   } catch (err) {
@@ -134,4 +165,5 @@ const getAllBrand = items.map(item => item.brand);
 
 
 
-module.exports = { productlist,prevIew,getRecProduct, getLuxProduct }
+
+module.exports = { productlist, list1, catList, prevIew, getRecProduct, getLuxProduct }

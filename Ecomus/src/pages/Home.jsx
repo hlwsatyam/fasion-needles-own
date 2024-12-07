@@ -20,6 +20,8 @@ import Categ from "../components/Categ";
 import LuxList from "../TestComp/luxList/LuxList";
 import HelmetTag from "../components/Header/Helmet";
 import PrevViewPro from "../components/PrevViewPro";
+import StaticPro1 from "../components/StaticProduct1";
+import CatList from "./Category/CatList";
 
 const Home = () => {
   const nvg = useNavigate();
@@ -209,6 +211,8 @@ const Home = () => {
       </section>
       {/* home main banner section end */}
 
+      <StaticPro1 />
+
       <div className="flex justify-center my-2 mt-4 items-center gap-x-1 sm:text-lg text-sm  font-bold text-gray-700">
         <div className="w-20 border-t-2 border-gray-400"></div>
         <span className="uppercase tracking-wide px-1">Shop By Brand</span>
@@ -318,14 +322,13 @@ const Home = () => {
         </OwlCarousel>
       </section>
 
-
-      <div className="flex justify-center my-2 items-center gap-x-1 text-sm sm:text-lg font-bold text-gray-700">
+      {/* <div className="flex justify-center my-2 items-center gap-x-1 text-sm sm:text-lg font-bold text-gray-700">
         <div className="w-20 border-t-2 border-gray-400"></div>
         <span className="uppercase tracking-wide px-1">New Arrival</span>
         <div className="w-20 leading border-t-2 border-gray-400"></div>
-      </div>
+      </div> */}
       {/* best seller start  */}
-      <section className="section-big-mb-space ratio_square product">
+      {/* <section className="section-big-mb-space ratio_square product">
         <div className="container-fluid">
           <div className="row">
             <div className="col-12 pr-0">
@@ -346,17 +349,19 @@ const Home = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
       {/* best seller end  */}
 
+      <CatList />
+
       {/* <ShopCard /> */}
-      <div className="flex justify-center my-2 items-center gap-x-1 sm:text-lg text-sm font-bold text-gray-700">
+      {/* <div className="flex justify-center my-2 items-center gap-x-1 sm:text-lg text-sm font-bold text-gray-700">
         <div className="w-20 border-t-2 border-gray-400"></div>
         <span className="uppercase tracking-wide px-1">Feature Product</span>
         <div className="w-20 leading border-t-2 border-gray-400"></div>
-      </div>
+      </div> */}
       {/* best feature start  */}
-      <section className="section-big-mb-space ratio_square product">
+      {/* <section className="section-big-mb-space ratio_square product">
         <div className="container-fluid">
           <div className="row">
             <div className="col-12 pr-0">
@@ -377,12 +382,11 @@ const Home = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
       {/* best feature end  */}
 
       <PrevViewPro />
 
-  
       {/* testomonial */}
       <Testomonials />
       {/* footer start */}

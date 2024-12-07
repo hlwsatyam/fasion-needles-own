@@ -734,7 +734,7 @@ function Productdetails() {
                                               setselectedSize(index)
                                             }
                                             style={{
-                                              padding: "4px",
+                                              padding: "3px 10px",
                                               background:
                                                 selectedSize == index
                                                   ? "#059fe2"

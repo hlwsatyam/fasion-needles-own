@@ -848,7 +848,7 @@ const CatFilter = () => {
                           <div className=" flex !pt-3 sm:!pt-5 items-center  justify-center sm:justify-start sm:gap-x-3 gap-2 sm:gap-y-4  flex-wrap !p-0 !m-0 !w-full removepadding additionalgap">
                             {itembybrand?.data[0] ? (
                               itembybrand?.data.map((item, index) => (
-                                <div className=" w-[175px] sm:w-[240px]   hover:shadow-2xl">
+                                <div className=" w-[170px] sm:w-[240px]   hover:shadow-2xl">
                                   <div
                                     className="bg-white catbox"
                                     style={{ margin: "3px 4px" }}

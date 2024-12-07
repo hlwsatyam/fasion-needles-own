@@ -31,7 +31,7 @@ export default function Testimonials() {
         <div className="w-20 leading border-t-2 border-gray-400"></div>
       </div>
       <div className="mx-auto px-2 sm:px-6 lg:px-8">
-        <div className="flex flex-wrap mt-4 justify-center items-center gap-x-[7px] sm:gap-8">
+        {/* <div className="flex flex-wrap mt-4 justify-center items-center gap-[27px]    sm:gap-8">
           {allText.map((item,i) => {
             return (
               <div
@@ -41,7 +41,7 @@ export default function Testimonials() {
                     state: { id: item._id},
                   })
                 }
-                className="rounded-full sha h-20 shadow sm:w-32 sm:h-32  w-20 bg-white s"
+                className="rounded-full h-28 shadow sm:w-32 sm:h-32  w-28 bg-white s"
               >
                 
                 <img
@@ -53,7 +53,47 @@ export default function Testimonials() {
               </div>
             );
           })}
-        </div>
+        </div> */}
+
+
+
+
+
+
+<div className="mx-auto px-2 sm:px-6 lg:px-8">
+  <div
+    className="grid grid-cols-2 sm:grid-cols-4 gap-[27px] mt-4 justify-center items-center place-content-center"
+    style={{ maxWidth: 'fit-content', margin: '0 auto' }}
+  >
+    {allText.map((item, i) => (
+      <div
+        key={i * 1000}
+        onClick={() =>
+          nvg(`/category/${item.name}`, {
+            state: { id: item._id },
+          })
+        }
+        className="rounded-full h-28 shadow sm:w-32 sm:h-32 w-28 bg-white"
+      >
+        <img
+          srcSet={`${process.env.REACT_APP_API_IMAGE_URL}${item.banner}`}
+          src={`${process.env.REACT_APP_API_IMAGE_URL}${item.banner}`}
+          alt={item.metatitle}
+          className="mix-blend-multiply cursor-pointer rounded-full w-full h-full object-contain object-center mb-4"
+        />
+      </div>
+    ))}
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
       </div>
     </section>
   );
