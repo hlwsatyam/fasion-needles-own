@@ -11,14 +11,11 @@ import About from "./pages/About";
 import Wishlist from "./pages/Wishlist";
 
 import Productdetails from "./pages/Productdetails";
-import Category from "./pages/Category/Category";
-
+ 
 import Login from "./pages/Login/Login";
 
 import Profile from "./pages/profilepage/Profile";
 import Addresslist from "./pages/Addresslist";
-
-
 
 import Thankyoupage from "./pages/Thankyoupage";
 
@@ -47,12 +44,9 @@ import { HelmetProvider } from 'react-helmet-async';
 import BrandFilter from "./pages/BrandFilter";
 import CatFilter from "./pages/CatDumm";
 import Footer from "./components/Footer";
-import Header from "./components/Header/Header";
-
 function App() {
   return (
     <HelmetProvider>
-      
       <div className="mx-auto container">
         <ToastContainer />
         <Routes >
@@ -91,7 +85,6 @@ function App() {
       </div>
       <Footer />
     </HelmetProvider>
-
   )
 }
 

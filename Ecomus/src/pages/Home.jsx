@@ -286,6 +286,39 @@ const Home = () => {
       </section>
       <Categ />
       <LuxList />
+
+      <section className="sale-banenr banner-style2 design2">
+        <OwlCarousel
+          className="owl-theme"
+          style={{ width: "100%", height: "100%" }}
+          {...options}
+        >
+          {Banner?.data.map((item, index) =>
+            item.banner_type == "Slider" ? (
+              <div key={index} style={{ height: "auto" }}>
+                <img
+                  loading="lazy"
+                  onClick={() => {
+                    //  window.location.href = item.banner_link;
+                  }}
+                  src={`${process.env.REACT_APP_API_IMAGE_URL}${item.banner}`}
+                  alt={`${item?.banner_alt}`}
+                  className="img-fluid mainbanner bg-img"
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "100% 100%",
+                  }}
+                />
+              </div>
+            ) : (
+              ""
+            )
+          )}
+        </OwlCarousel>
+      </section>
+
+
       <div className="flex justify-center my-2 items-center gap-x-1 text-sm sm:text-lg font-bold text-gray-700">
         <div className="w-20 border-t-2 border-gray-400"></div>
         <span className="uppercase tracking-wide px-1">New Arrival</span>
@@ -349,36 +382,7 @@ const Home = () => {
 
       <PrevViewPro />
 
-      <section className="sale-banenr banner-style2 design2">
-        <OwlCarousel
-          className="owl-theme"
-          style={{ width: "100%", height: "100%" }}
-          {...options}
-        >
-          {Banner?.data.map((item, index) =>
-            item.banner_type == "Slider" ? (
-              <div key={index} style={{ height: "auto" }}>
-                <img
-                  loading="lazy"
-                  onClick={() => {
-                    //  window.location.href = item.banner_link;
-                  }}
-                  src={`${process.env.REACT_APP_API_IMAGE_URL}${item.banner}`}
-                  alt={`${item?.banner_alt}`}
-                  className="img-fluid mainbanner bg-img"
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "100% 100%",
-                  }}
-                />
-              </div>
-            ) : (
-              ""
-            )
-          )}
-        </OwlCarousel>
-      </section>
+  
       {/* testomonial */}
       <Testomonials />
       {/* footer start */}

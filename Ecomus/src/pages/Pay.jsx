@@ -292,3 +292,4 @@ const Pay = () => {
   );
 };
 export default Pay;
+ 

@@ -845,7 +845,7 @@ const CatFilter = () => {
                         </div>
 
                         <div className="product-wrapper-grid !p-0 !m-0    product">
-                          <div className=" flex !pt-3 sm:!pt-5 items-center justify-start sm:gap-x-3 gap-2 sm:gap-y-4  flex-wrap !p-0 !m-0 !w-full removepadding additionalgap">
+                          <div className=" flex !pt-3 sm:!pt-5 items-center  justify-center sm:justify-start sm:gap-x-3 gap-2 sm:gap-y-4  flex-wrap !p-0 !m-0 !w-full removepadding additionalgap">
                             {itembybrand?.data[0] ? (
                               itembybrand?.data.map((item, index) => (
                                 <div className=" w-[175px] sm:w-[240px]   hover:shadow-2xl">

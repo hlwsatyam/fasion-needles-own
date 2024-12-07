@@ -100,12 +100,22 @@ function Productdetails() {
   const [getComment, setGetComment] = useState(null);
 
   useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      const lightbox = GLightbox({
+    let timer;
+    let lightbox;
+    // Set a timeout to delay the execution of the GLightbox initialization
+    timer = setTimeout(() => {
+      lightbox = GLightbox({
         selector: ".glightbox",
       });
-    }, 200); // Delay initialization by 100ms to ensure all elements are loaded
-  }, [id, Data23]);
+      // Cleanup previous instances of lightbox on component unmount or when viewimg changes
+    }, 200); // Delay of 1000 milliseconds (1 second)
+
+    // Cleanup timeout when component unmounts or when viewimg changes
+    return () => {
+      lightbox.destroy();
+      clearTimeout(timer);
+    };
+  }, [viewimg]); // Dependency array ensures the effect runs when viewimg changes
 
   const fetchComment = async (e) => {
     try {
@@ -202,9 +212,9 @@ function Productdetails() {
 
   // add to cart start here
   const addtocartfun = async () => {
-    console.log(selectedSize)
+    console.log(selectedSize);
     if (Data23[0]?.mutipleSize.length > 0) {
-      if (selectedSize===undefined || selectedSize === null) {
+      if (selectedSize === undefined || selectedSize === null) {
         return toast("Please select size");
       }
     }
@@ -245,7 +255,6 @@ function Productdetails() {
     }
   };
 
- 
   useEffect(() => {
     setloading(true);
     if (isLoading == false) {
@@ -276,9 +285,6 @@ function Productdetails() {
     }
   };
 
-  
-
- 
   return isLoading == true ? (
     ""
   ) : (
@@ -737,14 +743,12 @@ function Productdetails() {
                                           >
                                             {" "}
                                             <a
-                                           
                                               style={{
                                                 color:
                                                   selectedSize == index
                                                     ? "white"
                                                     : "#333",
                                               }}
-                                             
                                             >
                                               {" "}
                                               {str}
