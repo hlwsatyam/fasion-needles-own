@@ -66,8 +66,9 @@ const Header = () => {
   };
 
   const checkText = async (e) => {
+   
     if (e.key === "Enter" && serchvalue != "") {
-      nvg(`/category/${serchvalue.replace(/ /g, "-")}`);
+      window.location.href=`/category/${serchvalue.replace(/ /g, "-")}`;
     }
   };
 
@@ -469,6 +470,8 @@ const Header = () => {
                   placeholder="Search For Product"
                   style={{ width: "100%", border: "none", outline: "none" }}
                   id=""
+
+                    inputMode="search"
                   value={serchvalue}
                   onChange={(e) => {
                     searchresult(e.target.value);

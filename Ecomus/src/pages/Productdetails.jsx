@@ -107,15 +107,15 @@ function Productdetails() {
       lightbox = GLightbox({
         selector: ".glightbox",
       });
-      // Cleanup previous instances of lightbox on component unmount or when viewimg changes
-    }, 200); // Delay of 1000 milliseconds (1 second)
+       
+    }, 200);  
 
     // Cleanup timeout when component unmounts or when viewimg changes
     return () => {
-      lightbox.destroy();
+      lightbox?.destroy();
       clearTimeout(timer);
     };
-  }, [viewimg]); // Dependency array ensures the effect runs when viewimg changes
+  }, ); // Dependency array ensures the effect runs when viewimg changes
 
   const fetchComment = async (e) => {
     try {

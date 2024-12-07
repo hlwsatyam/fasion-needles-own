@@ -277,13 +277,17 @@ const frontendproductlistbycategory = async (req, res) => {
 
 async function frontendproductlistWithoutCategory(req, res) {
   const filter = req.body || {}; // Use `req.body` for input.
-
+  const categoryId = req.params.name;
+console.log(categoryId)
   try {
     const itemsPerPage = filter.productPerPage && filter.productPerPage !== "all" 
       ? parseInt(filter.productPerPage) 
       : 10000; // Default to 10,000 if "all" or not provided.
     const pageNumber = parseInt(filter.page) || 1;
     const skip = (pageNumber - 1) * itemsPerPage;
+
+
+
 
     let sortOptions = {};
     if (filter.shortBy === "lowToHigh") {
@@ -292,7 +296,7 @@ async function frontendproductlistWithoutCategory(req, res) {
       sortOptions["selling_price"] = -1;
     }
 
-    const baseQuery = buildBaseQuery(null, filter); // Pass null for category ID.
+    const baseQuery = buildBaseQuery(null, filter,categoryId); // Pass null for category ID.
 
     // Get total count before applying filters
     const totalCountBeforeFilter = await product.countDocuments(baseQuery);
@@ -320,7 +324,7 @@ async function frontendproductlistWithoutCategory(req, res) {
 }
 
 // Helper function to build the base query
-function buildBaseQuery(categoryId, filter) {
+function buildBaseQuery(categoryId, filter,text) {
   const baseQuery = {};
 
   if (categoryId) {
@@ -330,6 +334,18 @@ function buildBaseQuery(categoryId, filter) {
       { child_category: { $in: [categoryId.toString()] } },
     ];
   }
+
+  if (text && text!== "") {
+    const searchRegex = new RegExp(text, "i");
+    baseQuery.$or = [
+      { product_name: { $regex: searchRegex } },
+      { description: { $regex: searchRegex } },
+      { brand: { $regex: searchRegex } },
+    ];
+  }
+
+
+
 
   if (filter.min_price || filter.max_price) {
     baseQuery.selling_price = {};
