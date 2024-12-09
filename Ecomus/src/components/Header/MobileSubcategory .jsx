@@ -1,14 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Subsubcategory from "./Subsubcategory.jsx";
-
+ 
 const MobileSubcategory = ({ value, issubcategory }) => {
   const [showfullmenu, setshowfullmenu] = useState(false);
-  const nvg = useNavigate();
 
-  const transfer = (id, title) => {
-    nvg(`/category/${id}/${title}/none`);
-  };
+  
+  
   return (
     <li className={issubcategory == 0 ? "" : "mega"}>
       {issubcategory == 0 ? (

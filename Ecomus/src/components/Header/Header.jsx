@@ -467,15 +467,15 @@ const Header = () => {
                 <input
                   type="text"
                   name=""
+                 
                   placeholder="Search For Product"
                   style={{ width: "100%", border: "none", outline: "none" }}
-                  id=""
+                  id="search_heasd-a"
 
                     inputMode="search"
                   value={serchvalue}
                   onChange={(e) => {
                     searchresult(e.target.value);
-
                     setserchvalue(e.target.value);
                     setshowrecords(true);
                   }}
