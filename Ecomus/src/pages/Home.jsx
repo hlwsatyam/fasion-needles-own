@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Header from "../components/Header/Header";
-import Footer from "../components/Footer";
+
 import OwlCarousel from "react-owl-carousel";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
@@ -22,6 +22,7 @@ import HelmetTag from "../components/Header/Helmet";
 import PrevViewPro from "../components/PrevViewPro";
 import StaticPro1 from "../components/StaticProduct1";
 import CatList from "./Category/CatList";
+import CatPic from "./Category/CatPic";
 
 const Home = () => {
   const nvg = useNavigate();
@@ -385,6 +386,14 @@ const Home = () => {
       </section> */}
       {/* best feature end  */}
 
+
+      <div className="flex justify-center my-8 items-center gap-x-1 sm:text-lg   text-sm font-bold text-gray-700">
+        <div className="w-20 border-t-2 border-gray-400"></div>
+        <span className="uppercase tracking-wide px-1">Best Category</span>
+        <div className="w-20 leading border-t-2 border-gray-400"></div>
+      </div>
+
+      <CatPic />
       <PrevViewPro />
 
       {/* testomonial */}
