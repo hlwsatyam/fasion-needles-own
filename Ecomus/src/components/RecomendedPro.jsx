@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Carousel from "react-multi-carousel";
+ 
 import "react-multi-carousel/lib/styles.css";
 import OwlCarousel from "react-owl-carousel";
 import Crouselitem from "./Crouselitem";

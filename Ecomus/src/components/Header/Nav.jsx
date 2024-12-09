@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
 const Nav = ({ togglesidebar, closesidebar }) => {
+   
   const nvg = useNavigate();
   const globalvariable = useSelector((state) => state);
   const redirectfun = (linkpage) => {
@@ -77,7 +78,7 @@ const Nav = ({ togglesidebar, closesidebar }) => {
                   <div className="logo-block">
                     <div
                       
-                      className="  brand-logo logo-sm-center"
+                      className="brand-logo logo-sm-center"
                     >
                       <NavLink to="/home">
                         <img
@@ -89,38 +90,7 @@ const Nav = ({ togglesidebar, closesidebar }) => {
                     </div>
                   </div>
                 </div>
-                <div className="category-right ">
-                  <div className="menu-block">
-                    <nav id="main-nav">
-                      <div className="toggle-nav">
-                        <i className="fa fa-bars sidebar-bar" />
-                      </div>
-                      <ul
-                        id="main-menu"
-                        className="sm pixelstrap sm-horizontal"
-                      >
-                        <li>
-                          <div className="mobile-back text-right">
-                            Back
-                            <i
-                              className="fa fa-angle-right ps-2"
-                              aria-hidden="true"
-                            />
-                          </div>
-                        </li>
-                        {categoryData?.data.map((item, index) => (
-                          <Subcategory
-                            key={index}
-                            value={item}
-                            issubcategory={
-                              item.subcategories?.[0]?.name ? 1 : 0
-                            }
-                          />
-                        ))}
-                      </ul>
-                    </nav>
-                  </div>
-                </div>
+           
               </div>
             </div>
           </div>

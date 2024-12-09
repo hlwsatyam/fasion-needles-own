@@ -23,7 +23,7 @@ import PrevViewPro from "../components/PrevViewPro";
 import StaticPro1 from "../components/StaticProduct1";
 import CatList from "./Category/CatList";
 import CatPic from "./Category/CatPic";
-
+ 
 const Home = () => {
   const nvg = useNavigate();
 
@@ -165,6 +165,7 @@ const Home = () => {
   ) : (
     <div className=" overflow-hidden  bg-light">
       <Header />
+      
       <HelmetTag
         url={window.location.href}
         description={
@@ -385,7 +386,6 @@ const Home = () => {
         </div>
       </section> */}
       {/* best feature end  */}
-
 
       <div className="flex justify-center my-8 items-center gap-x-1 sm:text-lg   text-sm font-bold text-gray-700">
         <div className="w-20 border-t-2 border-gray-400"></div>

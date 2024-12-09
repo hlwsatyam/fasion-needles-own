@@ -5,6 +5,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { HelmetProvider } from "react-helmet-async";
 import Footer from "./components/Footer";
+import LoadingPage from "./pages/Loading";
 
 // Lazy load route components
 const Home = React.lazy(() => import("./pages/Home"));
@@ -52,7 +53,7 @@ function App() {
     <HelmetProvider>
       <div className="mx-auto container">
         <ToastContainer />
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<LoadingPage />}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />

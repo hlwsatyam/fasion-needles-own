@@ -1,25 +1,17 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
- 
+
 const MobileSubcategory = ({ value, issubcategory }) => {
   const [showfullmenu, setshowfullmenu] = useState(false);
 
-  
-  
   return (
     <li className={issubcategory == 0 ? "" : "mega"}>
       {issubcategory == 0 ? (
         <button
-          className="btn dark-menu-item desgin1"
+          className="btn  dark-menu-item desgin1"
           style={{ padding: "6px 18px 0px 18px" }}
-         
         >
-          <img
-            src={value.image}
-            style={{ width: "25px" }}
-            alt={404}
-            className="hideonlaptop"
-          />
+           
           &nbsp; <span className="largefont"> {value.name} </span>
         </button>
       ) : (
@@ -30,17 +22,12 @@ const MobileSubcategory = ({ value, issubcategory }) => {
             style={{ padding: "6px 18px 0px 18px" }}
             onClick={() => {
               setshowfullmenu(!showfullmenu);
+              // alert("cvcv")
             }}
           >
-            <img
-              src={value.image}
-              style={{ width: "25px" }}
-              alt={404}
-              className="hideonlaptop"
-            />{" "}
             &nbsp; <span className="largefont"> {value.name}</span>
           </button>
-          <ul className="mega-menu full-mega-menu resultappear newwith ">
+          <ul className="mega-menu   full-mega-menu resultappear newwith ">
             <div>
               <div className="container">
                 <div className="row">
@@ -48,9 +35,7 @@ const MobileSubcategory = ({ value, issubcategory }) => {
                     <div className="col mega-box" key={index}>
                       <div className="link-section">
                         <div className="menu-title">
-                          <h5
-                             
-                          >
+                          <h5>
                             <span className="border-b-2 mb-3 text-sm pb-1 text-red-700 font-semibold">
                               {" "}
                               {item.name}{" "}

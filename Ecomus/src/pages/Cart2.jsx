@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FaStar, FaPlus, FaMinus } from "react-icons/fa";
 import Header from "../components/Header/Header";
-import Footer from "../components/Footer";
+ 
 import { FaTrash } from "react-icons/fa6";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
@@ -160,7 +160,7 @@ const ShoppingCart = () => {
           </div>
         </div>
       </div>
-      <RecomendedPro items={items} title={'Recommended Products'}   />
+      {/* <RecomendedPro items={items} title={'Recommended Products'}   /> */}
     </div>
   );
 };
