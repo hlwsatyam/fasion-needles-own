@@ -67,7 +67,7 @@ function PrevView() {
 
   return (
     allProducts.length > 0 && (
-      <div className="mb-4">
+      <div className="my-8">
         <Header title={"Viewed Products"} />
         <div className="mt-2">
           <section className="section-big-mb-space ratio_square product">
