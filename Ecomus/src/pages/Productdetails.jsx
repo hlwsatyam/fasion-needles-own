@@ -5,7 +5,6 @@ import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 import GLightbox from "glightbox";
 import "glightbox/dist/css/glightbox.min.css";
-
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import {
@@ -32,51 +31,16 @@ import InfoList from "../components/InfoPage";
 import { useGetCommentMutation } from "../store/api/commentapi";
 import { toast } from "react-toastify";
 import HelmetTag from "../components/Header/Helmet";
-import ZoomImgIff from "../components/ZoomImgEff";
-import Features from "../components/Testomonials";
+ import Features from "../components/Testomonials";
 import PrevView from "../components/PrevViewPro";
-
-const options5 = {
-  items: 1,
-  loop: false,
-  autoplay: true,
-  nav: true,
-  responsiveClass: true,
-  dots: false,
-  responsive: {
-    1200: {
-      items: 5,
-      loop: false,
-      // stagePadding: 50,
-    },
-    920: {
-      items: 4,
-      loop: false,
-    },
-    700: {
-      items: 3,
-      loop: false,
-    },
-    600: {
-      items: 3,
-      loop: false,
-    },
-    504: {
-      items: 2,
-      loop: false,
-    },
-    300: {
-      items: 2,
-      loop: false,
-    },
-    310: {
-      items: 1,
-      loop: false,
-    },
-  },
-};
+import 'swiper/css';
+import 'swiper/css/navigation';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation } from 'swiper/modules';
+ 
+import 'swiper/css/autoplay';
 function Productdetails() {
-  const location = useLocation();
+ 
   const nvg = useNavigate();
   const { id, name } = useParams();
   const recentlydata = getrecetly();
@@ -92,8 +56,7 @@ function Productdetails() {
   const [Data23, setData] = useState([]);
   const [delresponse, setdelresponse] = useState({ status: false, msg: "" });
   const { data, isLoading, refetch } = useGetSingleProductQuery(id);
-  const [addincart] = usePostCartItemMutation();
-  const [getCommentApi] = useGetCommentMutation();
+  
   const [addtowishlistapi] = usePostWishlistItemMutation();
   const [removetowishlistapi] = usePostDeleteWishlistMutation();
 
@@ -397,7 +360,7 @@ function Productdetails() {
                     <div className="col-lg-6 makestk">
                       <div className="row">
                         <div className="col-md-3 col-3 superpadding3">
-                          <div
+                          {/* <div
                             class="container-fluid px-lg-4 px-md-3 px-2"
                             style={{ paddingLeft: "0px", paddingRight: "0px" }}
                           >
@@ -412,7 +375,7 @@ function Productdetails() {
                                     `${process.env.REACT_APP_API_IMAGE_URL}${Data23?.[showoption]?.product_image1}`
                                   );
                                 }}
-                                alt
+                                alt={Data23?.[showoption]?.product_name}
                                 className="img-fluid  image_zoom_cls-0"
                               />
                             </div>
@@ -428,7 +391,7 @@ function Productdetails() {
                                       `${process.env.REACT_APP_API_IMAGE_URL}${Data23?.[showoption]?.product_image2}`
                                     );
                                   }}
-                                  alt
+                                  alt={Data23?.[showoption]?.product_name}
                                   style={{ aspectRatio: "1/1" }}
                                   className="img-fluid  image_zoom_cls-1"
                                 />
@@ -448,7 +411,7 @@ function Productdetails() {
                                       `${process.env.REACT_APP_API_IMAGE_URL}${Data23?.[showoption]?.product_image3}`
                                     );
                                   }}
-                                  alt
+                                  alt={Data23?.[showoption]?.product_name}
                                   style={{ aspectRatio: "1/1" }}
                                   className="img-fluid  image_zoom_cls-2"
                                 />
@@ -468,7 +431,7 @@ function Productdetails() {
                                       `${process.env.REACT_APP_API_IMAGE_URL}${Data23?.[showoption]?.product_image4}`
                                     );
                                   }}
-                                  alt
+                                  alt={Data23?.[showoption]?.product_name}
                                   style={{ aspectRatio: "1/1" }}
                                   className="img-fluid  image_zoom_cls-3"
                                 />
@@ -476,46 +439,115 @@ function Productdetails() {
                             ) : (
                               ""
                             )}
-                          </div>
+                          </div> */}
                         </div>
-                        <div className="col-md-9 col-9">
+                        <div className="col-md-12 col-12">
                           <div className="product-slick ">
                             <div className="sm:h-[600px]  h-[350px] w-full">
-                              {/* <ReactImageMagnify
-                          
-                                {...{
-                                  smallImage: {
-                                    alt: "Wristwatch by Versace",
-                                    isFluidWidth: true,
-                                    src:
-                                      viewimg == null
-                                        ? `${process.env.REACT_APP_API_IMAGE_URL}${Data23?.[showoption]?.product_image1}`
-                                        : viewimg,
-                                    width: 1000,
-                                    height: 1000,
-                                  },
-                                  largeImage: {
-                                    src:
-                                      viewimg == null
-                                        ? `${process.env.REACT_APP_API_IMAGE_URL}${Data23?.[showoption]?.product_image1}`
-                                        : viewimg,
-                                    width: 836,
-                                    height: 1100,
-                                  },
-                                  enlargedImagePosition: "over",
 
-                                 
-                                }}
-                              /> */}
-                              {/* <ZoomImgIff
-                                img={
-                                  viewimg == null
-                                    ? `${process.env.REACT_APP_API_IMAGE_URL}${Data23?.[showoption]?.product_image1}`
-                                    : viewimg
-                                }
-                              /> */}
 
-                              <a
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                              {
+
+
+//  [
+//    `${process.env.REACT_APP_API_IMAGE_URL}${Data23?.[showoption]?.product_image1}`,
+//     `${process.env.REACT_APP_API_IMAGE_URL}${Data23?.[showoption]?.product_image2}`,
+//      `${process.env.REACT_APP_API_IMAGE_URL}${Data23?.[showoption]?.product_image3}`,
+//       `${process.env.REACT_APP_API_IMAGE_URL}${Data23?.[showoption]?.product_image4}`
+//  ].map((image, index) => (
+//   <a
+//     key={index}
+//     href={image}
+//     className="glightbox block !h-full !w-full"
+//   >
+//     <img
+//       src={image}
+//       className="h-full w-auto object-cover"
+//       alt={`Product Image ${index + 1}`}
+//     />
+//   </a>))
+
+                              }
+
+
+
+<Swiper
+        modules={[Navigation]}
+        navigation
+       autoplay={true}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        className="!h-full"
+        breakpoints={{
+          640: { slidesPerView: 1 },
+          768: { slidesPerView: 1},
+          1024: { slidesPerView: 1 },
+        }}
+      >
+        { [
+   `${process.env.REACT_APP_API_IMAGE_URL}${Data23?.[showoption]?.product_image1}`,
+    `${process.env.REACT_APP_API_IMAGE_URL}${Data23?.[showoption]?.product_image2}`,
+     `${process.env.REACT_APP_API_IMAGE_URL}${Data23?.[showoption]?.product_image3}`,
+      `${process.env.REACT_APP_API_IMAGE_URL}${Data23?.[showoption]?.product_image4}`
+ ].map((image, index) => (
+          <SwiperSlide key={index}>
+            <a href={image} className="glightbox">
+              <img
+                src={image}
+                alt={Data23?.[showoption]?.product_name}
+               className="!h-full m-auto w-auto object-cover"
+              />
+            </a>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+      <style jsx>{`
+        .swiper-button-prev,
+        .swiper-button-next {
+          opacity: 0.1;
+          transition: opacity 0.3s ease;
+        }
+        .swiper-button-prev:hover,
+        .swiper-button-next:hover {
+          opacity: 1;
+        }
+      `}</style>
+
+
+
+
+
+
+                              {/* <a
                                 href={
                                   viewimg == null
                                     ? `${process.env.REACT_APP_API_IMAGE_URL}${Data23?.[showoption]?.product_image1}`
@@ -530,32 +562,24 @@ function Productdetails() {
                                       : viewimg
                                   }
                                   className="h-full w-auto object-cover"
-                                  alt="Thumbnail"
+                                  alt={Data23?.[showoption]?.product_name}
                                 />
-                              </a>
+                              </a> */}
 
-                              {/* <ModalImage
-                                small={
-                                  viewimg == null
-                                    ? `${process.env.REACT_APP_API_IMAGE_URL}${Data23?.[showoption]?.product_image1}`
-                                    : viewimg
-                                }
-                                large={
-                                  viewimg == null
-                                    ? `${process.env.REACT_APP_API_IMAGE_URL}${Data23?.[showoption]?.product_image1}`
-                                    : viewimg
-                                }
-                                alt="Hello World!"
-                                style={{
-                                  width: "auto",
-                                  borderRadius: "10px",
-                                  margin: "auto",
-                                  height: "100%",
-                                }}
-                                imageBackgroundColor="red"
-                                height={"100%"}
-                                width={"auto"}
-                              /> */}
+
+
+
+
+
+
+
+
+
+
+
+
+
+                          
                             </div>
                           </div>
                         </div>
@@ -600,7 +624,7 @@ function Productdetails() {
                               <img
                                 className="!h-auto  !w-auto"
                                 src={`${process.env.REACT_APP_API_IMAGE_URL}${data?.brandLogo}`}
-                                alt=""
+                                alt= {Data23?.[showoption]?.product_name}
                               />
                             </a>
                           </div>
