@@ -138,13 +138,13 @@ export const Profile = () => {
     }
   };
   useEffect(() => {
-    if (location.state.id == 1) {
+    if (location?.state?.id == 1) {
       setowl("tab-1");
     } else {
-      if (location.state.id == 2) {
+      if (location?.state?.id == 2) {
         setowl("tab-2");
       } else {
-        if (location.state.id == 3) {
+        if (location?.state?.id == 3) {
           setowl("tab-3");
         } else {
           setowl("tab-4");

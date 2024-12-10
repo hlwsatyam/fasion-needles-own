@@ -27,6 +27,7 @@ import { useGetAllCategoriesQuery } from "../../store/api/categoryapi";
 import logo from "../../img/fashion needles.webp";
 import { gettoken } from "../../Localstorage/Store";
 import { useGetProductBySearchQuery } from "../../store/api/productapi";
+import SearchBarModal from "../SearchModal";
 const navigation = {
   categories: [
     {
@@ -481,123 +482,13 @@ export default function Example() {
 
               <div className="ml-auto flex items-center">
                 <div className="ml-4   flow-root lg:ml-6">
-                  <input
-                   inputMode="search"
-                    className="bg-gray-200 w-full h-full rounded-md border border-transparent py-2 pl-3 pr-10 text-sm placeholder-gray-500 focus:outline-none     "
-                    value={serchvalue}
-                    onChange={(e) => {
-                      searchresult(e.target.value);
-
-                      setserchvalue(e.target.value);
-                      setshowrecords(true);
-                    }}
-                    onKeyDown={(e) => checkText(e)}
-                    // onBlur={()=>{setshowrecords(false);searchresult([]);setserchvalue('')}}
-                    placeholder="Search for Product"
-                  />
-
-{
-      <ul
-      className="serachlisting     shadow-2xl"
-      style={{
-        display: "flex",
-        position: "absolute",
-     
-  
-
-        flexDirection: "column",
-        zIndex: 4,
-        background: "#fff",
-      }}
-    >
-      {isError == false ? (
-        searchapidata?.results?.[0]?.product_name ? (
-          searchapidata?.results
-            .map((item, index) => (
-              <li>
-                <div
-                  className="p-1 flex  items-center"
-                  style={{ gap: "10px", cursor: "pointer" }}
-                  onClick={() => {
-                    // transfer(item._id, item.title);
-                    window.location.href = `/productdetails/${item.product_name.replace(
-                      / /g,
-                      "-"
-                    )}/${item?._id}`;
-                  }}
-                >
-                  <img
-                    src={`${process.env.REACT_APP_API_IMAGE_URL}${item.product_image1}`}
-                    className="   h-[100px] w-[100px] "
-                    alt="product"
-                  />
-
-                  <div className="cartinfo">
-                    <h6
-                      style={{
-                        fontSize: "12px",
-                        color: "#059fe2",
-                        fontWeight: "600",
-                        padding: "3px 0px",
-                      }}
-                    >
-                      {item.product_name}
-                    </h6>
-                    <h6
-                      style={{
-                        fontSize: "12px",
-                        color: "#059fe2",
-                        padding: "3px 0px",
-                      }}
-                    >
-                      ₹{item.selling_price}
-                    </h6>
-                  </div>
-                </div>
-              </li>
-            ))
-            .slice(0, 5)
-        ) : serchvalue == "" ? (
-          ""
-        ) : (
-          <li style={{ width: "100%" }}>
-            <div
-              className="p-1 d-flex"
-              style={{
-                gap: "10px",
-                padding: "4px 0px",
-                cursor: "pointer",
-                width: "100%",
-                display: "flex",
-                justifyContent: "center",
-              }}
-            >
-              <h6
-                style={{
-                  fontSize: "14px",
-                  color: "#333",
-                  fontWeight: "600",
-                  padding: "3px 0px",
-                }}
-              >
-                No Record Found
-              </h6>
-            </div>
-          </li>
-        )
-      ) : (
-        ""
-      )}
-    </ul>
-}
-
-
+                  <SearchBarModal />
                 </div>
 
                 <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
                   <span aria-hidden="true" className="h-6 w-px bg-gray-200" />
 
-                  {gettoken ? (
+                  {gettoken() ? (
                     <a
                       href="/profile"
                       className="text-sm font-medium text-gray-700 hover:text-gray-800"

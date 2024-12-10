@@ -102,12 +102,12 @@ const Footer = () => {
             </p>
             <p className="mt-2  flex items-start gap-x-1 text-xs">
               {" "}
-              <FaPhone /> Phone: <a href="tel:+918595490062">+918595490062</a>
+              <FaPhone /> Phone: <a href="tel:+918595490062" className="text-xs font-extralight text-gray-300">+918595490062</a>
             </p>
             <p className="mt-2  flex items-start gap-x-1 text-xs">
               {" "}
               <FaEnvelope /> Email:{" "}
-              <a href="mailto:support@fashionneedles.com">
+              <a className="text-xs font-extralight text-gray-300"  href="mailto:support@fashionneedles.com">
                 support@fashionneedles.com
               </a>
             </p>
