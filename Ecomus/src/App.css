@@ -11,12 +11,7 @@
 }
 
 
-input {
-  max-width: 100%;
-  padding-left: 2.5rem;  /* Adjust this based on icon size */
-  box-sizing: border-box;
-}
-
+ 
 
 
 .breadcrumb {
