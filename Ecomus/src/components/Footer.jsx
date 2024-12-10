@@ -40,7 +40,7 @@ const Footer = () => {
     <footer className="bg-gradient-to-r pt-3 sm:!pt-10 !text-white bg-black/80">
       <div className="max-w-screen-xl px-4 sm:mb-0 mb-[68px]  sm:py-8 mx-auto sm:px-6 lg:px-8">
         <div className="grid grid-cols- gap-8 lg:grid-cols-3">
-          <div className="grid sm:grid-cols-5  grid-cols-3 gap-8 sm:col-span-2 lg:col-span-2">
+          <div className="grid sm:grid-cols-5  grid-cols-1 gap-8 sm:col-span-2 lg:col-span-2">
             {[
               {
                 heading: "Category",
