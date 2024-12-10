@@ -573,7 +573,7 @@ function Productdetails() {
                       >
                         <div className=" flex items-center justify-between">
                           <div>
-                            <h2 className="font-semibold">
+                            <h2 className="font-extrabold sm:text-xl text-xl">
                               {Data23?.[showoption]?.product_name}
                             </h2>
 
