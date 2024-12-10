@@ -1,6 +1,6 @@
 "use client";
 
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import {
   Dialog,
   DialogBackdrop,
@@ -28,6 +28,7 @@ import logo from "../../img/fashion needles.webp";
 import { gettoken } from "../../Localstorage/Store";
 import { useGetProductBySearchQuery } from "../../store/api/productapi";
 import SearchBarModal from "../SearchModal";
+import { TextField } from "@mui/material";
 const navigation = {
   categories: [
     {
@@ -161,20 +162,15 @@ const navigation = {
 export default function Example() {
   const [open, setOpen] = useState(false);
   const [serchvalue, setserchvalue] = useState("");
-  const [showrecords, setshowrecords] = useState(false);
-  const checktoken = gettoken();
-  const { data: categoryData, isLoading } = useGetAllCategoriesQuery();
+  const buttonRefs = useRef({});
+   const { data: categoryData, isLoading } = useGetAllCategoriesQuery();
   const {
     data: searchapidata,
     isLoading: searchloading,
     refetch: refetchsearch,
     isError,
   } = useGetProductBySearchQuery(serchvalue);
-  const checkText = async (e) => {
-    if (e.key === "Enter" && serchvalue != "") {
-      window.location.href = `/category/${serchvalue.replace(/ /g, "-")}`;
-    }
-  };
+ 
 
   const [noOfItems, setItems] = useState(0);
 
@@ -190,14 +186,7 @@ export default function Example() {
     return () => clearInterval(interval); // Clean up the interval on component unmount
   }, []);
 
-  const searchresult = async (value) => {
-    if (value == undefined || value == null || value == "") {
-      refetchsearch();
-    } else {
-      refetchsearch();
-      // setsearchdata(response.data.data)
-    }
-  };
+ 
 
   return (
     <div className="bg-white">
@@ -380,12 +369,23 @@ export default function Example() {
                   {categoryData?.data?.map((category) => (
                     <Popover key={category.name} className="flex">
                       <div className="relative flex">
-                        <PopoverButton className="relative z-10 -mb-px flex items-center border-b-2 border-transparent pt-px text-sm font-medium text-gray-700 transition-colors duration-200 ease-out hover:text-gray-800 data-open:border-indigo-600 data-open:text-indigo-600">
-                          {category.name}
+                        <PopoverButton
+                         ref={(el) => (buttonRefs.current[category.name] = el)}
+                          className="relative z-10 -mb-px flex items-center border-b-2 border-transparent pt-px text-sm font-medium text-gray-700 transition-colors duration-200 ease-out hover:text-gray-800 data-open:border-indigo-600 data-open:text-indigo-600"
+                        >
+                          {/* {category.name} */}
+
+                          <span
+                            className="cursor-pointer"
+                            onMouseEnter={() => buttonRefs.current[category.name]?.click()} // Trigger click on hover                            // Optionally, trigger click on mouse leave
+                          >
+                            {category.name}
+                          </span>
                         </PopoverButton>
                       </div>
 
                       <PopoverPanel
+                      onMouseLeave={() => buttonRefs.current[category.name]?.click()}
                         transition
                         className="absolute z-10 inset-x-0 top-full text-sm text-gray-500 transition data-closed:opacity-0 data-enter:duration-200 data-enter:ease-out data-leave:duration-150 data-leave:ease-in"
                       >
@@ -483,6 +483,16 @@ export default function Example() {
               <div className="ml-auto flex items-center">
                 <div className="ml-4   flow-root lg:ml-6">
                   <SearchBarModal />
+                   
+
+
+           
+
+
+
+
+
+
                 </div>
 
                 <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">

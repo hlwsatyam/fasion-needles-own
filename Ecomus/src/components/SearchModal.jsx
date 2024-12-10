@@ -1,8 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { FiSearch, FiX } from "react-icons/fi";
 import { useGetProductBySearchQuery } from "../store/api/productapi";
 import ProductCard from "./Header/ProductCard";
+import { TextField } from "@mui/material";
+import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import { GlassMagnifier } from "react-image-magnifiers";
+import { FaSearch } from "react-icons/fa";
 
 export default function SearchModal() {
   const [isOpen, setIsOpen] = useState(false);
@@ -31,6 +35,42 @@ export default function SearchModal() {
       refetchsearch();
     }
   };
+
+
+
+
+  useEffect(() => {
+    const handleFocus = () => {
+      document.body.style.overflow = "hidden"; // Prevent scrolling when input is focused
+    };
+
+    const handleBlur = () => {
+      document.body.style.overflow = ""; // Restore scrolling when input loses focus
+    };
+
+    // Attach the event listeners to input elements
+    const inputFields = document.querySelectorAll("input, textarea");
+    inputFields.forEach(field => {
+      field.addEventListener("focus", handleFocus);
+      field.addEventListener("blur", handleBlur);
+    });
+
+    return () => {
+      inputFields.forEach(field => {
+        field.removeEventListener("focus", handleFocus);
+        field.removeEventListener("blur", handleBlur);
+      });
+    };
+  }, []);
+
+
+
+
+
+
+
+
+
 
   const checkText = async (e) => {
     if (e.key === "Enter" && serchvalue !== "") {
@@ -71,22 +111,30 @@ export default function SearchModal() {
               </button>
             </div>
 
-            {/* Search Input */}
-            <div className="relative">
-              <input
-                inputMode="search"
-                value={serchvalue}
-                onChange={(e) => {
-                  searchresult(e.target.value);
-                  setserchvalue(e.target.value);
-                  setshowrecords(true);
-                }}
-                onKeyDown={(e) => checkText(e)}
-                placeholder="Type to search..."
-                className="w-full px-4 py-3 !pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
-              />
-              <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-xl" />
-            </div>
+           
+          
+       <TextField
+               
+              fullWidth
+              required
+            
+              inputMode="search"
+              value={serchvalue}
+              onChange={(e) => {
+                searchresult(e.target.value);
+                setserchvalue(e.target.value);
+                setshowrecords(true);
+              }}
+              onKeyDown={(e) => checkText(e)}
+              placeholder="Type to search..."
+              className="w-full m-0   border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+              InputProps={{
+                startAdornment: <FaSearch color="gray"   />,
+              }}
+            />
+
+
+ 
 
             {/* Search Results */}
             <div className="mt-4 overflow-y-auto max-h-[400px] border-t pt-2">
